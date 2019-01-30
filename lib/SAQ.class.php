@@ -55,7 +55,7 @@ class SAQ extends Modele {
 
 				//echo $this->get_inner_html($noeud);
 				$info = self::recupereInfo($noeud);
-				echo $info
+				echo $info;
 				//var_dump($info);
 				$retour = $this -> ajouteProduit($info);
 				if ($retour -> succes == false) {
@@ -70,7 +70,7 @@ class SAQ extends Modele {
 			}
 		}
 
-		return $i;
+		return $retour;
 	}
 
 	private function get_inner_html($node) {

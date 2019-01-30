@@ -17,9 +17,11 @@
 		$nombre = $saq->getProduits($nombreProduit,$debut);
 		echo "importation : ". $nombre. "<br>";
 	//	$debut += $nombreProduit;	
-	//}
-	
-	
+	//}	
+
+
+
+
 	
 
 ?>
