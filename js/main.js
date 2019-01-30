@@ -103,7 +103,7 @@ window.addEventListener('load', function() {
         notes : document.querySelector("[name='notes']"),
       };
 
-
+    
       liste.addEventListener("click", function(evt){
         console.dir(evt.target)
         if(evt.target.tagName == "LI"){
@@ -124,10 +124,12 @@ window.addEventListener('load', function() {
             "date_achat":bouteille.date_achat.value,
             "garde_jusqua":bouteille.garde_jusqua.value,
             "notes":bouteille.date_achat.value,
-            "prix":bouteille.prix.value,
+            "prix":parseFloat(bouteille.prix.value),
             "quantite":bouteille.quantite.value,
             "millesime":bouteille.millesime.value,
           };
+          console.log(parseFloat(bouteille.prix.value));
+
           let requete = new Request(BaseURL+"requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
