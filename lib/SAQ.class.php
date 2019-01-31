@@ -33,16 +33,17 @@ class SAQ extends Modele {
 	 */
 	public function getProduits($nombre = 100, $debut = 0) {
 		$s = curl_init();
-
 		//curl_setopt($s, CURLOPT_URL, "http://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?searchType=&orderBy=&categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=".$debut."&tri=&metaData=YWRpX2YxOjA8TVRAU1A%2BYWRpX2Y5OjE%3D&pageSize=". $nombre ."&catalogId=50000&searchTerm=*&sensTri=&pageView=&facet=&categoryId=39919&storeId=20002");
 		curl_setopt($s, CURLOPT_URL, "https://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=" . $debut . "&pageSize=" . $nombre . "&catalogId=50000&searchTerm=*&categoryId=39919&storeId=20002");
 		curl_setopt($s, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($s, CURLOPT_SSL_VERIFYPEER,false);
+
 		//curl_setopt($s, CURLOPT_FOLLOWLOCATION, 1);
-
 		self::$_webpage = curl_exec($s);
-		self::$_status = curl_getinfo($s, CURLINFO_HTTP_CODE);
+		self::$_status = curl_errno($s);
+		
 		curl_close($s);
-
+		var_dump(self::$_status);
 		$doc = new DOMDocument();
 		$doc -> recover = true;
 		$doc -> strictErrorChecking = false;
@@ -55,13 +56,12 @@ class SAQ extends Modele {
 
 				//echo $this->get_inner_html($noeud);
 				$info = self::recupereInfo($noeud);
-				echo $info;
 				//var_dump($info);
 				$retour = $this -> ajouteProduit($info);
 				if ($retour -> succes == false) {
 					echo "erreur : " . $retour -> raison . "<br>";
 					echo "<pre>";
-					var_dump($info);
+					//var_dump($info);
 					echo "</pre>";
 					echo "<br>";
 				} else {
@@ -69,8 +69,7 @@ class SAQ extends Modele {
 				}
 			}
 		}
-
-		return $retour;
+		return $info;
 	}
 
 	private function get_inner_html($node) {
@@ -140,8 +139,8 @@ class SAQ extends Modele {
 
 			$rows = $this -> _db -> query("select id from vino__bouteille where code_saq = '" . $bte -> desc -> code_SAQ . "'");
 			if ($rows -> num_rows < 1) {
-				$prixFloat =  floatval($bte -> prix);
-				$this -> stmt -> bind_param("sissssfsss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte,floatval, $bte -> url, $bte -> img, $bte -> desc -> format);
+				//$prixFloat =  floatval($bte -> prix);
+				$this -> stmt -> bind_param("sissssssss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte,$bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
 				$retour -> succes = $this -> stmt -> execute();
 
 			} else {

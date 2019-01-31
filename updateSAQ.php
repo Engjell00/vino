@@ -18,6 +18,7 @@
 		echo "importation : ". $nombre. "<br>";
 	//	$debut += $nombreProduit;	
 	//}	
+	
 
 
 
