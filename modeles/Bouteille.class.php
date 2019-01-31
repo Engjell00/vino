@@ -122,7 +122,7 @@ class Bouteille extends Modele {
 	}
 	function getBouteilleParID($idBouteille)
 	{
-		$requete = "Select * from vino__cellier where id_bouteille = ".$idBouteille;
+		$requete = "Select * from vino__bouteille where id = ".$idBouteille;
 		$res = $this->_db->query($requete);
 		return $res;
 	}

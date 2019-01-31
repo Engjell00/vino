@@ -13,11 +13,10 @@ const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
     document.querySelectorAll(".btnBoire").forEach(function(element){
-        console.log(element);
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
             let requete = new Request(BaseURL+"requete=boireBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
-            console.log(requete);
+
 
             fetch(requete)
             .then(response => {

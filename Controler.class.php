@@ -20,7 +20,6 @@ class Controler
 		 */
 		public function gerer()
 		{
-			
 			switch ($_GET['requete']) {
 				case 'listeBouteille':
 					$this->listeBouteille();
@@ -48,14 +47,15 @@ class Controler
 					break;
 			}
 		}
+		//Récupérer les informations de la bouteille nécessaires
 		private function pageModifierBouteilleCellier(){
-			$body = json_decode(file_get_contents('php://input'));
 			$bte = new Bouteille();
-			$data = $bte->getBouteilleParID($body->id);
+			$data = $bte->getBouteilleParID($_GET["idBouteille"]);
 			include("vues/entete.php");
 			include("vues/modifieroeuvre.php");
 			include("vues/pied.php");
 		}
+		//Après avoir récuperer les info il faudra les envoyer pour les ajout dans la BD
 		private function modifierBouteilleCellier(){
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
