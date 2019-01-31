@@ -161,12 +161,21 @@ class Bouteille extends Modele {
 	{
 		//TODO : Valider les données.
 			
-			
+		$rows = Array();	
 		$requete = "UPDATE vino__cellier SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id = ". $id;
 		//echo $requete;
         $res = $this->_db->query($requete);
-        
-		return $res;
+        $requete2 ="select id,quantite from vino__cellier";
+        $resultat = $this->_db->query($requete2);
+		if($resultat->num_rows)
+		{
+			while($row = $resultat->fetch_assoc())
+			{
+				$rows[] = $row;
+			}
+		}
+		
+		return $rows;
 	}
 }
 
