@@ -12,6 +12,28 @@
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
+    var submitLaBouteilleModifier = document.querySelector(".submitModifierBouteille");
+    submitLaBouteilleModifier.addEventListener("click", function(evt){
+      let bouteille = {
+        id : document.querySelector("[name='id']"),
+        nom : document.querySelector("[name='nom']"),
+        code_saq : document.querySelector("[name='code_saq']"),
+        prix : document.querySelector("[name='prix']"),
+        description : document.querySelector("[name='description']"),
+        pays : document.querySelector("[name='pays']"),
+        type : document.querySelector("[name='type']")
+      };
+      var param = {
+        "id_bouteille":bouteille.id,
+        "code_saq":bouteille.code_saq.value,
+        "prix":parseFloat(bouteille.prix.value),
+        "description":bouteille.description.value,
+        "pays":bouteille.pays.value,
+        "type":bouteille.type.value,
+      };
+      let requete = new Request(BaseURL+"requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
+
+    });
     document.querySelectorAll(".btnBoire").forEach(function(element){
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
