@@ -120,7 +120,20 @@ class Bouteille extends Modele {
 		//var_dump($rows);
 		return $rows;
 	}
-	
+	function getBouteilleParID($idBouteille)
+	{
+		$requete = "Select * from vino__cellier where id_bouteille = ".$idBouteille;
+		$res = $this->_db->query($requete);
+		return $res;
+	}
+	/*public function modifierLaBouteilleAuCellier($data)
+	{
+		$requete = "UPDATE vino__cellier SET nom ".$data->nom.",".$data->;
+
+        $res = $this->_db->query($requete);
+        
+		return $res;
+	}*/
 	
 	/**
 	 * Cette méthode ajoute une ou des bouteilles au cellier
