@@ -6,7 +6,7 @@ CREATE TABLE vino_usager(
         id_usager           Int NOT NULL ,
         nom_usager          Varchar (50) NOT NULL ,
         mot_de_passe_usager Varchar (50) NOT NULL ,
-        description_usager  Text NOT NULL
+        description_usager  Varchar (200)
 	,CONSTRAINT vino_usager_PK PRIMARY KEY (id_usager)
 )ENGINE=InnoDB;
 
