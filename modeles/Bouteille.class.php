@@ -39,7 +39,7 @@ class Bouteille extends Modele {
 		JOIN vino_cellier vc on c.id_cellier = vc.id_cellier
 		JOIN vino_usager vu on vc.id_usager = vu.id_usager
 		JOIN vino_type vt on vb.id_type = vt.id_type
-		Where vu.nom_usager ='" .$usager."'";
+		WHERE vu.nom_usager ='" .$usager."'";
 		var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
