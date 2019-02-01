@@ -9,7 +9,7 @@ foreach ($data as $cle => $bouteille) {
             <img src="https:<?php echo $bouteille['image'] ?>">
         </div>
         <div class="description">
-            <p class="nom">Nom : <?php echo $bouteille['nom'] ?></p>
+            <p class="nom">Nom : <?php echo $bouteille['nom_bouteille_cellier'] ?></p>
             <p class="quantite">Quantité : <?php echo $bouteille['quantite'] ?></p>
             <p class="pays">Pays : <?php echo $bouteille['pays'] ?></p>
             <p class="type">Type : <?php echo $bouteille['type'] ?></p>

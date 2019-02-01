@@ -29,11 +29,9 @@ class Bouteille extends Modele {
 		return $rows;
 	}
 	
-	public function getListeBouteilleCellier()
+	public function getListeBouteilleCellier($usager)
 	{
-		
-		$rows = Array();
-		$requete ='SELECT 
+		/*SELECT 
 						c.id as id_bouteille_cellier,
 						c.id_bouteille, 
 						c.date_achat, 
@@ -54,14 +52,22 @@ class Bouteille extends Modele {
 						from vino__cellier c 
 						INNER JOIN vino__bouteille b ON c.id_bouteille = b.id
 						INNER JOIN vino__type t ON t.id = b.type
-						'; 
+						'; */
+		$rows = Array();
+		$requete ="SELECT * from vino_bouteille
+		JOIN contient on vino_bouteille.id_bouteille = contient.id_bouteille
+		JOIN vino_cellier on contient.id_cellier = vino_cellier.id_cellier
+		JOIN vino_usager on vino_cellier.id_usager = vino_usager.id_usager
+		JOIN vino_type on vino_bouteille.id_type = vino_type.id_type
+		Where vino_usager.nom_usager ='" .$usager."'";
+		var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
 			{
 				while($row = $res->fetch_assoc())
 				{
-					$row['nom'] = trim(utf8_encode($row['nom']));
+					$row["nom_bouteille"] = trim(utf8_encode($row["nom_bouteille"]));
 					$rows[] = $row;
 				}
 			}
@@ -120,20 +126,23 @@ class Bouteille extends Modele {
 		//var_dump($rows);
 		return $rows;
 	}
-	function getBouteilleParID($idBouteille)
+	function getBouteilleParID($id_bouteille_cellier)
 	{
-		$requete = "Select * from vino__bouteille where id = ".$idBouteille;
+		$requete = "Select * from contient where id_bouteille_cellier = ".$id_bouteille_cellier;
 		$res = $this->_db->query($requete);
 		return $res;
 	}
-	/*public function modifierLaBouteilleAuCellier($data)
+	public function modifierLaBouteilleAuCellier($data)
 	{
-		$requete = "UPDATE vino__cellier SET nom ".$data->nom.",".$data->;
+		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",description_bouteille_cellier =".$data->description.",prix_a_lachat=".$data->prix.",
+		format_bouteille_cellier=".$data->format.",date_achat=".$data->dateAchat.",expiration=".$data->expiration.",
+		quantite=".$data->quantite.",notes=".$data->notes.",millesime=".$data->millesime.
+		"WHERE id_bouteille =".$data->idBouteille." AND WHERE id_cellier =".$data->idCellier;
 
         $res = $this->_db->query($requete);
         
 		return $res;
-	}*/
+	}
 	
 	/**
 	 * Cette méthode ajoute une ou des bouteilles au cellier
