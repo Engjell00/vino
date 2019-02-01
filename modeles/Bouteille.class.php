@@ -119,7 +119,7 @@ class Bouteille extends Modele {
 		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",prix_a_lachat=".$data->prix.",
 		format_bouteille_cellier=".$data->format.",date_achat=".$data->dateAchat.",expiration=".$data->expiration.",
 		quantite=".$data->quantite.",notes=".$data->notes.",millesime=".$data->millesime.
-		"WHERE id_bouteille =".$data->idBouteille." AND WHERE id_cellier =".$data->idCellier;
+		"WHERE id_bouteille_cellier =".$data->id_bouteille_cellier." AND WHERE id_cellier =".$data->idCellier;
 
         $res = $this->_db->query($requete);
         
@@ -137,7 +137,7 @@ class Bouteille extends Modele {
 	{
 		//TODO : Valider les données.
 		//var_dump($data);	
-		
+		//ACHANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 		$requete = "INSERT INTO vino__cellier(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
 		"'".$data->id_bouteille."',".
 		"'".$data->date_achat."',".
