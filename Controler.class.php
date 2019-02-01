@@ -58,7 +58,7 @@ class Controler
 			$bte = new Bouteille();
 			$data = $bte->getBouteilleParID($_GET["idBouteille"]);
 			include("vues/entete.php");
-			include("vues/modifieroeuvre.php");
+			include("vues/modifierBouteille.php");
 			include("vues/pied.php");
 		}
 		//Après avoir récuperer les info il faudra les envoyer pour les ajouter dans le Cellier
@@ -73,7 +73,7 @@ class Controler
 			}
 			else{
 				include("vues/entete.php");
-				include("vues/modifieroeuvre.php");
+				include("vues/modifierBouteille.php");
 				include("vues/pied.php");
 			}
 			

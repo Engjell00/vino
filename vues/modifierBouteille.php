@@ -9,7 +9,7 @@ foreach ($data as $cle => $bouteille) {
     <input type="hidden" name="id" value="<?php echo $bouteille['id_bouteille_cellier'];?>" />
     <div class="bouteille" data-quantite="">
         <div class="img">
-            <img src="https:<?php echo $bouteille['image'] ?>">
+            <img src="https:<?php echo $bouteille['image_bouteille_cellier'] ?>">
         </div>
         <div class="description">
             <input name="nom" value="<?php echo $bouteille['nom_bouteille_cellier'] ?>"><br>

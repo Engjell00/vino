@@ -116,7 +116,7 @@ class Bouteille extends Modele {
 	//REQUÊTE NON TESTÉE, Elle sert à modifier la bouteille après avoir récupérer les données,Il faudra changer les données puisque les tables sont différentes.
 	public function modifierLaBouteilleAuCellier($data)
 	{
-		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",description_bouteille_cellier =".$data->description.",prix_a_lachat=".$data->prix.",
+		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",prix_a_lachat=".$data->prix.",
 		format_bouteille_cellier=".$data->format.",date_achat=".$data->dateAchat.",expiration=".$data->expiration.",
 		quantite=".$data->quantite.",notes=".$data->notes.",millesime=".$data->millesime.
 		"WHERE id_bouteille =".$data->idBouteille." AND WHERE id_cellier =".$data->idCellier;
