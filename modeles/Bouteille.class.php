@@ -29,39 +29,25 @@ class Bouteille extends Modele {
 		return $rows;
 	}
 	
-	public function getListeBouteilleCellier()
+	public function getListeBouteilleCellier($usager)
 	{
-		
+		//Requête SQL basic, j'ai simplement toute séléctionner pour choisir par la suite dans l'affichage.
+		//Je ne suis pas super en SQL donc, whatever.s
 		$rows = Array();
-		$requete ='SELECT 
-						c.id as id_bouteille_cellier,
-						c.id_bouteille, 
-						c.date_achat, 
-						c.garde_jusqua, 
-						c.notes, 
-						c.prix, 
-						c.quantite,
-						c.millesime, 
-						b.id,
-						b.nom, 
-						b.type, 
-						b.image, 
-						b.code_saq, 
-						b.url_saq, 
-						b.pays, 
-						b.description,
-						t.type 
-						from vino__cellier c 
-						INNER JOIN vino__bouteille b ON c.id_bouteille = b.id
-						INNER JOIN vino__type t ON t.id = b.type
-						'; 
+		$requete ="SELECT * from vino_bouteille vb
+		JOIN contient c on vb.id_bouteille = c.id_bouteille
+		JOIN vino_cellier vc on c.id_cellier = vc.id_cellier
+		JOIN vino_usager vu on vc.id_usager = vu.id_usager
+		JOIN vino_type vt on vb.id_type = vt.id_type
+		Where vu.nom_usager ='" .$usager."'";
+		var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
 			{
 				while($row = $res->fetch_assoc())
 				{
-					$row['nom'] = trim(utf8_encode($row['nom']));
+					$row["nom_bouteille"] = trim(utf8_encode($row["nom_bouteille"]));
 					$rows[] = $row;
 				}
 			}
@@ -120,7 +106,25 @@ class Bouteille extends Modele {
 		//var_dump($rows);
 		return $rows;
 	}
-	
+	//Chercher la bouteille par son ID quand l'utilisateur va vouloir modifier la bouteille dans son cellier
+	function getBouteilleParID($id_bouteille_cellier)
+	{
+		$requete = "Select * from contient where id_bouteille_cellier = ".$id_bouteille_cellier;
+		$res = $this->_db->query($requete);
+		return $res;
+	}
+	//REQUÊTE NON TESTÉE, Elle sert à modifier la bouteille après avoir récupérer les données,Il faudra changer les données puisque les tables sont différentes.
+	public function modifierLaBouteilleAuCellier($data)
+	{
+		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",prix_a_lachat=".$data->prix.",
+		format_bouteille_cellier=".$data->format.",date_achat=".$data->dateAchat.",expiration=".$data->expiration.",
+		quantite=".$data->quantite.",notes=".$data->notes.",millesime=".$data->millesime.
+		"WHERE id_bouteille_cellier =".$data->id_bouteille_cellier." AND WHERE id_cellier =".$data->idCellier;
+
+        $res = $this->_db->query($requete);
+        
+		return $res;
+	}
 	
 	/**
 	 * Cette méthode ajoute une ou des bouteilles au cellier
@@ -133,7 +137,7 @@ class Bouteille extends Modele {
 	{
 		//TODO : Valider les données.
 		//var_dump($data);	
-		
+		//ACHANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 		$requete = "INSERT INTO vino__cellier(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
 		"'".$data->id_bouteille."',".
 		"'".$data->date_achat."',".
@@ -165,7 +169,7 @@ class Bouteille extends Modele {
 		$requete = "UPDATE vino__cellier SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id = ". $id;
 		//echo $requete;
         $res = $this->_db->query($requete);
-        $requete2 ="select id,quantite from vino__cellier";
+        $requete2 ="select id_bouteille_cellier,quantite from contient";
         $resultat = $this->_db->query($requete2);
 		if($resultat->num_rows)
 		{

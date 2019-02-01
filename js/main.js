@@ -11,16 +11,56 @@
  //const BaseURL = "http://127.0.0.1/vino/";
 const BaseURL = document.baseURI;
 console.log(BaseURL);
+
 window.addEventListener('load', function() {
- 
-    
-    console.log("load");
+    var submitLaBouteilleModifier = document.querySelector(".submitModifierBouteille");
+    //Ajout pour la modification, elle est a changer puisque maintenant il ya  dautre données que nous allons recevoir
+    //Cette partie ligne 16 a 56 est pour la modification de la bouteille dans le cellier.
+    if(submitLaBouteilleModifier){
+        submitLaBouteilleModifier.addEventListener("click", function(evt){
+          let bouteille = {
+            id : document.querySelector("[name='id']"),
+            nom : document.querySelector("[name='nom']"),
+            code_saq : document.querySelector("[name='code_saq']"),
+            prix : document.querySelector("[name='prix']"),
+            description : document.querySelector("[name='description']"),
+            pays : document.querySelector("[name='pays']"),
+            type : document.querySelector("[name='type']")
+          };
+          var param = {
+            "id_bouteille":bouteille.id.value,
+            "nom":bouteille.nom.value,
+            "code_saq":bouteille.code_saq.value,
+            "prix":parseFloat(bouteille.prix.value),
+            "description":bouteille.description.value,
+            "pays":bouteille.pays.value,
+            "type":bouteille.type.value,
+          };
+          let requete = new Request(BaseURL+"requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
+          fetch(requete)
+            .then(response => {
+                if (response.status === 200) {
+                  return response.json();
+                } else {
+                  throw new Error('Erreur');
+                }
+              })
+              .then(response => {
+                console.log(response);
+              
+              }).catch(error => {
+                console.error(error);
+              });
+
+        });
+    }
+
+
     document.querySelectorAll(".btnBoire").forEach(function(element){
-        console.log(element);
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
             let requete = new Request(BaseURL+"requete=boireBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
-           console.log(requete);
+
             fetch(requete)
             .then(response => {
                 if (response.status === 200) {
@@ -35,6 +75,7 @@ window.addEventListener('load', function() {
               }).catch(error => {
                 console.error(error);
               });
+
      
            // let quantite=document.querySelectorAll(".quantite").forEach(function(element){
                 
@@ -59,11 +100,11 @@ window.addEventListener('load', function() {
 
         })
         
-        
-    });
 
+        })
+
+    });
     document.querySelectorAll(".btnAjouter").forEach(function(element){
-        console.log(element);
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
             let requete = new Request(BaseURL+"requete=ajouterBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
@@ -108,16 +149,11 @@ window.addEventListener('load', function() {
             
             
         })
-
     });
-   
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
-    console.log(inputNomBouteille);
     let liste = document.querySelector('.listeAutoComplete');
-
     if(inputNomBouteille){
       inputNomBouteille.addEventListener("keyup", function(evt){
-        console.log(evt);
         let nom = inputNomBouteille.value;
         liste.innerHTML = "";
         if(nom){
@@ -132,8 +168,6 @@ window.addEventListener('load', function() {
                 })
                 .then(response => {
                   console.log(response);
-                  
-                 
                   response.forEach(function(element){
                     
                     liste.innerHTML += "<li data-id='"+element.id +"' classe='mesLi'>"+element.nom+"</li>";
@@ -145,10 +179,7 @@ window.addEventListener('load', function() {
                   console.error(error);
                 });
         }
-        
-        
       });
-        
 
       let bouteille = {
         nom : document.querySelector(".nom_bouteille"),
@@ -159,8 +190,6 @@ window.addEventListener('load', function() {
         garde_jusqua : document.querySelector("[name='garde_jusqua']"),
         notes : document.querySelector("[name='notes']"),
       };
-
-
       liste.addEventListener("click", function(evt){
         console.dir(evt.target)
         
@@ -174,13 +203,10 @@ window.addEventListener('load', function() {
         if(evt.target.tagName == "LI"){
           bouteille.nom.dataset.id = evt.target.dataset.id;
           bouteille.nom.innerHTML = evt.target.innerHTML;
-          
           liste.innerHTML = "";
           inputNomBouteille.value = "";
-
         }
       });
-
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
@@ -189,10 +215,11 @@ window.addEventListener('load', function() {
             "date_achat":bouteille.date_achat.value,
             "garde_jusqua":bouteille.garde_jusqua.value,
             "notes":bouteille.date_achat.value,
-            "prix":bouteille.prix.value,
+            "prix":parseFloat(bouteille.prix.value),
             "quantite":bouteille.quantite.value,
             "millesime":bouteille.millesime.value,
           };
+
           let requete = new Request(BaseURL+"requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
@@ -204,14 +231,13 @@ window.addEventListener('load', function() {
                   })
                   .then(response => {
                     console.log(response);
-                  
                   }).catch(error => {
                     console.error(error);
                   });
-        
         });
       } 
   }
+
     function modifierQuantiteBouteilles(objet){
      console.log(objet);
         
@@ -234,6 +260,7 @@ window.addEventListener('load', function() {
         
     }
     
+
 
 });
 

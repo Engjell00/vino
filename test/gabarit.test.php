@@ -96,7 +96,12 @@
 				echo $e->getMessage();
 			}
 			?>
-			
+			<h4>TAYEULEEEEE</h4>
+		   <?php
+		   			$saq = new SAQ();
+				   echo $saq->getProduits	
+		 
+		 	?>
 		</div>
 		<div id="footer">
 
