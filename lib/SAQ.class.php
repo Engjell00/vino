@@ -128,10 +128,12 @@ class SAQ extends Modele {
 		$retour -> succes = false;
 		$retour -> raison = '';
 
-		var_dump($bte);
+		//var_dump($bte);
 		// Récupère le type
 		$rows = $this -> _db -> query("select id_type from vino_type where nom_type = '" . $bte -> desc -> type  . "'");
-		if ($rows -> num_rows == 1) {
+
+		var_dump($rows);
+		if ($rows -> num_rows === 1) {
 			$type = $rows -> fetch_assoc();
 			$type = $type['id_type'];
 			$rows = $this -> _db -> query("select id_bouteille from vino_bouteille where code_saq_bouteille = '" . $bte -> desc -> code_SAQ  . "'");
