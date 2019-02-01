@@ -1,20 +1,19 @@
 <div class="ajouter">
 
     <div class="nouvelleBouteille" vertical layout>
-        Recherche : <input type="text" name="nom_bouteille">
+       <p> Recherche :</p> <input type="text" name="nom_bouteille">
         <ul class="listeAutoComplete">
 
         </ul>
             <div >
-                <p>Nom : <span data-id="" class="nom_bouteille"></span></p>
-                <p>Millesime : <input name="millesime"></p>
-                <p>Quantite : <input name="quantite" value="1"></p>
-                <p>Date achat : <input name="date_achat"></p>
-                <p>Prix : <input name="prix"></p>
-                <p>Garde : <input name="garde_jusqua"></p>
-                <p>Notes <input name="notes"></p>
+                <p class="nomBouteille">Nom :</p> <span data-id="" class="nom_bouteille"></span>
+                <p>Quantite :</p> <input name="quantite" value="1">
+                <p>Date achat :</p> <input name="date_achat">
+                <p>Prix :</p> <input name="prix">
+                <p>Garde :</p> <input name="garde_jusqua">
+                <p>Notes :</p><input name="notes">
             </div>
-            <button name="ajouterBouteilleCellier">Ajouter la bouteille</button>
+             <img src="./img/iconeAjoutBouteille-Red.png" name="ajouterBouteilleCellier" height="60px" width="60px">
         </div>
     </div>
 </div>

@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Maxeva';
+    src: url("../fonts/maxeva.otf") format("opentype");
+}
+
+
+
+header{
+    background-image: url('../img/cellier2.jpg');
+    color: #fff;
+
+    background-color: black;
+    display: flex;
+    height: 300px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; 
+}
+header h1{
+    display: none;
+}
+header nav > ul{
+    list-style-type: none;
+    display: flex;
+}
+header nav >ul>li>a:visited,
+header nav >ul>li>a:link,
+header nav >ul>li>a:hover,
+header nav >ul>li>a:active{
+    color: #fff;
+}
+
+header nav > ul > li{
+    padding-right: 20px;
+}
+
+header nav > ul > li:last-child{
+    padding-right: 0;
+}

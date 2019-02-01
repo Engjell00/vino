@@ -139,6 +139,7 @@ class Controler
 			$bte = new Bouteille();
 			$resultat = $bte->modifierQuantiteBouteilleCellier($body->id, -1);
 			echo json_encode($resultat);
+            
 		}
 
 		private function ajouterBouteilleCellier()

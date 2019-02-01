@@ -13,20 +13,40 @@
 		<link rel="stylesheet" href="./css/normalize.css" type="text/css" media="screen">
 		<link rel="stylesheet" href="./css/base_h5bp.css" type="text/css" media="screen">
 		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
+
+		<link rel="stylesheet" href="./css/header.css" type="text/css" media="screen">
+                <link rel="stylesheet" href="./css/menuHamburger.css" type="text/css" media="screen">
+
+		
+
 		<base href="<?php echo BASEURL; ?>">
 		<!--<script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
-		<!--<script src="/js/plugins.js"></script>-->
 		<script src="./js/main.js"></script>
+		<script src="./js/hamburger.js"></script>
+		<!-- inclus bootstrap cdn -->
+		
 	</head>
 	<body >
 		<header>
-			<h1>Un petit verre de vino ?</h1>
-			<nav>
-				<ul>
-					<li><a href="?requete=accueil">Mon cellier</a></li>
-					<li><a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a></li>
-				</ul>
-			</nav>
+			<div class='container'>
+				<h1>vino</h1>
+				<img src="./img/vinoLogo-blanc.png" alt="Logo Vino">
+
+				<!-- codepen start -->
+				 <input type="checkbox" id="menyAvPaa">
+    <label id="burger" for="menyAvPaa">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+						<!--codepen end  -->
+				<nav id="meny">
+					<ul>
+						<li><a href="?requete=accueil">Mon cellier</a></li>
+						<li><a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a></li>
+					</ul>
+				</nav>
+			</div>
 		</header>
-		<main>
+		<main class='container'>
 			
