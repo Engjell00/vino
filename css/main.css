@@ -62,10 +62,11 @@ cursor: pointer;
 	
 }
 
+
 .container{
 	width: 80%;
 	margin: 0 auto;
-}
+    }
     div{
         text-align: center;
         
@@ -96,12 +97,12 @@ cursor: pointer;
 
 footer
 {
-	
+
 	bottom:0px;
 	width: 100%;
-	padding-top:3px;
+	
 	text-align: center;
-	background-color:#FFFFFF;
+	background-color:#ffff;
 }
 footer p
 {
