@@ -166,7 +166,7 @@ class Bouteille extends Modele {
 		//TODO : Valider les données.
 			
 		$rows = Array();	
-		$requete = "UPDATE contient SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id = ". $id;
+		$requete = "UPDATE contient SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id_bouteille_cellier = ". $id;
 		//echo $requete;
         $res = $this->_db->query($requete);
         $requete2 ="select id_bouteille_cellier,quantite from contient";

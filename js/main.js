@@ -75,6 +75,7 @@ window.addEventListener('load', function() {
     document.querySelectorAll(".btnAjouter").forEach(function(element){
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
+            console.log(id);
             let requete = new Request(BaseURL+"requete=ajouterBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
             fetch(requete)
             .then(response => {
@@ -131,6 +132,7 @@ window.addEventListener('load', function() {
         garde_jusqua : document.querySelector("[name='garde_jusqua']"),
         notes : document.querySelector("[name='notes']"),
       };
+    if(liste){
       liste.addEventListener("click", function(evt){
         console.dir(evt.target)
         document.querySelector(".nom_bouteille").style.display = "block";
@@ -142,6 +144,7 @@ window.addEventListener('load', function() {
           inputNomBouteille.value = "";
         }
       });
+    }
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
@@ -171,9 +174,10 @@ window.addEventListener('load', function() {
         });
       } 
     function modifierQuantiteBouteilles(objet){
+        console.log(objet);
         let quantite=document.querySelectorAll(".quantite").forEach(function(element){
             objet.forEach(function(monElement){
-                if(element.dataset.id==monElement.id){
+                if(element.dataset.id==monElement.id_bouteille_cellier){
                   element.innerHTML="Quantité : "+monElement.quantite;     
                 }    
             })   
