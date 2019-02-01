@@ -36,9 +36,13 @@ class Controler
 				case 'boireBouteilleCellier':
 					$this->boireBouteilleCellier();
 					break;
+				//AJOUT DE 2 CASE
+				//Une qui nous transmet le id de la bouteille et nous redirige vers
+				//La page de modification avec son ID
 				case 'pageModifierBouteilleCellier':
 					$this->pageModifierBouteilleCellier();
 					break;
+				//Celle-ci reçoit les données après avoir modifier
 				case 'modifierBouteilleCellier':
 					$this->modifierBouteilleCellier();
 					break;	
@@ -48,6 +52,8 @@ class Controler
 			}
 		}
 		//Récupérer les informations de la bouteille nécessaires
+		//Elle est bien simple,p-t optimiser et changer,
+		//Comme j'ai écris en haut on redirige vers la page de modification avec l'ID rêcu
 		private function pageModifierBouteilleCellier(){
 			$bte = new Bouteille();
 			$data = $bte->getBouteilleParID($_GET["idBouteille"]);
@@ -55,7 +61,9 @@ class Controler
 			include("vues/modifieroeuvre.php");
 			include("vues/pied.php");
 		}
-		//Après avoir récuperer les info il faudra les envoyer pour les ajout dans la BD
+		//Après avoir récuperer les info il faudra les envoyer pour les ajouter dans le Cellier
+		//Bien sûr, elle n'est pas complète, il faudra aussi envoyer le nom d'utilisateur, 
+		//j'imagine qui sera en 2ième parametre pour permettre de recevoir le body en son entier pareillement.
 		private function modifierBouteilleCellier(){
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
@@ -70,6 +78,10 @@ class Controler
 			}
 			
 		}
+		//Ajout d'un utilisateur manuellement, le ''engjell'' je l'ai ajouté
+		//directement dans la BD so c'est simplement pour tester, si vous voulez, créez votre propre user
+		//dans PHPMYADMIN et puis vous aurez votre propre cellier.
+		//Ceci est a modifier par la suite, lors de l'utilisation de la variable SESSION
 		private function accueil()
 		{
 			$bte = new Bouteille();

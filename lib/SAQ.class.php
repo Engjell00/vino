@@ -131,7 +131,7 @@ class SAQ extends Modele {
 		//var_dump($bte);
 		// Récupère le type
 		$rows = $this -> _db -> query("select id_type from vino_type where nom_type = '" . $bte -> desc -> type  . "'");
-
+		/// j'ai modifier ici les parametres et certaines choses qui ne me tente pas d'écrire parce que ca ma pris un foutu temps pour quelques choses d'aussi stupide.
 		var_dump($rows);
 		if ($rows -> num_rows === 1) {
 			$type = $rows -> fetch_assoc();

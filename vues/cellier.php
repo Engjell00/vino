@@ -11,12 +11,12 @@ foreach ($data as $cle => $bouteille) {
         <div class="description">
             <p class="nom">Nom : <?php echo $bouteille['nom_bouteille_cellier'] ?></p>
             <p class="quantite">Quantité : <?php echo $bouteille['quantite'] ?></p>
-            <p class="code_saq_cellier">Pays : <?php echo $bouteille['code_saq_cellier'] ?></p>
-            <p class="pays_cellier">Pays : <?php echo $bouteille['pays_cellier'] ?></p>
-            <p class="prix_a_lachat">Pays : <?php echo $bouteille['prix_a_lachat'] ?></p>
-            <p class="format_bouteille_cellier">Type : <?php echo $bouteille['format_bouteille_cellier'] ?></p>
-            <p class="date_achat">Type : <?php echo $bouteille['date_achat'] ?></p>
-            <p class="expiration">Type : <?php echo $bouteille['expiration'] ?></p>
+            <p class="code_saq">Code SAQ : <?php echo $bouteille['code_saq_cellier'] ?></p>
+            <p class="pays">Pays : <?php echo $bouteille['pays_cellier'] ?></p>
+            <p class="prix">Prix à l'achat : <?php echo $bouteille['prix_a_lachat'] ?></p>
+            <p class="format">Format : <?php echo $bouteille['format_bouteille_cellier'] ?></p>
+            <p class="date_achat">Data Achat : <?php echo $bouteille['date_achat'] ?></p>
+            <p class="expiration">Expiration : <?php echo $bouteille['expiration'] ?></p>
             <p class="millesime">Millesime : <?php echo $bouteille['millesime'] ?></p>
             <p><a href="<?php echo $bouteille['url_saq'] ?>">Voir SAQ</a></p>
         </div>
@@ -28,7 +28,10 @@ foreach ($data as $cle => $bouteille) {
         </div>
     </div>
 <?php
-
+//LIGNE 24 J'AI AJOUTER UN HREF QUI REDIRIGE VERS LA PAGE DE MODIF AVEC L'ID DE LA BOUTEILLE DANS LE CELLIER
+//Il y a des meilleurs façon mais cela fonctionne bien.
+//NOTE:
+//L'AJOUT DEVRA ÊTRE MODIFIER AUSSI DANS SA VUE ET bouteille class ->>> function ajouterBouteilleCellier
 
 }
 

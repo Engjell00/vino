@@ -31,35 +31,15 @@ class Bouteille extends Modele {
 	
 	public function getListeBouteilleCellier($usager)
 	{
-		/*SELECT 
-						c.id as id_bouteille_cellier,
-						c.id_bouteille, 
-						c.date_achat, 
-						c.garde_jusqua, 
-						c.notes, 
-						c.prix, 
-						c.quantite,
-						c.millesime, 
-						b.id,
-						b.nom, 
-						b.type, 
-						b.image, 
-						b.code_saq, 
-						b.url_saq, 
-						b.pays, 
-						b.description,
-						t.type 
-						from vino__cellier c 
-						INNER JOIN vino__bouteille b ON c.id_bouteille = b.id
-						INNER JOIN vino__type t ON t.id = b.type
-						'; */
+		//Requête SQL basic, j'ai simplement toute séléctionner pour choisir par la suite dans l'affichage.
+		//Je ne suis pas super en SQL donc, whatever.s
 		$rows = Array();
-		$requete ="SELECT * from vino_bouteille
-		JOIN contient on vino_bouteille.id_bouteille = contient.id_bouteille
-		JOIN vino_cellier on contient.id_cellier = vino_cellier.id_cellier
-		JOIN vino_usager on vino_cellier.id_usager = vino_usager.id_usager
-		JOIN vino_type on vino_bouteille.id_type = vino_type.id_type
-		Where vino_usager.nom_usager ='" .$usager."'";
+		$requete ="SELECT * from vino_bouteille vb
+		JOIN contient c on vb.id_bouteille = c.id_bouteille
+		JOIN vino_cellier vc on c.id_cellier = vc.id_cellier
+		JOIN vino_usager vu on vc.id_usager = vu.id_usager
+		JOIN vino_type vt on vb.id_type = vt.id_type
+		Where vu.nom_usager ='" .$usager."'";
 		var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
@@ -126,12 +106,14 @@ class Bouteille extends Modele {
 		//var_dump($rows);
 		return $rows;
 	}
+	//Chercher la bouteille par son ID quand l'utilisateur va vouloir modifier la bouteille dans son cellier
 	function getBouteilleParID($id_bouteille_cellier)
 	{
 		$requete = "Select * from contient where id_bouteille_cellier = ".$id_bouteille_cellier;
 		$res = $this->_db->query($requete);
 		return $res;
 	}
+	//REQUÊTE NON TESTÉE, Elle sert à modifier la bouteille après avoir récupérer les données,Il faudra changer les données puisque les tables sont différentes.
 	public function modifierLaBouteilleAuCellier($data)
 	{
 		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",description_bouteille_cellier =".$data->description.",prix_a_lachat=".$data->prix.",

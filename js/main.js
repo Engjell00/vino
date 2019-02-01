@@ -14,7 +14,8 @@ console.log(BaseURL);
 
 window.addEventListener('load', function() {
     var submitLaBouteilleModifier = document.querySelector(".submitModifierBouteille");
-    
+    //Ajout pour la modification, elle est a changer puisque maintenant il ya  dautre données que nous allons recevoir
+    //Cette partie ligne 16 a 56 est pour la modification de la bouteille dans le cellier.
     if(submitLaBouteilleModifier){
         submitLaBouteilleModifier.addEventListener("click", function(evt){
           let bouteille = {
