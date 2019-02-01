@@ -54,21 +54,7 @@ window.addEventListener('load', function() {
 
 
            
-            let quantite=document.querySelectorAll(".quantite").forEach(function(element){
-                
-                if(element.dataset.id ==id){
-        console.log(element.dataset.id);
-                    let idquantite=element.innerHTML;
-                    
-                    console.log(idquantite);
-                   idquantite -=1;
-                    if(idquantite<0){
-                        idquantite=0;
-                    }
-                   element.innerHTML=idquantite;
-                }
-        
- });
+  
 
 
         })
@@ -115,19 +101,7 @@ window.addEventListener('load', function() {
 // });
 
 
-                   let quantite=document.querySelectorAll(".quantite").forEach(function(element){
-                
-                if(element.dataset.id ==id){
-        
-                    let idquantite=element.innerHTML;
-                    
-                    console.log(idquantite);
-                   idquantite++;
-                    element.innerHTML=idquantite;
-                 
-                }
-        
- });
+     
 
 
             
@@ -248,7 +222,7 @@ window.addEventListener('load', function() {
 
                 element.innerHTML="Quantité : "+monElement.quantite;
 
-                element.innerHTML=monElement.quantite;
+                
 
                 }
                 
