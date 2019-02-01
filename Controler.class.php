@@ -105,7 +105,7 @@ class Controler
 			$bte = new Bouteille();
 			//var_dump(file_get_contents('php://input'));
 			$body = json_decode(file_get_contents('php://input'));
-			//var_dump($body);
+			var_dump($body);
             $listeBouteille = $bte->autocomplete($body->nom);
             
             echo json_encode($listeBouteille);

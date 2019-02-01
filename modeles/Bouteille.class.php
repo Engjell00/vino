@@ -39,7 +39,7 @@ class Bouteille extends Modele {
 		JOIN vino_cellier vc on c.id_cellier = vc.id_cellier
 		JOIN vino_usager vu on vc.id_usager = vu.id_usager
 		JOIN vino_type vt on vb.id_type = vt.id_type
-		WHERE vu.nom_usager ='" .$usager."'";
+		Where vu.nom_usager ='" .$usager."'";
 		var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
@@ -82,7 +82,7 @@ class Bouteille extends Modele {
 		$nom = preg_replace("/\*/","%" , $nom);
 		 
 		//echo $nom;
-		$requete ='SELECT id, nom FROM vino__bouteille where LOWER(nom) like LOWER("%'. $nom .'%") LIMIT 0,'. $nb_resultat; 
+		$requete ='SELECT id_bouteille, nom_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("%'. $nom .'%") LIMIT 0,'. $nb_resultat; 
 		//var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
@@ -90,7 +90,7 @@ class Bouteille extends Modele {
 			{
 				while($row = $res->fetch_assoc())
 				{
-					$row['nom'] = trim(utf8_encode($row['nom']));
+					$row['nom_bouteille'] = trim(utf8_encode($row['nom_bouteille']));
 					$rows[] = $row;
 					
 				}
@@ -138,7 +138,7 @@ class Bouteille extends Modele {
 		//TODO : Valider les données.
 		//var_dump($data);	
 		//ACHANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-		$requete = "INSERT INTO vino__cellier(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
+		$requete = "INSERT INTO contient(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
 		"'".$data->id_bouteille."',".
 		"'".$data->date_achat."',".
 		"'".$data->garde_jusqua."',".
@@ -166,7 +166,7 @@ class Bouteille extends Modele {
 		//TODO : Valider les données.
 			
 		$rows = Array();	
-		$requete = "UPDATE vino__cellier SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id = ". $id;
+		$requete = "UPDATE contient SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id = ". $id;
 		//echo $requete;
         $res = $this->_db->query($requete);
         $requete2 ="select id_bouteille_cellier,quantite from contient";
