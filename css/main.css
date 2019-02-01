@@ -1,9 +1,13 @@
 /********
  * Votre CSS
  ********/
+@media only screen and (max-width: 600px) {
+html{
+	height: 100%;
+
+}
 
 html, body {
-	height: 100%;
 	margin: 0;
 	background-color: #E5E5E5;
 	
@@ -11,15 +15,33 @@ html, body {
 	font-size: 95%;
 	
 }
+
+
+
 .liste {
 	display: block;
 	border-top: 1px solid #ccc;
 	border-bottom: none;
-	/*background: #666;*/
+	
+    
+    
 	/*color: #03a9f4;*/
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+    @font-face {
+    font-family: 'Shink';
+    src: url('Maxeva.otf');
+}
+    body{
+        background: white;
+    }
+    
+    
+    img{
+cursor: pointer;
+        margin-top: 5px;
 }
 
 .liste > div {
@@ -40,18 +62,41 @@ html, body {
 	
 }
 
-@media all and (max-width:640px)
-{
-	footer
-	{
-		display:none;
-	}
-	
+.container{
+	width: 80%;
+	margin: 0 auto;
 }
+    div{
+        text-align: center;
+        
+        font-family: Shink;
+        font-size: 28px;
+       
+    }
+    a{
+        text-decoration: none;
+        color: #7B241C;
+        
+    }
+    .listeAutoComplete{
+        list-style-type: none;
+        font-family: sans-serif;
+        font-size: 12px;
+        text-align: left;
+    }
+    .nom_bouteille{
+        display: none;
+    }
+    .nomBouteille{
+        display: none;
+    }
+ 
+
+
 
 footer
 {
-	position: fixed;;
+	
 	bottom:0px;
 	width: 100%;
 	padding-top:3px;
@@ -63,4 +108,5 @@ footer p
 	display:inline;
 	padding-right:50px;
 	font-size : 10px;
+}
 }
