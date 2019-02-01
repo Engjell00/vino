@@ -3,7 +3,7 @@
 #------------------------------------------------------------
 
 CREATE TABLE vino_usager(
-        id_usager           Int NOT NULL ,
+        id_usager           Int NOT NULL AUTO_INCREMENT,
         nom_usager          Varchar (50) NOT NULL ,
         mot_de_passe_usager Varchar (50) NOT NULL ,
         description_usager  Varchar (200)
@@ -16,7 +16,7 @@ CREATE TABLE vino_usager(
 #------------------------------------------------------------
 
 CREATE TABLE vino_type(
-        id_type  Int NOT NULL ,
+        id_type  Int NOT NULL AUTO_INCREMENT,
         nom_type Varchar (11) NOT NULL
 	,CONSTRAINT vino_type_PK PRIMARY KEY (id_type)
 )ENGINE=InnoDB;
@@ -27,7 +27,7 @@ CREATE TABLE vino_type(
 #------------------------------------------------------------
 
 CREATE TABLE vino_bouteille(
-        id_bouteille          Int NOT NULL ,
+        id_bouteille          Int NOT NULL AUTO_INCREMENT,
         nom_bouteille         Varchar (200) ,
         image_bouteille       Varchar (200) ,
         code_saq_bouteille    Varchar (50) ,
@@ -39,7 +39,6 @@ CREATE TABLE vino_bouteille(
         format_bouteille      Varchar (20) ,
         id_type               Int
 	,CONSTRAINT vino_bouteille_PK PRIMARY KEY (id_bouteille)
-
 	,CONSTRAINT vino_bouteille_vino_type_FK FOREIGN KEY (id_type) REFERENCES vino_type(id_type)
 )ENGINE=InnoDB;
 
@@ -49,7 +48,7 @@ CREATE TABLE vino_bouteille(
 #------------------------------------------------------------
 
 CREATE TABLE vino_cellier(
-        id_cellier  Int NOT NULL ,
+        id_cellier  Int NOT NULL AUTO_INCREMENT,
         nom_cellier Varchar (20) NOT NULL ,
         id_usager   Int NOT NULL
 	,CONSTRAINT vino_cellier_PK PRIMARY KEY (id_cellier)
@@ -81,7 +80,6 @@ CREATE TABLE contient(
         notes                         Varchar (200) NOT NULL ,
         millesime                     Varchar (20) NOT NULL
 	,CONSTRAINT contient_PK PRIMARY KEY (id_bouteille,id_cellier)
-
 	,CONSTRAINT contient_vino_bouteille_FK FOREIGN KEY (id_bouteille) REFERENCES vino_bouteille(id_bouteille)
 	,CONSTRAINT contient_vino_cellier0_FK FOREIGN KEY (id_cellier) REFERENCES vino_cellier(id_cellier)
 )ENGINE=InnoDB;
