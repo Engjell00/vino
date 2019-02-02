@@ -47,7 +47,7 @@ class Controler
 					$this->modifierBouteilleCellier();
 					break;	
 				default:
-					$this->accueil();
+					$this->tests();
 					break;
 			}
 		}
@@ -78,14 +78,32 @@ class Controler
 			}
 			
 		}
-		//Ajout d'un utilisateur manuellement, le ''engjell'' je l'ai ajouté
-		//directement dans la BD so c'est simplement pour tester, si vous voulez, créez votre propre user
-		//dans PHPMYADMIN et puis vous aurez votre propre cellier.
+		// sert seulement a tester les nouvelles methodes de bouteille
+		private function tests()
+		{
+			echo 'PAGE TEST';
+			$bte = new Bouteille();
+			// $data = $bte->getListeBouteilleCellier(1, 1); // TESTÉ
+			// $data = $bte->getBouteilleParId(1); // TESTÉ
+			// $data = $bte->getListeBouteille(); // TESTÉ
+			// $data = $bte->getBouteilleCellierParID(1,1); // TESTÉ
+			//$data = $bte->modifierBouteilleCellier($array) // NON TESTÉ
+			//$data = $bte->ajouterBouteilleCellier($array) // NON TESTÉ
+			// $data = $bte->modifierQuantiteBouteilleCellier(1, 10); // TESTÉ
+			
+			include("vues/entete.php"); 
+			include("vues/cellier.php");
+			include("vues/pied.php");
+                  
+		}		
+		//Suite a la modification de getListeBouteilleCellier, la methode prends maintenant les id de l'usage et du cellieer
+		//la DB a maintenant des usagés, nom dèusager et mot de passe correspondant a nos prenoms
 		//Ceci est a modifier par la suite, lors de l'utilisation de la variable SESSION
+ 
 		private function accueil()
 		{
 			$bte = new Bouteille();
-            $data = $bte->getListeBouteilleCellier("reda");
+			$data = $bte->getListeBouteilleCellier(1, 1);
 			include("vues/entete.php");
 			include("vues/cellier.php");
 			include("vues/pied.php");

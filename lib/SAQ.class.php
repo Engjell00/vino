@@ -21,7 +21,7 @@ class SAQ extends Modele {
 
 	public function __construct() {
 		parent::__construct();
-		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino_bouteille(nom_bouteille,image_bouteille, code_saq_bouteille, pays_bouteille, description_bouteille, prix_saq_bouteille, url_saq_bouteille, urlimg_bouteille, format_bouteille,id_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"))) {
+		if (!($this -> stmt = $this -> _db -> prepare("INSERT INTO vino_bouteille(nom_bouteille,image_bouteille, code_saq_bouteille, pays_bouteille, description_bouteille, prix_saq_bouteille, url_saq_bouteille, urlimg_bouteille, format_bouteille,id_type_bouteille) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"))) {
 			echo "Echec de la préparation : (" . $mysqli -> errno . ") " . $mysqli -> error;
 		}
 	}

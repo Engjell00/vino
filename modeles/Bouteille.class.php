@@ -11,7 +11,7 @@
  * 
  */
 class Bouteille extends Modele {
-	const TABLE = 'vino__bouteille';
+	const TABLE = 'vino_bouteille';
     
 	public function getListeBouteille()
 	{
@@ -24,32 +24,89 @@ class Bouteille extends Modele {
 			{
 				$rows[] = $row;
 			}
+			// var_dump($rows);
 		}
 		
 		return $rows;
 	}
+
+	/**
+	 * Cette méthode permet de retourner la liste des bouteilles dans un cellier donné
+	 * 
+	 * @param Int id de l'usager
+	 * @param Int id du cellier
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return array id et nom de la bouteille trouvée dans le catalogue
+	 */
+
 	
-	public function getListeBouteilleCellier($usager)
+	public function getBouteilleParId($idBouteille)
 	{
-		//Requête SQL basic, j'ai simplement toute séléctionner pour choisir par la suite dans l'affichage.
-		//Je ne suis pas super en SQL donc, whatever.s
+		$rows = Array();
+		$requete ="SELECT * FROM vino_bouteille	WHERE id_bouteille = $idBouteille";
+		$res = $this->_db->query($requete);
+		if($res->num_rows)
+		{
+			while($row = $res->fetch_assoc())
+			{
+				$rows[] = $row;
+			}
+			// var_dump($rows);
+			return $rows;			
+		}
+		else 
+		{
+			throw new Exception("Erreur de requête sur la base de donnée", 1);
+			 //$this->_db->error;
+		}
+		
+		
+		
+		return $rows;
+	}
+
+	/**
+	 * Cette méthode permet de retourner la liste des bouteilles dans un cellier donné
+	 * 
+	 * @param Int id de l'usager
+	 * @param Int id du cellier
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return array id et nom de la bouteille trouvée dans le catalogue
+	 */
+
+	
+	public function getListeBouteilleCellier($id_cellier, $id_usager)
+	{
 		$rows = Array();
 		$requete ="SELECT * from vino_bouteille vb
 		JOIN contient c on vb.id_bouteille = c.id_bouteille
 		JOIN vino_cellier vc on c.id_cellier = vc.id_cellier
 		JOIN vino_usager vu on vc.id_usager = vu.id_usager
-		JOIN vino_type vt on vb.id_type = vt.id_type
-		Where vu.nom_usager ='" .$usager."'";
-		var_dump($requete);
+		JOIN vino_type vt on vb.id_type_bouteille = vt.id_type
+		WHERE vc.id_cellier = $id_cellier AND vc.id_usager = $id_usager";
+		$res = $this->_db->query($requete);
+		// var_dump($res->num_rows);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
+			// var_dump($res);
 			if($res->num_rows)
 			{
+
 				while($row = $res->fetch_assoc())
 				{
 					$row["nom_bouteille"] = trim(utf8_encode($row["nom_bouteille"]));
 					$rows[] = $row;
 				}
+				// var_dump($rows);
+			}
+			else 
+			{
+			throw new Exception("Erreur de requête sur la base de donnée", 1);
+
 			}
 		}
 		else 
@@ -106,24 +163,61 @@ class Bouteille extends Modele {
 		//var_dump($rows);
 		return $rows;
 	}
-	//Chercher la bouteille par son ID quand l'utilisateur va vouloir modifier la bouteille dans son cellier
-	function getBouteilleParID($id_bouteille_cellier)
+	/**
+	 * Cette méthode permet de chercher une bouteille par son id unique de cellier quand l'utilisateur va vouloir modifier ses bouteilles
+	 * 
+	 * @param Int id de la bouteille du cellier
+	 * @param Int id du cellier
+	 * 
+	 * @throws Exception Erreur de requête sur la base de données 
+	 * 
+	 * @return Array informations completes sur la bouteille du cellier
+	 */
+	
+	function getBouteilleCellierParID($id_bouteille_cellier, $id_cellier)
 	{
-		$requete = "Select * from contient where id_bouteille_cellier = ".$id_bouteille_cellier;
+		$requete = "SELECT * from contient WHERE id_bouteille_cellier = $id_bouteille_cellier AND id_cellier = $id_cellier";
 		$res = $this->_db->query($requete);
-		return $res;
+		if($res->num_rows)
+		{
+			while($row = $res->fetch_assoc())
+			{
+				$rows[] = $row;
+			}
+			// var_dump($rows);
+			return $rows;			
+		}
+		else 
+		{
+			throw new Exception("Erreur de requête sur la base de donnée", 1);
+			//$this->_db->error;
+		}
+	
 	}
-	//REQUÊTE NON TESTÉE, Elle sert à modifier la bouteille après avoir récupérer les données,Il faudra changer les données puisque les tables sont différentes.
-	public function modifierLaBouteilleAuCellier($data)
+
+
+
+	/**
+	 * Celle methode sert  Elle sert à modifier la bouteille après avoir récupérer les données
+	 * 
+	 * @param Array data contenant les infos personnalisés de l'usager dans son cellier, ainsi que l'id_bouteille_cellier et id_cellier
+	 * 
+	 * @return Boolean Succès ou échec de l'ajout. 
+	 * 
+	 */
+	// REQUÊTE TESTÉE EN PHPMYADMIN
+	// NON TESTÉE SUR LE SITE Elle sert à modifier la bouteille après avoir récupérer les données,Il faudra changer les données puisque les tables sont différentes.
+	// TODO: TESTER
+	public function modifierBouteilleCellier($data)
 	{
 		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",prix_a_lachat=".$data->prix.",
 		format_bouteille_cellier=".$data->format.",date_achat=".$data->dateAchat.",expiration=".$data->expiration.",
 		quantite=".$data->quantite.",notes=".$data->notes.",millesime=".$data->millesime.
-		"WHERE id_bouteille_cellier =".$data->id_bouteille_cellier." AND WHERE id_cellier =".$data->idCellier;
+		"WHERE id_bouteille_cellier =".$data->idBouteilleCellier." AND WHERE id_cellier =".$data->idCellier;
 
         $res = $this->_db->query($requete);
-        
 		return $res;
+		
 	}
 	
 	/**
@@ -132,13 +226,13 @@ class Bouteille extends Modele {
 	 * @param Array $data Tableau des données représentants la bouteille.
 	 * 
 	 * @return Boolean Succès ou échec de l'ajout.
+	 * 
 	 */
 	public function ajouterBouteilleCellier($data)
 	{
 		//TODO : Valider les données.
 		//var_dump($data);	
-		//ACHANGERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-		$requete = "INSERT INTO vino__cellier(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
+		$requete = "INSERT INTO contient(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
 		"'".$data->id_bouteille."',".
 		"'".$data->date_achat."',".
 		"'".$data->garde_jusqua."',".
@@ -161,6 +255,7 @@ class Bouteille extends Modele {
 	 * 
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
+	// TODO: TESTER 
 	public function modifierQuantiteBouteilleCellier($id, $nombre)
 	{
 		//TODO : Valider les données.
@@ -176,6 +271,7 @@ class Bouteille extends Modele {
 			while($row = $resultat->fetch_assoc())
 			{
 				$rows[] = $row;
+				// var_dump($rows);
 			}
 		}
 		
