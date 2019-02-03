@@ -67,15 +67,14 @@ class Controler
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
 				$bte = new Bouteille();
-				$data = json_decode($_REQUEST['data']);
-				$resultat = $bte->modifierLaBouteilleAuCellier($body);
+				$resultat = $bte->modifierBouteilleAuCellier($body);
+				echo json_encode($resultat);
 			}
 			else{
 				include("vues/entete.php");
 				include("vues/modifierBouteille.php");
 				include("vues/pied.php");
 			}
-			
 		}
 		// sert seulement a tester les nouvelles methodes de bouteille
 		private function tests()

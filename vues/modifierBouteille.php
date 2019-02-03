@@ -5,7 +5,8 @@ foreach ($data as $cle => $bouteille) {
     //Manque simplement de recevoir l'utilisateur en paramètre par la suite, vu que sans $_SESSION, c'est un peu
     //Mal coder
     ?>
-   <form  method ="POST"> 
+   <form  method ="GET">
+    <input type="hidden" name="idBouteille" value="<?php echo $bouteille['id_bouteille'];?>" /> 
     <input type="hidden" name="idBouteilleCellier" value="<?php echo $bouteille['id_bouteille_cellier'];?>" />
     <input type="hidden" name="idCellier" value="<?php echo $bouteille['id_cellier'];?>" />
     <div class="bouteille" data-quantite="">
