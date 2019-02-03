@@ -128,9 +128,9 @@ INSERT INTO `vino_cellier` VALUES(8, 'CELLIER 2', 4);
 --
 DROP TABLE IF EXISTS `contient`;
 CREATE TABLE `contient` (
+        `id_bouteille_cellier`          Int NOT NULL AUTO_INCREMENT,
         `id_bouteille`                  Int NOT NULL ,
         `id_cellier`                    Int NOT NULL ,
-        `id_bouteille_cellier`          Int NOT NULL ,
         `nom_bouteille_cellier`         Varchar (200) NOT NULL ,
         `image_bouteille_cellier`       Varchar (200) NOT NULL ,
         `code_saq_cellier`              Varchar (200) NOT NULL ,
@@ -146,7 +146,7 @@ CREATE TABLE `contient` (
         `quantite`                      Int NOT NULL ,
         `notes`                         Varchar (200) NOT NULL ,
         `millesime`                     Varchar (20) DEFAULT NULL
-	,CONSTRAINT contient_PK PRIMARY KEY (`id_bouteille`,`id_cellier`)
+	,CONSTRAINT contient_PK PRIMARY KEY (`id_bouteille_cellier`)
 	,CONSTRAINT contient_vino_bouteille0_FK FOREIGN KEY (`id_bouteille`) REFERENCES vino_bouteille(`id_bouteille`)
 	,CONSTRAINT contient_vino_cellier0_FK FOREIGN KEY (`id_cellier`) REFERENCES vino_cellier(`id_cellier`)
 	,CONSTRAINT contient_vino_type0_FK FOREIGN KEY (`id_type`) REFERENCES vino_type(`id_type`)
