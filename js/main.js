@@ -19,26 +19,29 @@ window.addEventListener('load', function() {
         submitLaBouteilleModifier.addEventListener("click", function(evt){
             console.log()
           let bouteille = {
-            id : document.querySelector("[name='id']"),
+            idBouteilleCellier : document.querySelector("[name='idBouteilleCellier']"),
+            idCellier : document.querySelector("[name='idCellier']"),
             nom : document.querySelector("[name='nom']"),
-    
+            format : document.querySelector("[name='format']"),
+            pays : document.querySelector("[name='pays']"),
             prix : document.querySelector("[name='prix']"),
-            description : document.querySelector("[name='desc']"),
-          
-           
+            data_achat : document.querySelector("[name='data_achat']"),
+            expiration : document.querySelector("[name='expiration']"),
+            quantite : document.querySelector("[name='quantite']"),
+            millesime : document.querySelector("[name='millesime']")
           };
           var param = {
-            "id_bouteille":bouteille.id.value,
+            "id_bouteille_cellier":bouteille.idBouteilleCellier.value,
+            "id_cellier":bouteille.idCellier.value,
             "nom":bouteille.nom.value,
-            "prix":parseFloat(bouteille.prix.value),
-            "description":bouteille.description.value,
-           
-         
+            "format":bouteille.format.value,
+            "pays":bouteille.pays.value,
+            "prix":bouteille.prix.value,
+            "data_achat":bouteille.data_achat.value,
+            "expiration":bouteille.expiration.value,
+            "quantite":bouteille.quantite.value,
+            "millesime":bouteille.millesime.value,
           };
-
-             document.querySelector("[name='description']").value;
-            console.log(document.querySelector("[name='desc']").value);
-
           let requete = new Request(BaseURL+"index.php?requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
           fetch(requete)
             .then(response => {

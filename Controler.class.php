@@ -36,19 +36,15 @@ class Controler
 				case 'boireBouteilleCellier':
 					$this->boireBouteilleCellier();
 					break;
-				//AJOUT DE 2 CASE
-				//Une qui nous transmet le id de la bouteille et nous redirige vers
-				//La page de modification avec son ID
 				case 'pageModifierBouteilleCellier':
 					$this->pageModifierBouteilleCellier();
 					break;
-				//Celle-ci reçoit les données après avoir modifier
 				case 'modifierBouteilleCellier':
 					$this->modifierBouteilleCellier();
 					break;	
                 case 'getbouteillebyid':
-                getbouteillbyid();
-                break;
+                	getbouteillbyid();
+                	break;
 				default:
 					$this->accueil();
 					break;

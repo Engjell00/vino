@@ -6,21 +6,21 @@ foreach ($data as $cle => $bouteille) {
     //Mal coder
     ?>
    <form  method ="POST"> 
-    <input type="hidden" name="id" value="<?php echo $bouteille['id_bouteille_cellier'];?>" />
+    <input type="hidden" name="idBouteilleCellier" value="<?php echo $bouteille['id_bouteille_cellier'];?>" />
+    <input type="hidden" name="idCellier" value="<?php echo $bouteille['id_cellier'];?>" />
     <div class="bouteille" data-quantite="">
         <div class="img">
             <img src="https:<?php echo $bouteille['image_bouteille_cellier'] ?>">
         </div>
         <div class="description">
-            <input name="nom" value="<?php echo $bouteille['nom_bouteille_cellier'] ?>"><br>
-            <input name="format" value="<?php echo $bouteille['format_bouteille_cellier'] ?>"><br>
-            <input name="pays" value="<?php echo $bouteille['pays_cellier'] ?>"><br>
-            <input name="prix" value="<?php echo $bouteille['prix_a_lachat'] ?>"><br>
-            <input name="data_achat" value="<?php echo $bouteille['date_achat'] ?>"><br>
-            <input name="expiration" value="<?php echo $bouteille['expiration'] ?>"><br>
-            <input name="quantite" value="<?php echo $bouteille['quantite'] ?>"><br>
-            <input name="millesime" value="<?php echo $bouteille['millesime'] ?>"><br>
-            <input name="desc" value="<?php echo $bouteille['description_bouteille_cellier'] ?>"><br>
+            <p>Nom: <input name="nom" value="<?php echo $bouteille['nom_bouteille_cellier'] ?>"></p>
+            <p>Format :<input name="format" value="<?php echo $bouteille['format_bouteille_cellier'] ?>"></p>
+            <p>Pays: <input name="pays" value="<?php echo $bouteille['pays_cellier'] ?>"></p>
+            <p>Prix: <input name="prix" value="<?php echo $bouteille['prix_a_lachat'] ?>"></p>
+            <p>Date Achat :<input name="data_achat" value="<?php echo $bouteille['date_achat'] ?>"></p>
+            <p>Expiration :<input name="expiration" value="<?php echo $bouteille['expiration'] ?>"></p>
+            <p>Quantite :<input name="quantite" value="<?php echo $bouteille['quantite'] ?>"></p>
+            <p>Millesime: <input name="millesime" value="<?php echo $bouteille['millesime'] ?>"></p>
         </div>
     </div>
     <input type="button" value="Modifier" name="Submit" class="submitModifierBouteille"/>   
