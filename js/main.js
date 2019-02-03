@@ -26,7 +26,7 @@ window.addEventListener('load', function() {
               format : document.querySelector("[name='format']"),
               pays : document.querySelector("[name='pays']"),
               prix : document.querySelector("[name='prix']"),
-              data_achat : document.querySelector("[name='data_achat']"),
+              date_achat : document.querySelector("[name='date_achat']"),
               expiration : document.querySelector("[name='expiration']"),
               quantite : document.querySelector("[name='quantite']"),
               millesime : document.querySelector("[name='millesime']")
@@ -39,7 +39,7 @@ window.addEventListener('load', function() {
               "format":bouteille.format.value,
               "pays":bouteille.pays.value,
               "prix":bouteille.prix.value,
-              "data_achat":bouteille.data_achat.value,
+              "date_achat":bouteille.date_achat.value,
               "expiration":bouteille.expiration.value,
               "quantite":parseInt(bouteille.quantite.value),
               "millesime":bouteille.millesime.value,
@@ -110,8 +110,7 @@ window.addEventListener('load', function() {
     let liste = document.querySelector('.listeAutoComplete');
     if(inputNomBouteille){
       inputNomBouteille.addEventListener("keyup", function(evt){
-          console.log("ssssssssssssss");
-            console.log(inputNomBouteille);
+        console.log(inputNomBouteille);
         let nom = inputNomBouteille.value;
         liste.innerHTML = "";
         if(nom){

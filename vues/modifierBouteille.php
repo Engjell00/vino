@@ -18,7 +18,7 @@ foreach ($data as $cle => $bouteille) {
             <p>Format :<input name="format" value="<?php echo $bouteille['format_bouteille_cellier'] ?>"></p>
             <p>Pays: <input name="pays" value="<?php echo $bouteille['pays_cellier'] ?>"></p>
             <p>Prix: <input name="prix" value="<?php echo $bouteille['prix_a_lachat'] ?>"></p>
-            <p>Date Achat :<input name="data_achat" value="<?php echo $bouteille['date_achat'] ?>"></p>
+            <p>Date Achat :<input name="date_achat" value="<?php echo $bouteille['date_achat'] ?>"></p>
             <p>Expiration :<input name="expiration" value="<?php echo $bouteille['expiration'] ?>"></p>
             <p>Quantite :<input name="quantite" value="<?php echo $bouteille['quantite'] ?>"></p>
             <p>Millesime: <input name="millesime" value="<?php echo $bouteille['millesime'] ?>"></p>
