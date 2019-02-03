@@ -35,8 +35,10 @@ window.addEventListener('load', function() {
            
          
           };
+
              document.querySelector("[name='description']").value;
             console.log(document.querySelector("[name='desc']").value);
+
           let requete = new Request(BaseURL+"index.php?requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
           fetch(requete)
             .then(response => {
@@ -181,7 +183,9 @@ window.addEventListener('load', function() {
             "millesime":bouteille.millesime.value,
               "id_type":1,
           };
+
             console.log(param);
+
           let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
