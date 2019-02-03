@@ -46,8 +46,11 @@ class Controler
 				case 'modifierBouteilleCellier':
 					$this->modifierBouteilleCellier();
 					break;	
+                case 'getbouteillebyid':
+                getbouteillbyid();
+                break;
 				default:
-					$this->tests();
+					$this->accueil();
 					break;
 			}
 		}
@@ -109,6 +112,7 @@ class Controler
 			include("vues/pied.php");
                   
 		}
+   
 		private function listeBouteille()
 		{
 			$bte = new Bouteille();
