@@ -47,7 +47,7 @@ class Controler
 					$this->modifierBouteilleCellier();
 					break;	
 				default:
-					$this->tests();
+					$this->accueil();
 					break;
 			}
 		}

@@ -35,7 +35,7 @@ window.addEventListener('load', function() {
             "pays":bouteille.pays.value,
             "type":bouteille.type.value,
           };
-          let requete = new Request(BaseURL+"requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
+          let requete = new Request(BaseURL+"index.php?requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
           fetch(requete)
             .then(response => {
                 if (response.status === 200) {
@@ -55,7 +55,8 @@ window.addEventListener('load', function() {
     document.querySelectorAll(".btnBoire").forEach(function(element){
           element.addEventListener("click", function(evt){
               let id = evt.target.parentElement.dataset.id;
-              let requete = new Request(BaseURL+"requete=boireBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
+              console.log(id);
+              let requete = new Request(BaseURL+"index.php?requete=boireBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
               fetch(requete)
               .then(response => {
                   if (response.status === 200) {
@@ -76,7 +77,7 @@ window.addEventListener('load', function() {
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
             console.log(id);
-            let requete = new Request(BaseURL+"requete=ajouterBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
+            let requete = new Request(BaseURL+"index.php?requete=ajouterBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
             fetch(requete)
             .then(response => {
                 if (response.status === 200) {
@@ -95,13 +96,16 @@ window.addEventListener('load', function() {
         })
     });
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
+  
     let liste = document.querySelector('.listeAutoComplete');
     if(inputNomBouteille){
       inputNomBouteille.addEventListener("keyup", function(evt){
+          console.log("ssssssssssssss");
+            console.log(inputNomBouteille);
         let nom = inputNomBouteille.value;
         liste.innerHTML = "";
         if(nom){
-          let requete = new Request(BaseURL+"requete=autocompleteBouteille", {method: 'POST', body: '{"nom": "'+nom+'"}'});
+          let requete = new Request(BaseURL+"index.php?requete=autocompleteBouteille", {method: 'POST', body: '{"nom": "'+nom+'"}'});
           fetch(requete)
               .then(response => {
                   if (response.status === 200) {
@@ -157,7 +161,7 @@ window.addEventListener('load', function() {
             "quantite":bouteille.quantite.value,
             "millesime":bouteille.millesime.value,
           };
-          let requete = new Request(BaseURL+"requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
+          let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
