@@ -45,7 +45,7 @@ class Bouteille extends Modele {
 	public function getBouteilleParId($idBouteille)
 	{
 		$rows = Array();
-		$requete ="SELECT * FROM vino_bouteille	WHERE id_bouteille = $idBouteille";
+		$requete ="SELECT * FROM contient	WHERE id_bouteille_cellier = $idBouteille";
 		$res = $this->_db->query($requete);
 		if($res->num_rows)
 		{
@@ -139,7 +139,7 @@ class Bouteille extends Modele {
 		$nom = preg_replace("/\*/","%" , $nom);
 		 
 		//echo $nom;
-		$requete ='SELECT id_bouteille, nom_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("%'. $nom .'%") LIMIT 0,'. $nb_resultat; 
+		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("%'. $nom .'%") LIMIT 0,'. $nb_resultat; 
 		//var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
@@ -213,7 +213,7 @@ class Bouteille extends Modele {
 		$requete = "UPDATE contient SET nom_bouteille_cellier = ".$data->nom.",prix_a_lachat=".$data->prix.",
 		format_bouteille_cellier=".$data->format.",date_achat=".$data->dateAchat.",expiration=".$data->expiration.",
 		quantite=".$data->quantite.",notes=".$data->notes.",millesime=".$data->millesime.
-		"WHERE id_bouteille_cellier =".$data->idBouteilleCellier." AND WHERE id_cellier =".$data->idCellier;
+		"WHERE id_bouteille =".$data->id_bouteille;
 
         $res = $this->_db->query($requete);
 		return $res;
@@ -232,14 +232,17 @@ class Bouteille extends Modele {
 	{
 		//TODO : Valider les données.
 		//var_dump($data);	
-		$requete = "INSERT INTO contient(id_bouteille,date_achat,garde_jusqua,notes,prix,quantite,millesime) VALUES (".
+		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
 		"'".$data->id_bouteille."',".
+        "'".$data->id_cellier."',".
+         "'".$data->nom_bouteille_cellier."',".
+         "'".$data->image_bouteille."',".
 		"'".$data->date_achat."',".
-		"'".$data->garde_jusqua."',".
 		"'".$data->notes."',".
 		"'".$data->prix."',".
 		"'".$data->quantite."',".
-		"'".$data->millesime."')";
+		"'".$data->millesime."',".
+        "'".$data->id_type."')";
 
         $res = $this->_db->query($requete);
         
@@ -277,6 +280,9 @@ class Bouteille extends Modele {
 		
 		return $rows;
 	}
+    
+    
+   
 }
 
 

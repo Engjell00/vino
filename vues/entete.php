@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta name="viewport" content="width=device-width, minimum-scale=0.5, initial-scale=1.0, user-scalable=yes">
-
+         <link href="https://fonts.googleapis.com/css?family=Krub|Questrial" rel="stylesheet">
 		<meta name="description" content="Un petit verre de vino">
 		<meta name="author" content="Jonathan Martel (jmartel@cmaisonneuve.qc.ca)">
 
