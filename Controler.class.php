@@ -71,6 +71,7 @@ class Controler
 				echo json_encode($resultat);
 			}
 			else{
+				
 				include("vues/entete.php");
 				include("vues/modifierBouteille.php");
 				include("vues/pied.php");

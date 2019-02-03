@@ -18,7 +18,7 @@ window.addEventListener('load', function() {
     if(submitLaBouteilleModifier){
       submitLaBouteilleModifier.addEventListener("click", function(evt){
           let bouteille = {
-            idBouteille : document.querySelector("[name='id_bouteille']"),
+            idBouteille : document.querySelector("[name='idBouteille']"),
             idBouteilleCellier : document.querySelector("[name='idBouteilleCellier']"),
             idCellier : document.querySelector("[name='idCellier']"),
             nom : document.querySelector("[name='nom']"),
@@ -55,7 +55,7 @@ window.addEventListener('load', function() {
           fetch(requete)
             .then(response => {
                 if (response.status === 200) {
-                  return response.text();
+                  return response.json();
                 } else {
                   throw new Error('Erreur');
                 }
