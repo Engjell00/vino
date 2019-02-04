@@ -105,6 +105,20 @@ window.addEventListener('load', function() {
                 });
           })
         })
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     document.querySelectorAll(".btnAjouter").forEach(function(element){
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
@@ -127,6 +141,36 @@ window.addEventListener('load', function() {
               });      
         })
     });
+    
+    let inputRecherchee = document.querySelector("[name='nom_bouteille']");
+       inputRecherchee.addEventListener("blur",function(){
+        
+        
+        document.querySelector(".nom_bouteille").style.display = "block";
+        document.querySelector(".nomBouteille").style.display = "block";
+        document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
+       
+        
+        
+        
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
   
     let liste = document.querySelector('.listeAutoComplete');
@@ -186,6 +230,11 @@ window.addEventListener('load', function() {
         }
       });
     }
+    
+  
+    
+    
+    
     
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
