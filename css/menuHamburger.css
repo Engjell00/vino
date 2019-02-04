@@ -23,6 +23,7 @@ header {
     top: 0;
     z-index: 0;
     transition: 0.5s;
+    
       
     
 }
@@ -70,12 +71,21 @@ li{
     border-bottom: 1px solid #eee;
     padding-bottom: 0.7rem;
     padding-top: 0.7rem;
+    padding-left: 0.7rem;
     
 }
  
 li:last-child{
     padding-bottom: none;
 }
+
+#meny>ul>li>a:hover{
+
+
+    color:#3866a3;
+    font-size: 110%;
+}
+
 #burger > div {
     height: 2px;
     background-color: #fff;
