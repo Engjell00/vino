@@ -12,9 +12,67 @@
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
-    var submitLaBouteilleModifier = document.querySelector(".submitModifierBouteille");
-    //Ajout pour la modification, elle est a changer puisque maintenant il ya  dautre données que nous allons recevoir
-    //Cette partie ligne 16 a 56 est pour la modification de la bouteille dans le cellier.
+      //Envoye d'une requête lorsque l'usager veut se connecter
+      var connexionParUnUsager = document.querySelector(".connexion");
+      if(connexionParUnUsager){
+        connexionParUnUsager.addEventListener("click", function(evt){
+          evt.preventDefault();
+          let connexion = {
+            utilisateur : document.querySelector("[name='utilisateur']"),
+            motDePasse : document.querySelector("[name='motDePasse']"),
+          }
+          let param = {
+            "utilisateur":connexion.utilisateur.value,
+            "motDePasse":connexion.motDePasse.value,
+          }
+          console.log(param);
+          let requete = new Request(BaseURL+"index.php?requete=login", {method: 'POST', body: JSON.stringify(param)});
+          fetch(requete)
+            .then(response => {
+                if (response.status === 200) {
+                  return response.json();
+                } else {
+                  throw new Error('Erreur');
+                }
+              })
+              .then(response => {
+                console.log(response);
+              }).catch(error => {
+                console.error(error);
+              });
+        });
+      }
+    //Envoye d'une requête lorsque un nouveau usager veut s'inscrire à notre application
+    var inscriptionParUnUsager = document.querySelector(".inscription");
+    if(inscriptionParUnUsager){
+      inscriptionParUnUsager.addEventListener("click", function(evt){
+        evt.preventDefault();
+        let inscription = {
+          utilisateur : document.querySelector("[name='utilisateur']"),
+          motDePasse : document.querySelector("[name='motDePasse']"),
+          description : document.querySelector("[name='description']")
+        }
+        let param = {
+          "utilisateur":inscription.utilisateur.value,
+          "motDePasse":inscription.motDePasse.value,
+          "description":inscription.description.value
+        }
+        let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
+        fetch(requete)
+          .then(response => {
+              if (response.status === 200) {
+                return response.json();
+              } else {
+                throw new Error('Erreur');
+              }
+            })
+            .then(response => {
+              console.log(response);
+            }).catch(error => {
+              console.error(error);
+            });
+      });
+  }
 	 document.querySelectorAll(".supprimerLivre").forEach(function(element){
           element.addEventListener("click", function(evt){
               let bouteille={
@@ -37,6 +95,7 @@ window.addEventListener('load', function() {
                 });
           })
         })
+    var submitLaBouteilleModifier = document.querySelector(".submitModifierBouteille");    
     if(submitLaBouteilleModifier){
         submitLaBouteilleModifier.addEventListener("click", function(evt){
           evt.preventDefault();

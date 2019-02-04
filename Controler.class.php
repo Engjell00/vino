@@ -20,7 +20,19 @@ class Controler
 		 */
 		public function gerer()
 		{
+			session_start();
 			switch ($_GET['requete']) {
+				case 'formulaireInscription':
+					include("vues/entete.php");
+					include("vues/inscription.html");
+					include("vues/pied.php");
+					break;
+				case 'inscription':
+					$this->inscriptionParUnUsager();
+					break;
+				case 'login':
+					$this->connectionParUnUsager();
+					break;			
 				case 'listeBouteille':
 					$this->listeBouteille();
 					break;
@@ -47,11 +59,47 @@ class Controler
                 	break;
                 case 'SupprimerBouteilleAuCellier':
 					$this->SupprimerBouteilleAuCellier();
-					break;    
+					break;
+				case "Logout":
+					$_SESSION = array();
+					if (ini_get("session.use_cookies")) {
+						$params = session_get_cookie_params();
+						setcookie(session_name(), '', time() - 42000,
+							$params["path"], $params["domain"],
+							$params["secure"], $params["httponly"]
+						);
+					}
+					session_destroy();
+					$data = listeBouteille();
+					include("vues/entete.php");
+					include("vues/cellier.php");
+					include("vues/pied.php");
+					break;	    
 				default:
 					$this->accueil();
 					break;
 			}
+		}
+		private function connectionParUnUsager(){
+			$body = json_decode(file_get_contents('php://input'));
+                if(!empty($body)){
+                    $usager = new Usager();
+                    $resultat = $usager->Authentification($body);
+					if($resultat){
+						$this->accueil();
+					}
+                }
+
+		}
+		private function inscriptionParUnUsager(){
+			$body = json_decode(file_get_contents('php://input'));
+                if(!empty($body)){
+                    $usager = new Usager();
+                    $resultat = $usager->creationUsager($body);
+					if($resultat){
+						$_SESSION["UserID"] = $resultat;
+					}
+                }
 		}
         private function SupprimerBouteilleAuCellier(){
 			$body = json_decode(file_get_contents('php://input'));
@@ -118,10 +166,8 @@ class Controler
  
 		private function accueil()
 		{
-			$bte = new Bouteille();
-			$data = $bte->getListeBouteilleCellier(1, 1);
 			include("vues/entete.php");
-			include("vues/cellier.php");
+			include("vues/accueil.php");
 			include("vues/pied.php");
                   
 		}

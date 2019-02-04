@@ -16,8 +16,28 @@
 
 
 class Usager extends Modele {
-    const TABLE = 'vino_usager';
-    
+	const TABLE = 'vino_usager';
+	/**
+	 * Méthode qui permet d'authentifier l'utilisateur
+	 */
+	function Authentification($data)
+	{
+		$requete = "SELECT motdepasse from contient WHERE nom_usager ='" . $data->utilisateur . "'";
+		if(($res = $this->_db->query($requete)) ==	 true)
+		{
+			if($res->num_rows)
+			{
+				while($row = $res->fetch_assoc())
+				{
+					if(password_verify($data->motDePasse, $row["motdepasse"])){
+						return true;
+					}    
+					else
+						return false;
+				}
+			}
+		}	
+	}
 
     /**
 	 * Cette méthode permet a l'usager de voir les bouteilles dans un cellier donné
@@ -94,17 +114,16 @@ class Usager extends Modele {
      public function creationUsager($data)
 	{
 		//TODO : Valider les données.
-        //var_dump($data);
-        if(isset($data->nom_usager) && isset($data->mot_de_passe_usager)&& isset($data->description_usager)){     	
+		//var_dump($data);
+        if(isset($data->utilisateur) && isset($data->description)&& isset($data->description)){   	
             try{
+				$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
                 $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager, description_usager) VALUES (".
-                "'".$data->nom_usager."',".
-                "'".$data->mot_de_passe_usager."',".
-                "'".$data->description_usager."')";
-        
+                "'".$data->utilisateur."',".
+                "'".$passwordEncrypte."',".
+                "'".$data->description."')";
                 $res = $this->_db->query($requete);
-                
-                return $res;
+                return $res->insert_id();
             }
             catch(Exception $e){
                 trigger_error('Une erreur s\'est produite lors de la création du compte');
