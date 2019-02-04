@@ -45,11 +45,28 @@ class Controler
                 case 'getbouteillebyid':
                 	getbouteillbyid();
                 	break;
+                case 'SupprimerBouteilleAuCellier':
+					$this->SupprimerBouteilleAuCellier();
+					break;    
 				default:
 					$this->accueil();
 					break;
 			}
 		}
+        private function SupprimerBouteilleAuCellier(){
+			$body = json_decode(file_get_contents('php://input'));
+                if(!empty($body)){
+                    $bte = new Bouteille();
+                    $resultat = $bte->supprimerLaBouteilleAuCellier($body);
+					echo json_encode($resultat);
+                }
+                else{
+                    include("vues/entete.php");
+                    include("vues/cellier.php");
+                    include("vues/pied.php");
+                }
+
+        }
 		//Récupérer les informations de la bouteille nécessaires
 		//Elle est bien simple,p-t optimiser et changer,
 		//Comme j'ai écris en haut on redirige vers la page de modification avec l'ID rêcu

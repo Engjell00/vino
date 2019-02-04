@@ -22,9 +22,10 @@ foreach ($data as $cle => $bouteille) {
         </div>
         <div class="options" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
             <a class="bouton" href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>'>Modifier bouteille</a>
+             <button class="bouton supprimerLivre" type='button'  data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>">Supprimer</button>
            <img src="./img/iconeAjoutBouteille-Red.png" class='btnAjouter' height="60px" width="60px">
             <button class='btnBoire bouton'>Boire</button>
-            
+  
         </div>
     </div>
 <?php

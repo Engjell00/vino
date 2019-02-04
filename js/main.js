@@ -15,6 +15,28 @@ window.addEventListener('load', function() {
     var submitLaBouteilleModifier = document.querySelector(".submitModifierBouteille");
     //Ajout pour la modification, elle est a changer puisque maintenant il ya  dautre données que nous allons recevoir
     //Cette partie ligne 16 a 56 est pour la modification de la bouteille dans le cellier.
+	 document.querySelectorAll(".supprimerLivre").forEach(function(element){
+          element.addEventListener("click", function(evt){
+              let bouteille={
+                idBouteille : evt.target.getAttribute('data-id-bouteille'),
+                idCellier : evt.target.getAttribute('data-id-cellier')
+              }
+              let requete = new Request(BaseURL+"index.php?requete=SupprimerBouteilleAuCellier", {method: 'POST', body: JSON.stringify(bouteille)});
+              fetch(requete)
+              .then(response => {
+                  if (response.status === 200) {
+                    return response.json();
+                  } else {
+                    throw new Error('Erreur');
+                  }
+                })
+                .then(response => {
+                  console.log(response);
+                }).catch(error => {
+                  console.error(error);
+                });
+          })
+        })
     if(submitLaBouteilleModifier){
         submitLaBouteilleModifier.addEventListener("click", function(evt){
           evt.preventDefault();

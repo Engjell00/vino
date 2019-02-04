@@ -215,6 +215,12 @@ class Bouteille extends Modele {
 		return $res;
 		
 	}
+    //Supprimer
+    public function supprimerLaBouteilleAuCellier($data){
+		$requete = "DELETE FROM contient where id_bouteille_cellier = '".$data->idBouteille."' AND id_cellier = '".$data->idCellier."'";
+		$res = $this->_db->query($requete);
+		return $res;
+	}
 	
 	/**
 	 * Cette méthode ajoute une ou des bouteilles au cellier
