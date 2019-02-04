@@ -21,9 +21,9 @@ foreach ($data as $cle => $bouteille) {
             <p><a href="<?php echo $bouteille['url_saq_bouteille'] ?>">Voir SAQ</a></p>
         </div>
         <div class="options" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
-            <a href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>'>Modifier bouteille</a>
+            <a class="bouton" href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>'>Modifier bouteille</a>
            <img src="./img/iconeAjoutBouteille-Red.png" class='btnAjouter' height="60px" width="60px">
-            <button class='btnBoire'>Boire</button>
+            <button class='btnBoire bouton'>Boire</button>
             
         </div>
     </div>
