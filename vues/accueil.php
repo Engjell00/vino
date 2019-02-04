@@ -8,14 +8,14 @@
                         Mot de Passe :<input type="password" name="motDePasse">
                         <input class= "connexion" type="submit" value="Log in"/>
                 </form><br>
-        <a class="bouton" href='?requete=formulaireInscription'>Inscrivez-vous</a>    
+        <a class="bouton" href='index.php?requete=formulaireInscription'>Inscrivez-vous</a>    
 <?php
     }
     else
     {
 ?>
     Vous êtes déjà authentifiés...
-    <a href="?requete=Logout">Se déconnecter</a>
+    <a href="index.php?requete=Logout">Se déconnecter</a>
         <?php
     }
 ?>

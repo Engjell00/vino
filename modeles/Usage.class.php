@@ -10,35 +10,9 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-
-
 // TODO : TEST METHODS. SEE IF CELLIER CLASS NEEDED
-
-
 class Usager extends Modele {
 	const TABLE = 'vino_usager';
-	/**
-	 * Méthode qui permet d'authentifier l'utilisateur
-	 */
-	function Authentification($data)
-	{
-		$requete = "SELECT motdepasse from contient WHERE nom_usager ='" . $data->utilisateur . "'";
-		if(($res = $this->_db->query($requete)) ==	 true)
-		{
-			if($res->num_rows)
-			{
-				while($row = $res->fetch_assoc())
-				{
-					if(password_verify($data->motDePasse, $row["motdepasse"])){
-						return true;
-					}    
-					else
-						return false;
-				}
-			}
-		}	
-	}
-
     /**
 	 * Cette méthode permet a l'usager de voir les bouteilles dans un cellier donné
 	 * 
@@ -108,9 +82,6 @@ class Usager extends Modele {
 	 * 
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
-    
-    
-
      public function creationUsager($data)
 	{
 		//TODO : Valider les données.
@@ -133,6 +104,30 @@ class Usager extends Modele {
             trigger_error('Tout les champs sont requis.');
         }
 		
+	}
+	/**
+	 * Méthode qui permet d'authentifier l'utilisateur
+	 */
+	function Authentification($data)
+	{
+		$requete = "SELECT mot_de_passe_usager from contient WHERE nom_usager ='" . $data->utilisateur . "'";
+		if(($res = $this->_db->query($requete)) ===	true)
+		{
+			if($res->num_rows)
+			{
+				while($row = $res->fetch_assoc())
+				{
+					if(password_verify($data->motDePasse, $row["mot_de_passe_usager"]))
+					{
+						return true;
+					}    
+					else
+					{
+						return false;
+					}
+				}
+			}
+		}	
 	}
 	
 	

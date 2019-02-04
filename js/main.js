@@ -45,34 +45,35 @@ window.addEventListener('load', function() {
     //Envoye d'une requête lorsque un nouveau usager veut s'inscrire à notre application
     var inscriptionParUnUsager = document.querySelector(".inscription");
     if(inscriptionParUnUsager){
-      inscriptionParUnUsager.addEventListener("click", function(evt){
-        evt.preventDefault();
-        let inscription = {
-          utilisateur : document.querySelector("[name='utilisateur']"),
-          motDePasse : document.querySelector("[name='motDePasse']"),
-          description : document.querySelector("[name='description']")
-        }
-        let param = {
-          "utilisateur":inscription.utilisateur.value,
-          "motDePasse":inscription.motDePasse.value,
-          "description":inscription.description.value
-        }
-        let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
-        fetch(requete)
-          .then(response => {
-              if (response.status === 200) {
-                return response.json();
-              } else {
-                throw new Error('Erreur');
-              }
-            })
+        inscriptionParUnUsager.addEventListener("click", function(evt){
+          evt.preventDefault();
+          let inscription = {
+            utilisateur_ins : document.querySelector("[name='utilisateur']"),
+            motDePasse_ins : document.querySelector("[name='motDePasse']"),
+            description_ins : document.querySelector("[name='description']")
+          }
+          let param = {
+            "utilisateur":inscription.utilisateur_ins.value,
+            "motDePasse":inscription.motDePasse_ins.value,
+            "description":inscription.description_ins.value
+          }
+          console.log(param);
+          let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
+          fetch(requete)
             .then(response => {
-              console.log(response);
-            }).catch(error => {
-              console.error(error);
-            });
-      });
-  }
+                if (response.status === 200) {
+                  return response.json();
+                } else {
+                  throw new Error('Erreur');
+                }
+              })
+              .then(response => {
+                console.log(response);
+              }).catch(error => {
+                console.error(error);
+              });
+        });
+    }
 	 document.querySelectorAll(".supprimerLivre").forEach(function(element){
           element.addEventListener("click", function(evt){
               let bouteille={
@@ -219,7 +220,6 @@ window.addEventListener('load', function() {
     }
       let bouteille = {
         nom : document.querySelector(".nom_bouteille"),
-         
         millesime : document.querySelector("[name='millesime']"),
         quantite : document.querySelector("[name='quantite']"),
         date_achat : document.querySelector("[name='date_achat']"),
@@ -234,9 +234,7 @@ window.addEventListener('load', function() {
         document.querySelector(".nom_bouteille").style.display = "block";
         document.querySelector(".nomBouteille").style.display = "block";
         if(evt.target.tagName == "LI"){
-            bouteille.image=evt.target.getAttribute('image');
-            
-        
+          bouteille.image=evt.target.getAttribute('image');
           bouteille.nom.dataset.id = evt.target.dataset.id;
           bouteille.nom.innerHTML = evt.target.innerHTML;
           liste.innerHTML = "";
@@ -249,18 +247,11 @@ window.addEventListener('load', function() {
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
-            
-
-            
-            
-            
-            
-            
           var param = {
             "id_bouteille":bouteille.nom.dataset.id,
-              "id_cellier":1,
-              "nom_bouteille_cellier":bouteille.nom.innerHTML,
-              "image_bouteille" :bouteille.image,
+            "id_cellier":1,
+            "nom_bouteille_cellier":bouteille.nom.innerHTML,
+            "image_bouteille" :bouteille.image,
             "date_achat":bouteille.date_achat.value,
             "garde_jusqua":bouteille.garde_jusqua.value,
             "notes":bouteille.date_achat.value,
@@ -269,9 +260,7 @@ window.addEventListener('load', function() {
             "millesime":bouteille.millesime.value,
               "id_type":1,
           };
-
-            console.log(param);
-
+          console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {

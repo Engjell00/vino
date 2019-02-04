@@ -86,7 +86,7 @@ class Controler
                     $usager = new Usager();
                     $resultat = $usager->Authentification($body);
 					if($resultat){
-						$this->accueil();
+						$_SESSION["UserID"] = $resultat;
 					}
                 }
 
@@ -97,8 +97,10 @@ class Controler
                     $usager = new Usager();
                     $resultat = $usager->creationUsager($body);
 					if($resultat){
-						$_SESSION["UserID"] = $resultat;
+						echo_json_encode($resultat);
+						$this->accueil();
 					}
+				
                 }
 		}
         private function SupprimerBouteilleAuCellier(){
