@@ -22,6 +22,11 @@ class Controler
 		{
 			session_start();
 			switch ($_GET['requete']) {
+				case 'accueil':
+					require_once("vues/entete.php");
+					require_once("vues/accueil.php");
+					require_once("vues/pied.php");
+					break;
 				case 'formulaireInscription':
 					include("vues/entete.php");
 					include("vues/inscription.php");
@@ -88,7 +93,7 @@ class Controler
 					if($resultat){
 						$_SESSION["UserID"] = $resultat;
 						echo json_encode($_SESSION["UserID"]);
-						exit;
+						
 					}
                 }
 
@@ -99,7 +104,7 @@ class Controler
                     $usager = new Usager();
                     $resultat = $usager->creationUsager($body);
 					if($resultat){
-						header('Location: http://127.0.0.1:8080/vino/index.php?requete=login'); 
+						header('Location: http://127.0.0.1:8080/vino/index.php?requete=accueil'); 
 					}
 				
                 }
