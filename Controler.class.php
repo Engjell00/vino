@@ -87,7 +87,9 @@ class Controler
                     $resultat = $usager->Authentification($body);
 					if($resultat){
 						$_SESSION["UserID"] = $resultat;
-						header("Location: index.php?requete=cellier");
+						include("vues/entete.php");
+						include("vues/cellier.php");
+						include("vues/pied.php");
 					}
                 }
 
