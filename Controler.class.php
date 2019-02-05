@@ -24,7 +24,7 @@ class Controler
 			switch ($_GET['requete']) {
 				case 'formulaireInscription':
 					include("vues/entete.php");
-					include("vues/inscription.html");
+					include("vues/inscription.php");
 					include("vues/pied.php");
 					break;
 				case 'inscription':
@@ -87,6 +87,7 @@ class Controler
                     $resultat = $usager->Authentification($body);
 					if($resultat){
 						$_SESSION["UserID"] = $resultat;
+						header("Location: index.php?requete=cellier");
 					}
                 }
 
@@ -97,7 +98,7 @@ class Controler
                     $usager = new Usager();
                     $resultat = $usager->creationUsager($body);
 					if($resultat){
-						echo_json_encode($resultat);
+						echo json_encode($resultat);
 						$this->accueil();
 					}
 				

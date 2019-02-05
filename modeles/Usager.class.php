@@ -86,15 +86,13 @@ class Usager extends Modele {
 	{
 		//TODO : Valider les données.
 		//var_dump($data);
-        if(isset($data->utilisateur) && isset($data->description)&& isset($data->description)){   	
+        if(isset($data->utilisateur) && isset($data->motDePasse)){   	
             try{
 				$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
-                $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager, description_usager) VALUES (".
-                "'".$data->utilisateur."',".
-                "'".$passwordEncrypte."',".
-                "'".$data->description."')";
-                $res = $this->_db->query($requete);
-                return $res->insert_id();
+                $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager) VALUES ("."'".$data->utilisateur."',"."'".$passwordEncrypte."')";
+				$res = $this->_db->query($requete);
+				$id =  $this->_db->insert_id;
+                return $id;
             }
             catch(Exception $e){
                 trigger_error('Une erreur s\'est produite lors de la création du compte');
@@ -110,7 +108,7 @@ class Usager extends Modele {
 	 */
 	function Authentification($data)
 	{
-		$requete = "SELECT mot_de_passe_usager from contient WHERE nom_usager ='" . $data->utilisateur . "'";
+		$requete = "SELECT mot_de_passe_usager,id_usager from contient WHERE nom_usager ='" . $data->utilisateur . "'";
 		if(($res = $this->_db->query($requete)) ===	true)
 		{
 			if($res->num_rows)
@@ -119,7 +117,7 @@ class Usager extends Modele {
 				{
 					if(password_verify($data->motDePasse, $row["mot_de_passe_usager"]))
 					{
-						return true;
+						return $row["id_usager"];
 					}    
 					else
 					{

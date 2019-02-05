@@ -50,12 +50,10 @@ window.addEventListener('load', function() {
           let inscription = {
             utilisateur_ins : document.querySelector("[name='utilisateur']"),
             motDePasse_ins : document.querySelector("[name='motDePasse']"),
-            description_ins : document.querySelector("[name='description']")
           }
           let param = {
             "utilisateur":inscription.utilisateur_ins.value,
             "motDePasse":inscription.motDePasse_ins.value,
-            "description":inscription.description_ins.value
           }
           console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
