@@ -103,10 +103,6 @@ class Controler
                 if(!empty($body)){
                     $usager = new Usager();
                     $resultat = $usager->creationUsager($body);
-					if($resultat){
-						header('Location: http://127.0.0.1:8080/vino/index.php?requete=accueil'); 
-					}
-				
                 }
 		}
         private function SupprimerBouteilleAuCellier(){

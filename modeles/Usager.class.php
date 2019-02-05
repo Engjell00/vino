@@ -107,21 +107,19 @@ class Usager extends Modele {
 	 */
 	function Authentification($data)
 	{
-		$requete = "SELECT mot_de_passe_usager,id_usager from contient WHERE nom_usager ='" . $data->utilisateur . "'";
-		if(($res = $this->_db->query($requete)) ===	true)
+		$requete = "SELECT id_usager,mot_de_passe_usager, from vino_usager WHERE nom_usager = '".$data->utilisateur ."'";
+		$res = $this->_db->query($requete);
+		if($res->num_rows)
 		{
-			if($res->num_rows)
+			while($row = $res->fetch_assoc())
 			{
-				while($row = $res->fetch_assoc())
+				if(password_verify($data->motDePasse, $row["mot_de_passe_usager"]))
 				{
-					if(password_verify($data->motDePasse, $row["mot_de_passe_usager"]))
-					{
-						return $row["id_usager"];
-					}    
-					else
-					{
-						return false;
-					}
+					return $this->_db->insert_id;
+				}    
+				else
+				{
+					return false;
 				}
 			}
 		}	

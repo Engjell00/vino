@@ -61,6 +61,7 @@ window.addEventListener('load', function() {
             .then(response => {
                 if (response.status === 200) {
                   return response.json();
+                  //window.location.href = BaseURL+'index.php?requete=accueil'; 
                 } else {
                   throw new Error('Erreur');
                 }

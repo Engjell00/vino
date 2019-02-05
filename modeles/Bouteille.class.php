@@ -237,8 +237,8 @@ class Bouteille extends Modele {
 		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
 		"'".$data->id_bouteille."',".
         "'".$data->id_cellier."',".
-         "'".$data->nom_bouteille_cellier."',".
-         "'".$data->image_bouteille."',".
+        "'".$data->nom_bouteille_cellier."',".
+    	"'".$data->image_bouteille."',".
 		"'".$data->date_achat."',".
 		"'".$data->notes."',".
 		"'".$data->prix."',".
