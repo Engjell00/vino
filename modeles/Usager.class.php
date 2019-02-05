@@ -91,8 +91,7 @@ class Usager extends Modele {
 				$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
                 $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager) VALUES ("."'".$data->utilisateur."',"."'".$passwordEncrypte."')";
 				$res = $this->_db->query($requete);
-				$id =  $this->_db->insert_id;
-                return $id;
+                return $res;
             }
             catch(Exception $e){
                 trigger_error('Une erreur s\'est produite lors de la création du compte');

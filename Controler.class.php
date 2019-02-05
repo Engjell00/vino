@@ -87,9 +87,8 @@ class Controler
                     $resultat = $usager->Authentification($body);
 					if($resultat){
 						$_SESSION["UserID"] = $resultat;
-						include("vues/entete.php");
-						include("vues/cellier.php");
-						include("vues/pied.php");
+						echo json_encode($_SESSION["UserID"]);
+						exit;
 					}
                 }
 
@@ -100,8 +99,7 @@ class Controler
                     $usager = new Usager();
                     $resultat = $usager->creationUsager($body);
 					if($resultat){
-						echo json_encode($resultat);
-						$this->accueil();
+						header('Location: http://127.0.0.1:8080/vino/index.php?requete=login'); 
 					}
 				
                 }
