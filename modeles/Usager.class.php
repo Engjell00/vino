@@ -88,8 +88,8 @@ class Usager extends Modele {
 		//var_dump($data);
         if(isset($data->utilisateur) && isset($data->motDePasse)){   	
             try{
-				$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
-                $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager) VALUES ("."'".$data->utilisateur."',"."'".$passwordEncrypte."')";
+				//$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
+                $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager) VALUES ("."'".$data->utilisateur."',"."'".$data->motDePasse."')";
 				$res = $this->_db->query($requete);
                 return $res;
             }
@@ -107,22 +107,21 @@ class Usager extends Modele {
 	 */
 	function Authentification($data)
 	{
-		$requete = "SELECT id_usager,mot_de_passe_usager, from vino_usager WHERE nom_usager = '".$data->utilisateur ."'";
+		$requete = "SELECT id_usager,mot_de_passe_usager  from vino_usager WHERE nom_usager = '".$data->utilisateur ."'";
 		$res = $this->_db->query($requete);
-		if($res->num_rows)
+		while($row = $res->fetch_assoc())
 		{
-			while($row = $res->fetch_assoc())
+			var_dump($row);
+			if($data->motDePasse == $row["mot_de_passe_usager"])
 			{
-				if(password_verify($data->motDePasse, $row["mot_de_passe_usager"]))
-				{
-					return $this->_db->insert_id;
-				}    
-				else
-				{
-					return false;
-				}
+				$id = $row["id_usager"];
+				return $id;
+			}    
+			else
+			{
+				return false;
 			}
-		}	
+		}
 	}
 	
 	

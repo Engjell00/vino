@@ -23,86 +23,31 @@
 			} else {
 				echo "Erreur de connection mysqli";
 			}
-			?>
+			function connectionParUnUsager($array){
+				echo "hahahaha";
+					if(!empty($array)){
+						$usager = new Usager();
+						$resultat = $usager->Authentification($array);
+						if($resultat){
+							session_start();
+							$_SESSION["UserID"] = $resultat;
+							if(empty($_SESSION["UserID"])){
+								return 'marche pas';
+							}
+							echo $_SESSION["UserID"];
+						}
+					}
+	
+			}
+			$array = array('utilisateur' => 'naruto00','motDePasse' => 'allo00');
+			echo "hahaha";
+			die(connectionParUnUsager($array));
 
-			<h2>getListeBouteille</h2>
-			<?php
-			/*
-			$bout = new Bouteille();
-			$listeBouteille = $bout -> getListeBouteille();
-			echo Utilitaires::afficheTable($listeBouteille);
-			?>
-			<h2>getListeBouteilleCellier</h2>
-			<?php
 
-			$bout = new Bouteille();
-			try{
-				$listeBouteilleCellier = $bout -> getListeBouteilleCellier();
-				echo Utilitaires::afficheTable($listeBouteilleCellier);	
-			}
-			catch(Exception $e)
-			{
-				echo $e->getMessage();
-			}
-			*/
-			?>
-			
-			<h2>Bouteille::autocomplete($nom, $nb_resultat=10)</h2>
-			<h3>$nom = "ch*teau", $nb_resultat = 10</h3>
-			<?php
 
-			$bout = new Bouteille();
-			try{
-				$nom = "ch*teau";
-				$nb_resultat = 10;
-				$listeBouteilleCellier = $bout -> autocomplete($nom, 10);
-				echo Utilitaires::afficheTable($listeBouteilleCellier);	
-			}
-			catch(Exception $e)
-			{
-				echo $e->getMessage();
-			}
 			?>
-			<h3>$nom = "chateau", $nb_resultat = 10</h3>
-			<?php
-
-			$bout = new Bouteille();
-			try{
-				$nom = "chateau";
-				$nb_resultat = 10;
-				$listeBouteilleCellier = $bout -> autocomplete($nom, 10);
-				echo Utilitaires::afficheTable($listeBouteilleCellier);	
-			}
-			catch(Exception $e)
-			{
-				echo $e->getMessage();
-			}
-			
-			?>
-			
-			
-			
-			<h2>Bouteille::getListeBouteilleCellier()</h2>
-			<h3></h3>
-			<?php
-
-			$bout = new Bouteille();
-			try{
-				$listeBouteilleCellier = $bout -> getListeBouteilleCellier();
-				echo Utilitaires::afficheTable($listeBouteilleCellier);	
-			}
-			catch(Exception $e)
-			{
-				echo $e->getMessage();
-			}
-			?>
-			<h4>TAYEULEEEEE</h4>
-		   <?php
-		   			$saq = new SAQ();
-				   echo $saq->getProduits	
-		 
-		 	?>
-		</div>
+				
+	
 		<div id="footer">
 
 		</div>

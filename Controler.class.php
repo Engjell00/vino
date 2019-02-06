@@ -10,10 +10,8 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-
 class Controler 
 {
-	
 		/**
 		 * Traite la requête
 		 * @return void
@@ -27,6 +25,11 @@ class Controler
 					require_once("vues/accueil.php");
 					require_once("vues/pied.php");
 					break;
+				case 'accueilConnecter':
+					require_once("vues/entete.php");
+					require_once("vues/accueilConnecter.php");
+					require_once("vues/pied.php");
+					break;	
 				case 'formulaireInscription':
 					include("vues/entete.php");
 					include("vues/inscription.php");
@@ -87,16 +90,17 @@ class Controler
 		}
 		private function connectionParUnUsager(){
 			$body = json_decode(file_get_contents('php://input'));
-                if(!empty($body)){
-                    $usager = new Usager();
-                    $resultat = $usager->Authentification($body);
-					if($resultat){
-						$_SESSION["UserID"] = $resultat;
-						echo json_encode($_SESSION["UserID"]);
-						
+			if(!empty($body)){
+				$usager = new Usager();
+				$resultat = $usager->Authentification($body);
+				if($resultat){
+					$_SESSION["UserID"] = $resultat;
+					if(!empty($_SESSION["UserID"])){
+						header("Location: index.php?requete=accueilConnecter");
 					}
-                }
-
+					echo $_SESSION["UserID"];
+				}
+			}
 		}
 		private function inscriptionParUnUsager(){
 			$body = json_decode(file_get_contents('php://input'));
@@ -175,7 +179,6 @@ class Controler
 			include("vues/pied.php");
                   
 		}
-   
 		private function listeBouteille()
 		{
 			$bte = new Bouteille();
@@ -184,14 +187,12 @@ class Controler
             echo json_encode($cellier);
                   
 		}
-		
 		private function autocompleteBouteille()
 		{
 			$bte = new Bouteille();
 			//var_dump(file_get_contents('php://input'));
 			$body = json_decode(file_get_contents('php://input'));
             $listeBouteille = $bte->autocomplete($body->nom);
-            
             echo json_encode($listeBouteille);
                   
 		}
@@ -202,7 +203,6 @@ class Controler
 			if(!empty($body)){
 				$bte = new Bouteille();
 				//var_dump($_POST['data']);
-				
 				//var_dump($data);
 				$resultat = $bte->ajouterBouteilleCellier($body);
 				echo json_encode($resultat);
@@ -212,8 +212,6 @@ class Controler
 				include("vues/ajouter.php");
 				include("vues/pied.php");
 			}
-			
-            
 		}
 		
 		private function boireBouteilleCellier()
