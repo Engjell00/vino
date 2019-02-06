@@ -78,10 +78,7 @@ class Controler
 						);
 					}
 					session_destroy();
-					$data = listeBouteille();
-					include("vues/entete.php");
-					include("vues/cellier.php");
-					include("vues/pied.php");
+					$this->accueil();
 					break;	    
 				default:
 					$this->accueil();
@@ -96,9 +93,8 @@ class Controler
 				if($resultat){
 					$_SESSION["UserID"] = $resultat;
 					if(!empty($_SESSION["UserID"])){
-						header("Location: index.php?requete=accueilConnecter");
+						echo $_SESSION["UserID"];
 					}
-					echo $_SESSION["UserID"];
 				}
 			}
 		}
