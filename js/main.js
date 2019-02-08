@@ -184,6 +184,7 @@ window.addEventListener('load', function() {
           fetch(requete)
               .then(response => {
                   if (response.status === 200) {
+                      
                     return response.json();
                   } else {
                     throw new Error('Erreur');
@@ -204,7 +205,7 @@ window.addEventListener('load', function() {
     }
       let bouteille = {
         nom : document.querySelector(".nom_bouteille"),
-         
+        pays : document.querySelector("[name='pays']"),
         millesime : document.querySelector("[name='millesime']"),
         quantite : document.querySelector("[name='quantite']"),
         date_achat : document.querySelector("[name='date_achat']"),
@@ -230,6 +231,14 @@ window.addEventListener('load', function() {
         }
       });
     }
+  
+  
+    
+    
+    
+    
+    
+  
     
   
     
@@ -240,7 +249,11 @@ window.addEventListener('load', function() {
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
             
+if(!bouteille.image){
 
+bouteille.image="test";
+
+}
             
             
             
@@ -251,12 +264,14 @@ window.addEventListener('load', function() {
               "id_cellier":1,
               "nom_bouteille_cellier":bouteille.nom.innerHTML,
               "image_bouteille" :bouteille.image,
+               "pays_bouteille":bouteille.pays.value, 
             "date_achat":bouteille.date_achat.value,
             "garde_jusqua":bouteille.garde_jusqua.value,
             "notes":bouteille.date_achat.value,
             "prix":parseFloat(bouteille.prix.value),
             "quantite":bouteille.quantite.value,
             "millesime":bouteille.millesime.value,
+               
               "id_type":1,
           };
 
@@ -266,12 +281,14 @@ window.addEventListener('load', function() {
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
+                        
                       return response.json();
                     } else {
                       throw new Error('Erreur');
                     }
                   })
                   .then(response => {
+                   
                     console.log(response);
                   }).catch(error => {
                     console.error(error);

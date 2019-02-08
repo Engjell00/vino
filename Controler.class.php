@@ -29,9 +29,17 @@ class Controler
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
 					$this->ajouterNouvelleBouteilleCellier();
-					break;
+                
+               
+                break;
+                case "profile" :
+                $this->getMonProfil();
+                   
+                break;
 				case 'ajouterBouteilleCellier':
 					$this->ajouterBouteilleCellier();
+           
+                  
 					break;
 				case 'boireBouteilleCellier':
 					$this->boireBouteilleCellier();
@@ -58,7 +66,9 @@ class Controler
                 if(!empty($body)){
                     $bte = new Bouteille();
                     $resultat = $bte->supprimerLaBouteilleAuCellier($body);
+                   
 					echo json_encode($resultat);
+                     
                 }
                 else{
                     include("vues/entete.php");
@@ -86,6 +96,7 @@ class Controler
 				$bte = new Bouteille();
 				$resultat = $bte->modifierBouteilleAuCellier($body);
 				echo json_encode($resultat);
+               
 			}
 			else{
 				
@@ -125,6 +136,17 @@ class Controler
 			include("vues/pied.php");
                   
 		}
+    
+    	private function getMonProfil()
+		{
+			$usager = new Usager();
+			$data = $usager->getProfile(1);
+			include("vues/entete.php");
+			include("vues/profile.php");
+			include("vues/pied.php");
+                  
+		}
+    
    
 		private function listeBouteille()
 		{
@@ -155,13 +177,19 @@ class Controler
 				
 				//var_dump($data);
 				$resultat = $bte->ajouterBouteilleCellier($body);
+                
 				echo json_encode($resultat);
+               
+                
 			}
 			else{
 				include("vues/entete.php");
 				include("vues/ajouter.php");
 				include("vues/pied.php");
+                
+                 
 			}
+             
 			
             
 		}
