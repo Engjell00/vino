@@ -37,7 +37,7 @@ class Usager extends Modele {
 	{
 		
 		$rows = Array();
-		$requete ="SELECT vino_usager.id_usager,nom,prenom,courriel,count(contient.id_cellier) as nombre FROM vino_usager join vino_cellier on vino_usager.id_usager=vino_cellier.id_cellier join contient on vino_cellier.id_cellier=contient.id_cellier WHERE vino_usager.id_usager = $idUsager";
+		$requete ="SELECT id_usager,nom,description_usager,prenom,courriel FROM vino_usager  WHERE vino_usager.id_usager = $idUsager";
 					 
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
@@ -97,7 +97,7 @@ class Usager extends Modele {
         if(isset($data->utilisateur) && isset($data->motDePasse)){   	
             try{
 				//$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
-                $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager) VALUES ("."'".$data->utilisateur."',"."'".$data->motDePasse."')";
+                $requete = "INSERT INTO " . self::TABLE . "(nom_usager, mot_de_passe_usager,nom,prenom,courriel,description_usager) VALUES ("."'".$data->utilisateur."',"."'".$data->motDePasse."',"."'".$data->nom."',"."'".$data->prenom."',"."'".$data->courriel."',"."'".$data->description."')";
 				$res = $this->_db->query($requete);
                 return $res;
             }

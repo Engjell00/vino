@@ -13,8 +13,7 @@ foreach ($data as $cle => $usager) {
           <p>Votre Nom :<span><?php  echo $usager["nom"];  ?></span></p>
          <p> Votre Prenom :<span><?php  echo $usager["prenom"];  ?></span></p>
         </p> Votre Courriel :<span><?php  echo $usager["courriel"];  ?></span></p>
-        </p>vous avez :<span><?php  echo $usager["nombre"]." celliers";  ?></span></p>
-        
+        </p> Votre description :<span><?php  echo $usager["description_usager"];  ?></span></p>
         </div>   
    
     </div>

@@ -53,10 +53,18 @@ window.addEventListener('load', function() {
           let inscription = {
             utilisateur_ins : document.querySelector("[name='utilisateur']"),
             motDePasse_ins : document.querySelector("[name='motDePasse']"),
+            nom_ins : document.querySelector("[name='nom']"),
+            prenom_ins : document.querySelector("[name='prenom']"),
+            courriel_ins : document.querySelector("[name='courriel']"),
+            description_ins : document.querySelector(".description"),
           }
           let param = {
             "utilisateur":inscription.utilisateur_ins.value,
             "motDePasse":inscription.motDePasse_ins.value,
+            "nom":inscription.nom_ins.value,
+            "prenom":inscription.prenom_ins.value,
+            "courriel":inscription.courriel_ins.value,
+            "description":inscription.description_ins.value,
           }
           console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
