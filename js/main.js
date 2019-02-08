@@ -166,7 +166,7 @@ window.addEventListener('load', function() {
                   console.error(error);
                 });
           })
-        })
+        })   
     document.querySelectorAll(".btnAjouter").forEach(function(element){
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
@@ -189,6 +189,29 @@ window.addEventListener('load', function() {
               });      
         })
     });
+    let inputRecherchee = document.querySelector("[name='nom_bouteille']");
+        inputRecherchee.addEventListener("blur",function(){
+        document.querySelector(".nom_bouteille").style.display = "block";
+        document.querySelector(".nomBouteille").style.display = "block";
+        document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
   
     let liste = document.querySelector('.listeAutoComplete');
@@ -202,6 +225,7 @@ window.addEventListener('load', function() {
           fetch(requete)
               .then(response => {
                   if (response.status === 200) {
+                      
                     return response.json();
                   } else {
                     throw new Error('Erreur');
@@ -222,6 +246,10 @@ window.addEventListener('load', function() {
     }
       let bouteille = {
         nom : document.querySelector(".nom_bouteille"),
+<<<<<<< HEAD
+=======
+        pays : document.querySelector("[name='pays']"),
+>>>>>>> 6c72a0d06e0280802595a05281c0b2374c5d9085
         millesime : document.querySelector("[name='millesime']"),
         quantite : document.querySelector("[name='quantite']"),
         date_achat : document.querySelector("[name='date_achat']"),
@@ -245,21 +273,55 @@ window.addEventListener('load', function() {
         }
       });
     }
+  
+  
+    
+    
+    
+    
+    
+  
+    
+  
+    
+    
+    
     
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
+<<<<<<< HEAD
           var param = {
             "id_bouteille":bouteille.nom.dataset.id,
             "id_cellier":1,
             "nom_bouteille_cellier":bouteille.nom.innerHTML,
             "image_bouteille" :bouteille.image,
+=======
+            
+if(!bouteille.image){
+
+bouteille.image="test";
+
+}
+            
+            
+            
+            
+            
+          var param = {
+            "id_bouteille":bouteille.nom.dataset.id,
+              "id_cellier":1,
+              "nom_bouteille_cellier":bouteille.nom.innerHTML,
+              "image_bouteille" :bouteille.image,
+               "pays_bouteille":bouteille.pays.value, 
+>>>>>>> 6c72a0d06e0280802595a05281c0b2374c5d9085
             "date_achat":bouteille.date_achat.value,
             "garde_jusqua":bouteille.garde_jusqua.value,
             "notes":bouteille.date_achat.value,
             "prix":parseFloat(bouteille.prix.value),
             "quantite":bouteille.quantite.value,
             "millesime":bouteille.millesime.value,
+               
               "id_type":1,
           };
           console.log(param);
@@ -267,12 +329,14 @@ window.addEventListener('load', function() {
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
+                        
                       return response.json();
                     } else {
                       throw new Error('Erreur');
                     }
                   })
                   .then(response => {
+                   
                     console.log(response);
                   }).catch(error => {
                     console.error(error);

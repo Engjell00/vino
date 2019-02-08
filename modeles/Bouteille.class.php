@@ -82,12 +82,7 @@ class Bouteille extends Modele {
 	public function getListeBouteilleCellier($id_cellier, $id_usager)
 	{
 		$rows = Array();
-		$requete ="SELECT * from vino_bouteille vb
-		JOIN contient c on vb.id_bouteille = c.id_bouteille
-		JOIN vino_cellier vc on c.id_cellier = vc.id_cellier
-		JOIN vino_usager vu on vc.id_usager = vu.id_usager
-		JOIN vino_type vt on vb.id_type_bouteille = vt.id_type
-		WHERE vc.id_cellier = $id_cellier AND vc.id_usager = $id_usager";
+		$requete ="SELECT * from contient WHERE id_cellier = $id_cellier";
 		$res = $this->_db->query($requete);
 		// var_dump($res->num_rows);
 		if(($res = $this->_db->query($requete)) ==	 true)
@@ -98,7 +93,7 @@ class Bouteille extends Modele {
 
 				while($row = $res->fetch_assoc())
 				{
-					$row["nom_bouteille"] = trim(utf8_encode($row["nom_bouteille"]));
+					$row["nom_bouteille_cellier"] = trim(utf8_encode($row["nom_bouteille_cellier"]));
 					$rows[] = $row;
 				}
 				// var_dump($rows);
@@ -234,24 +229,21 @@ class Bouteille extends Modele {
 	{
 		//TODO : Valider les données.
 		//var_dump($data);	
-		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
+		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
 		"'".$data->id_bouteille."',".
         "'".$data->id_cellier."',".
-        "'".$data->nom_bouteille_cellier."',".
-    	"'".$data->image_bouteille."',".
+        "'".$data->nom_bouteille_cellier."',".      
+        "'".$data->image_bouteille."',".
+        "'".$data->pays_bouteille."',".
 		"'".$data->date_achat."',".
 		"'".$data->notes."',".
 		"'".$data->prix."',".
 		"'".$data->quantite."',".
 		"'".$data->millesime."',".
         "'".$data->id_type."')";
-
         $res = $this->_db->query($requete);
-        
-		return $res;
+		return $res;       
 	}
-	
-	
 	/**
 	 * Cette méthode change la quantité d'une bouteille en particulier dans le cellier
 	 * 
@@ -264,7 +256,6 @@ class Bouteille extends Modele {
 	public function modifierQuantiteBouteilleCellier($id, $nombre)
 	{
 		//TODO : Valider les données.
-			
 		$rows = Array();	
 		$requete = "UPDATE contient SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id_bouteille_cellier = ". $id;
 		//echo $requete;
@@ -279,12 +270,8 @@ class Bouteille extends Modele {
 				// var_dump($rows);
 			}
 		}
-		
 		return $rows;
 	}
-    
-    
-   
 }
 
 

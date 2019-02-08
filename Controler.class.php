@@ -47,6 +47,9 @@ class Controler
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
 					$this->ajouterNouvelleBouteilleCellier();
+               		break;
+                case "profile" :
+					$this->getMonProfil();
 					break;
 				case 'ajouterBouteilleCellier':
 					$this->ajouterBouteilleCellier();
@@ -108,7 +111,9 @@ class Controler
                 if(!empty($body)){
                     $bte = new Bouteille();
                     $resultat = $bte->supprimerLaBouteilleAuCellier($body);
+                   
 					echo json_encode($resultat);
+                     
                 }
                 else{
                     include("vues/entete.php");
@@ -130,6 +135,7 @@ class Controler
 				$bte = new Bouteille();
 				$resultat = $bte->modifierBouteilleAuCellier($body);
 				echo json_encode($resultat);
+               
 			}
 			else{
 				
@@ -145,11 +151,19 @@ class Controler
 			include("vues/pied.php");
                   
 		}
+    	private function getMonProfil()
+		{
+			$usager = new Usager();
+			$data = $usager->getProfile($_SESSION["UserID"]);
+			include("vues/entete.php");
+			include("vues/profile.php");
+			include("vues/pied.php");
+                  
+		}
 		private function listeBouteille()
 		{
 			$bte = new Bouteille();
             $cellier = $bte->getListeBouteilleCellier();
-            
             echo json_encode($cellier);
                   
 		}
@@ -176,10 +190,9 @@ class Controler
 			else{
 				include("vues/entete.php");
 				include("vues/ajouter.php");
-				include("vues/pied.php");
+				include("vues/pied.php");   
 			}
 		}
-		
 		private function boireBouteilleCellier()
 		{
 			$body = json_decode(file_get_contents('php://input'));
@@ -189,7 +202,6 @@ class Controler
 			echo json_encode($resultat);
             
 		}
-
 		private function ajouterBouteilleCellier()
 		{
 			$body = json_decode(file_get_contents('php://input'));

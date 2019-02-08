@@ -35,6 +35,52 @@ class Usager extends Modele {
 		
 		return $rows;
 	}
+    
+    
+    
+    
+     public function getProfile($idUsager)
+	{
+		
+		$rows = Array();
+		$requete ="SELECT vino_usager.id_usager,nom,prenom,courriel,count(contient.id_cellier) as nombre FROM vino_usager join vino_cellier on vino_usager.id_usager=vino_cellier.id_cellier join contient on vino_cellier.id_cellier=contient.id_cellier WHERE vino_usager.id_usager = $idUsager";
+					 
+		if(($res = $this->_db->query($requete)) ==	 true)
+		{
+			return $res;
+		}
+		else 
+		{
+			throw new Exception("Erreur de requête sur la base de donnée", 1);
+			 $this->_db->error;
+		}
+		
+		
+		
+		
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	/**
 	 * Cette méthode permet a l'usager de voir les celliers lui appartenant
 	 * 

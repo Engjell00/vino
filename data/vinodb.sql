@@ -76,6 +76,9 @@ CREATE TABLE `vino_usager`(
         `id_usager`           Int NOT NULL AUTO_INCREMENT,
         `nom_usager`          Varchar (50) NOT NULL ,
         `mot_de_passe_usager` Varchar (50) NOT NULL ,
+        `nom` Varchar (50) NOT NULL ,
+        `prenom` Varchar (50) NOT NULL ,
+        `courriel` Varchar (50) NOT NULL ,
         `description_usager`  Varchar (200)        
 	,CONSTRAINT vino_usager_PK PRIMARY KEY (`id_usager`)
 )ENGINE=InnoDB;
@@ -84,10 +87,10 @@ CREATE TABLE `vino_usager`(
 -- Contenu de la table `vino_usager` TESTÉ
 --
 
-INSERT INTO `vino_usager` VALUES(1, 'engjell', 'engjell', '');
-INSERT INTO `vino_usager` VALUES(2, 'reda', 'reda', '');
-INSERT INTO `vino_usager` VALUES(3, 'louisalexandre', 'louisalexandre', '');
-INSERT INTO `vino_usager` VALUES(4, 'alexanne', 'alexanne', '');
+INSERT INTO `vino_usager` VALUES(1, 'engjell', 'engjell', 'test','','','');
+INSERT INTO `vino_usager` VALUES(2, 'reda', 'reda','jeffal','reda','redajeffal@yahoo.ca','hjhjhjh');
+INSERT INTO `vino_usager` VALUES(3, 'louisalexandre', 'louisalexandre', 'test','','','');
+INSERT INTO `vino_usager` VALUES(4, 'alexanne', 'alexanne', 'test','','','');
 
 
 
@@ -129,7 +132,7 @@ INSERT INTO `vino_cellier` VALUES(8, 'CELLIER 2', 4);
 DROP TABLE IF EXISTS `contient`;
 CREATE TABLE `contient` (
         `id_bouteille_cellier`          Int NOT NULL AUTO_INCREMENT,
-        `id_bouteille`                  Int NOT NULL ,
+        `id_bouteille`                  Int ,
         `id_cellier`                    Int NOT NULL ,
         `nom_bouteille_cellier`         Varchar (200) NOT NULL ,
         `image_bouteille_cellier`       Varchar (200) NOT NULL ,
@@ -147,7 +150,6 @@ CREATE TABLE `contient` (
         `notes`                         Varchar (200) NOT NULL ,
         `millesime`                     Varchar (20) DEFAULT NULL
 	,CONSTRAINT contient_PK PRIMARY KEY (`id_bouteille_cellier`)
-	,CONSTRAINT contient_vino_bouteille0_FK FOREIGN KEY (`id_bouteille`) REFERENCES vino_bouteille(`id_bouteille`)
 	,CONSTRAINT contient_vino_cellier0_FK FOREIGN KEY (`id_cellier`) REFERENCES vino_cellier(`id_cellier`)
 	,CONSTRAINT contient_vino_type0_FK FOREIGN KEY (`id_type`) REFERENCES vino_type(`id_type`)
 
