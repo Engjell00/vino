@@ -1,3 +1,7 @@
+<?php
+    if(isset($_SESSION["UserID"]))
+    {
+?>
 <div class="cellier">
 <?php
 foreach ($data as $cle => $bouteille) {
@@ -34,9 +38,7 @@ foreach ($data as $cle => $bouteille) {
 //NOTE:
 //L'AJOUT DEVRA ÊTRE MODIFIER AUSSI DANS SA VUE ET bouteille class ->>> function ajouterBouteilleCellier
 
-}
-
+        }
+    }
 ?>	
 </div>
-
-

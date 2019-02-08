@@ -24,14 +24,10 @@ class Controler
 					$this->accueil();
 					break;
 				case 'accueilConnecter':
-					require_once("vues/entete.php");
-					require_once("vues/accueilConnecter.php");
-					require_once("vues/pied.php");
+					$this->accueilConnecter();
 					break;	
 				case 'formulaireInscription':
-					include("vues/entete.php");
-					include("vues/inscription.php");
-					include("vues/pied.php");
+					$this->formulaireInscription();
 					break;
 				case 'inscription':
 					$this->inscriptionParUnUsager();
@@ -41,7 +37,10 @@ class Controler
 					break;
 				case 'cellierParUsager':
 					$this->listeDesCelliersParUsager();
-					break;					
+					break;
+				case 'afficheUnCellierDunUsager':
+					$this->afficheUnCellierDunUsager();	
+					break;						
 				case 'listeBouteille':
 					$this->listeBouteille();
 					break;
@@ -89,6 +88,9 @@ class Controler
 					break;
 			}
 		}
+		/**
+		 * Connection d'un usager à l'accueil
+		 */
 		private function connectionParUnUsager(){
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
@@ -102,6 +104,9 @@ class Controler
 				}
 			}
 		}
+		/**
+		 * Inscription d'un nouveau usager sur le site
+		 */
 		private function inscriptionParUnUsager(){
 			$body = json_decode(file_get_contents('php://input'));
                 if(!empty($body)){
@@ -109,14 +114,15 @@ class Controler
                     $resultat = $usager->creationUsager($body);
                 }
 		}
+		/**
+		 * Suppresion d'une bouteille dans le cellier 
+		 * */
         private function SupprimerBouteilleAuCellier(){
 			$body = json_decode(file_get_contents('php://input'));
                 if(!empty($body)){
                     $bte = new Bouteille();
                     $resultat = $bte->supprimerLaBouteilleAuCellier($body);
-                   
-					echo json_encode($resultat);
-                     
+					echo json_encode($resultat);        
                 }
                 else{
                     include("vues/entete.php");
@@ -125,6 +131,9 @@ class Controler
                 }
 
 		}
+		/**
+		 * Affichage des celliers selon l'usager
+		 */
 		private function listeDesCelliersParUsager(){
 			$usager = new bouteille();
 			$data = $usager->getListeDesCelliersParUsager($_SESSION["UserID"]);
@@ -133,6 +142,19 @@ class Controler
 			include("vues/pied.php");
 
 		}
+		/**
+		 * Affichage d'un cellier lorsque l'utilisateur connecter veut y accéder 
+		 */
+		private function afficheUnCellierDunUsager(){
+			$usager = new bouteille();
+			$data = $usager->getListeBouteilleCellier($_SESSION["UserID"],$_GET["id_cellier"]);
+			include("vues/entete.php");
+			include("vues/cellier.php");
+			include("vues/pied.php");
+		}
+		/**
+		 * Page pour modifier une bouteille dans le cellier
+		 */
 		private function pageModifierBouteilleCellier(){
 			$bte = new Bouteille();
 			$data = $bte->getBouteilleParID($_GET["idBouteille"]);
@@ -140,6 +162,9 @@ class Controler
 			include("vues/modifierBouteille.php");
 			include("vues/pied.php");
 		}
+		/**
+		 * Envoye des données lorsqu'on voudra modifier.
+		 */
 		private function modifierBouteilleCellier(){
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
@@ -154,7 +179,10 @@ class Controler
 				include("vues/modifierBouteille.php");
 				include("vues/pied.php");
 			}
-		}		
+		}
+		/**
+		 * Page d'accueil quand un utilisateur n'est pas connecté
+		*/		
 		private function accueil()
 		{
 			include("vues/entete.php");
@@ -162,6 +190,27 @@ class Controler
 			include("vues/pied.php");
                   
 		}
+		/**
+		 * Page d'accueil d'un utilisateur lorsqu'il est connecté
+		 */
+		private function accueilConnecter()
+		{
+			include("vues/entete.php");
+			include("vues/accueilConnecter.php");
+			include("vues/pied.php");
+                  
+		}
+		/**
+		 * formulaire d'inscription
+		 */
+		private function formulaireInscription (){
+			include("vues/entete.php");
+			include("vues/inscription.php");
+			include("vues/pied.php");
+		}
+		/**
+		 * Chercher le profil d'un user lorsqu'il se connecte
+		 */
     	private function getMonProfil()
 		{
 			$usager = new Usager();
