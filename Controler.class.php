@@ -21,9 +21,7 @@ class Controler
 			session_start();
 			switch ($_GET['requete']) {
 				case 'accueil':
-					require_once("vues/entete.php");
-					require_once("vues/accueil.php");
-					require_once("vues/pied.php");
+					$this->accueil();
 					break;
 				case 'accueilConnecter':
 					require_once("vues/entete.php");
@@ -119,9 +117,6 @@ class Controler
                 }
 
         }
-		//Récupérer les informations de la bouteille nécessaires
-		//Elle est bien simple,p-t optimiser et changer,
-		//Comme j'ai écris en haut on redirige vers la page de modification avec l'ID rêcu
 		private function pageModifierBouteilleCellier(){
 			$bte = new Bouteille();
 			$data = $bte->getBouteilleParID($_GET["idBouteille"]);
@@ -129,9 +124,6 @@ class Controler
 			include("vues/modifierBouteille.php");
 			include("vues/pied.php");
 		}
-		//Après avoir récuperer les info il faudra les envoyer pour les ajouter dans le Cellier
-		//Bien sûr, elle n'est pas complète, il faudra aussi envoyer le nom d'utilisateur, 
-		//j'imagine qui sera en 2ième parametre pour permettre de recevoir le body en son entier pareillement.
 		private function modifierBouteilleCellier(){
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
@@ -145,29 +137,7 @@ class Controler
 				include("vues/modifierBouteille.php");
 				include("vues/pied.php");
 			}
-		}
-		// sert seulement a tester les nouvelles methodes de bouteille
-		private function tests()
-		{
-			echo 'PAGE TEST';
-			$bte = new Bouteille();
-			// $data = $bte->getListeBouteilleCellier(1, 1); // TESTÉ
-			// $data = $bte->getBouteilleParId(1); // TESTÉ
-			// $data = $bte->getListeBouteille(); // TESTÉ
-			// $data = $bte->getBouteilleCellierParID(1,1); // TESTÉ
-			//$data = $bte->modifierBouteilleCellier($array) // NON TESTÉ
-			//$data = $bte->ajouterBouteilleCellier($array) // NON TESTÉ
-			// $data = $bte->modifierQuantiteBouteilleCellier(1, 10); // TESTÉ
-			
-			include("vues/entete.php"); 
-			include("vues/cellier.php");
-			include("vues/pied.php");
-                  
 		}		
-		//Suite a la modification de getListeBouteilleCellier, la methode prends maintenant les id de l'usage et du cellieer
-		//la DB a maintenant des usagés, nom dèusager et mot de passe correspondant a nos prenoms
-		//Ceci est a modifier par la suite, lors de l'utilisation de la variable SESSION
- 
 		private function accueil()
 		{
 			include("vues/entete.php");
