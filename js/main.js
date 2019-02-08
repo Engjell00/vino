@@ -194,26 +194,8 @@ window.addEventListener('load', function() {
         document.querySelector(".nom_bouteille").style.display = "block";
         document.querySelector(".nomBouteille").style.display = "block";
         document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
-    })
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    })   
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
-  
     let liste = document.querySelector('.listeAutoComplete');
     if(inputNomBouteille){
       inputNomBouteille.addEventListener("keyup", function(evt){
@@ -246,10 +228,7 @@ window.addEventListener('load', function() {
     }
       let bouteille = {
         nom : document.querySelector(".nom_bouteille"),
-<<<<<<< HEAD
-=======
         pays : document.querySelector("[name='pays']"),
->>>>>>> 6c72a0d06e0280802595a05281c0b2374c5d9085
         millesime : document.querySelector("[name='millesime']"),
         quantite : document.querySelector("[name='quantite']"),
         date_achat : document.querySelector("[name='date_achat']"),
@@ -269,7 +248,7 @@ window.addEventListener('load', function() {
           bouteille.nom.innerHTML = evt.target.innerHTML;
           liste.innerHTML = "";
           inputNomBouteille.value = "";
-            console.log(bouteille.image);
+          console.log(bouteille.image);
         }
       });
     }
