@@ -29,6 +29,22 @@ class Bouteille extends Modele {
 		
 		return $rows;
 	}
+	public function getListeDesCelliersParUsager($id_usager)
+	{
+		
+		$rows = Array();
+		$res = $this->_db->query("Select * from vino_cellier where id_usager = $id_usager" );
+		if($res->num_rows)
+		{
+			while($row = $res->fetch_assoc())
+			{
+				$rows[] = $row;
+			}
+			// var_dump($rows);
+		}
+		
+		return $rows;
+	}
 
 	/**
 	 * Cette méthode permet de retourner la liste des bouteilles dans un cellier donné

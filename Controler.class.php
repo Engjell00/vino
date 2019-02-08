@@ -38,7 +38,10 @@ class Controler
 					break;
 				case 'login':
 					$this->connectionParUnUsager();
-					break;			
+					break;
+				case 'cellierParUsager':
+					$this->listeDesCelliersParUsager();
+					break;					
 				case 'listeBouteille':
 					$this->listeBouteille();
 					break;
@@ -121,7 +124,15 @@ class Controler
                     include("vues/pied.php");
                 }
 
-        }
+		}
+		private function listeDesCelliersParUsager(){
+			$usager = new bouteille();
+			$data = $usager->getListeDesCelliersParUsager($_SESSION["UserID"]);
+			include("vues/entete.php");
+			include("vues/cellierParUsager.php");
+			include("vues/pied.php");
+
+		}
 		private function pageModifierBouteilleCellier(){
 			$bte = new Bouteille();
 			$data = $bte->getBouteilleParID($_GET["idBouteille"]);
