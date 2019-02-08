@@ -22,7 +22,6 @@ class Usager extends Modele {
 	 */
 	public function getListeBouteillesCellier($idUsager, $idCellier)
 	{
-		
 		$rows = Array();
 		$res = $this->_db->query('Select * from '. self::TABLE);
 		if($res->num_rows)
@@ -32,13 +31,8 @@ class Usager extends Modele {
 				$rows[] = $row;
 			}
 		}
-		
 		return $rows;
 	}
-    
-    
-    
-    
      public function getProfile($idUsager)
 	{
 		
@@ -54,33 +48,7 @@ class Usager extends Modele {
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
 			 $this->_db->error;
 		}
-		
-		
-		
-		
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	/**
 	 * Cette méthode permet a l'usager de voir les celliers lui appartenant
 	 * 
@@ -113,14 +81,8 @@ class Usager extends Modele {
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
 			 $this->_db->error;
 		}
-		
-		
-		
 		return $rows;
 	}
-	
-		
-	
 	/**
 	 * Cette méthode ajoute un usager a la table vino_usager
 	 * 

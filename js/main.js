@@ -252,56 +252,25 @@ window.addEventListener('load', function() {
         }
       });
     }
-  
-  
-    
-    
-    
-    
-    
-  
-    
-  
-    
-    
-    
-    
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
-<<<<<<< HEAD
+        if(!bouteille.image){
+           bouteille.image="test";
+        }  
           var param = {
             "id_bouteille":bouteille.nom.dataset.id,
             "id_cellier":1,
             "nom_bouteille_cellier":bouteille.nom.innerHTML,
             "image_bouteille" :bouteille.image,
-=======
-            
-if(!bouteille.image){
-
-bouteille.image="test";
-
-}
-            
-            
-            
-            
-            
-          var param = {
-            "id_bouteille":bouteille.nom.dataset.id,
-              "id_cellier":1,
-              "nom_bouteille_cellier":bouteille.nom.innerHTML,
-              "image_bouteille" :bouteille.image,
-               "pays_bouteille":bouteille.pays.value, 
->>>>>>> 6c72a0d06e0280802595a05281c0b2374c5d9085
+            "pays_bouteille":bouteille.pays.value, 
             "date_achat":bouteille.date_achat.value,
             "garde_jusqua":bouteille.garde_jusqua.value,
             "notes":bouteille.date_achat.value,
             "prix":parseFloat(bouteille.prix.value),
             "quantite":bouteille.quantite.value,
             "millesime":bouteille.millesime.value,
-               
-              "id_type":1,
+            "id_type":1,
           };
           console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
