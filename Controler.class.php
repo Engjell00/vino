@@ -122,7 +122,6 @@ class Controler
                 if(!empty($body)){
                     $bte = new Bouteille();
 					$resultat = $bte->supprimerLaBouteilleAuCellier($body);
-					echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->id_cellier."'"]);
 					echo json_encode($resultat);        
                 }
                 else{
