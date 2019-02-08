@@ -121,7 +121,8 @@ class Controler
 			$body = json_decode(file_get_contents('php://input'));
                 if(!empty($body)){
                     $bte = new Bouteille();
-                    $resultat = $bte->supprimerLaBouteilleAuCellier($body);
+					$resultat = $bte->supprimerLaBouteilleAuCellier($body);
+					echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->id_cellier."'"]);
 					echo json_encode($resultat);        
                 }
                 else{
@@ -170,7 +171,8 @@ class Controler
 			if(!empty($body)){
 				$bte = new Bouteille();
 				$resultat = $bte->modifierBouteilleAuCellier($body);
-				echo json_encode($resultat);
+				//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
+				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->id_cellier."'"]);
                
 			}
 			else{
@@ -178,6 +180,27 @@ class Controler
 				include("vues/entete.php");
 				include("vues/modifierBouteille.php");
 				include("vues/pied.php");
+			}
+		}
+		/**
+		 * Ajout d'une nouvelle bouteille dans le cellier
+		 */
+		private function ajouterNouvelleBouteilleCellier()
+		{
+			$body = json_decode(file_get_contents('php://input'));
+			//var_dump($body);
+			if(!empty($body)){
+				$bte = new Bouteille();
+				//var_dump($_POST['data']);
+				//var_dump($data);
+				$resultat = $bte->ajouterBouteilleCellier($body);
+				//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
+				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->id_cellier."'"]);
+			}
+			else{
+				include("vues/entete.php");
+				include("vues/ajouter.php");
+				include("vues/pied.php");   
 			}
 		}
 		/**
@@ -235,23 +258,6 @@ class Controler
             $listeBouteille = $bte->autocomplete($body->nom);
             echo json_encode($listeBouteille);
                   
-		}
-		private function ajouterNouvelleBouteilleCellier()
-		{
-			$body = json_decode(file_get_contents('php://input'));
-			//var_dump($body);
-			if(!empty($body)){
-				$bte = new Bouteille();
-				//var_dump($_POST['data']);
-				//var_dump($data);
-				$resultat = $bte->ajouterBouteilleCellier($body);
-				echo json_encode($resultat);
-			}
-			else{
-				include("vues/entete.php");
-				include("vues/ajouter.php");
-				include("vues/pied.php");   
-			}
 		}
 		private function boireBouteilleCellier()
 		{

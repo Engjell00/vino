@@ -100,7 +100,7 @@ window.addEventListener('load', function() {
                   }
                 })
                 .then(response => {
-                  console.log(response);
+                  window.location.href = BaseURL+response.url; 
                 }).catch(error => {
                   console.error(error);
                 });
@@ -147,10 +147,8 @@ window.addEventListener('load', function() {
                 }
               })
               .then(response => {
-                if(response){
-                  window.location.href = BaseURL+'index.php?requete=afficheUnCellierDunUsager';
-                }
-              console.log(response);
+                console.log(response);
+                   window.location.href = BaseURL+response.url;  
               }).catch(error => {
                 console.error(error);
               });
@@ -295,7 +293,7 @@ window.addEventListener('load', function() {
                   })
                   .then(response => {
                    
-                    console.log(response);
+                    window.location.href = BaseURL+response.url; 
                   }).catch(error => {
                     console.error(error);
                   });
