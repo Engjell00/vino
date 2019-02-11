@@ -42,6 +42,7 @@
 						<!--codepen end  -->
 				<nav id="meny">
 					<ul>
+   
 						<li><a href="?requete=accueil">Mon cellier</a></li>
 						<li><a href="?requete=ajouterNouvelleBouteilleCellier">Ajouter une bouteille au cellier</a></li>
 					</ul>

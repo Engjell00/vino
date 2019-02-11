@@ -240,11 +240,15 @@ window.addEventListener('load', function() {
         })
     });
     let inputRecherchee = document.querySelector("[name='nom_bouteille']");
+ 
+    
+    if(inputRecherchee){
         inputRecherchee.addEventListener("blur",function(){
         document.querySelector(".nom_bouteille").style.display = "block";
         document.querySelector(".nomBouteille").style.display = "block";
         document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
     })   
+    }
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
     let liste = document.querySelector('.listeAutoComplete');
     if(inputNomBouteille){
@@ -277,6 +281,7 @@ window.addEventListener('load', function() {
       });
     }
       let bouteille = {
+        id_cellier:document.querySelector("[name='valeurIdCellier']"),
         nom : document.querySelector(".nom_bouteille"),
         pays : document.querySelector("[name='pays']"),
         millesime : document.querySelector("[name='millesime']"),
@@ -310,7 +315,7 @@ window.addEventListener('load', function() {
         }  
           var param = {
             "id_bouteille":bouteille.nom.dataset.id,
-            "id_cellier":1,
+            "id_cellier":bouteille.id_cellier.value,
             "nom_bouteille_cellier":bouteille.nom.innerHTML,
             "image_bouteille" :bouteille.image,
             "pays_bouteille":bouteille.pays.value, 
@@ -351,5 +356,35 @@ window.addEventListener('load', function() {
             })   
         }); 
     }
+    
+    
+    
+    let AjouterCellier =document.querySelector("[name='ajoutercellier']");
+    if(AjouterCellier){
+    AjouterCellier.addEventListener("click",function(){
+    
+    console.log(AjouterCellier);
+        let nom=document.querySelector("[name='cellier']").value;
+        let requete = new Request(BaseURL+"index.php?requete=ConfirmerAjoutCellier", {method: 'POST', body: '{"nom": "'+nom+'"}'});
+            fetch(requete)
+                .then(response => {
+                    if (response.status === 200) {
+                        
+                      return response.json();
+                    } else {
+                      throw new Error('Erreur');
+                    }
+                  })
+                  .then(response => {
+                   
+                   window.location.href = BaseURL+response.url; 
+                  }).catch(error => {
+                    console.error(error);
+                  });
+    
+    })
+    }
+  
+    
 });
 
