@@ -1,8 +1,10 @@
 <?php
     if(isset($_SESSION["UserID"]))
     {
+        if($data){
 ?>
 <div class="cellier">
+    <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $_GET["id_cellier"];?>'>Ajouter une bouteille au cellier</a>
 <?php
 foreach ($data as $cle => $bouteille) {
  
@@ -38,6 +40,12 @@ foreach ($data as $cle => $bouteille) {
 //NOTE:
 //L'AJOUT DEVRA ÊTRE MODIFIER AUSSI DANS SA VUE ET bouteille class ->>> function ajouterBouteilleCellier
 
+        }
+        }
+        else{
+            echo $_GET["id_cellier"]."<br>";
+            echo "<a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
+            echo "<h1>vous n avez aucune bouteille dans votre cellier</h1>";
         }
     }
 ?>	

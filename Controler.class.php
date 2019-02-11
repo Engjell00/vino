@@ -44,6 +44,14 @@ class Controler
 				case 'listeBouteille':
 					$this->listeBouteille();
 					break;
+                case 'AjouterUnCellier' :
+                     include("vues/entete.php");
+			         include("vues/ajouterCellier.php");
+			         include("vues/pied.php");
+                break;
+                case 'ConfirmerAjoutCellier' :
+                  $this->creeCellier();
+                break;
 				case 'autocompleteBouteille':
 					$this->autocompleteBouteille();
 					break;
@@ -104,6 +112,21 @@ class Controler
 				}
 			}
 		}
+    
+    
+    private function creeCellier()
+    {
+      $cle = new Cellier();
+			//var_dump(file_get_contents('php://input'));
+			$body = json_decode(file_get_contents('php://input'));
+            $creationCellier = $cle->creeCellier($_SESSION["UserID"],$body->nom);
+           echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager&id_usager='".$_SESSION["UserID"]."'"]);
+        
+    }
+    
+    
+    
+    
 		/**
 		 * Inscription d'un nouveau usager sur le site
 		 */
@@ -147,7 +170,7 @@ class Controler
 		 */
 		private function afficheUnCellierDunUsager(){
 			$usager = new bouteille();
-			$data = $usager->getListeBouteilleCellier($_SESSION["UserID"],$_GET["id_cellier"]);
+			$data = $usager->getListeBouteilleCellier($_GET["id_cellier"],$_SESSION["UserID"]);
 			include("vues/entete.php");
 			include("vues/cellier.php");
 			include("vues/pied.php");

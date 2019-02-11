@@ -14,7 +14,9 @@
                 <p>Garde :</p> <input type="date" class="input" name="garde_jusqua">
                    <p>millesime :</p><input type="number" min="1800" max="2019" class="input" name="millesime">
                 <p>Notes :</p><input  class="input" name="notes">
+                <p><input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">  </p>
             </div>
+       
              <img src="./img/iconeAjoutBouteille-Red.png" name="ajouterBouteilleCellier" height="60px" width="60px">
         </div>
     </div>
