@@ -49,7 +49,7 @@ class Controler
                		break;
                 case 'ConfirmerAjoutCellier' :
                   $this->creeCellier();
-                break;
+               		break;
 				case 'autocompleteBouteille':
 					$this->autocompleteBouteille();
 					break;
@@ -116,15 +116,13 @@ class Controler
 				}
 			}
 		}
-    
-    
 		private function creeCellier()
 		{
-		$cle = new Cellier();
+				$cle = new Cellier();
 				//var_dump(file_get_contents('php://input'));
 				$body = json_decode(file_get_contents('php://input'));
 				$creationCellier = $cle->creeCellier($_SESSION["UserID"],$body->nom);
-			echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager&id_usager='".$_SESSION["UserID"]."'"]);
+				echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager&id_usager='".$_SESSION["UserID"]."'"]);
 			
 		}
 		private function pageAjoutCellier(){
