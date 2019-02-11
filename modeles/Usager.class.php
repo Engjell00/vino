@@ -132,7 +132,6 @@ class Usager extends Modele {
 		}
 	}
 	function modifierUsagerProfile($data){
-
 		$requete="UPDATE vino_usager set nom = '".$data->nom."' , prenom = '".$data->prenom."' , courriel= '".$data->courriel."' , description_usager = '".$data->description."' where id_usager= '".$data->idUsager."'";
 		$res = $this->_db->query($requete);
         return $res;
