@@ -64,7 +64,13 @@ class Controler
 					break;
 				case 'modifierBouteilleCellier':
 					$this->modifierBouteilleCellier();
-					break;	
+					break;
+				case 'pageModifierProfile':
+					$this->pageModifierProfile();
+					break;
+				case 'modifierProfilUsager':
+					$this->modifierProfilUsager();
+					break;			
                 case 'getbouteillebyid':
                 	getbouteillbyid();
                 	break;
@@ -151,6 +157,36 @@ class Controler
 			include("vues/entete.php");
 			include("vues/cellier.php");
 			include("vues/pied.php");
+		}
+		/**
+		 * Page modifier profile d'un utilisateur
+		 */
+		private function pageModifierProfile(){
+			$usager = new usager();
+			$data = $usager->getProfile($_GET["idProfile"]);
+			include("vues/entete.php");
+			include("vues/modifierProfile.php");
+			include("vues/pied.php");
+		}
+		/*
+		* Envoye des données pour la modification du profile
+		*/ 
+		private function modifierProfilUsager(){
+			$body = json_decode(file_get_contents('php://input'));
+			if(!empty($body)){
+				$usager = new Usager();
+				$resultat = $usager->modifierUsagerProfile($body);
+				//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
+				if($resultat){
+					echo json_encode(["status" => true, "url"=>"index.php?requete=profile"]);
+				}
+			}
+			else{
+				
+				include("vues/entete.php");
+				include("vues/modifierProfile.php");
+				include("vues/pied.php");
+			}
 		}
 		/**
 		 * Page pour modifier une bouteille dans le cellier

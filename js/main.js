@@ -12,6 +12,45 @@
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
+    var modifierProfileParUnUsager = document.querySelector(".submitModifierProfile");
+    if(modifierProfileParUnUsager){
+      modifierProfileParUnUsager.addEventListener("click", function(evt){
+        evt.preventDefault();
+        let modifier = {
+          idUsager : document.querySelector("[name='idUsager']"),
+          nom : document.querySelector("[name='nom']"),
+          prenom : document.querySelector("[name='prenom']"),
+          courriel : document.querySelector("[name='courriel']"),
+          description : document.getElementById("description"),
+        }
+        let param = {
+          "idUsager" : modifier.idUsager.value,
+          "nom":modifier.nom.value,
+          "prenom":modifier.prenom.value,
+          "courriel":modifier.courriel.value,
+          "description":modifier.description.value,
+        }
+        console.log(param);
+        let requete = new Request(BaseURL+"index.php?requete=modifierProfilUsager", {method: 'POST', body: JSON.stringify(param)});
+        fetch(requete)
+          .then(response => {
+              if (response.status === 200) {
+                return response.json()
+              } else {
+                throw new Error('Erreur');
+              }
+            })
+            .then(response => {
+              if(response){
+                window.location.href = BaseURL+response.url;
+                console.log(response) 
+              }
+            }).catch(error => {
+              console.error(error);
+            });
+
+      });
+    }
       //Envoye d'une requête lorsque l'usager veut se connecter
       var connexionParUnUsager = document.querySelector(".connexion");
       if(connexionParUnUsager){

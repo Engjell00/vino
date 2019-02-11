@@ -15,7 +15,7 @@ foreach ($data as $cle => $usager) {
         </p> Votre Courriel :<span><?php  echo $usager["courriel"];  ?></span></p>
         </p> Votre description :<span><?php  echo $usager["description_usager"];  ?></span></p>
         </div>   
-   
+        <a class="bouton" href='?requete=pageModifierProfile&idProfile=<?php echo $_SESSION["UserID"]?>'>Modifier votre Profile</a>
     </div>
 	
 </div>
