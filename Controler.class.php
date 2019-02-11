@@ -44,11 +44,9 @@ class Controler
 				case 'listeBouteille':
 					$this->listeBouteille();
 					break;
-                case 'AjouterUnCellier' :
-                     include("vues/entete.php");
-			         include("vues/ajouterCellier.php");
-			         include("vues/pied.php");
-                break;
+                case 'AjouterUnCellier':
+                    $this->pageAjoutCellier();
+               		break;
                 case 'ConfirmerAjoutCellier' :
                   $this->creeCellier();
                 break;
@@ -120,19 +118,20 @@ class Controler
 		}
     
     
-    private function creeCellier()
-    {
-      $cle = new Cellier();
-			//var_dump(file_get_contents('php://input'));
-			$body = json_decode(file_get_contents('php://input'));
-            $creationCellier = $cle->creeCellier($_SESSION["UserID"],$body->nom);
-           echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager&id_usager='".$_SESSION["UserID"]."'"]);
-        
-    }
-    
-    
-    
-    
+		private function creeCellier()
+		{
+		$cle = new Cellier();
+				//var_dump(file_get_contents('php://input'));
+				$body = json_decode(file_get_contents('php://input'));
+				$creationCellier = $cle->creeCellier($_SESSION["UserID"],$body->nom);
+			echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager&id_usager='".$_SESSION["UserID"]."'"]);
+			
+		}
+		private function pageAjoutCellier(){
+			include("vues/entete.php");
+			include("vues/ajouterCellier.php");
+			include("vues/pied.php");
+		}
 		/**
 		 * Inscription d'un nouveau usager sur le site
 		 */

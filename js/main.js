@@ -356,35 +356,26 @@ window.addEventListener('load', function() {
             })   
         }); 
     }
-    
-    
-    
     let AjouterCellier =document.querySelector("[name='ajoutercellier']");
     if(AjouterCellier){
     AjouterCellier.addEventListener("click",function(){
-    
     console.log(AjouterCellier);
         let nom=document.querySelector("[name='cellier']").value;
         let requete = new Request(BaseURL+"index.php?requete=ConfirmerAjoutCellier", {method: 'POST', body: '{"nom": "'+nom+'"}'});
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
-                        
                       return response.json();
                     } else {
                       throw new Error('Erreur');
                     }
                   })
-                  .then(response => {
-                   
+                  .then(response => { 
                    window.location.href = BaseURL+response.url; 
                   }).catch(error => {
                     console.error(error);
                   });
-    
     })
-    }
-  
-    
+    }   
 });
 
