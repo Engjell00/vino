@@ -162,11 +162,13 @@ class Controler
 		 * Page modifier profile d'un utilisateur
 		 */
 		private function pageModifierProfile(){
-			$usager = new usager();
-			$data = $usager->getProfile($_GET["idProfile"]);
-			include("vues/entete.php");
-			include("vues/modifierProfile.php");
-			include("vues/pied.php");
+			if($_SESSION["UserID"]==$_GET["idProfile"]){
+				$usager = new usager();
+				$data = $usager->getProfile($_GET["idProfile"]);
+				include("vues/entete.php");
+				include("vues/modifierProfile.php");
+				include("vues/pied.php");
+			}
 		}
 		/*
 		* Envoye des données pour la modification du profile

@@ -118,6 +118,9 @@ window.addEventListener('load', function() {
               })
               .then(response => {
                 console.log(response);
+                if(response){
+                  window.location.href = BaseURL+'index.php?requete=accueil'; 
+                } 
               }).catch(error => {
                 console.error(error);
               });
