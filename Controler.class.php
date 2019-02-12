@@ -168,7 +168,12 @@ class Controler
 			if(!empty($body)){
 				$bte = new Bouteille();
 				$resultat = $bte->rechercherBouteilleParValeur($body);
-				echo json_encode($resultat);   
+				if($resultat){
+					include("vues/entete.php");
+					include("vues/cellier.php");
+					include("vues/pied.php");
+				}
+				 
 			}
 		}
 		/**
