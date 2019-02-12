@@ -3,6 +3,18 @@
     {
         if($data){
 ?>
+<form method="POST">
+  <input class="input" name="valeurRechercher" >
+  <select name="typeDeRecherche">
+    <option value="nom_bouteille_cellier">nom</option>
+    <option value="prix_a_lachat">prix</option>
+    <option value="quantite">quantite</option>
+    <option value="millesime">millesime</option>
+    <option value="pays_cellier">pays</option>
+  </select>
+  <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">
+  <input class='rechercher bouton' type="submit" value="Rechercher des bouteilles"/>
+</form>
 <div class="cellier">
     <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $_GET["id_cellier"];?>'>Ajouter une bouteille au cellier</a>
 <?php

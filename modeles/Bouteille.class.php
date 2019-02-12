@@ -288,6 +288,25 @@ class Bouteille extends Modele {
 		}
 		return $rows;
 	}
+	public function rechercherBouteilleParValeur($data){
+		$requete = "SELECT * FROM contient WHERE $data->typeDeRecherche  like '%".$data->valeurRechercher."%' AND id_cellier ='".$data->id_cellier."' ";
+		var_dump($requete);
+		$res = $this->_db->query($requete);
+		if($res->num_rows)
+		{
+			while($row = $res->fetch_assoc())
+			{
+				$rows[] = $row;
+			}
+			// var_dump($rows);
+			return $rows;			
+		}
+		else 
+		{
+			throw new Exception("Erreur de requête sur la base de donnée", 1);
+			 //$this->_db->error;
+		}
+	}
 }
 
 

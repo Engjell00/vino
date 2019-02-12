@@ -12,6 +12,37 @@
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
+    var rechercherBouteillePar =  document.querySelector(".rechercher");
+    if(rechercherBouteillePar){
+      rechercherBouteillePar.addEventListener("click", function(evt){
+        evt.preventDefault();
+        let rechercher = {
+          valeurRechercher : document.querySelector("[name='valeurRechercher']"),
+          typeDeRecherche : document.querySelector("[name='typeDeRecherche']"),
+          id_cellier : document.querySelector("[name='valeurIdCellier']"),
+        }
+        let param = {
+          "valeurRechercher":rechercher.valeurRechercher.value,
+          "typeDeRecherche":rechercher.typeDeRecherche.value,
+          "id_cellier":rechercher.id_cellier.value,
+        }
+        console.log(param);
+        let requete = new Request(BaseURL+"index.php?requete=rechercherBouteilleParType", {method: 'POST', body: JSON.stringify(param)});
+        fetch(requete)
+          .then(response => {
+              if (response.status === 200) {
+                return response.text()
+              } else {
+                throw new Error('Erreur');
+              }
+            })
+            .then(response => {
+              console.log(response) 
+            }).catch(error => {
+              console.error(error);
+            });
+      });
+    }
     var modifierProfileParUnUsager = document.querySelector(".submitModifierProfile");
     if(modifierProfileParUnUsager){
       modifierProfileParUnUsager.addEventListener("click", function(evt){

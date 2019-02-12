@@ -68,6 +68,9 @@ class Controler
 				case 'pageModifierBouteilleCellier':
 					$this->pageModifierBouteilleCellier();
 					break;
+				case 'rechercherBouteilleParType':
+					$this->rechercherBouteilleParType();
+					break;	
 				case 'modifierBouteilleCellier':
 					$this->modifierBouteilleCellier();
 					break;
@@ -156,6 +159,17 @@ class Controler
                     include("vues/pied.php");
                 }
 
+		}
+		/**
+		 * rechercher des bouteilles par le type envoyer le nom,la quantitée, le pays etc..
+		 */
+		private function rechercherBouteilleParType(){
+			$body = json_decode(file_get_contents('php://input'));
+			if(!empty($body)){
+				$bte = new Bouteille();
+				$resultat = $bte->rechercherBouteilleParValeur($body);
+				echo json_encode($resultat);   
+			}
 		}
 		/**
 		 * Affichage des celliers selon l'usager
