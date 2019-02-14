@@ -301,22 +301,21 @@ class Bouteille extends Modele {
 		return $rows;
 	}
 	public function rechercherBouteilleParValeur($data){
-		$requete = "SELECT * FROM contient WHERE $data->typeDeRecherche  like '%".$data->valeurRechercher."%' AND id_cellier ='".$data->id_cellier."' ";
+		$requete = "SELECT id_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type,url_image_cellier,url_saq_cellier,commentaire,expiration FROM contient WHERE $data->typeDeRecherche  like '%".$data->valeurRechercher."%' AND id_cellier ='".$data->id_cellier."'";
 		$res = $this->_db->query($requete);
 		if($res->num_rows)
 		{
 			while($row = $res->fetch_assoc())
 			{
 				$rows[] = $row;
-			}
-			var_dump($rows);
-			return $rows;			
+			}			
 		}
 		else 
 		{
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
 			 //$this->_db->error;
 		}
+		return json_encode($rows);
 	}
 }
 

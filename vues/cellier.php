@@ -15,6 +15,9 @@
   <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">
   <input class='rechercher bouton' type="submit" value="Rechercher des bouteilles"/>
 </form>
+<input class="SupprimerResultat" type="button" value="Annuler Recherche">
+<div class="resultatRecherche">
+</div>
 <div class="cellier">
    
 <?php
@@ -61,7 +64,7 @@ foreach ($data as $cle => $bouteille) {
         if($bouteille['commentaire'])
     {
                 echo "<p>";
-                   echo "votre encien commentaire : ".$bouteille['commentaire'];
+                   echo "votre ancien commentaire : ".$bouteille['commentaire'];
                    echo "</p>"; 
     }
     else{

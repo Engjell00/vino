@@ -195,14 +195,13 @@ class Controler
 	 * rechercher des bouteilles par le type envoyer le nom,la quantitée, le pays etc..
 	 */
 	private function rechercherBouteilleParType(){
+		$bte = new Bouteille();
 		$body = json_decode(file_get_contents('php://input'));
 		if(!empty($body)){
-			$bte = new Bouteille();
 			$resultat = $bte->rechercherBouteilleParValeur($body);
 			if($resultat){
-				echo json_encode($resultat,true);
-			}
-				
+				echo $resultat;
+			}		
 		}
 	}
 	/**
