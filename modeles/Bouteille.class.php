@@ -174,6 +174,18 @@ class Bouteille extends Modele {
 		//var_dump($rows);
 		return $rows;
 	}
+    
+    
+    public function ajouterUnCommentaire($data)
+    {
+      $requete="UPDATE contient SET commentaire = '".$data->commentaire."'  WHERE id_bouteille_cellier = '".$data->id_bouteille_cellier."'";  
+       $res = $this->_db->query($requete);
+		return $res; 
+    }
+    
+    
+    
+    
 	/**
 	 * Cette méthode permet de chercher une bouteille par son id unique de cellier quand l'utilisateur va vouloir modifier ses bouteilles
 	 * 

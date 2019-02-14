@@ -376,6 +376,93 @@ window.addEventListener('load', function() {
                     console.error(error);
                   });
     })
-    }   
+    }  
+    
+    
+    let BtnSuprimerCellier =document.querySelectorAll("[name='suprimerCelier']");
+    BtnSuprimerCellier.forEach(function(element){
+    
+    element.addEventListener("click",function(evt){
+        let id=evt.target.dataset.id;
+        console.log(id);
+        let requete = new Request(BaseURL+"index.php?requete=suprimerCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
+       
+            fetch(requete)
+              .then(response => {
+                    if (response.status === 200) {
+                      return response.json();
+                    } else {
+                      throw new Error('Erreur');
+                    }
+                  })
+                  .then(response => { 
+             
+                  }).catch(error => {
+                    console.error(error);
+                  });
+    })
+    
+    
+    
+    
+    })
+    
+   let BtnComm = document.querySelectorAll("[name='commentaire']"); 
+    
+  BtnComm.forEach(function(element){
+  element.addEventListener("click",function(evt){
+
+
+    if(evt.target.nextElementSibling.style.display == "block"){
+        evt.target.nextElementSibling.style.display = "none";
+    }
+      else{
+          evt.target.nextElementSibling.style.display = "block";
+      }
+  
+  })
+  
+  
+  
+  })
+   let ContenuComm=document.querySelectorAll(".textecommentaire");
+    
+  let tennvoyerom =document.querySelectorAll(".envoyerComm"); 
+    tennvoyerom.forEach(function(element){
+    console.log(element);
+    element.addEventListener("click",function(){
+     let id_cellier=document.querySelector("[name='valeurIdCellier']").dataset.id;  
+   let id_bouteille_cellier = element.dataset.id;
+    let commentaire = element.previousElementSibling.value;
+      var param = {
+            "id_cellier" :id_cellier,
+            "id_bouteille_cellier":id_bouteille_cellier,
+            "commentaire":commentaire,
+            
+          };
+        console.log(param);
+       let requete = new Request(BaseURL+"index.php?requete=AjouterUnCommentaire", {method: 'POST',  body: JSON.stringify(param)});
+            fetch(requete)
+                .then(response => {
+                    if (response.status === 200) {
+                      return response.json();
+                    } else {
+                      throw new Error('Erreur');
+                    }
+                  })
+                  .then(response => { 
+                      window.location.href = BaseURL+response.url; 
+                  }).catch(error => {
+                    console.error(error);
+                  });    
+    
+    })
+    })
+  
+     
+
+  
+  
+    
 });
 

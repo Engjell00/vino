@@ -38,6 +38,9 @@ class Controler
 				case 'cellierParUsager':
 					$this->listeDesCelliersParUsager();
 					break;
+                case 'suprimerCellier':
+                    $this->suprimerUnCellier();
+                break;
 				case 'afficheUnCellierDunUsager':
 					$this->afficheUnCellierDunUsager();	
 					break;						
@@ -76,7 +79,10 @@ class Controler
 					break;
 				case 'modifierProfilUsager':
 					$this->modifierProfilUsager();
-					break;			
+					break;	
+                case 'AjouterUnCommentaire':
+                    $this->AjouterUnCommentaire();
+                break;
                 case 'getbouteillebyid':
                 	getbouteillbyid();
                 	break;
@@ -124,9 +130,32 @@ class Controler
 				//var_dump(file_get_contents('php://input'));
 				$body = json_decode(file_get_contents('php://input'));
 				$creationCellier = $cle->creeCellier($_SESSION["UserID"],$body->nom);
-			echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager&id_usager='".$_SESSION["UserID"]."'"]);
+            $creationCellier=str_replace("''","",$creationCellier);
+			echo json_encode(["status" => true, "url"=>"index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$creationCellier]);
 			
 		}
+    
+    
+    public function AjouterUnCommentaire()
+    {
+        $bte = new Bouteille();
+        $body = json_decode(file_get_contents('php://input'));
+        $suprimerComm=$bte->ajouterUnCommentaire($body);
+         echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->id_cellier."'"]);
+    }
+    
+    private function suprimerUnCellier()
+    {
+       $cle = new Cellier();
+        //var_dump(file_get_contents('php://input'));
+        $body = json_decode(file_get_contents('php://input'));
+        $supressionCellier = $cle->suprimerCellier($body->id);
+        echo json_encode($supressionCellier);
+    }
+    
+    
+    
+    
 		private function pageAjoutCellier(){
 			include("vues/entete.php");
 			include("vues/ajouterCellier.php");
@@ -150,7 +179,7 @@ class Controler
                 if(!empty($body)){
                     $bte = new Bouteille();
 					$resultat = $bte->supprimerLaBouteilleAuCellier($body);
-					echo json_encode($resultat);        
+					echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->idCellier."'"]);       
                 }
                 else{
                     include("vues/entete.php");
