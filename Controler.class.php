@@ -158,7 +158,6 @@ class Controler
                     include("vues/cellier.php");
                     include("vues/pied.php");
                 }
-
 		}
 		/**
 		 * rechercher des bouteilles par le type envoyer le nom,la quantitée, le pays etc..
@@ -169,9 +168,7 @@ class Controler
 				$bte = new Bouteille();
 				$resultat = $bte->rechercherBouteilleParValeur($body);
 				if($resultat){
-					include("vues/entete.php");
-					include("vues/cellier.php");
-					include("vues/pied.php");
+					echo json_encode($resultat);
 				}
 				 
 			}
@@ -185,7 +182,6 @@ class Controler
 			include("vues/entete.php");
 			include("vues/cellierParUsager.php");
 			include("vues/pied.php");
-
 		}
 		/**
 		 * Affichage d'un cellier lorsque l'utilisateur connecter veut y accéder 
@@ -355,9 +351,6 @@ class Controler
 		
 }
 ?>
-
-
-
 
 
 
