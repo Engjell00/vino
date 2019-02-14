@@ -3,7 +3,11 @@
     {
         if($data){
 ?>
-<form method="POST">
+
+
+     
+     
+     <form method="POST">
   <input class="input" name="valeurRechercher" >
   <select name="typeDeRecherche">
     <option value="nom_bouteille_cellier">nom</option>
@@ -49,7 +53,7 @@ foreach ($data as $cle => $bouteille) {
             <p class="date_achat">Data Achat : <?php echo $bouteille['date_achat'] ?></p>
             <p class="expiration">Expiration : <?php echo $bouteille['expiration'] ?></p>
             <p class="millesime">Millesime : <?php echo $bouteille['millesime'] ?></p>
-            <p><a href="<?php echo $bouteille['url_saq_bouteille'] ?>">Voir SAQ</a></p>
+            <p><a href="<?php echo $bouteille['url_saq_cellier'] ?>">Voir SAQ</a></p>
         </div>
         <div class="options" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
             <a class="bouton" href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>'>Modifier bouteille</a>
