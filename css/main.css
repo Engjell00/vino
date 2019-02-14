@@ -122,6 +122,10 @@ cursor: pointer;
   border-radius: 4px;
   box-sizing: border-box;
     }
+.ConteneurCommentaire{
+display: none;
+
+}
 
 /*.input:nth-child(even){
     background-color: darkgrey;

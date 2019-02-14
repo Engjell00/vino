@@ -51,17 +51,35 @@ class Cellier extends Modele {
             try{
 				//$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
                 $requete = "INSERT INTO " . self::TABLE . "( nom_cellier,id_usager) VALUES ("."'".$nomCellier."',"."'".$idUsager."')";
-				$res = $this->_db->query($requete);
-                return $res;
+				if($res = $this->_db->query($requete)== true){
+                 $last_id =$this->_db->insert_id; 
+                return $last_id;
+                }
             }
             catch(Exception $e){
-                trigger_error('Une erreur s\'est produite lors de la création du compte');
+                trigger_error('Une erreur s\'est produite lors de la création du cellier');
             }
        
         
     
     
     
+    }
+    public function suprimerCellier($id)
+    {
+       try{
+				$requete0="delete from contient where id_cellier=$id";
+                $this->_db->query($requete0);
+                $requete = "delete from vino_cellier where id_cellier=$id";
+				$res = $this->_db->query($requete);
+             
+                return $res;
+                
+            }
+            catch(Exception $e){
+                trigger_error('Une erreur s\'est produite lors de la création du cellier');
+            }  
+        
     }
 
 	

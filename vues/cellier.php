@@ -16,10 +16,20 @@
   <input class='rechercher bouton' type="submit" value="Rechercher des bouteilles"/>
 </form>
 <div class="cellier">
-    <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $_GET["id_cellier"];?>'>Ajouter une bouteille au cellier</a>
+   
 <?php
+                  $bool=false;
 foreach ($data as $cle => $bouteille) {
+    
+    if($bool==false){
+   
+    
  
+    ?>
+     <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'>Ajouter une bouteille au cellier</a>
+    <?php
+        $bool=true;
+    }
     ?>
     <div class="bouteille" data-quantite="">
         <div class="img">
@@ -40,9 +50,29 @@ foreach ($data as $cle => $bouteille) {
         </div>
         <div class="options" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
             <a class="bouton" href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>'>Modifier bouteille</a>
-             <button class="bouton supprimerLivre" type='button'  data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>">Supprimer</button>
+             <button class="bouton supprimerBouteille" type='button'  data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>">Supprimer</button>
            <img src="./img/iconeAjoutBouteille-Red.png" class='btnAjouter' height="60px" width="60px">
             <button class='btnBoire bouton'>Boire</button>
+            <button class='commentaire bouton' name="commentaire">laisser un commentaire</button>
+            <div class="ConteneurCommentaire" >
+                <div>
+                    
+                    <?php
+        if($bouteille['commentaire'])
+    {
+                echo "<p>";
+                   echo "votre encien commentaire : ".$bouteille['commentaire'];
+                   echo "</p>"; 
+    }
+    else{
+    echo "<p>vous n'avez pas de commentaire!!</p>";
+    }
+                        ?>
+                </div>
+                Votre nouveau commentaire : <input type="text" classe="textecommentaire" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
+            <button class='envoyerComm'data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">envoyer</button>
+                <input type="hidden" name="valeurIdCellier" data-id="<?php echo $bouteille['id_cellier'] ?>">
+            </div>
   
         </div>
     </div>

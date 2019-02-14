@@ -7,11 +7,13 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  *
  */
-
  //const BaseURL = "http://127.0.0.1/vino/";
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
+  /**
+   * Recherche d'une bouteille dans le cellier
+   */
     var rechercherBouteillePar =  document.querySelector(".rechercher");
     if(rechercherBouteillePar){
       rechercherBouteillePar.addEventListener("click", function(evt){
@@ -43,6 +45,9 @@ window.addEventListener('load', function() {
             });
       });
     }
+    /*
+    *Modifier profile par un usager
+    */
     var modifierProfileParUnUsager = document.querySelector(".submitModifierProfile");
     if(modifierProfileParUnUsager){
       modifierProfileParUnUsager.addEventListener("click", function(evt){
@@ -157,7 +162,10 @@ window.addEventListener('load', function() {
               });
         });
     }
-	 document.querySelectorAll(".supprimerLivre").forEach(function(element){
+    /**
+     * Supprimer bouteille
+     */
+	 document.querySelectorAll(".supprimerBouteille").forEach(function(element){
           element.addEventListener("click", function(evt){
               let bouteille={
                 idBouteille : evt.target.getAttribute('data-id-bouteille'),
@@ -179,6 +187,9 @@ window.addEventListener('load', function() {
                 });
           })
         })
+     /**
+      * Modifier la bouteille dans le cellier d'un utilisateur
+      */   
     var submitLaBouteilleModifier = document.querySelector(".submitModifierBouteille");    
     if(submitLaBouteilleModifier){
         submitLaBouteilleModifier.addEventListener("click", function(evt){
@@ -227,6 +238,9 @@ window.addEventListener('load', function() {
               });
         });
     }
+    /***
+     *Boire la bouteille
+     */
     document.querySelectorAll(".btnBoire").forEach(function(element){
           element.addEventListener("click", function(evt){
               let id = evt.target.parentElement.dataset.id;
@@ -247,7 +261,9 @@ window.addEventListener('load', function() {
                   console.error(error);
                 });
           })
-        })   
+        })
+    /**
+     * Ajouter quantité d'une bouteille */       
     document.querySelectorAll(".btnAjouter").forEach(function(element){
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
@@ -270,15 +286,13 @@ window.addEventListener('load', function() {
               });      
         })
     });
-    let inputRecherchee = document.querySelector("[name='nom_bouteille']");
- 
-    
+    let inputRecherchee = document.querySelector("[name='nom_bouteille']"); 
     if(inputRecherchee){
         inputRecherchee.addEventListener("blur",function(){
-        document.querySelector(".nom_bouteille").style.display = "block";
-        document.querySelector(".nomBouteille").style.display = "block";
-        document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
-    })   
+          document.querySelector(".nom_bouteille").style.display = "block";
+          document.querySelector(".nomBouteille").style.display = "block";
+          document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
+      })   
     }
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
     let liste = document.querySelector('.listeAutoComplete');
@@ -325,25 +339,25 @@ window.addEventListener('load', function() {
       };
     if(liste){
       liste.addEventListener("click", function(evt){
-        console.dir(evt.target)
-        document.querySelector(".nom_bouteille").style.display = "block";
-        document.querySelector(".nomBouteille").style.display = "block";
-        if(evt.target.tagName == "LI"){
-          bouteille.image=evt.target.getAttribute('image');
-          bouteille.nom.dataset.id = evt.target.dataset.id;
-          bouteille.nom.innerHTML = evt.target.innerHTML;
-          liste.innerHTML = "";
-          inputNomBouteille.value = "";
-          console.log(bouteille.image);
-        }
+          console.dir(evt.target)
+          document.querySelector(".nom_bouteille").style.display = "block";
+          document.querySelector(".nomBouteille").style.display = "block";
+          if(evt.target.tagName == "LI"){
+            bouteille.image=evt.target.getAttribute('image');
+            bouteille.nom.dataset.id = evt.target.dataset.id;
+            bouteille.nom.innerHTML = evt.target.innerHTML;
+            liste.innerHTML = "";
+            inputNomBouteille.value = "";
+            console.log(bouteille.image);
+          }
       });
     }
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
-        if(!bouteille.image){
-           bouteille.image="test";
-        }  
+          if(!bouteille.image){
+            bouteille.image="test";
+          }  
           var param = {
             "id_bouteille":bouteille.nom.dataset.id,
             "id_cellier":bouteille.id_cellier.value,
@@ -389,10 +403,70 @@ window.addEventListener('load', function() {
     }
     let AjouterCellier =document.querySelector("[name='ajoutercellier']");
     if(AjouterCellier){
-    AjouterCellier.addEventListener("click",function(){
-    console.log(AjouterCellier);
-        let nom=document.querySelector("[name='cellier']").value;
-        let requete = new Request(BaseURL+"index.php?requete=ConfirmerAjoutCellier", {method: 'POST', body: '{"nom": "'+nom+'"}'});
+      AjouterCellier.addEventListener("click",function(){
+          console.log(AjouterCellier);
+          let nom=document.querySelector("[name='cellier']").value;
+          let requete = new Request(BaseURL+"index.php?requete=ConfirmerAjoutCellier", {method: 'POST', body: '{"nom": "'+nom+'"}'});
+              fetch(requete)
+                  .then(response => {
+                      if (response.status === 200) {
+                        return response.json();
+                      } else {
+                        throw new Error('Erreur');
+                      }
+                    })
+                    .then(response => { 
+                    window.location.href = BaseURL+response.url; 
+                    }).catch(error => {
+                      console.error(error);
+                    });
+      })
+    }  
+    let BtnSuprimerCellier =document.querySelectorAll("[name='suprimerCelier']");
+    BtnSuprimerCellier.forEach(function(element){
+      element.addEventListener("click",function(evt){
+          let id=evt.target.dataset.id;
+          console.log(id);
+          let requete = new Request(BaseURL+"index.php?requete=suprimerCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
+              fetch(requete)
+                .then(response => {
+                      if (response.status === 200) {
+                        return response.json();
+                      } else {
+                        throw new Error('Erreur');
+                      }
+                    })
+                .then(response => { 
+                  }).catch(error => {
+                      console.error(error);
+                  });
+      })
+    })
+   let BtnComm = document.querySelectorAll("[name='commentaire']"); 
+   BtnComm.forEach(function(element){
+    element.addEventListener("click",function(evt){
+        if(evt.target.nextElementSibling.style.display == "block"){
+            evt.target.nextElementSibling.style.display = "none";
+        }else{
+          evt.target.nextElementSibling.style.display = "block";
+        }
+    })
+  })
+  let ContenuComm=document.querySelectorAll(".textecommentaire");
+  let tennvoyerom =document.querySelectorAll(".envoyerComm"); 
+    tennvoyerom.forEach(function(element){
+     console.log(element);
+     element.addEventListener("click",function(){
+        let id_cellier=document.querySelector("[name='valeurIdCellier']").dataset.id;  
+        let id_bouteille_cellier = element.dataset.id;
+        let commentaire = element.previousElementSibling.value;
+        var param = {
+            "id_cellier" :id_cellier,
+            "id_bouteille_cellier":id_bouteille_cellier,
+            "commentaire":commentaire,  
+          };
+        console.log(param);
+        let requete = new Request(BaseURL+"index.php?requete=AjouterUnCommentaire", {method: 'POST',  body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
@@ -402,11 +476,11 @@ window.addEventListener('load', function() {
                     }
                   })
                   .then(response => { 
-                   window.location.href = BaseURL+response.url; 
+                      window.location.href = BaseURL+response.url; 
                   }).catch(error => {
                     console.error(error);
-                  });
-    })
-    }   
+                  });    
+      })
+    })  
 });
 
