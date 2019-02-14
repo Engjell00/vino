@@ -43,8 +43,8 @@ window.addEventListener('load', function() {
               var bouteilleCellier =  document.querySelector(".cellier");
               var resultatRecherche =  document.querySelector(".resultatRecherche");
               var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-              resultatRecherche.innerHTML = ""
               if(response){
+                resultatRecherche.style.display="inline";
                 bouteilleCellier.style.display="none";
                 response.forEach(function(element){
                   resultatRecherche.innerHTML += "<li data-id='"+element.nom_bouteille_cellier +"' classe='mesLi' image='"+element.image_bouteille_cellier+"'>"+element.nom_bouteille_cellier+"</li>";
@@ -150,17 +150,32 @@ window.addEventListener('load', function() {
             courriel_ins : document.querySelector("[name='courriel']"),
             description_ins : document.querySelector(".description"),
           }
-          let param = {
-            "utilisateur":inscription.utilisateur_ins.value,
-            "motDePasse":inscription.motDePasse_ins.value,
-            "nom":inscription.nom_ins.value,
-            "prenom":inscription.prenom_ins.value,
-            "courriel":inscription.courriel_ins.value,
-            "description":inscription.description_ins.value,
+          function checkForm(form)
+          {
+            if(inscription.motDePasse_ins.value != "") {
+              if(inscription.motDePasse_ins.value.length < 6) {
+                alert("Erreur:Le mot de passe doit contenir au moins 6 caractères");
+                inscription.motDePasse_ins.focus();
+                return false;
+              }
+              else{
+                return true;
+              }
+            }
           }
-          console.log(param);
-          let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
-          fetch(requete)
+          var regexMDP = checkForm(inscription);
+          if(regexMDP){
+            let param = {
+              "utilisateur":inscription.utilisateur_ins.value,
+              "motDePasse":inscription.motDePasse_ins.value,
+              "nom":inscription.nom_ins.value,
+              "prenom":inscription.prenom_ins.value,
+              "courriel":inscription.courriel_ins.value,
+              "description":inscription.description_ins.value,
+            }
+            console.log(param);
+            let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
+            fetch(requete)
             .then(response => {
                 if (response.status === 200) {
                   return response.json();
@@ -177,6 +192,8 @@ window.addEventListener('load', function() {
               }).catch(error => {
                 console.error(error);
               });
+
+          }
         });
     }
     /**
