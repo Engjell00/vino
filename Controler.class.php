@@ -200,7 +200,7 @@ class Controler
 			$bte = new Bouteille();
 			$resultat = $bte->rechercherBouteilleParValeur($body);
 			if($resultat){
-				echo json_encode($resultat);
+				echo json_encode($resultat,true);
 			}
 				
 		}
