@@ -40,7 +40,9 @@ window.addEventListener('load', function() {
             })
             .then(response => {
               console.log(response)
-              var bouteilleCellier =  document.querySelector(".cellier");
+              var bouteilleCellier =  document.querySelector(".DisplayCellier");
+              console.log(bouteilleCellier);
+             
               var resultatRecherche =  document.querySelector(".resultatRecherche");
               var SupprimerResultat =  document.querySelector(".SupprimerResultat");
               if(response){
@@ -52,7 +54,7 @@ window.addEventListener('load', function() {
               }
               if(SupprimerResultat){
                 SupprimerResultat.addEventListener("click", function(evt){
-                  bouteilleCellier.style.display="inline";
+                  bouteilleCellier.style.display="block";
                   resultatRecherche.innerHTML = ""
                   resultatRecherche.style.display="none";
                 });
@@ -129,7 +131,7 @@ window.addEventListener('load', function() {
               })
               .then(response => {
                 if(response){
-                  window.location.href = BaseURL+'index.php?requete=accueilConnecter';
+                  window.location.href = BaseURL+'index.php?requete=cellierParUsager';
                   console.log(response) 
                 }
               }).catch(error => {
@@ -187,7 +189,7 @@ window.addEventListener('load', function() {
               .then(response => {
                 console.log(response);
                 if(response){
-                  window.location.href = BaseURL+'index.php?requete=accueil'; 
+                  window.location.href = BaseURL+response.url; 
                 } 
               }).catch(error => {
                 console.error(error);
@@ -215,7 +217,9 @@ window.addEventListener('load', function() {
                   }
                 })
                 .then(response => {
-                  window.location.href = BaseURL+response.url; 
+                 if(response){
+                     window.location.href = BaseURL+response.url; 
+                  } 
                 }).catch(error => {
                   console.error(error);
                 });
@@ -389,6 +393,7 @@ window.addEventListener('load', function() {
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
+            evt.preventDefault;
           if(!bouteille.image){
             bouteille.image="test";
           }  

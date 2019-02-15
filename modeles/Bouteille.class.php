@@ -29,6 +29,10 @@ class Bouteille extends Modele {
 		
 		return $rows;
 	}
+    
+ 
+    
+    
 	public function getListeDesCelliersParUsager($id_usager)
 	{
 		

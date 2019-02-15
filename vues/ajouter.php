@@ -1,4 +1,12 @@
-<div class="ajouter">
+
+ <div class="ajouter mdl-layout__tab-panel is-active" id="overview">
+     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+         <div class="mdl-card mdl-cell mdl-cell--12-col">
+             <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                  <h4 class="mdl-cell mdl-cell--12-col">Ajouter une bouteille</h4>
+                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+
+
 
     <div class="nouvelleBouteille" vertical layout>
        <p> Recherche :</p> <input class="input" type="text" name="nom_bouteille">
@@ -7,17 +15,45 @@
         </ul>
             <div >
                 <p class="nomBouteille">Nom :</p> <span  data-id="" class="nom_bouteille"></span>
-                <p>Quantite :</p> <input class="input" name="quantite" value="1">
-                <p>Date achat :</p> <input type="date" class="input" name="date_achat">
-                <p>Prix :</p> <input  class="input" name="prix">
-                 <p>Pays :</p> <input  class="input" name="pays">
-                <p>Garde :</p> <input type="date" class="input" name="garde_jusqua">
-                   <p>millesime :</p><input type="number" min="1800" max="2019" class="input" name="millesime">
-                <p>Notes :</p><input  class="input" name="notes">
-                <p><input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">  </p>
+                
+                
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="input mdl-textfield__input" type="text" name="quantite" id="quantite" value="1">
+                                        <label class="mdl-textfield__label" for="quantite">Quantité...</label>
+                                    </div><br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="input mdl-textfield__input" type="text" name="date_achat" id="date_achat">
+                                        <label class="mdl-textfield__label" for="date_achat">Date d'achat...</label>
+                                    </div><br>
+                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="input mdl-textfield__input" type="text" name="garde_jusqua" id="garde_jusqua">
+                                        <label class="mdl-textfield__label" for="garde_jusqua">Date d'expiration...</label>
+                                    </div><br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="input mdl-textfield__input" type="number" name="prix" id="prix">
+                                        <label class="mdl-textfield__label" for="prix">Prix...</label>
+                                    </div><br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="input mdl-textfield__input" type="text" name="pays" id="pays">
+                                        <label class="mdl-textfield__label" for="pays">Pays...</label>
+                                    </div><br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="input mdl-textfield__input" type="text" name="millesime" id="millesime">
+                                        <label class="mdl-textfield__label" for="millesime">Millesime...</label>
+                                    </div><br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="input mdl-textfield__input" type="text" name="Notes" id="Notes">
+                                        <label class="mdl-textfield__label" for="Notes">Notes...</label>
+                                    </div><br>
+                
+                
+                <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">  
             </div>
-       
-             <img src="./img/iconeAjoutBouteille-Red.png" name="ajouterBouteilleCellier" height="60px" width="60px">
+        
+                     </div>
+                     </div>
         </div>
     </div>
-</div>
+                 
+                 <a name="ajouterBouteilleCellier" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter la bouteille</a>
+

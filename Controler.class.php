@@ -92,6 +92,9 @@ class Controler
                 case 'SupprimerBouteilleAuCellier':
 					$this->SupprimerBouteilleAuCellier();
 					break;
+                case 'afficherDetailsBouteille':
+                    $this->afficherDetailsBouteille();
+                    break;
 				case "Logout":
 					$_SESSION = array();
 					if (ini_get("session.use_cookies")) {
@@ -133,6 +136,7 @@ class Controler
 			if(!empty($body)){
 				$usager = new Usager();
 				$resultat = $usager->creationUsager($body);
+                echo json_encode(["status" => true, "url"=>"index.php?requete=accueil"]);
 			}
 	}
 	/**
@@ -148,10 +152,23 @@ class Controler
 			echo json_encode(["status" => true, "url"=>"index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$creationCellier]);
 		
 	}
+    
+    private function afficherDetailsBouteille()
+    {
+        $bte = new Bouteille();
+        $id_bouteille_cellier=$_GET['id_bouteille_cellier'];
+        $data=$bte->getBouteilleParId($id_bouteille_cellier);
+        include("vues/entete.php");
+		include("vues/DetailBouteille.php");
+		include("vues/pied.php");
+    }
+    
+    
+    
 	/**
 	 * Ajout d'un commentaire sur une bouteille
 	 */
-    public function AjouterUnCommentaire()
+    private function AjouterUnCommentaire()
     {
         $bte = new Bouteille();
         $body = json_decode(file_get_contents('php://input'));
@@ -167,7 +184,7 @@ class Controler
         //var_dump(file_get_contents('php://input'));
         $body = json_decode(file_get_contents('php://input'));
         $supressionCellier = $cle->suprimerCellier($body->id);
-        echo json_encode($supressionCellier);
+        echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager"]);
 	}
 	
 	private function pageAjoutCellier(){
