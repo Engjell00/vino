@@ -40,21 +40,24 @@ window.addEventListener('load', function() {
             })
             .then(response => {
               console.log(response)
-              var bouteilleCellier =  document.querySelector(".DisplayCellier");
+              var bouteilleCellier =  document.querySelectorAll(".DisplayCellier");
               console.log(bouteilleCellier);
-             
               var resultatRecherche =  document.querySelector(".resultatRecherche");
               var SupprimerResultat =  document.querySelector(".SupprimerResultat");
               if(response){
                 resultatRecherche.style.display="inline";
-                bouteilleCellier.style.display="none";
+                bouteilleCellier.forEach(function(element){
+                  element.style.display="none";
+                })
                 response.forEach(function(element){
                   resultatRecherche.innerHTML += "<li data-id='"+element.nom_bouteille_cellier +"' classe='mesLi' image='"+element.image_bouteille_cellier+"'>"+element.nom_bouteille_cellier+"</li>";
                 })
               }
               if(SupprimerResultat){
                 SupprimerResultat.addEventListener("click", function(evt){
-                  bouteilleCellier.style.display="block";
+                  bouteilleCellier.forEach(function(element){
+                    element.style.display="block";
+                  })
                   resultatRecherche.innerHTML = ""
                   resultatRecherche.style.display="none";
                 });
