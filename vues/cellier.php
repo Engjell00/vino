@@ -16,22 +16,18 @@
     <option value="millesime">millesime</option>
     <option value="pays_cellier">pays</option>
   </select>
-  <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">
+  <input type="hidden" value=<?php echo $_GET["id_cellier"]; ?> name="valeurIdCellier">
   <input class='rechercher bouton' type="submit" value="Rechercher des bouteilles"/>
 </form>
-<input class="SupprimerResultat" type="button" value="Annuler Recherche">
+<input class="SupprimerResultat" type="button" value="X">
 <div class="resultatRecherche">
 </div>
 <div class="cellier">
    
 <?php
-                  $bool=false;
+                 $bool=false;
 foreach ($data as $cle => $bouteille) {
-    
     if($bool==false){
-   
-    
- 
     ?>
      <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'>Ajouter une bouteille au cellier</a>
     <?php
