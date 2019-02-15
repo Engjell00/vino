@@ -225,7 +225,7 @@ class Controler
 	 * Affichage des celliers selon l'usager
 	 */
 	private function listeDesCelliersParUsager(){
-		$usager = new bouteille();
+		$usager = new Bouteille();
 		$data = $usager->getListeDesCelliersParUsager($_SESSION["UserID"]);
 		include("vues/entete.php");
 		include("vues/cellierParUsager.php");
@@ -235,8 +235,8 @@ class Controler
 	 * Affichage d'un cellier lorsque l'utilisateur connecter veut y accéder 
 	 */
 	private function afficheUnCellierDunUsager(){
-		$usager = new bouteille();
-		$data = $usager->getListeBouteilleCellier($_GET["id_cellier"],$_SESSION["UserID"]);
+		$bouteille = new Bouteille();
+		$data = $bouteille->getListeBouteilleCellier($_GET["id_cellier"],$_SESSION["UserID"]);
 		include("vues/entete.php");
 		include("vues/cellier.php");
 		include("vues/pied.php");
@@ -246,7 +246,7 @@ class Controler
 	 */
 	private function pageModifierProfile(){
 		if($_SESSION["UserID"]==$_GET["idProfile"]){
-			$usager = new usager();
+			$usager = new Usager();
 			$data = $usager->getProfile($_GET["idProfile"]);
 			include("vues/entete.php");
 			include("vues/modifierProfile.php");
@@ -315,7 +315,7 @@ class Controler
 			//var_dump($data);
 			$resultat = $bte->ajouterBouteilleCellier($body);
 			//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
-			echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->id_cellier."'"]);
+			echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$body->id_cellier]);
 		}
 		else{
 			include("vues/entete.php");
