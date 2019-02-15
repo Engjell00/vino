@@ -53,15 +53,7 @@ foreach ($data as $cle => $bouteille) {
             
         </section>
             </div>
-    </div>
-        
-           
-           
-       
-           
-         
-    
-    
+    </div>  
 <?php
 
         }
@@ -73,4 +65,3 @@ foreach ($data as $cle => $bouteille) {
         }
     }
 ?>	
-
