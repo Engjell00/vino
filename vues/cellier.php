@@ -23,7 +23,7 @@
 foreach ($data as $cle => $bouteille) {
     if($bool==false){
    ?>
-     <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'  id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter une bouteille</a>
+     <a href='index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'  id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter une bouteille</a>
     <?php
      $bool=true;
     }
@@ -32,7 +32,17 @@ foreach ($data as $cle => $bouteille) {
         <div class="DisplayCellier">
         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
              <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">
-                        <img src="https:<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                <?php
+                    if($bouteille['image_bouteille_cellier'] != ""){
+                ?>
+                    <img src="https:<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                <?php
+                    }else{
+                ?>
+                    <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille=<?php echo $bouteille['id_bouteille'];?>' class="mdl-button">Ajouter une photo</a>      
+                <?php
+                    }
+                 ?>
                     </header>
             <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone">
                 <div  class="description mdl-card__supporting-text">

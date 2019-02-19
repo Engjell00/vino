@@ -88,7 +88,10 @@ class Controler
                 break;
                 case 'getbouteillebyid':
                 	getbouteillbyid();
-                	break;
+					break;
+				case 'pageAjoutPhotoBouteille':
+					$this->pageAjoutPhotoBouteille();
+					break;	
                 case 'SupprimerBouteilleAuCellier':
 					$this->SupprimerBouteilleAuCellier();
 					break;
@@ -190,6 +193,11 @@ class Controler
 	private function pageAjoutCellier(){
 		include("vues/entete.php");
 		include("vues/ajouterCellier.php");
+		include("vues/pied.php");
+	}
+	private function pageAjoutPhotoBouteille(){
+		include("vues/entete.php");
+		include("vues/uploadPhoto.php");
 		include("vues/pied.php");
 	}
 	/**

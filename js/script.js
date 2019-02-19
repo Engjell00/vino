@@ -14,8 +14,16 @@ window.addEventListener("load", function () {
     if (mm < 10) {
         mm = '0' + mm
     }
-
     today = yyyy + '-' + mm + '-' + dd;
     document.getElementById("date_achat").setAttribute("max", today);
-    });
+    var uploadBTN = document.querySelector(".uploadBtn");
+    var uploadFILE = document.querySelector(".uploadFile");
+    uploadBTN.onchange = function () {
+        uploadFILE.value = this.files[0].name;
+    };
 
+
+    });
+    
+
+    

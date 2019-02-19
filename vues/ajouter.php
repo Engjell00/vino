@@ -55,8 +55,6 @@
                             <input class="input mdl-textfield__input" type="text" name="Notes" id="Notes">
                             <label class="mdl-textfield__label" for="notes">Notes...</label>
                         </div><br>
-
-
                         <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">
                     
 

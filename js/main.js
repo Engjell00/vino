@@ -370,41 +370,26 @@ window.addEventListener('load', function() {
     let liste = document.querySelector('.listeAutoComplete');
     console.log(inputRecherchee);
     if(inputRecherchee){
-        
-         document.querySelector(".nom_bouteille").style.display = "none";
+        document.querySelector(".nom_bouteille").style.display = "none";
         document.querySelector(".nomBouteille").style.display = "none";
-        
         inputRecherchee.addEventListener("blur",function(){
-             
           document.querySelector(".nom_bouteille").style.display = "block";
           document.querySelector(".nomBouteille").style.display = "block";
-          document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
-          
-           
-      
-       
-       
-            
-       
-      })
-       
+          document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;     
+        });   
     }
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
-    
     if(inputNomBouteille){
-
       inputNomBouteille.addEventListener("keyup", function(evt){  
-         document.querySelector(".commNonListees").innerHTML="";
+        document.querySelector(".commNonListees").innerHTML="";
         console.log(inputNomBouteille);
         let nom = inputNomBouteille.value;
-          
         liste.innerHTML = "";
         if(nom){
           let requete = new Request(BaseURL+"index.php?requete=autocompleteBouteille", {method: 'POST', body: '{"nom": "'+nom+'"}'});
           fetch(requete)
               .then(response => {
                   if (response.status === 200) {
-                      
                     return response.json();
                   } else {
                     throw new Error('Erreur');
@@ -412,17 +397,16 @@ window.addEventListener('load', function() {
                 })
                 .then(response => {
                   console.log(response);
-              if(response==""){
-                  document.querySelector(".commNonListees").innerHTML="attention la bouteille est non listee";
-              }
-              else{
-                  response.forEach(function(element){
-                       document.querySelector(".commNonListees").innerHTML="";
-                   
-                    liste.innerHTML += "<li data-id='"+element.id_bouteille +"' classe='mesLi' image='"+element.image_bouteille+"' typeV='"+element.id_type_bouteille+"'>"+element.nom_bouteille+"</li>";
-                  })
-              }
-             
+                  if(response==""){
+                      document.querySelector(".commNonListees").innerHTML="attention la bouteille est non listee";
+                  }
+                  else{
+                      response.forEach(function(element){
+                          document.querySelector(".commNonListees").innerHTML="";
+                      
+                        liste.innerHTML += "<li data-id='"+element.id_bouteille +"' classe='mesLi' image='"+element.image_bouteille+"' typeV='"+element.id_type_bouteille+"'>"+element.nom_bouteille+"</li>";
+                      })
+                  }
                 }).catch(error => {
                   console.error(error);
                 });
@@ -439,12 +423,9 @@ window.addEventListener('load', function() {
         prix : document.querySelector("[name='prix']"),
         garde_jusqua : document.querySelector("[name='garde_jusqua']"),
         notes : document.querySelector("[name='notes']"),
-          
       };
-    
     if(liste){
       liste.addEventListener("click", function(evt){
-           
           console.dir(evt.target)
           document.querySelector(".nom_bouteille").style.display = "block";
           document.querySelector(".nomBouteille").style.display = "block";
@@ -462,9 +443,9 @@ window.addEventListener('load', function() {
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
             evt.preventDefault;
-          if(!bouteille.image){
-            bouteille.image="test";
-          }  
+          /*if(!bouteille.image){
+            bouteille.image="";
+          }  */
           var param = {
             "id_bouteille":bouteille.nom.dataset.id,
             "id_cellier":bouteille.id_cellier.value,
@@ -484,14 +465,12 @@ window.addEventListener('load', function() {
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
-                        
                       return response.json();
                     } else {
                       throw new Error('Erreur');
                     }
                   })
                   .then(response => {
-                   
                     window.location.href = BaseURL+response.url; 
                   }).catch(error => {
                     console.error(error);

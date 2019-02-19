@@ -52,6 +52,7 @@
     
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/style2.css">
+    <link rel="stylesheet" href="./css/script3.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
      
     <style>
