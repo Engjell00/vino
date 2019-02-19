@@ -44,8 +44,8 @@ foreach ($data as $cle => $bouteille) {
                     </ul>
                     </div>
                 <div class="mdl-card__actions" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
-                            <a class="bouton mdl-button" href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>'>Modifier</a>
-                    <a class="bouton supprimerBouteille mdl-button" type='button' href="#" data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>"  >Supprimer</a>
+                    <a class="bouton mdl-button" href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>'>Modifier</a>
+                    <a class="bouton supprimerBouteille mdl-button" type='button'  data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>"  >Supprimer</a>
                     <a class="bouton btnBoire mdl-button" type='button' >Boire</a>
                     <a class="bouton btnAjouter mdl-button" type='button' >Ajouter</a>
                 </div>

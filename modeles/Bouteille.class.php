@@ -154,7 +154,7 @@ class Bouteille extends Modele {
 		$nom = preg_replace("/\*/","%" , $nom);
 		 
 		//echo $nom;
-		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("%'. $nom .'%") LIMIT 0,'. $nb_resultat; 
+		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("'. $nom .'%") LIMIT 0,'. $nb_resultat; 
 		//var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
@@ -305,7 +305,7 @@ class Bouteille extends Modele {
 		return $rows;
 	}
 	public function rechercherBouteilleParValeur($data){
-		$requete = "SELECT id_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type,url_image_cellier,url_saq_cellier,commentaire,expiration FROM contient WHERE $data->typeDeRecherche  like '%".$data->valeurRechercher."%' AND id_cellier ='".$data->id_cellier."'";
+		$requete = "SELECT id_cellier,id_bouteille_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type,url_image_cellier,url_saq_cellier,commentaire,expiration,format_bouteille_cellier FROM contient WHERE $data->typeDeRecherche  like '%".$data->valeurRechercher."%' AND id_cellier ='".$data->id_cellier."'";
 		$res = $this->_db->query($requete);
 		if($res->num_rows)
 		{

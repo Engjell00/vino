@@ -51,6 +51,7 @@
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-blue.min.css" />
     
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/style2.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
      
     <style>
@@ -69,6 +70,7 @@
 		<base href="<?php echo BASEURL; ?>">
 		<!--<script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
 		<script src="./js/main.js"></script>
+    <script src="./js/script.js"></script>
 	
 		<!-- inclus bootstrap cdn -->
 		

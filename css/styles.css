@@ -374,6 +374,7 @@ opacity: 0.6;
           animation: subtitleBlur 0.3s;
 }
 
+
 .card__description {
   position: absolute;
   left: 20px;
@@ -450,6 +451,12 @@ opacity: 0.6;
   -webkit-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
           transform: translate(0, 0);
+}
+
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+    color: transparent;
 }
 
 @-webkit-keyframes titleBlur {

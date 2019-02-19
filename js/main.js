@@ -16,56 +16,77 @@ window.addEventListener('load', function() {
    */
     var rechercherBouteillePar =  document.querySelector(".rechercher");
     if(rechercherBouteillePar){
-      rechercherBouteillePar.addEventListener("click", function(evt){
-        evt.preventDefault();
-        let rechercher = {
-          valeurRechercher : document.querySelector("[name='valeurRechercher']"),
-          typeDeRecherche : document.querySelector("[name='typeDeRecherche']"),
-          id_cellier : document.querySelector("[name='valeurIdCellier']"),
-        }
-        let param = {
-          "valeurRechercher":rechercher.valeurRechercher.value,
-          "typeDeRecherche":rechercher.typeDeRecherche.value,
-          "id_cellier":rechercher.id_cellier.value,
-        }
-        console.log(param);
-        let requete = new Request(BaseURL+"index.php?requete=rechercherBouteilleParType", {method: 'POST', body: JSON.stringify(param)});
-        fetch(requete)
-          .then(response => {
-              if (response.status === 200) {
-                return response.json()
-              } else {
-                throw new Error('Erreur');
-              }
-            })
-            .then(response => {
-              console.log(response)
-              var bouteilleCellier =  document.querySelectorAll(".DisplayCellier");
-              console.log(bouteilleCellier);
-              var resultatRecherche =  document.querySelector(".resultatRecherche");
-              var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-              if(response){
-                resultatRecherche.style.display="inline";
-                bouteilleCellier.forEach(function(element){
-                  element.style.display="none";
-                })
-                response.forEach(function(element){
-                  resultatRecherche.innerHTML += "<li data-id='"+element.nom_bouteille_cellier +"' classe='mesLi' image='"+element.image_bouteille_cellier+"'>"+element.nom_bouteille_cellier+"</li>";
-                })
-              }
-              if(SupprimerResultat){
-                SupprimerResultat.addEventListener("click", function(evt){
-                  bouteilleCellier.forEach(function(element){
-                    element.style.display="block";
-                  })
-                  resultatRecherche.innerHTML = ""
-                  resultatRecherche.style.display="none";
-                });
-              }
-            }).catch(error => {
-              console.error(error);
-            });
-      });
+          rechercherBouteillePar.addEventListener("click", function(evt){
+            evt.preventDefault();
+            let rechercher = {
+              valeurRechercher : document.querySelector("[name='valeurRechercher']"),
+              typeDeRecherche : document.querySelector("[name='typeDeRecherche']"),
+              id_cellier : document.querySelector("[name='valeurIdCellier']"),
+            }
+            let param = {
+              "valeurRechercher":rechercher.valeurRechercher.value,
+              "typeDeRecherche":rechercher.typeDeRecherche.value,
+              "id_cellier":rechercher.id_cellier.value,
+            }
+            if(rechercher.valeurRechercher.value != ""){
+                console.log(param);
+                let requete = new Request(BaseURL+"index.php?requete=rechercherBouteilleParType", {method: 'POST', body: JSON.stringify(param)});
+                fetch(requete)
+                  .then(response => {
+                      if (response.status === 200) {
+                        return response.json()
+                      } else {
+                        throw new Error('Erreur');
+                      }
+                    })
+                    .then(response => {
+                      console.log(response)
+                      var bouteilleCellier =  document.querySelectorAll(".DisplayCellier");
+                      console.log(bouteilleCellier);
+                      var resultatRecherche =  document.querySelector(".resultatRecherche");
+                      var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                      if(response){
+                        resultatRecherche.innerHTML = ""
+                        resultatRecherche.style.display="inline";
+                        componentHandler.downgradeElements(resultatRecherche);
+                        bouteilleCellier.forEach(function(element){
+                          element.style.display="none";
+                        })
+                        var madiv = "";
+                        response.forEach(function(element){
+                          madiv += '<div class="bouteille mdl-layout__tab-panel is-active" id="overview">';
+                          madiv += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+                          madiv += '<header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">';
+                          madiv += "<img src="+element.image_bouteille_cellier+" height='200' width='200'>";
+                          madiv += "</header>";
+                          madiv += "<div class='mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone'>";
+                          madiv += "<div class='description mdl-card__supporting-text'>";
+                          madiv += "<a href='?requete=afficherDetailsBouteille&id_bouteille_cellier="+element.id_bouteille_cellier+"'> <h5 class='nom'>"+element.nom_bouteille_cellier+"</h5></a>";
+                          madiv += "<ul data-id="+element.id_bouteille_cellier+">";
+                          madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
+                          madiv += "<li>$"+element.prix_a_lachat+"</li>";
+                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div>";
+                        })
+                        resultatRecherche.innerHTML = madiv;
+                        componentHandler.upgradeElement(resultatRecherche);
+                      }
+                      if(SupprimerResultat){
+                        SupprimerResultat.addEventListener("click", function(evt){
+                          bouteilleCellier.forEach(function(element){
+                            element.style.display="block";
+                            resultatRecherche.innerHTML = "";
+                          })
+                          resultatRecherche.forEach(function(element){
+                            element.style.display = "none";
+                            element.innerHTML = "";
+                          })
+                        });
+                      }
+                    }).catch(error => {
+                      console.error(error);
+                    });
+            }
+          });     
     }
     /*
     *Modifier profile par un usager
@@ -157,15 +178,33 @@ window.addEventListener('load', function() {
           }
           function checkForm(form)
           {
-            if(inscription.motDePasse_ins.value != "") {
-              if(inscription.motDePasse_ins.value.length < 6) {
-                alert("Erreur:Le mot de passe doit contenir au moins 6 caractères");
-                inscription.motDePasse_ins.focus();
-                return false;
-              }
-              else{
-                return true;
-              }
+            var messageErreur = document.querySelector(".erreur")
+            if(inscription.utilisateur_ins.value != "" && inscription.motDePasse_ins.value != "" && inscription.nom_ins.value != "" 
+              && inscription.prenom_ins.value != "" && inscription.courriel_ins !="" && inscription.description_ins != ""){
+                  if(inscription.motDePasse_ins.value.length < 6) {
+                      messageErreur.innerHTML ="Le mot de passe doit contenir au moins 6 caractères";
+                      inscription.motDePasse_ins.focus();
+                      return false;
+                  }else{
+                    messageErreur.innerHTML= "";
+                  }
+                  if (/\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/.test(inscription.courriel_ins.value))
+                  {
+                      messageErreur.innerHTML= "";
+                  }else{
+                      messageErreur.innerHTML +="Votre courriel est invalide";
+                      return false;
+                  }
+                  if (/^[a-zA-Z0-9]{5,12}$/.test(inscription.utilisateur_ins.value))
+                  {
+                      messageErreur.innerHTML= "";
+                  }else{
+                      messageErreur.innerHTML +="veuilez rentrer un nom utilisateur entre 5 et 12 caractères";
+                      return false;
+                  }
+                  return true;
+            }else{
+              messageErreur.innerHTML +="Veuillez rentrer tous les champs nécéssaires";
             }
           }
           var regexMDP = checkForm(inscription);
@@ -327,20 +366,38 @@ window.addEventListener('load', function() {
               });      
         })
     });
-    let inputRecherchee = document.querySelector("[name='nom_bouteille']"); 
+    let inputRecherchee = document.querySelector("[name='nom_bouteille']");
+    let liste = document.querySelector('.listeAutoComplete');
+    console.log(inputRecherchee);
     if(inputRecherchee){
+        
+         document.querySelector(".nom_bouteille").style.display = "none";
+        document.querySelector(".nomBouteille").style.display = "none";
+        
         inputRecherchee.addEventListener("blur",function(){
+             
           document.querySelector(".nom_bouteille").style.display = "block";
           document.querySelector(".nomBouteille").style.display = "block";
           document.querySelector(".nom_bouteille").innerHTML=document.querySelector(".input").value;
-      })   
+          
+           
+      
+       
+       
+            
+       
+      })
+       
     }
     let inputNomBouteille = document.querySelector("[name='nom_bouteille']");
-    let liste = document.querySelector('.listeAutoComplete');
+    
     if(inputNomBouteille){
-      inputNomBouteille.addEventListener("keyup", function(evt){
+
+      inputNomBouteille.addEventListener("keyup", function(evt){  
+         document.querySelector(".commNonListees").innerHTML="";
         console.log(inputNomBouteille);
         let nom = inputNomBouteille.value;
+          
         liste.innerHTML = "";
         if(nom){
           let requete = new Request(BaseURL+"index.php?requete=autocompleteBouteille", {method: 'POST', body: '{"nom": "'+nom+'"}'});
@@ -355,10 +412,16 @@ window.addEventListener('load', function() {
                 })
                 .then(response => {
                   console.log(response);
+              if(response==""){
+                  document.querySelector(".commNonListees").innerHTML="attention la bouteille est non listee";
+              }
+              else{
                   response.forEach(function(element){
+                       document.querySelector(".commNonListees").innerHTML="";
                    
                     liste.innerHTML += "<li data-id='"+element.id_bouteille +"' classe='mesLi' image='"+element.image_bouteille+"' typeV='"+element.id_type_bouteille+"'>"+element.nom_bouteille+"</li>";
                   })
+              }
              
                 }).catch(error => {
                   console.error(error);
@@ -378,15 +441,17 @@ window.addEventListener('load', function() {
         notes : document.querySelector("[name='notes']"),
           
       };
+    
     if(liste){
       liste.addEventListener("click", function(evt){
+           
           console.dir(evt.target)
           document.querySelector(".nom_bouteille").style.display = "block";
           document.querySelector(".nomBouteille").style.display = "block";
           if(evt.target.tagName == "LI"){
             bouteille.image=evt.target.getAttribute('image');
             bouteille.nom.dataset.id = evt.target.dataset.id;
-            bouteille.nom.innerHTML = evt.target.innerHTML;
+            bouteille.nom.innerHTML =evt.target.innerHTML;
             liste.innerHTML = "";
             inputNomBouteille.value = "";
             console.log(bouteille.image);

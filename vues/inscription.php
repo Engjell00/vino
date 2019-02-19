@@ -21,6 +21,7 @@
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="sample3" name="nom">
                                         <label class="mdl-textfield__label" for="sample3">Nom...</label>
+
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="sample3" name="prenom">
@@ -44,6 +45,7 @@
                                     </div>
                                    <input class='inscription' type="submit" value="S'inscrire"/>
                                 </form>
+                                <span class="erreur"></span>
                             </div>
                             </div>
                         </div>
