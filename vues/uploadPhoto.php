@@ -4,7 +4,7 @@
         <div class="mdl-card mdl-cell mdl-cell--12-col">
             <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-<form>
+<form enctype="multipart/form-data">
 
   <div class=" mdl-textfield mdl-js-textfield mdl-textfield--file">
     <input type="file" name="photo" accept="image/*">
