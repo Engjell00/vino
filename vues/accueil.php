@@ -14,8 +14,7 @@
                         </div>
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" type="password" id="motDePasse" name="motDePasse">
-                            <label class="mdl-textfield__label" for="motDePasse">Mot de P
-                                passe...</label>
+                            <label class="mdl-textfield__label" for="motDePasse">Mot de Passe...</label>
                         </div>
                         <input class= "connexion" type="submit" value="Log in">
                     </form>
