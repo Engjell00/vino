@@ -4,29 +4,17 @@
             <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <h4 class="mdl-cell mdl-cell--12-col">Ajouter une bouteille</h4>
                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-
-                      <div class="commNonListees"></div>
-
-                    
-                 
+                      <div class="commNonListees"></div>      
                      <div class="nouvelleBouteille mdl-textfield mdl-js-textfield mdl-textfield--floating-label" vertical layout>
                             <input class="input mdl-textfield__input" type="text" name="nom_bouteille" id="recherche">
                             <label class="mdl-textfield__label" for="recherche">Recherche...</label>
                         </div><br>
-                    <ul class="listeAutoComplete">
-                        
-                        </ul>
-                    
-                     <div class="nomBouteille mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      
-                         <span class="nom_bouteille input mdl-textfield__input" name="nom" id="nom"></span>
-                            
-                        </div><br>
-                    
-                    
+                    <ul class="listeAutoComplete">             
+                        </ul>         
+                     <div class="nomBouteille mdl-textfield mdl-js-textfield mdl-textfield--floating-label">              
+                         <span class="nom_bouteille input mdl-textfield__input" name="nom" id="nom"></span>                     
+                        </div><br>                 
                        <!-- <p class="nomBouteille">Nom :</p> <span data-id="" class="nom_bouteille"></span>-->
-
-
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="input mdl-textfield__input" type="text" name="quantite" id="quantite" value="1" min="1">
                             <label class="mdl-textfield__label" for="quantite">Quantité...</label>
@@ -56,9 +44,6 @@
                             <label class="mdl-textfield__label" for="notes">Notes...</label>
                         </div><br>
                         <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">
-                    
-
-
                 </div>
             </div>
         </div>

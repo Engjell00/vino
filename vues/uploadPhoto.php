@@ -17,10 +17,8 @@
         </div>
       </section>
 </div>
-
 <!--
     <form>
-
   <div class=" mdl-textfield mdl-js-textfield mdl-textfield--file">
     <input class="mdl-textfield__input" placeholder="File" type="text" id="uploadFile" readonly/>
     <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
