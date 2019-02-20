@@ -210,7 +210,7 @@ class Controler
 	}
 	private function ajouterPhotoBouteilleNonListee(){
 			  $bte = new Bouteille();
-			  $repertoire = "/img/imagesBouteilleUsager/";
+			  $repertoire = "img/imagesBouteilleUsager/";
 			  $nomFichier = $repertoire . basename($_FILES["fichierPhoto"]["name"]);
 			  $uploadOk = true;
 			  $imageType = strtolower(pathinfo($nomFichier,PATHINFO_EXTENSION));
@@ -228,6 +228,15 @@ class Controler
 			  if ($uploadOk == false) {
 				  echo "Upload impossible.";
 			  }
+			  if ($uploadOk == false) {
+				echo "Upload impossible.";
+			  } else {
+					if (move_uploaded_file($_FILES["fichierPhoto"]["tmp_name"], $nomFichier)) {
+						
+					} else {
+						echo "Erreur d'upload.";
+					}
+				}
 			  $resultat = $bte->ajouterPhotoALaBouteilleNonListee($nomFichier,$_POST["idBouteilleCellier"]);
 			  if($resultat){
 				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$_POST["idCellier"]."'"]); 
