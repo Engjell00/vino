@@ -226,7 +226,9 @@ class Bouteille extends Modele {
 	}
     //Supprimer
     public function supprimerLaBouteilleAuCellier($data){
-		$requete = "DELETE FROM contient where id_bouteille_cellier = '".$data->idBouteille."' AND id_cellier = '".$data->idCellier."'";
+		$idBouteilleVerifier = mysqli_real_escape_string($this->_db, $data->idBouteille);
+		$idCellierVerifier = mysqli_real_escape_string($this->_db, $data->idCellier );
+		$requete = "DELETE FROM contient where id_bouteille_cellier = '".$idBouteilleVerifier."' AND id_cellier = '".$idCellierVerifier."'";
 		$res = $this->_db->query($requete);
 		return $res;
 	}
@@ -290,7 +292,11 @@ class Bouteille extends Modele {
 		return $rows;
 	}
 	public function rechercherBouteilleParValeur($data){
-		$requete = "SELECT id_cellier,id_bouteille_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type,url_image_cellier,url_saq_cellier,commentaire,expiration,format_bouteille_cellier FROM contient WHERE $data->typeDeRecherche  like '%".$data->valeurRechercher."%' AND id_cellier ='".$data->id_cellier."'";
+		$ValeurVerifier = mysqli_real_escape_string($this->_db, $data->typeDeRecherche );
+		$ValeurRechercherVerifier = mysqli_real_escape_string($this->_db, $data->valeurRechercher );
+		$idCellierVerifier = mysqli_real_escape_string($this->_db, $data->id_cellier );
+		$requete = "SELECT id_cellier,id_bouteille_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type,url_image_cellier,url_saq_cellier,commentaire,expiration,format_bouteille_cellier 
+		FROM contient WHERE $ValeurVerifier  like '".$data->valeurRechercher."%' AND id_cellier ='".$idCellierVerifier."'";
 		$res = $this->_db->query($requete);
 		if($res->num_rows)
 		{
@@ -314,8 +320,4 @@ class Bouteille extends Modele {
 		return $res;
 	}
 }
-
-
-
-
 ?>
