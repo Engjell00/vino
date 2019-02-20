@@ -34,6 +34,7 @@ foreach ($data as $cle => $bouteille) {
              <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">
                 <?php
                     if($bouteille['image_bouteille_cellier'] != ""){
+                           /**Condition qui regarde si le lien de l'image reçu provient de la SAQ ou seulement de l'usager */
                         if (strpos($bouteille['image_bouteille_cellier'], '//s7d9') === 0) {
                 ?>
                            <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
