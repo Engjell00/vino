@@ -13,6 +13,7 @@
                         <input type="hidden" value="<?php echo $_GET["id_Cellier"]; ?>" name="idCellier">
                       </form>
                 </div>
+      
             </div>
         </div>
       </section>

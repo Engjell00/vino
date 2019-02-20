@@ -11,9 +11,6 @@
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
-  /**
-   * Recherche d'une bouteille dans le cellier
-   */
     var ajouterUnePhotoBouteilleNonListee =  document.querySelector(".ajouterUnePhoto");
     if(ajouterUnePhotoBouteilleNonListee){
       ajouterUnePhotoBouteilleNonListee.addEventListener("click", function(evt){
@@ -25,26 +22,30 @@ window.addEventListener('load', function() {
         formulaire.append('idBouteilleCellier',idBouteilleCellier);
         formulaire.append('idCellier',idCellier);
         formulaire.append('fichierPhoto', fileTelecharger);
-        console.log(formulaire);
-        let requete = new Request(BaseURL+"index.php?requete=ajouterPhotoBouteilleNonListee", {method: 'POST', body: formulaire});
-        fetch(requete)
-          .then(response => {
-              if (response.status === 200) {
-                return response.json()
-              } else {
-                throw new Error('Erreur');
-              }
-            })
-            .then(response => {
-              if(response){
-                window.location.href = BaseURL+response.url;
-                console.log(response) 
-              }
-            }).catch(error => {
-              console.error(error);
-            });
-      })  
+          console.log(formulaire);
+            messageErreur.innerHTML = "";
+            let requete = new Request(BaseURL+"index.php?requete=ajouterPhotoBouteilleNonListee", {method: 'POST', body: formulaire});
+            fetch(requete)
+              .then(response => {
+                  if (response.status === 200) {
+                    return response.json()
+                  } else {
+                    throw new Error('Erreur');
+                  }
+                })
+                .then(response => {
+                  if(response){
+                    window.location.href = BaseURL+response.url;
+                    console.log(response) 
+                  }
+                }).catch(error => {
+                  console.error(error);
+                });
+        })  
     }
+      /**
+   * Recherche d'une bouteille dans le cellier
+   */
     var rechercherBouteillePar =  document.querySelector(".rechercher");
     if(rechercherBouteillePar){
           rechercherBouteillePar.addEventListener("click", function(evt){
