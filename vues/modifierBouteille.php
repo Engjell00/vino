@@ -12,7 +12,7 @@ foreach ($data as $cle => $bouteille) {
                         <input type="hidden" name="idCellier" value="<?php echo $bouteille['id_cellier'];?>" />
                         <div class="img">
                         <?php
-                        if($bouteille['image_bouteille_cellier'] != ""){
+                        if($bouteille['image_bouteille_cellier'] != "" && $bouteille['image_bouteille_cellier'] != "imageNONdeposer"){
                             /**Condition qui regarde si le lien de l'image reçu provient de la SAQ ou seulement de l'usager */
                             if (strpos($bouteille['image_bouteille_cellier'], '//s7d9') === 0) {
                         ?>

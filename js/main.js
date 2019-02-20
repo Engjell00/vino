@@ -474,9 +474,9 @@ window.addEventListener('load', function() {
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
             evt.preventDefault;
-          /*if(!bouteille.image){
-            bouteille.image="";
-          }  */
+          if(!bouteille.image){
+            bouteille.image="imageNONdeposer";
+          }  
           var param = {
             "id_bouteille":bouteille.nom.dataset.id,
             "id_cellier":bouteille.id_cellier.value,

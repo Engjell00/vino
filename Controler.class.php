@@ -367,7 +367,9 @@ class Controler
 			//var_dump($data);
 			$resultat = $bte->ajouterBouteilleCellier($body);
 			//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
-			echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$body->id_cellier]);
+			if($resultat){
+				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$body->id_cellier]);
+			}
 		}
 		else{
 			include("vues/entete.php");

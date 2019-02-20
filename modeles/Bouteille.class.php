@@ -242,7 +242,10 @@ class Bouteille extends Modele {
 	public function ajouterBouteilleCellier($data)
 	{
 		//TODO : Valider les données.
-		//var_dump($data);	
+		//var_dump($data);
+		if(!isset($data->id_bouteille)){
+			$data->id_bouteille = 0;
+		}	
 		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
 		"'".$data->id_bouteille."',".
         "'".$data->id_cellier."',".
