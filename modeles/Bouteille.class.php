@@ -45,7 +45,6 @@ class Bouteille extends Modele {
 		
 		return $rows;
 	}
-
 	/**
 	 * Cette méthode permet de retourner la liste des bouteilles dans un cellier donné
 	 * 
@@ -57,7 +56,6 @@ class Bouteille extends Modele {
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */
 
-	
 	public function getBouteilleParId($idBouteille)
 	{
 		$rows = Array();
