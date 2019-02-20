@@ -14,6 +14,37 @@ window.addEventListener('load', function() {
   /**
    * Recherche d'une bouteille dans le cellier
    */
+    var ajouterUnePhotoBouteilleNonListee =  document.querySelector(".ajouterUnePhoto");
+    if(ajouterUnePhotoBouteilleNonListee){
+      ajouterUnePhotoBouteilleNonListee.addEventListener("click", function(evt){
+        evt.preventDefault();
+        var formulaire = new FormData();
+        var fileTelecharger = document.querySelector("[name='photo']").files[0];
+        var idBouteilleCellier =  document.querySelector("[name='idBouteilleCellier']").value;
+        var idCellier =  document.querySelector("[name='idCellier']").value;
+        formulaire.append('idBouteilleCellier',idBouteilleCellier);
+        formulaire.append('idCellier',idCellier);
+        formulaire.append('fichierPhoto', fileTelecharger);
+        console.log(formulaire);
+        let requete = new Request(BaseURL+"index.php?requete=ajouterPhotoBouteilleNonListee", {method: 'POST', body: formulaire});
+        fetch(requete)
+          .then(response => {
+              if (response.status === 200) {
+                return response.json()
+              } else {
+                throw new Error('Erreur');
+              }
+            })
+            .then(response => {
+              if(response){
+                window.location.href = BaseURL+response.url;
+                console.log(response) 
+              }
+            }).catch(error => {
+              console.error(error);
+            });
+      })  
+    }
     var rechercherBouteillePar =  document.querySelector(".rechercher");
     if(rechercherBouteillePar){
           rechercherBouteillePar.addEventListener("click", function(evt){

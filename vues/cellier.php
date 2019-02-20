@@ -39,7 +39,7 @@ foreach ($data as $cle => $bouteille) {
                 <?php
                     }else{
                 ?>
-                    <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille=<?php echo $bouteille['id_bouteille'];?>' class="mdl-button">Ajouter une photo</a>      
+                    <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille_cellier=<?php echo $bouteille['id_bouteille_cellier'];?>&id_Cellier=<?php echo $bouteille['id_cellier'];?>' class="mdl-button">Ajouter une photo</a>      
                 <?php
                     }
                  ?>

@@ -91,7 +91,10 @@ class Controler
 					break;
 				case 'pageAjoutPhotoBouteille':
 					$this->pageAjoutPhotoBouteille();
-					break;	
+					break;
+				case 'ajouterPhotoBouteilleNonListee':
+					$this->ajouterPhotoBouteilleNonListee();
+					break;			
                 case 'SupprimerBouteilleAuCellier':
 					$this->SupprimerBouteilleAuCellier();
 					break;
@@ -189,16 +192,48 @@ class Controler
         $supressionCellier = $cle->suprimerCellier($body->id);
         echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager"]);
 	}
-	
+	/**
+	 * Page d'ajout d'un nouveau cellier
+	 */
 	private function pageAjoutCellier(){
 		include("vues/entete.php");
 		include("vues/ajouterCellier.php");
 		include("vues/pied.php");
 	}
+	/**
+	 * Formulaire d'ajout d'une bouteille non listé
+	 */
 	private function pageAjoutPhotoBouteille(){
 		include("vues/entete.php");
 		include("vues/uploadPhoto.php");
 		include("vues/pied.php");
+	}
+	private function ajouterPhotoBouteilleNonListee(){
+			  $bte = new Bouteille();
+			  $repertoire = "./img/imagesBouteilleUsager/";
+			  $nomFichier = $repertoire . basename($_FILES["fichierPhoto"]["name"]);
+			  $uploadOk = true;
+			  $imageType = strtolower(pathinfo($nomFichier,PATHINFO_EXTENSION));
+			  $check = getimagesize($_FILES["fichierPhoto"]["tmp_name"]);
+			  if($check !== false) {
+				  $uploadOk = true;
+			  } else {
+				  echo "Le fichier n'est pas une image.";
+				  $uploadOk = false;
+			  }
+			  if ($_FILES["fichierPhoto"]["size"] > 5000000) {
+				  echo "Le fichier est trop gros.";
+				  $uploadOk = false;
+			  }
+			  if ($uploadOk == false) {
+				  echo "Upload impossible.";
+			  }
+			  $resultat = $bte->ajouterPhotoALaBouteilleNonListee($nomFichier,$_POST["idBouteilleCellier"]);
+			  if($resultat){
+				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$_POST["idCellier"]."'"]); 
+			  }
+
+
 	}
 	/**
 	 * Suppresion d'une bouteille dans le cellier 
