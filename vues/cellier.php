@@ -35,7 +35,7 @@ foreach ($data as $cle => $bouteille) {
                 <?php
                     if($bouteille['image_bouteille_cellier'] != ""){
                 ?>
-                    <img src="https:<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                    <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
                 <?php
                     }else{
                 ?>

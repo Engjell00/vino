@@ -324,7 +324,6 @@ class Bouteille extends Modele {
 	public function ajouterPhotoALaBouteilleNonListee($photo,$idBouteille){
 		$bouteille_id = intval($idBouteille);
 		$photoVerifier = mysqli_real_escape_string($this->_db, $photo);
-		
 		$requete = "UPDATE contient SET image_bouteille_cellier='$photoVerifier' WHERE id_bouteille_cellier=".$bouteille_id;
         $res = $this->_db->query($requete);
 		return $res;
