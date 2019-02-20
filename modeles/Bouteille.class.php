@@ -77,7 +77,6 @@ class Bouteille extends Modele {
 		}
 		return $rows;
 	}
-
 	/**
 	 * Cette méthode permet de retourner la liste des bouteilles dans un cellier donné
 	 * 
@@ -88,8 +87,6 @@ class Bouteille extends Modele {
 	 * 
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */
-
-	
 	public function getListeBouteilleCellier($id_cellier, $id_usager)
 	{
 		$rows = Array();
@@ -120,9 +117,6 @@ class Bouteille extends Modele {
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
 			 //$this->_db->error;
 		}
-		
-		
-		
 		return $rows;
 	}
 	
@@ -203,9 +197,6 @@ class Bouteille extends Modele {
 		}
 	
 	}
-
-
-
 	/**
 	 * Celle methode sert  Elle sert à modifier la bouteille après avoir récupérer les données
 	 * 
