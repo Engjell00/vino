@@ -72,14 +72,6 @@ foreach ($data as $cle => $bouteille) {
                     </ul>
         </section>
     </div>
-        
-           
-           
-       
-           
-         
-    
-    
 <?php
 
         }
