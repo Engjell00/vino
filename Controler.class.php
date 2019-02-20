@@ -210,7 +210,7 @@ class Controler
 	}
 	private function ajouterPhotoBouteilleNonListee(){
 			  $bte = new Bouteille();
-			  $repertoire = "./img/imagesBouteilleUsager/";
+			  $repertoire = "/img/imagesBouteilleUsager/";
 			  $nomFichier = $repertoire . basename($_FILES["fichierPhoto"]["name"]);
 			  $uploadOk = true;
 			  $imageType = strtolower(pathinfo($nomFichier,PATHINFO_EXTENSION));

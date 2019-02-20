@@ -34,9 +34,15 @@ foreach ($data as $cle => $bouteille) {
              <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">
                 <?php
                     if($bouteille['image_bouteille_cellier'] != ""){
+                        if (strpos($bouteille['image_bouteille_cellier'], '//s7d9') === 0) {
                 ?>
-                    <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                           <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
                 <?php
+                        }else{
+                            ?>
+                            <img src="..<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                            <?php 
+                        }
                     }else{
                 ?>
                     <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille_cellier=<?php echo $bouteille['id_bouteille_cellier'];?>&id_Cellier=<?php echo $bouteille['id_cellier'];?>' class="mdl-button">Ajouter une photo</a>      
