@@ -17,21 +17,19 @@ foreach ($data as $cle => $cellier) {
                             foreach ($nombreDeBouteilles as $cle => $bouteille) {
                                 if($cellier["id_cellier"] == $bouteille["cellierUsager"]){
                                 ?>
-                                <li>Nombres de bouteilles: <?php  echo $bouteille["nombre_de_bouteilles"]; ?></li>
+                                    <li>Nombres de bouteilles: <?php  echo $bouteille["nombre_de_bouteilles"]; ?></li>
                                 <?php
                                 }
                             }
                                 ?>
                             </ul>
-
                         </div>
                         <div class="mdl-card__actions">
                             <a class="bouton mdl-button" id="idcellier" data-id="<?php  echo $cellier["id_cellier"]; ?>" href='index.php?requete=afficheUnCellierDunUsager&id_cellier=
                 <?php  echo $cellier["id_cellier"];  ?>'>Afficher cellier</a>
                             <a class="bouton mdl-button"  data-id="<?php  echo $cellier["id_cellier"]; ?>"  name="suprimerCelier" value="Suprimer Le selier">Supprimer le cellier</a>
                         </div>
-                        
-                      
+                    
                     </div>
                  
                 </section>

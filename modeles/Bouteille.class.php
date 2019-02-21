@@ -29,6 +29,12 @@ class Bouteille extends Modele {
 		
 		return $rows;
 	}
+	/**
+	 * Cette méthode permet de retourner la liste des celliers par Usagers
+	 * 
+	 * @param Int id de l'usager
+	 * @return array La liste des cellier d'un usager
+	 */
 	public function getListeDesCelliersParUsager($id_usager)
 	{
 		
@@ -45,6 +51,12 @@ class Bouteille extends Modele {
 		
 		return $rows;
 	}
+	/**
+	 * Cette méthode permet de retourner la quantité de bouteille de chacun des celliers d'un usager en particulier
+	 * 
+	 * @param Int id de l'usager
+	 * @return array id du cellier, et le nombre de bouteilles
+	 */
 	public function getNombreDeBouteilleParCellierUsager($id_usager){
 		$rows = Array();
 		$res = $this->_db->query("SELECT SUM(quantite) as nombre_de_bouteilles, contient.id_cellier as cellierUsager,vino_cellier.id_usager FROM contient

@@ -430,7 +430,7 @@ window.addEventListener('load', function() {
                 .then(response => {
                   console.log(response);
                   if(response==""){
-                      document.querySelector(".commNonListees").innerHTML="attention la bouteille est non listee";
+                      document.querySelector(".commNonListees").innerHTML="Attention cette bouteille sera non listée";
                   }
                   else{
                       response.forEach(function(element){
