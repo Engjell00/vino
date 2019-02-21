@@ -12,7 +12,12 @@
  */
 class Bouteille extends Modele {
 	const TABLE = 'vino_bouteille';
-    
+    /**
+	 * Cette méthode permet de retourner la liste des bouteilles
+	 * 
+	 * 
+	 * @return array la liste des bouteilles
+	 */
 	public function getListeBouteille()
 	{
 		
@@ -180,6 +185,12 @@ class Bouteille extends Modele {
 		}
 		return $rows;
 	}
+	/**
+	 * Cette méthode permet d'ajouter une note de dégustation lorsque l'utilisateur voudra 
+	 * 
+	 * @param Object Reçoit le commentaire et l'id de la bouteille
+	 * @return Boolean Succès ou échec de la suppression.
+	 */
     public function ajouterUnCommentaire($data)
     {
       $requete="UPDATE contient SET commentaire = '".$data->commentaire."'  WHERE id_bouteille_cellier = '".$data->id_bouteille_cellier."'";  
@@ -230,7 +241,14 @@ class Bouteille extends Modele {
 		return $res;
 		
 	}
-    //Supprimer
+    /**
+	 * Cette méthode permet de supprimer une bouteille dans un cellier présent
+	 *  @param Int
+	 * @param Object Contenant le ID d'un cellier et le id de la bouteille a supprimer
+	 * 
+	 * @return Boolean Succès ou échec de la suppression. 
+	 * 
+	 */
     public function supprimerLaBouteilleAuCellier($data){
 		$idBouteilleVerifier = mysqli_real_escape_string($this->_db, $data->idBouteille);
 		$idCellierVerifier = mysqli_real_escape_string($this->_db, $data->idCellier );
@@ -293,6 +311,14 @@ class Bouteille extends Modele {
 		}
 		return $rows;
 	}
+	/**
+	 * Cette méthode permet de rechercher dans un cellier les bouteilles selon le type que
+	 * l'utilisateur aura choisit
+	 * 
+	 * @param Object Le type de recherche, la valeur à rechercher et le id du cellier
+	 * 
+	 * @return array Le résultat des recherches trouvé
+	 */
 	public function rechercherBouteilleParValeur($data){
 		$ValeurVerifier = mysqli_real_escape_string($this->_db, $data->typeDeRecherche );
 		$ValeurRechercherVerifier = mysqli_real_escape_string($this->_db, $data->valeurRechercher );
@@ -313,6 +339,14 @@ class Bouteille extends Modele {
 		}
 		return json_encode($rows);
 	}
+		/**
+	 * Cette méthode permet de rechercher dans tous les celliers cellier les bouteilles selon le type que
+	 * l'utilisateur aura choisit
+	 * 
+	 * @param Object Le type de recherche, la valeur à rechercher
+	 * 
+	 * @return array Le résultat des recherches trouvé
+	 */
 	public function RechercheBouteilleToutCelliers($body)
     {
 		$rows = Array();
@@ -336,7 +370,16 @@ class Bouteille extends Modele {
 			}
 			$resultatJSON = json_encode($rows,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 			return  $resultatJSON;
-    }
+	}
+		/**
+	 * Cette méthode permet de rechercher dans un cellier les bouteilles selon le type que
+	 * l'utilisateur aura choisit
+	 * 
+	 * @param Photo une variable $_FILE qui aura été pris en charge par le formdata et envoyé sur le serveur
+	 * @param idBouteille id de la bouteille
+	 * 
+	 * @return array Le résultat des recherches trouvé
+	 */
 	public function ajouterPhotoALaBouteilleNonListee($photo,$idBouteille){
 		$bouteille_id = intval($idBouteille);
 		$photoVerifier = mysqli_real_escape_string($this->_db, $photo);
