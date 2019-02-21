@@ -24,7 +24,6 @@ class Bouteille extends Modele {
 			{
 				$rows[] = $row;
 			}
-			// var_dump($rows);
 		}
 		
 		return $rows;
@@ -46,7 +45,6 @@ class Bouteille extends Modele {
 			{
 				$rows[] = $row;
 			}
-			// var_dump($rows);
 		}
 		
 		return $rows;
@@ -69,7 +67,6 @@ class Bouteille extends Modele {
 				$rows[] = $row;
 			}
 		}
-		
 		return $rows;
 
 	}
@@ -120,10 +117,8 @@ class Bouteille extends Modele {
 		$rows = Array();
 		$requete ="SELECT * from contient WHERE id_cellier = $id_cellier";
 		$res = $this->_db->query($requete);
-		// var_dump($res->num_rows);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
-			// var_dump($res);
 			if($res->num_rows)
 			{
 
@@ -132,7 +127,6 @@ class Bouteille extends Modele {
 					$row["nom_bouteille_cellier"] = trim(utf8_encode($row["nom_bouteille_cellier"]));
 					$rows[] = $row;
 				}
-				// var_dump($rows);
 			}
 			else 
 			{
@@ -143,7 +137,7 @@ class Bouteille extends Modele {
 		else 
 		{
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
-			 //$this->_db->error;
+			 
 		}
 		return $rows;
 	}
@@ -166,9 +160,7 @@ class Bouteille extends Modele {
 		$nom = $this->_db->real_escape_string($nom);
 		$nom = preg_replace("/\*/","%" , $nom);
 		 
-		//echo $nom;
 		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("'. $nom .'%") LIMIT 0,'. $nb_resultat; 
-		//var_dump($requete);
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
@@ -215,13 +207,11 @@ class Bouteille extends Modele {
 			{
 				$rows[] = $row;
 			}
-			// var_dump($rows);
 			return $rows;			
 		}
 		else 
 		{
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
-			//$this->_db->error;
 		}
 	
 	}
@@ -233,9 +223,6 @@ class Bouteille extends Modele {
 	 * @return Boolean Succès ou échec de l'ajout. 
 	 * 
 	 */
-	// REQUÊTE TESTÉE EN PHPMYADMIN
-	// NON TESTÉE SUR LE SITE Elle sert à modifier la bouteille après avoir récupérer les données,Il faudra changer les données puisque les tables sont différentes.
-	// TODO: TESTER
 	public function modifierBouteilleAuCellier($data)
 	{
 		$requete = "UPDATE contient SET nom_bouteille_cellier = '".$data->nom."' ,prix_a_lachat='".$data->prix."',format_bouteille_cellier= '".$data->format."',date_achat= '".$data->date_achat. "',expiration= '".$data->expiration. "',quantite= '".$data->quantite."',pays_cellier='".$data->pays."',millesime='".$data->millesime."' WHERE id_bouteille_cellier = '".$data->id_bouteille_cellier."' AND id_cellier = '".$data->id_cellier."' AND id_bouteille = '".$data->id_bouteille."'";
@@ -290,13 +277,10 @@ class Bouteille extends Modele {
 	 * 
 	 * @return Boolean Succès ou échec de l'ajout.
 	 */
-	// TODO: TESTER 
 	public function modifierQuantiteBouteilleCellier($id, $nombre)
 	{
-		//TODO : Valider les données.
 		$rows = Array();	
 		$requete = "UPDATE contient SET quantite = GREATEST(quantite + ". $nombre. ", 0) WHERE id_bouteille_cellier = ". $id;
-		//echo $requete;
         $res = $this->_db->query($requete);
         $requete2 ="select id_bouteille_cellier,quantite from contient";
         $resultat = $this->_db->query($requete2);
@@ -305,7 +289,6 @@ class Bouteille extends Modele {
 			while($row = $resultat->fetch_assoc())
 			{
 				$rows[] = $row;
-				// var_dump($rows);
 			}
 		}
 		return $rows;
@@ -327,7 +310,6 @@ class Bouteille extends Modele {
 		else 
 		{
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
-			 //$this->_db->error;
 		}
 		return json_encode($rows);
 	}
