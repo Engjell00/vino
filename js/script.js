@@ -3,7 +3,8 @@
 
 
 window.addEventListener("load", function () {
-
+    var expiration = document.getElementById("garde_jusqua");
+    var achat = document.getElementById("date_achat");
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -14,16 +15,13 @@ window.addEventListener("load", function () {
     if (mm < 10) {
         mm = '0' + mm
     }
+
     today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("date_achat").setAttribute("max", today);
-    var uploadBTN = document.querySelector(".uploadBtn");
-    var uploadFILE = document.querySelector(".uploadFile");
-    uploadBTN.onchange = function () {
-        uploadFILE.value = this.files[0].name;
-    };
-
-
+    
+   
+    achat.setAttribute("max", today);
+    expiration.setAttribute("min", today);
+  
+    
     });
-    
 
-    

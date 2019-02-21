@@ -52,19 +52,43 @@
     
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/style2.css">
-    <link rel="stylesheet" href="./css/script3.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
      
     <style>
-        #view-source {
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-    }
+              #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+          }
+              .mdl-grid {
+          max-width: 600px;
+      }
+      .mdl-card__media {
+          margin: 0;
+          background-color: white;
+          text-align: center;
+      }
+      .mdl-card__media > img {
+          max-width: 100%;
+      }
+      .mdl-card__actions {
+          display: flex;
+          box-sizing:border-box;
+          align-items: center;
+      }
+      .mdl-card__actions > .mdl-button--icon {
+          margin-right: 3px;
+          margin-left: 3px;
+      }
+
+      .mdl-card__supporting-text > ul{
+      margin-left: 20%;
+          list-style-type: none;
+      }
     </style>
 		
 
