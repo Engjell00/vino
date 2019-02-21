@@ -13,8 +13,15 @@ foreach ($data as $cle => $cellier) {
                         <div  class="mdl-card__supporting-text">
                             <h5><?php  echo $cellier["nom_cellier"];  ?></h5>
                             <ul style="text-decoration: none">
-                                <li>200 Bouteille</li>
-                                
+                            <?php
+                            foreach ($nombreDeBouteilles as $cle => $bouteille) {
+                                if($cellier["id_cellier"] == $bouteille["cellierUsager"]){
+                                ?>
+                                <li>Nombres de bouteilles: <?php  echo $bouteille["nombre_de_bouteilles"]; ?></li>
+                                <?php
+                                }
+                            }
+                                ?>
                             </ul>
 
                         </div>

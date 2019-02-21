@@ -277,8 +277,9 @@ class Controler
 	 * Affichage des celliers selon l'usager
 	 */
 	private function listeDesCelliersParUsager(){
-		$usager = new Bouteille();
-		$data = $usager->getListeDesCelliersParUsager($_SESSION["UserID"]);
+		$bouteille = new Bouteille();
+		$data = $bouteille->getListeDesCelliersParUsager($_SESSION["UserID"]);
+		$nombreDeBouteilles = $bouteille->getNombreDeBouteilleParCellierUsager($_SESSION["UserID"]);
 		include("vues/entete.php");
 		include("vues/cellierParUsager.php");
 		include("vues/pied.php");

@@ -45,6 +45,22 @@ class Bouteille extends Modele {
 		
 		return $rows;
 	}
+	public function getNombreDeBouteilleParCellierUsager($id_usager){
+		$rows = Array();
+		$res = $this->_db->query("SELECT SUM(quantite) as nombre_de_bouteilles, contient.id_cellier as cellierUsager,vino_cellier.id_usager FROM contient
+								join vino_cellier on contient.id_cellier = vino_cellier.id_cellier
+								where vino_cellier.id_usager = $id_usager GROUP BY contient.id_cellier" );
+		if($res->num_rows)
+		{
+			while($row = $res->fetch_assoc())
+			{
+				$rows[] = $row;
+			}
+		}
+		
+		return $rows;
+
+	}
 	/**
 	 * Cette méthode permet de retourner la liste des bouteilles dans un cellier donné
 	 * 
