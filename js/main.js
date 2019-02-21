@@ -22,8 +22,6 @@ window.addEventListener('load', function() {
         formulaire.append('idBouteilleCellier',idBouteilleCellier);
         formulaire.append('idCellier',idCellier);
         formulaire.append('fichierPhoto', fileTelecharger);
-          console.log(formulaire);
-            messageErreur.innerHTML = "";
             let requete = new Request(BaseURL+"index.php?requete=ajouterPhotoBouteilleNonListee", {method: 'POST', body: formulaire});
             fetch(requete)
               .then(response => {
@@ -599,6 +597,92 @@ window.addEventListener('load', function() {
                     console.error(error);
                   });    
       })
-    })  
+    })
+    let BtnRechercheDansToutCelliers =document.querySelector(".recherchetoutcelliers");
+    if(BtnRechercheDansToutCelliers){
+      BtnRechercheDansToutCelliers.addEventListener("click",function(){
+      let ChampDeRecherche=document.querySelector("[name='typeDeRecherchetoutcelliers']").value;
+      let valeurRechercher=document.querySelector("[name='valeurRechercher']").value;
+      console.log(ChampDeRecherche);
+      console.log(valeurRechercher);
+      var param = {
+              "champ" :ChampDeRecherche,
+              "valeur":valeurRechercher,
+          };  
+          console.log(param);
+            let requete = new Request(BaseURL+"index.php?requete=RechercheBouteilleToutCelliers", {method: 'POST',  body: JSON.stringify(param)});
+              fetch(requete)
+                  .then(response => {
+                      if (response.status === 200) {
+                        return response.json();
+                      } else {
+                        throw new Error('Erreur');
+                      }
+                    })
+                    .then(response => {
+                        console.log(response)
+                        var bouteilleCellier =  document.querySelectorAll(".cellier");
+                        console.log(bouteilleCellier);
+                        var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
+                        var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                        if(response){
+                          resultatRecherche.innerHTML = ""
+                          resultatRecherche.style.display="inline";
+                          componentHandler.downgradeElements(resultatRecherche);
+                          bouteilleCellier.forEach(function(element){
+                            element.style.display="none";
+                          })
+                          var madiv = "";
+                          response.forEach(function(element){
+                            madiv += '<div class="bouteille mdl-layout__tab-panel is-active" id="overview">';
+                            madiv += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+                            madiv += '<header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">';
+                            madiv += "<img src="+element.image_bouteille_cellier+" height='200' width='200'>";
+                            madiv += "</header>";
+                            madiv += "<div class='mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone'>";
+                            madiv += "<div class='description mdl-card__supporting-text'>";
+                            madiv += "<a href='?requete=afficherDetailsBouteille&id_bouteille_cellier="+element.id_bouteille_cellier+"'> <h5 class='nom'>"+element.nom_bouteille_cellier+"</h5></a>";
+                            madiv += "<ul data-id="+element.id_bouteille_cellier+">";
+                            madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
+                            madiv += "<li>$"+element.prix_a_lachat+"</li>";
+                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div>";
+                          })
+                          resultatRecherche.innerHTML = madiv;
+                          componentHandler.upgradeElement(resultatRecherche);
+                        }
+                        if(SupprimerResultat){
+                          SupprimerResultat.addEventListener("click", function(evt){
+                            bouteilleCellier.forEach(function(element){
+                              element.style.display="block";
+                              resultatRecherche.innerHTML = "";
+                            })
+                            if(resultatRecherche){
+                            resultatRecherche.forEach(function(element){
+                              element.style.display = "none";
+                              element.innerHTML = "";
+                              
+                            })
+                              }
+                          });
+                        } 
+                    }).catch(error => {
+                      var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                      var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                      var resultatRecherche =  document.querySelector(".resultatRecherche");
+                      var lesCelliers=document.querySelectorAll(".cellierParUsager");
+                      lesCelliers.forEach(function(element){
+                          element.style.display = "none";
+                      })
+                      madiv="Il ya aucun resultat qui corespond a botre rechercher";
+                      resultatRecherche.innerHTML = madiv;
+                      SupprimerResultat.addEventListener("click", function(evt){
+                            lesCelliers.forEach(function(element){
+                              element.style.display="block";
+                              resultatRecherche.innerHTML = "";
+                            })
+                          });
+                    });        
+      })
+    }      
 });
 

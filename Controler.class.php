@@ -38,28 +38,28 @@ class Controler
 				case 'cellierParUsager':
 					$this->listeDesCelliersParUsager();
 					break;
-                case 'suprimerCellier':
-                    $this->suprimerUnCellier();
-                break;
+				case 'suprimerCellier':
+						$this->suprimerUnCellier();
+				break;
 				case 'afficheUnCellierDunUsager':
 					$this->afficheUnCellierDunUsager();	
 					break;						
 				case 'listeBouteille':
 					$this->listeBouteille();
 					break;
-                case 'AjouterUnCellier':
-                    $this->pageAjoutCellier();
-               		break;
-                case 'ConfirmerAjoutCellier' :
-                  $this->creeCellier();
-               		break;
+				case 'AjouterUnCellier':
+						$this->pageAjoutCellier();
+					break;
+				case 'ConfirmerAjoutCellier' :
+					$this->creeCellier();
+					break;
 				case 'autocompleteBouteille':
 					$this->autocompleteBouteille();
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
 					$this->ajouterNouvelleBouteilleCellier();
-               		break;
-                case "profile" :
+        	break;
+        case "profile" :
 					$this->getMonProfil();
 					break;
 				case 'ajouterBouteilleCellier':
@@ -73,7 +73,10 @@ class Controler
 					break;
 				case 'rechercherBouteilleParType':
 					$this->rechercherBouteilleParType();
-					break;	
+					break;
+				case 'RechercheBouteilleToutCelliers':
+					$this->RechercheBouteilleToutCelliers();
+					break;		
 				case 'modifierBouteilleCellier':
 					$this->modifierBouteilleCellier();
 					break;
@@ -83,11 +86,8 @@ class Controler
 				case 'modifierProfilUsager':
 					$this->modifierProfilUsager();
 					break;	
-                case 'AjouterUnCommentaire':
-                    $this->AjouterUnCommentaire();
-                break;
-                case 'getbouteillebyid':
-                	getbouteillbyid();
+				case 'AjouterUnCommentaire':
+						$this->AjouterUnCommentaire();
 					break;
 				case 'pageAjoutPhotoBouteille':
 					$this->pageAjoutPhotoBouteille();
@@ -95,12 +95,12 @@ class Controler
 				case 'ajouterPhotoBouteilleNonListee':
 					$this->ajouterPhotoBouteilleNonListee();
 					break;			
-                case 'SupprimerBouteilleAuCellier':
+				case 'SupprimerBouteilleAuCellier':
 					$this->SupprimerBouteilleAuCellier();
 					break;
-                case 'afficherDetailsBouteille':
-                    $this->afficherDetailsBouteille();
-                    break;
+				case 'afficherDetailsBouteille':
+					$this->afficherDetailsBouteille();
+					break;
 				case "Logout":
 					$_SESSION = array();
 					if (ini_get("session.use_cookies")) {
@@ -272,6 +272,15 @@ class Controler
 				echo $resultat;
 			}		
 		}
+	}
+	private function RechercheBouteilleToutCelliers()
+	{
+			$body = json_decode(file_get_contents('php://input'));
+			if(!empty($body)){
+				$bte = new Bouteille();        
+				$RechercheBouteille= $bte->RechercheBouteilleToutCelliers($body);		
+				echo $RechercheBouteille; 
+			}
 	}
 	/**
 	 * Affichage des celliers selon l'usager

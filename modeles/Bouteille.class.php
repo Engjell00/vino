@@ -313,6 +313,30 @@ class Bouteille extends Modele {
 		}
 		return json_encode($rows);
 	}
+	public function RechercheBouteilleToutCelliers($body)
+    {
+		$rows = Array();
+		$champVerifier =mysqli_real_escape_string($this->_db, $body->champ);
+		$valeurVerifier =mysqli_real_escape_string($this->_db, $body->valeur);
+		$requete ="SELECT * FROM contient join vino_cellier on contient.id_cellier=vino_cellier.id_cellier WHERE vino_cellier.id_usager=".$_SESSION['UserID']." and ".$champVerifier." like '".$valeurVerifier."%'";
+			$res = $this->_db->query($requete);
+			if($res->num_rows)
+			{
+				while($row = $res->fetch_assoc())
+				{
+					$rows[] = array_map('utf8_encode', $row);
+				}
+				//var_dump($rows);
+							
+			}
+			else 
+			{
+				throw new Exception("Erreur de requête sur la base de donnée", 1);
+				//$this->_db->error;
+			}
+			$resultatJSON = json_encode($rows,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+			return  $resultatJSON;
+    }
 	public function ajouterPhotoALaBouteilleNonListee($photo,$idBouteille){
 		$bouteille_id = intval($idBouteille);
 		$photoVerifier = mysqli_real_escape_string($this->_db, $photo);

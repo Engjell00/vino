@@ -1,5 +1,20 @@
 <?php
 if($data){
+    ?>
+    <form>
+        <input class="input" name="valeurRechercher" >
+        <select name="typeDeRecherchetoutcelliers">
+        <option value="nom_bouteille_cellier">nom</option>
+        <option value="prix_a_lachat">prix</option>
+        <option value="millesime">millesime</option>
+        <option value="pays_cellier">pays</option>
+        </select>
+        <input class='recherchetoutcelliers bouton' type="button" value="Rechercher des bouteilles"/>
+  </form>
+  <input class="SupprimerResultat" type="button" value="X">
+  <div class="resultatRechercheTousLesCelliers">
+  </div>
+  <?php
 foreach ($data as $cle => $cellier) {
      ?>
 <div class="cellier mdl-layout__tab-panel is-active" id="overview">
