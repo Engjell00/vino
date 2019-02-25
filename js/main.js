@@ -687,7 +687,7 @@ window.addEventListener('load', function() {
                             madiv += "<ul data-id="+element.id_bouteille_cellier+">";
                             madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                             madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div>";
+                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div><br>";
                           })
                           resultatRecherche.innerHTML = madiv;
                           componentHandler.upgradeElement(resultatRecherche);

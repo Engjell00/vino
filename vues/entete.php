@@ -106,7 +106,7 @@
              <div class="mdl-layout--large-screen-only mdl-layout__header-row">
             </div>
              <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                <a href="celliers.html">
+                <a href="index.php?requete=cellierParUsager">
   <img src="./img/vinoLogo-blanc.png"
        alt="Logo du site Vino">
 </a>
