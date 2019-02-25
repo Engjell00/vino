@@ -262,8 +262,6 @@ class Controler
 					echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$_POST["idCellier"]."'"]); 
 				}
 			}
-
-
 	}
 	/**
 	 * Suppresion d'une bouteille dans le cellier 

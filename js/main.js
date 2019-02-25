@@ -5,7 +5,29 @@
  * @update 2019-01-21
  * @license Creative Commons BY-NC 3.0 (Licence Creative Commons Attribution - Pas d’utilisation commerciale 3.0 non transposé)
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
+ ***
+ * Application qui aide aux utilisateurs de de créer leur celliers et ajouter des bouteilles
+ * @desc Les fonctionnalités par Javascript -->
+ *          1- Ajout d'une photo pour une bouteille qui ne provient pas de la SAQ // Ligne: 31 à 62
+ *          2- Rechercher une bouteille dans un cellier présent // Ligne: 66 à 153
+ *          3- Modifier Profile d'un usager connecté // Ligne: 158 à 193
+ *          4- Connection d'un usager déjà inscrit // Ligne: 199 à 230
+ *          5- L'inscription d'un nouveau utilisateur du site web // Ligne: 233 à 308
+ *          6- Supprimer une bouteille dans un cellier présent // Ligne: 313 à 336
+ *          7- Modifier la bouteille dans le cellier d'un utilisateur // Ligne: 341 à 388
+ *          8- Boire la bouteille (Changer la quantité dans le dom) // Ligne:  393 à 413
+ *          9- Ajouter une bouteille (Changer la quantité dans le dom) // Ligne: 417 à 438
+ *         10- Rechercher une bouteille dans l'importation de la SAQ (S'il y a lieu) 
+ *             et ajouter la nouvelle bouteille dans le cellier de l'usager // Ligne: 441 à 562
+ *         11- Ajout d'un cellier par un usager connecté // Ligne: 563 à 583
+ *         12- Supprimer un cellier d'un usager connecté // Ligne: 585 à 605
+ *         13- Ajouter une note de dégustation sur une bouteille existante dans le cellier // Ligne: 606 à 645
+ *         14- Rechercher une bouteille dans tous les celliers existantes du l'usager // Ligne: 647 à 742  
+ *     
+ * @required Controler.class.php --> Pour traiter les requêtes envoyés aux serveur à l'aide de ce script.
  *
+ *
+ * 
  */
  //const BaseURL = "http://127.0.0.1/vino/";
 const BaseURL = document.baseURI;
