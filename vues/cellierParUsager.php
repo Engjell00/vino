@@ -18,7 +18,6 @@ if($data){
 foreach ($data as $cle => $cellier) {
      ?>
 <div class="cellier mdl-layout__tab-panel is-active" id="overview">
-
     <div class="profil" data-quantite="">
         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                     <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">

@@ -594,7 +594,8 @@ window.addEventListener('load', function() {
                         throw new Error('Erreur');
                       }
                     })
-                .then(response => { 
+                .then(response => {
+                  window.location.href = BaseURL+response.url;  
                   }).catch(error => {
                       console.error(error);
                   });
@@ -709,7 +710,6 @@ window.addEventListener('load', function() {
                         } 
                     }).catch(error => {
                       var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                    
                       var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
                       var lesCelliers=document.querySelectorAll(".cellier");
                       lesCelliers.forEach(function(element){
