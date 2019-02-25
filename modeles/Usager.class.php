@@ -88,12 +88,13 @@ class Usager extends Modele {
     public function Verifierautorisation()
     {
         if(isset($_SESSION["UserID"])){
-        $requete ="SELECT autorisation FROM vino_usager WHERE id_usager=".$_SESSION["UserID"];
-       $res = $this->_db->query($requete);
-        $resultat=mysqli_fetch_assoc($res);
-       
-        return $resultat['autorisation'];
-             }
+			$requete ="SELECT autorisation FROM vino_usager WHERE id_usager=".$_SESSION["UserID"];
+			$res = $this->_db->query($requete);
+			if($res){
+					$resultat=mysqli_fetch_assoc($res);
+					return $resultat['autorisation'];
+			}
+        }
     }
     
     public function MesStatestique()

@@ -12,6 +12,7 @@ const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
     var ajouterUnePhotoBouteilleNonListee =  document.querySelector(".ajouterUnePhoto");
+    var messageErreur =  document.querySelector(".messageErreur");
     if(ajouterUnePhotoBouteilleNonListee){
       ajouterUnePhotoBouteilleNonListee.addEventListener("click", function(evt){
         evt.preventDefault();
@@ -33,8 +34,13 @@ window.addEventListener('load', function() {
                 })
                 .then(response => {
                   if(response){
-                    window.location.href = BaseURL+response.url;
-                    console.log(response) 
+                    if(response.url){
+                      window.location.href = BaseURL+response.url;
+                    }
+                    console.log(response);
+                    if(response.message){
+                      messageErreur.innerHTML = response.message;
+                    } 
                   }
                 }).catch(error => {
                   console.error(error);

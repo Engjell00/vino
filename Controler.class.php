@@ -229,38 +229,39 @@ class Controler
 		include("vues/pied.php");
 	}
 	private function ajouterPhotoBouteilleNonListee(){
-			  $bte = new Bouteille();
-			  $repertoire = "img/imagesBouteilleUsager/";
-			  $nomFichier = $repertoire . basename($_FILES["fichierPhoto"]["name"]);
-			  $uploadOk = true;
-			  $imageType = strtolower(pathinfo($nomFichier,PATHINFO_EXTENSION));
-			  $check = getimagesize($_FILES["fichierPhoto"]["tmp_name"]);
-			  if($check !== false) {
-				  $uploadOk = true;
-			  } else {
-				  echo "Le fichier n'est pas une image.";
-				  $uploadOk = false;
-			  }
-			  if ($_FILES["fichierPhoto"]["size"] > 5000000) {
-				  echo "Le fichier est trop gros.";
-				  $uploadOk = false;
-			  }
-			  if ($uploadOk == false) {
-				  echo "Upload impossible.";
-			  }
-			  if ($uploadOk == false) {
-				echo "Upload impossible.";
-			  } else {
-					if (move_uploaded_file($_FILES["fichierPhoto"]["tmp_name"], $nomFichier)) {
-						
-					} else {
-						echo "Erreur d'upload.";
-					}
+		if(empty($_FILES['fichierPhoto']['tmp_name']) || !is_uploaded_file($_FILES['fichierPhoto']['tmp_name']))
+		{
+			echo json_encode(["status" => true, "message"=>"Veuillez rentrer une image"]);
+		}else{
+				$bte = new Bouteille();
+				$repertoire = "img/imagesBouteilleUsager/";
+				$nomFichier = $repertoire . basename($_FILES["fichierPhoto"]["name"]);
+				$uploadOk = true;
+				$imageType = strtolower(pathinfo($nomFichier,PATHINFO_EXTENSION));
+				$check = getimagesize($_FILES["fichierPhoto"]["tmp_name"]);
+				if($check !== false) {
+					$uploadOk = true;
+				} else {
+					echo "Le fichier n'est pas une image.";
+					$uploadOk = false;
 				}
-			  $resultat = $bte->ajouterPhotoALaBouteilleNonListee($nomFichier,$_POST["idBouteilleCellier"]);
-			  if($resultat){
-				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$_POST["idCellier"]."'"]); 
-			  }
+				if ($_FILES["fichierPhoto"]["size"] > 5000000) {
+					echo "Le fichier est trop gros.";
+					$uploadOk = false;
+				}
+				if ($uploadOk == false) {
+					echo "Upload impossible.";
+				}
+				if ($uploadOk == false) {
+					echo "Upload impossible.";
+				} else {
+						move_uploaded_file($_FILES["fichierPhoto"]["tmp_name"], $nomFichier); 
+					}
+				$resultat = $bte->ajouterPhotoALaBouteilleNonListee($nomFichier,$_POST["idBouteilleCellier"]);
+				if($resultat){
+					echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$_POST["idCellier"]."'"]); 
+				}
+			}
 
 
 	}
