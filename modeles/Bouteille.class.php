@@ -330,7 +330,7 @@ class Bouteille extends Modele {
 		{
 			while($row = $res->fetch_assoc())
 			{
-				$rows[] = $row;
+				$rows[] = array_map('utf8_encode', $row);
 			}			
 		}
 		else 
