@@ -39,8 +39,8 @@ class Controler
 					$this->listeDesCelliersParUsager();
 					break;
 				case 'suprimerCellier':
-						$this->suprimerUnCellier();
-				break;
+					$this->suprimerUnCellier();
+					break;
 				case 'afficheUnCellierDunUsager':
 					$this->afficheUnCellierDunUsager();	
 					break;						
@@ -48,7 +48,7 @@ class Controler
 					$this->listeBouteille();
 					break;
 				case 'AjouterUnCellier':
-						$this->pageAjoutCellier();
+					$this->pageAjoutCellier();
 					break;
 				case 'ConfirmerAjoutCellier' :
 					$this->creeCellier();
@@ -63,8 +63,8 @@ class Controler
 					$this->getMonProfil();
 					break;
                 case 'statistiques':
-                $this->ChercherStatistiques();
-                break;
+                	$this->ChercherStatistiques();
+                	break;
 				case 'ajouterBouteilleCellier':
 					$this->ajouterBouteilleCellier();
 					break;
@@ -90,7 +90,7 @@ class Controler
 					$this->modifierProfilUsager();
 					break;	
 				case 'AjouterUnCommentaire':
-						$this->AjouterUnCommentaire();
+					$this->AjouterUnCommentaire();
 					break;
 				case 'pageAjoutPhotoBouteille':
 					$this->pageAjoutPhotoBouteille();
@@ -137,23 +137,15 @@ class Controler
 			}
 		}
 	}
-    
-    
     private function ChercherStatistiques()
     {
-     $usg=new Usager();
-     $resultat=$usg->MesStatestique();
-    $data2 =$usg->Verifierautorisation();  
-         include("vues/entete.php");
-		include("vues/statistique.php");
-		include("vues/pied.php");
+			$usg = new Usager();
+			$resultat = $usg->MesStatestique();
+			$data2 = $usg->Verifierautorisation();  
+			include("vues/entete.php");
+			include("vues/statistique.php");
+			include("vues/pied.php");
     }
-    
-    
-    
-    
-    
-    
 	/**
 	 * Inscription d'un nouveau usager sur le site
 	 */
@@ -178,7 +170,6 @@ class Controler
 			echo json_encode(["status" => true, "url"=>"index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$creationCellier]);
 		
 	}
-    
     private function afficherDetailsBouteille()
     {
         $bte = new Bouteille();
@@ -188,9 +179,6 @@ class Controler
 		include("vues/DetailBouteille.php");
 		include("vues/pied.php");
     }
-    
-    
-    
 	/**
 	 * Ajout d'un commentaire sur une bouteille
 	 */
@@ -308,20 +296,20 @@ class Controler
 	 */
 	private function listeDesCelliersParUsager(){
         if(isset($_SESSION["UserID"])){
-		$bouteille = new Bouteille();
-		$data = $bouteille->getListeDesCelliersParUsager($_SESSION["UserID"]);
-		$nombreDeBouteilles = $bouteille->getNombreDeBouteilleParCellierUsager($_SESSION["UserID"]);
-        $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
-		include("vues/entete.php");
-		include("vues/cellierParUsager.php");
-		include("vues/pied.php");
+			$bouteille = new Bouteille();
+			$data = $bouteille->getListeDesCelliersParUsager($_SESSION["UserID"]);
+			$nombreDeBouteilles = $bouteille->getNombreDeBouteilleParCellierUsager($_SESSION["UserID"]);
+			$usg = new Usager();
+			$data2 =$usg->Verifierautorisation();
+			include("vues/entete.php");
+			include("vues/cellierParUsager.php");
+			include("vues/pied.php");
         }
         else{
-        $erreur=true;
-        include("vues/entete.php");
-		include("vues/accueil.php");
-		include("vues/pied.php");
+			$erreur=true;
+			include("vues/entete.php");
+			include("vues/accueil.php");
+			include("vues/pied.php");
         }
 	}
 	/**
@@ -340,11 +328,11 @@ class Controler
 	 * Page modifier profile d'un utilisateur
 	 */
 	private function pageModifierProfile(){
-		if($_SESSION["UserID"]==$_GET["idProfile"]){
+		if($_SESSION["UserID"] == $_GET["idProfile"]){
 			$usager = new Usager();
 			$data = $usager->getProfile($_GET["idProfile"]);
             $usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
+            $data2 = $usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/modifierProfile.php");
 			include("vues/pied.php");
@@ -393,7 +381,6 @@ class Controler
 			$resultat = $bte->modifierBouteilleAuCellier($body);
 			//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
 			echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->id_cellier."'"]);
-			
 		}
 		else{
 			$usg = new Usager();
