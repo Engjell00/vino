@@ -113,7 +113,21 @@ window.addEventListener('load', function() {
                         });
                       }
                     }).catch(error => {
-                      console.error(error);
+                         var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                    
+                      var resultatRecherche =  document.querySelector(".resultatRecherche");
+                      var lesBouteillesCelliers=document.querySelectorAll(".DisplayCellier");
+                      lesBouteillesCelliers.forEach(function(element){
+                          element.style.display = "none";
+                      })
+                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
+                      resultatRecherche.innerHTML = madiv;
+                      SupprimerResultat.addEventListener("click", function(evt){
+                            lesBouteillesCelliers.forEach(function(element){
+                              element.style.display="block";
+                              resultatRecherche.innerHTML = "";
+                            })
+                          });
                     });
             }
           });     
@@ -667,13 +681,13 @@ window.addEventListener('load', function() {
                         } 
                     }).catch(error => {
                       var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                      var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                      var resultatRecherche =  document.querySelector(".resultatRecherche");
-                      var lesCelliers=document.querySelectorAll(".cellierParUsager");
+                    
+                      var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
+                      var lesCelliers=document.querySelectorAll(".cellier");
                       lesCelliers.forEach(function(element){
                           element.style.display = "none";
                       })
-                      madiv="Il ya aucun resultat qui corespond a botre rechercher";
+                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
                       resultatRecherche.innerHTML = madiv;
                       SupprimerResultat.addEventListener("click", function(evt){
                             lesCelliers.forEach(function(element){

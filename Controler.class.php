@@ -58,10 +58,13 @@ class Controler
 					break;
 				case 'ajouterNouvelleBouteilleCellier':
 					$this->ajouterNouvelleBouteilleCellier();
-        	break;
-        case "profile" :
+        	       break;
+                case "profile" :
 					$this->getMonProfil();
 					break;
+                case 'statistiques':
+                $this->ChercherStatistiques();
+                break;
 				case 'ajouterBouteilleCellier':
 					$this->ajouterBouteilleCellier();
 					break;
@@ -134,6 +137,23 @@ class Controler
 			}
 		}
 	}
+    
+    
+    private function ChercherStatistiques()
+    {
+     $usg=new Usager();
+     $resultat=$usg->MesStatestique();
+    $data2 =$usg->Verifierautorisation();  
+         include("vues/entete.php");
+		include("vues/statistique.php");
+		include("vues/pied.php");
+    }
+    
+    
+    
+    
+    
+    
 	/**
 	 * Inscription d'un nouveau usager sur le site
 	 */
@@ -255,6 +275,8 @@ class Controler
 				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier='".$body->idCellier."'"]);       
 			}
 			else{
+                $usg = new Usager();
+                $data2 =$usg->Verifierautorisation();
 				include("vues/entete.php");
 				include("vues/cellier.php");
 				include("vues/pied.php");
@@ -286,12 +308,22 @@ class Controler
 	 * Affichage des celliers selon l'usager
 	 */
 	private function listeDesCelliersParUsager(){
+        if(isset($_SESSION["UserID"])){
 		$bouteille = new Bouteille();
 		$data = $bouteille->getListeDesCelliersParUsager($_SESSION["UserID"]);
 		$nombreDeBouteilles = $bouteille->getNombreDeBouteilleParCellierUsager($_SESSION["UserID"]);
+        $usg = new Usager();
+        $data2 =$usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/cellierParUsager.php");
 		include("vues/pied.php");
+        }
+        else{
+        $erreur=true;
+        include("vues/entete.php");
+		include("vues/accueil.php");
+		include("vues/pied.php");
+        }
 	}
 	/**
 	 * Affichage d'un cellier lorsque l'utilisateur connecter veut y accéder 
@@ -299,6 +331,8 @@ class Controler
 	private function afficheUnCellierDunUsager(){
 		$bouteille = new Bouteille();
 		$data = $bouteille->getListeBouteilleCellier($_GET["id_cellier"],$_SESSION["UserID"]);
+        $usg = new Usager();
+        $data2 =$usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/cellier.php");
 		include("vues/pied.php");
@@ -310,6 +344,8 @@ class Controler
 		if($_SESSION["UserID"]==$_GET["idProfile"]){
 			$usager = new Usager();
 			$data = $usager->getProfile($_GET["idProfile"]);
+            $usg = new Usager();
+            $data2 =$usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/modifierProfile.php");
 			include("vues/pied.php");
@@ -329,7 +365,8 @@ class Controler
 			}
 		}
 		else{
-			
+			$usg = new Usager();
+            $data2 =$usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/modifierProfile.php");
 			include("vues/pied.php");
@@ -341,6 +378,8 @@ class Controler
 	private function pageModifierBouteilleCellier(){
 		$bte = new Bouteille();
 		$data = $bte->getBouteilleParID($_GET["idBouteille"]);
+        $usg = new Usager();
+        $data2 =$usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/modifierBouteille.php");
 		include("vues/pied.php");
@@ -358,7 +397,8 @@ class Controler
 			
 		}
 		else{
-			
+			$usg = new Usager();
+            $data2 =$usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/modifierBouteille.php");
 			include("vues/pied.php");
@@ -382,6 +422,8 @@ class Controler
 			}
 		}
 		else{
+            $usg = new Usager();
+            $data2 =$usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/ajouter.php");
 			include("vues/pied.php");   
@@ -391,7 +433,8 @@ class Controler
 	 * Page d'accueil quand un utilisateur n'est pas connecté
 	*/		
 	private function accueil()
-	{
+	{  
+        
 		include("vues/entete.php");
 		include("vues/accueil.php");
 		include("vues/pied.php");
@@ -402,6 +445,8 @@ class Controler
 	 */
 	private function accueilConnecter()
 	{
+        $usg = new Usager();
+        $data2 =$usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/accueilConnecter.php");
 		include("vues/pied.php");
@@ -411,6 +456,8 @@ class Controler
 	 * formulaire d'inscription
 	 */
 	private function formulaireInscription (){
+        $usg = new Usager();
+        $data2 =$usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/inscription.php");
 		include("vues/pied.php");
@@ -419,7 +466,9 @@ class Controler
 	 * Chercher le profil d'un user lorsqu'il se connecte
 	 */
 	private function getMonProfil()
-	{
+	{   
+        $usg = new Usager();
+        $data2 =$usg->Verifierautorisation();
 		$usager = new Usager();
 		$data = $usager->getProfile($_SESSION["UserID"]);
 		include("vues/entete.php");

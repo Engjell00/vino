@@ -29,12 +29,17 @@ foreach ($data as $cle => $cellier) {
                             <h5><?php  echo $cellier["nom_cellier"];  ?></h5>
                             <ul style="text-decoration: none">
                             <?php
+                            $teste=false;
                             foreach ($nombreDeBouteilles as $cle => $bouteille) {
                                 if($cellier["id_cellier"] == $bouteille["cellierUsager"]){
+                                    $teste=true;
                                 ?>
                                     <li>Nombres de bouteilles: <?php  echo $bouteille["nombre_de_bouteilles"]; ?></li>
                                 <?php
                                 }
+                            }
+                        if($teste==false){
+                            echo "<li>Nombres de bouteilles: 0</li>";
                             }
                                 ?>
                             </ul>
