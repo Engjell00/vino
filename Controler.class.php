@@ -365,11 +365,11 @@ class Controler
 			}
 		}
 		else{
-			$usg = new Usager();
-            $data2 = $usg->Verifierautorisation();
-			include("vues/entete.php");
-			include("vues/modifierProfil.php");
-			include("vues/pied.php");
+				$usg = new Usager();
+				$data2 = $usg->verifierAutorisation();
+				include("vues/entete.php");
+				include("vues/modifierProfil.php");
+				include("vues/pied.php");
 		}
 	}
 	/**
@@ -379,7 +379,7 @@ class Controler
 		$bte = new Bouteille();
 		$data = $bte->getBouteilleParID($_GET["idBouteille"]);
         $usg = new Usager();
-        $data2 = $usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		include("vues/entete.php");
 		include("vues/modifierBouteille.php");
 		include("vues/pied.php");
@@ -397,7 +397,7 @@ class Controler
 		}
 		else{
 			$usg = new Usager();
-            $data2 = $usg->Verifierautorisation();
+            $data2 = $usg->verifierAutorisation();
 			include("vues/entete.php");
 			include("vues/modifierBouteille.php");
 			include("vues/pied.php");
@@ -419,7 +419,7 @@ class Controler
 		}
 		else{
             $usg = new Usager();
-            $data2 = $usg->Verifierautorisation();
+            $data2 = $usg->verifierAutorisation();
 			include("vues/entete.php");
 			include("vues/ajouter.php");
 			include("vues/pied.php");   
@@ -448,7 +448,7 @@ class Controler
 	 */
 	private function formulaireInscription (){
         $usg = new Usager();
-        $data2 = $usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		include("vues/entete.php");
 		include("vues/inscription.php");
 		include("vues/pied.php");
@@ -459,7 +459,7 @@ class Controler
 	private function getMonProfil()
 	{   
         $usg = new Usager();
-        $data2 = $usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		$usager = new Usager();
 		$data = $usager->getProfil($_SESSION["UserID"]);
 		include("vues/entete.php");
