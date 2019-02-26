@@ -10,7 +10,6 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-// TODO : TEST METHODS. SEE IF CELLIER CLASS NEEDED
 class Usager extends Modele {
 	const TABLE = 'vino_usager';
     /**
@@ -64,7 +63,6 @@ class Usager extends Modele {
 	 */
 	public function getListeCellier($idUsager)
 	{
-		
 		$rows = Array();
 		$requete ="SELECT * FROM vino_cellier WHERE id_usager = $idUsager";
 					 
@@ -92,7 +90,6 @@ class Usager extends Modele {
 	 * @param Int $_SESSION["UserID"]
 	 * @return Int Une valeur de 1 sera attribué aux admin et 0 au reste des utilisateurs
 	 */
-    
     public function verifierAutorisation()
     {
         if(isset($_SESSION["UserID"])){

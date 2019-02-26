@@ -10,7 +10,6 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-// TODO : TEST METHODS. SEE IF CELLIER CLASS NEEDED
 class Cellier extends Modele {
 	const TABLE = 'vino_cellier';
     /**
