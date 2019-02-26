@@ -273,7 +273,7 @@ class Controler
 			}
 			else{
                 $usg = new Usager();
-                $data2 =$usg->Verifierautorisation();
+                $data2 = $usg->verifierAutorisation();
 				include("vues/entete.php");
 				include("vues/cellier.php");
 				include("vues/pied.php");
@@ -313,7 +313,7 @@ class Controler
 			$data = $bouteille->getListeDesCelliersParUsager($_SESSION["UserID"]);
 			$nombreDeBouteilles = $bouteille->getNombreDeBouteilleParCellierUsager($_SESSION["UserID"]);
 			$usg = new Usager();
-			$data2 =$usg->Verifierautorisation();
+			$data2 =$usg->verifierAutorisation();
 			include("vues/entete.php");
 			include("vues/cellierParUsager.php");
 			include("vues/pied.php");
