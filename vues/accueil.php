@@ -20,13 +20,12 @@
                     </form>
                     <div>
                     <?php
-        if(isset($erreur)){
-        if($erreur==true){
-        echo "votre nom d utilisateur ou mot de passe est incorrect";
-        
-        }
-        }
-        ?>
+                        if(isset($erreur)){
+                            if($erreur==true){
+                                echo "votre nom d utilisateur ou mot de passe est incorrect";
+                            }
+                        }
+                     ?>
                     </div>
                 </div>
             </div>

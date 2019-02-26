@@ -19,13 +19,8 @@ foreach ($data as $cle => $usager) {
                     <div class="mdl-card__actions">
                         <a href='?requete=pageModifierProfil&idProfil=<?php echo $_SESSION["UserID"]?>' class="bouton mdl-button">Modifier mon profil</a>
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
     </section>
 </div>

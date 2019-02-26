@@ -33,19 +33,9 @@
                 <a type="submit" value="Modifier" name="Submit" class="mdl-button submitModifierProfil">Sauvegarder</a>
               </div>
        </form>
-    
-    
-        
-            
-           
-           
-          
-
-  
 <?php
 }
                     
-
 ?>
 	
                 </div>

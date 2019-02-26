@@ -115,35 +115,31 @@
              <div class="mdl-layout--large-screen-only mdl-layout__header-row">
             </div>
 			 <div class="container mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-                 <?php
+            <?php
               if(isset($_SESSION["UserID"]))
               { 
-                   ?>
+            ?>
                 <a href="index.php?requete=profil" class="mdl-layout__tab">Mon profil</a>
                 <a href="index.php?requete=cellierParUsager" class="mdl-layout__tab">Mes celliers</a>
-                 <a href="index.php?requete=Logout" class="mdl-layout__tab">Se déconnecter</a>
-                  <?php
-                  if(isset($data2)){
-                 if($data2==1)
+                <a href="index.php?requete=Logout" class="mdl-layout__tab">Se déconnecter</a>
+            <?php
+                if(isset($data2)){
+                    if($data2==1)
                     {
-                     ?>
-                        <a href="index.php?requete=statistiques" class="mdl-layout__tab">Admin</a>
-                 <?php
+            ?>
+                      <a href="index.php?requete=statistiques" class="mdl-layout__tab">Admin</a>
+            <?php
                     }
-                  }
+                }
               }
             if(!isset($_SESSION["UserID"]))
-              { 
-                                              
+              {                               
+            ?>
+                <a href="index.php?requete=formulaireInscription" class="mdl-layout__tab">Inscription</a>
+                <a href="index.php?requete=accueil" class="mdl-layout__tab">Connexion</a>
+            <?php
+              }
               ?>
-                    <a href="index.php?requete=formulaireInscription" class="mdl-layout__tab">Inscription</a>
-                    <a href="index.php?requete=accueil" class="mdl-layout__tab">Connexion</a>
-                 
-                
-                 <?php
-                
-                  }
-                 ?>
                
                
             </div>

@@ -1,19 +1,18 @@
 <?php
-    if(isset($_SESSION["UserID"]))
-    {
-        if($data){
+if(isset($_SESSION["UserID"]))
+{
+    if($data){
 ?>
-
 <?php
     $bool=false;
 foreach ($data as $cle => $bouteille) {
     if($bool==false){
-   ?>
-     <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'  id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter une bouteille</a>
-    <?php
-     $bool=true;
+?>
+       <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'  id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter une bouteille</a>
+<?php
+        $bool=true;
     }
-    ?>
+?>
 <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
     <main class="mdl-layout__content">
         <div class="mdl-grid">
@@ -35,19 +34,18 @@ foreach ($data as $cle => $bouteille) {
                         <li>Expiration : <?php echo $bouteille['expiration'] ?></li>
                         <li>Millesime : <?php echo $bouteille['millesime'] ?></li>
                         <li>  <div class="ConteneurCommentaire" >
-                <div>
-                    
-                    <?php 
-        if($bouteille['commentaire'])
-    {
-                echo "<p>";
+                <div>            
+            <?php 
+                if($bouteille['commentaire'])
+                {
+                   echo "<p>";
                    echo "Votre  commentaire : ".$bouteille['commentaire'];
                    echo "</p>"; 
-    }
-    else{
-    echo "<p>vous n'avez pas de commentaire!!</p>";
-    }
-                        ?>
+                }
+                else{
+                     echo "<p>vous n'avez pas de commentaire!!</p>";
+                }
+            ?>
                 </div>
                 Votre nouveau commentaire : <input type="text" classe="textecommentaire" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
             <button class='envoyerComm'data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">envoyer</button>
@@ -62,22 +60,16 @@ foreach ($data as $cle => $bouteille) {
                     <a class="btnBoire mdl-button mdl-button--colored">Boire</a>
                 </div>
             </div>
-        </div>
-           
-       
-           
-         
-    
-    
+        </div>    
 <?php
 
         }
-        }
-        else{
-            echo $_GET["id_cellier"]."<br>";
-            echo "<a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
-            echo "<h1>vous n avez aucune bouteille dans votre cellier</h1>";
-        }
     }
+    else{
+        echo $_GET["id_cellier"]."<br>";
+        echo "<a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
+        echo "<h1>vous n avez aucune bouteille dans votre cellier</h1>";
+    }
+}
 ?>	
 
