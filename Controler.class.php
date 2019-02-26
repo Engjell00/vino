@@ -20,6 +20,9 @@ class Controler
 		{
 			session_start();
 			switch ($_GET['requete']) {
+				case 'intro':
+					$this->intro();
+				break;
 				case 'accueil':
 					$this->accueil();
 					break;	
@@ -111,10 +114,10 @@ class Controler
 						);
 					}
 					session_destroy();
-					$this->accueil();
+					$this->intro();
 					break;	    
 				default:
-					$this->accueil();
+					$this->intro();
 					break;
 			}
 		}
@@ -422,6 +425,15 @@ class Controler
 			include("vues/pied.php");   
 		}
 	}
+	/**
+	 * Page introduction au produit
+	 */
+	private function intro()
+    {
+        
+		include("vues/intro.html");
+		  
+    }
 	/**
 	 * Page d'accueil quand un utilisateur n'est pas connecté
 	*/		

@@ -62,6 +62,6 @@ foreach ($data as $cle => $bouteille) {
                 </div>
             </div>
         </div>
-        
+    
     </section>
 </div>
