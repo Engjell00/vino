@@ -193,8 +193,8 @@ class Bouteille extends Modele {
 	 */
     public function ajouterUnCommentaire($data)
     {
-      $requete="UPDATE contient SET commentaire = '".$data->commentaire."'  WHERE id_bouteille_cellier = '".$data->id_bouteille_cellier."'";  
-       $res = $this->_db->query($requete);
+      	$requete="UPDATE contient SET commentaire = '".$data->commentaire."'  WHERE id_bouteille_cellier = '".$data->id_bouteille_cellier."'";  
+       	$res = $this->_db->query($requete);
 		return $res; 
     }
 	/**
@@ -350,8 +350,8 @@ class Bouteille extends Modele {
 	public function RechercheBouteilleToutCelliers($body)
     {
 		$rows = Array();
-		$champVerifier =mysqli_real_escape_string($this->_db, $body->champ);
-		$valeurVerifier =mysqli_real_escape_string($this->_db, $body->valeur);
+		$champVerifier = mysqli_real_escape_string($this->_db, $body->champ);
+		$valeurVerifier = mysqli_real_escape_string($this->_db, $body->valeur);
 		$requete ="SELECT * FROM contient join vino_cellier on contient.id_cellier=vino_cellier.id_cellier WHERE vino_cellier.id_usager=".$_SESSION['UserID']." and ".$champVerifier." like '".$valeurVerifier."%'";
 			$res = $this->_db->query($requete);
 			if($res->num_rows)

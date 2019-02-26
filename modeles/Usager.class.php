@@ -99,7 +99,7 @@ class Usager extends Modele {
     
     public function MesStatestique()
     {
-        $requete = "select vino_usager.id_usager,vino_usager.nom,vino_usager.prenom,courriel,description_usager,count(vino_cellier.id_cellier) as nombre from vino_usager join vino_cellier on vino_usager.id_usager=vino_cellier.id_usager group by vino_cellier.id_usager ";
+        $requete = "select vino_cellier.id_cellier as vino_cellier_ID,vino_usager.id_usager,vino_usager.nom,vino_usager.prenom,courriel,description_usager,count(vino_cellier.id_cellier) as nombre from vino_usager join vino_cellier on vino_usager.id_usager=vino_cellier.id_usager group by vino_cellier.id_usager ";
          if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
@@ -118,9 +118,32 @@ class Usager extends Modele {
 		}
 		return $rows;
         
-    }
-    
-    
+	}
+	public function prixEnMoyenneParUsager()
+	{
+		
+		$rows = Array();
+		$requete ="Select id_cellier,ROUND(SUM(prix_a_lachat)/count(quantite), 2) as prixMoyenDesBouteilles 
+					from contient 
+					group by contient.id_cellier";
+					 
+		if(($res = $this->_db->query($requete)) ==	 true)
+		{
+			if($res->num_rows)
+			{
+				while($row = $res->fetch_assoc())
+				{
+					$rows[] = $row;
+				}
+			}
+		}
+		else 
+		{
+			throw new Exception("Erreur de requête sur la base de donnée", 1);
+			 $this->_db->error;
+		}
+		return $rows;
+	}
     
 	/**
 	 * Cette méthode ajoute un usager a la table vino_usager
@@ -175,11 +198,5 @@ class Usager extends Modele {
 		$res = $this->_db->query($requete);
         return $res;
 	}
-	
-	
 }
-
-
-
-
 ?>

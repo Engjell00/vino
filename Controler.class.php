@@ -142,6 +142,7 @@ class Controler
 			$usg = new Usager();
 			$resultat = $usg->MesStatestique();
 			$data2 = $usg->Verifierautorisation();  
+			$data3 = $usg->prixEnMoyenneParUsager();
 			include("vues/entete.php");
 			include("vues/statistique.php");
 			include("vues/pied.php");
