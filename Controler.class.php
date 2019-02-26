@@ -332,7 +332,7 @@ class Controler
 		$bouteille = new Bouteille();
 		$data = $bouteille->getListeBouteilleCellier($_GET["id_cellier"],$_SESSION["UserID"]);
         $usg = new Usager();
-        $data2 = $usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		include("vues/entete.php");
 		include("vues/cellier.php");
 		include("vues/pied.php");
@@ -345,7 +345,7 @@ class Controler
 			$usager = new Usager();
 			$data = $usager->getProfil($_GET["idProfil"]);
             $usg = new Usager();
-            $data2 = $usg->Verifierautorisation();
+            $data2 = $usg->verifierAutorisation();
 			include("vues/entete.php");
 			include("vues/modifierProfil.php");
 			include("vues/pied.php");
