@@ -243,7 +243,6 @@ class Bouteille extends Modele {
 	}
     /**
 	 * Cette méthode permet de supprimer une bouteille dans un cellier présent
-	 *  @param Int
 	 * @param Object Contenant le ID d'un cellier et le id de la bouteille a supprimer
 	 * 
 	 * @return Boolean Succès ou échec de la suppression. 
