@@ -10,7 +10,7 @@
  * @desc Les fonctionnalités par Javascript -->
  *          1- Ajout d'une photo pour une bouteille qui ne provient pas de la SAQ // Ligne: 31 à 62
  *          2- Rechercher une bouteille dans un cellier présent // Ligne: 66 à 153
- *          3- Modifier Profile d'un usager connecté // Ligne: 158 à 193
+ *          3- Modifier Profil d'un usager connecté // Ligne: 158 à 193
  *          4- Connection d'un usager déjà inscrit // Ligne: 199 à 230
  *          5- L'inscription d'un nouveau utilisateur du site web // Ligne: 233 à 308
  *          6- Supprimer une bouteille dans un cellier présent // Ligne: 313 à 336
@@ -38,6 +38,7 @@ window.addEventListener('load', function() {
     if(ajouterUnePhotoBouteilleNonListee){
       ajouterUnePhotoBouteilleNonListee.addEventListener("click", function(evt){
         evt.preventDefault();
+        //créer un objet FormData qui va contenir par la suite les données nécessaire à l'ajout d'une photo non listée
         var formulaire = new FormData();
         var fileTelecharger = document.querySelector("[name='photo']").files[0];
         var idBouteilleCellier =  document.querySelector("[name='idBouteilleCellier']").value;
@@ -111,6 +112,8 @@ window.addEventListener('load', function() {
                           element.style.display="none";
                         })
                         var madiv = "";
+                        //Afficher le résultat de la recherche avec les classes MDL
+                        //MDL a besoin de recharger le dom pour bien afficher les classes 
                         response.forEach(function(element){
                           madiv += '<div class="bouteille mdl-layout__tab-panel is-active" id="overview">';
                           madiv += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
@@ -126,6 +129,8 @@ window.addEventListener('load', function() {
                           madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div>";
                         })
                         resultatRecherche.innerHTML = madiv;
+                        //Pour que les classes soient bien active ,
+                        //il faudra les enregistré dans ce module qui va recharger ce dom présent,or l'affichage se fera correctement
                         componentHandler.upgradeElement(resultatRecherche);
                       }
                       if(SupprimerResultat){
@@ -161,11 +166,11 @@ window.addEventListener('load', function() {
           });     
     }
     /*
-    *Modifier profile par un usager
+    *Modifier profil par un usager
     */
-    var modifierProfileParUnUsager = document.querySelector(".submitModifierProfile");
-    if(modifierProfileParUnUsager){
-      modifierProfileParUnUsager.addEventListener("click", function(evt){
+    var modifierProfilParUnUsager = document.querySelector(".submitModifierProfil");
+    if(modifierProfilParUnUsager){
+      modifierProfilParUnUsager.addEventListener("click", function(evt){
         evt.preventDefault();
         let modifier = {
           idUsager : document.querySelector("[name='idUsager']"),
@@ -248,6 +253,11 @@ window.addEventListener('load', function() {
             courriel_ins : document.querySelector("[name='courriel']"),
             description_ins : document.querySelector(".description"),
           }
+          /**
+           * @desc  Validation des champs lors d'une inscription par un usager
+           * @param {*} inscription 
+           * @return Boolean
+           */
           function checkForm(form)
           {
             var messageErreur = document.querySelector(".erreur")
@@ -580,12 +590,12 @@ window.addEventListener('load', function() {
                     });
       })
     }  
-    let BtnSuprimerCellier =document.querySelectorAll("[name='suprimerCelier']");
-    BtnSuprimerCellier.forEach(function(element){
+    let BtnSupprimerUnCellier =document.querySelectorAll("[name='supprimerUnCellier']");
+    BtnSupprimerUnCellier.forEach(function(element){
       element.addEventListener("click",function(evt){
           let id=evt.target.dataset.id;
           console.log(id);
-          let requete = new Request(BaseURL+"index.php?requete=suprimerCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
+          let requete = new Request(BaseURL+"index.php?requete=supprimerUnCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
               fetch(requete)
                 .then(response => {
                       if (response.status === 200) {
@@ -625,7 +635,7 @@ window.addEventListener('load', function() {
             "commentaire":commentaire,  
           };
         console.log(param);
-        let requete = new Request(BaseURL+"index.php?requete=AjouterUnCommentaire", {method: 'POST',  body: JSON.stringify(param)});
+        let requete = new Request(BaseURL+"index.php?requete=ajouterUnCommentaire", {method: 'POST',  body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
@@ -653,7 +663,7 @@ window.addEventListener('load', function() {
               "valeur":valeurRechercher,
           };  
           console.log(param);
-            let requete = new Request(BaseURL+"index.php?requete=RechercheBouteilleToutCelliers", {method: 'POST',  body: JSON.stringify(param)});
+            let requete = new Request(BaseURL+"index.php?requete=rechercheBouteilleTousLesCelliers", {method: 'POST',  body: JSON.stringify(param)});
               fetch(requete)
                   .then(response => {
                       if (response.status === 200) {

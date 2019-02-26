@@ -8,7 +8,7 @@
          if(isset($_SESSION["UserID"]))
          { 
      ?>
-       <li><a href="index.php?requete=profile">Mon Profil</a></li>
+       <li><a href="index.php?requete=profil">Mon Profil</a></li>
        <li><a href="index.php?requete=cellierParUsager">Mes cellier</a></li>
        <li><a href="index.php?requete=Logout" >Se déconnecter</a></li>
      <?php

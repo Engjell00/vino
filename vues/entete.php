@@ -119,7 +119,7 @@
               if(isset($_SESSION["UserID"]))
               { 
                    ?>
-                <a href="index.php?requete=profile" class="mdl-layout__tab">Mon profil</a>
+                <a href="index.php?requete=profil" class="mdl-layout__tab">Mon profil</a>
                 <a href="index.php?requete=cellierParUsager" class="mdl-layout__tab">Mes celliers</a>
                  <a href="index.php?requete=Logout" class="mdl-layout__tab">Se déconnecter</a>
                   <?php

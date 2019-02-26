@@ -347,7 +347,7 @@ class Bouteille extends Modele {
 	 * 
 	 * @return array Le résultat des recherches trouvé
 	 */
-	public function RechercheBouteilleToutCelliers($body)
+	public function rechercheBouteilleTousLesCelliers($body)
     {
 		$rows = Array();
 		$champVerifier = mysqli_real_escape_string($this->_db, $body->champ);

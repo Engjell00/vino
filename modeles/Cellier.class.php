@@ -13,9 +13,12 @@
 // TODO : TEST METHODS. SEE IF CELLIER CLASS NEEDED
 class Cellier extends Modele {
 	const TABLE = 'vino_cellier';
- 
- 
-     
+    /**
+	 * Cette méthode permet de retourner la liste des celliers par Usagers
+	 * 
+	 * @param Int id de l'usager
+	 * @return array La liste des cellier d'un usager
+	 */
 	public function getListeCellier($idUsager)
 	{
 		
@@ -40,6 +43,13 @@ class Cellier extends Modele {
 		}
 		return $rows;
 	}
+	 /**
+	 * Cette méthode permet de créer un nouveau cellier d'un usager connecté
+	 * 
+	 * @param Int id de l'usager
+	 * @param string Nom du Cellier
+	 * @return INT le dernier cellier ajouté
+	 */
     public function creeCellier($idUsager,$nomCellier)
     {
             try{ 
@@ -52,8 +62,14 @@ class Cellier extends Modele {
             catch(Exception $e){
                 trigger_error('Une erreur s\'est produite lors de la création du cellier');
             } 
-    }
-    public function suprimerCellier($id)
+	}
+	 /**
+	 * Cette méthode supprimer un cellier d'un usager connecté
+	 * 
+	 * @param Int id du cellier
+	 * @return Boolean Retourne True si la query s'est bien éxécuté
+	 */
+    public function supprimerUnCellier($id)
     {
        try{
 				$requete0="delete from contient where id_cellier=$id";
