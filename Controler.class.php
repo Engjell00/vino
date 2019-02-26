@@ -22,7 +22,7 @@ class Controler
 			switch ($_GET['requete']) {
 				case 'intro':
 					$this->intro();
-				break;
+					break;
 				case 'accueil':
 					$this->accueil();
 					break;	
@@ -201,7 +201,7 @@ class Controler
 	 */
     private function supprimerUnCellier()
     {
-       $cle = new Cellier();
+       	$cle = new Cellier();
         //var_dump(file_get_contents('php://input'));
         $body = json_decode(file_get_contents('php://input'));
         $supressionCellier = $cle->supprimerUnCellier($body->id);
@@ -300,7 +300,7 @@ class Controler
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
 				$bte = new Bouteille();        
-				$RechercheBouteille= $bte->rechercheBouteilleTousLesCelliers($body);		
+				$RechercheBouteille = $bte->rechercheBouteilleTousLesCelliers($body);		
 				echo $RechercheBouteille; 
 			}
 	}
@@ -319,7 +319,7 @@ class Controler
 			include("vues/pied.php");
         }
         else{
-			$erreur=true;
+			$erreur = true;
 			include("vues/entete.php");
 			include("vues/accueil.php");
 			include("vues/pied.php");
@@ -332,7 +332,7 @@ class Controler
 		$bouteille = new Bouteille();
 		$data = $bouteille->getListeBouteilleCellier($_GET["id_cellier"],$_SESSION["UserID"]);
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/cellier.php");
 		include("vues/pied.php");
@@ -366,7 +366,7 @@ class Controler
 		}
 		else{
 			$usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
+            $data2 = $usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/modifierProfil.php");
 			include("vues/pied.php");
@@ -379,7 +379,7 @@ class Controler
 		$bte = new Bouteille();
 		$data = $bte->getBouteilleParID($_GET["idBouteille"]);
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/modifierBouteille.php");
 		include("vues/pied.php");
@@ -397,7 +397,7 @@ class Controler
 		}
 		else{
 			$usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
+            $data2 = $usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/modifierBouteille.php");
 			include("vues/pied.php");
@@ -419,7 +419,7 @@ class Controler
 		}
 		else{
             $usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
+            $data2 = $usg->Verifierautorisation();
 			include("vues/entete.php");
 			include("vues/ajouter.php");
 			include("vues/pied.php");   
@@ -430,9 +430,7 @@ class Controler
 	 */
 	private function intro()
     {
-        
 		include("vues/intro.html");
-		  
     }
 	/**
 	 * Page d'accueil quand un utilisateur n'est pas connecté
@@ -450,7 +448,7 @@ class Controler
 	 */
 	private function formulaireInscription (){
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->Verifierautorisation();
 		include("vues/entete.php");
 		include("vues/inscription.php");
 		include("vues/pied.php");
@@ -461,7 +459,7 @@ class Controler
 	private function getMonProfil()
 	{   
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->Verifierautorisation();
 		$usager = new Usager();
 		$data = $usager->getProfil($_SESSION["UserID"]);
 		include("vues/entete.php");
