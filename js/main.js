@@ -58,7 +58,7 @@ window.addEventListener('load', function() {
               "typeDeRecherche":rechercher.typeDeRecherche.value,
               "id_cellier":rechercher.id_cellier.value,
             }
-            if(rechercher.valeurRechercher.value != ""){
+            if(rechercher.valeurRechercher.value !== ""){
                 console.log(param);
                 let requete = new Request(BaseURL+"index.php?requete=rechercherBouteilleParType", {method: 'POST', body: JSON.stringify(param)});
                 fetch(requete)
@@ -113,7 +113,21 @@ window.addEventListener('load', function() {
                         });
                       }
                     }).catch(error => {
-                      console.error(error);
+                         var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                    
+                      var resultatRecherche =  document.querySelector(".resultatRecherche");
+                      var lesBouteillesCelliers=document.querySelectorAll(".DisplayCellier");
+                      lesBouteillesCelliers.forEach(function(element){
+                          element.style.display = "none";
+                      })
+                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
+                      resultatRecherche.innerHTML = madiv;
+                      SupprimerResultat.addEventListener("click", function(evt){
+                            lesBouteillesCelliers.forEach(function(element){
+                              element.style.display="block";
+                              resultatRecherche.innerHTML = "";
+                            })
+                          });
                     });
             }
           });     
@@ -330,7 +344,7 @@ window.addEventListener('load', function() {
               "quantite":parseInt(bouteille.quantite.value),
               "millesime":bouteille.millesime.value,
             };
-
+console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
           fetch(requete)
             .then(response => {
@@ -553,6 +567,7 @@ window.addEventListener('load', function() {
                       }
                     })
                 .then(response => { 
+                     window.location.href = BaseURL+response.url;
                   }).catch(error => {
                       console.error(error);
                   });
@@ -600,7 +615,8 @@ window.addEventListener('load', function() {
     })
     let BtnRechercheDansToutCelliers =document.querySelector(".recherchetoutcelliers");
     if(BtnRechercheDansToutCelliers){
-      BtnRechercheDansToutCelliers.addEventListener("click",function(){
+       BtnRechercheDansToutCelliers.addEventListener("click", function(evt){
+            evt.preventDefault();
       let ChampDeRecherche=document.querySelector("[name='typeDeRecherchetoutcelliers']").value;
       let valeurRechercher=document.querySelector("[name='valeurRechercher']").value;
       console.log(ChampDeRecherche);
@@ -667,13 +683,13 @@ window.addEventListener('load', function() {
                         } 
                     }).catch(error => {
                       var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                      var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                      var resultatRecherche =  document.querySelector(".resultatRecherche");
-                      var lesCelliers=document.querySelectorAll(".cellierParUsager");
+                    
+                      var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
+                      var lesCelliers=document.querySelectorAll(".cellier");
                       lesCelliers.forEach(function(element){
                           element.style.display = "none";
                       })
-                      madiv="Il ya aucun resultat qui corespond a botre rechercher";
+                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
                       resultatRecherche.innerHTML = madiv;
                       SupprimerResultat.addEventListener("click", function(evt){
                             lesCelliers.forEach(function(element){

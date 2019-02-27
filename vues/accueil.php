@@ -18,6 +18,16 @@
                         </div>
                         <input class= "connexion" type="submit" value="Log in">
                     </form>
+                    <div>
+                    <?php
+        if(isset($erreur)){
+        if($erreur==true){
+        echo "votre nom d utilisateur ou mot de passe est incorrect";
+        
+        }
+        }
+        ?>
+                    </div>
                 </div>
             </div>
              <div class="mdl-card__actions">

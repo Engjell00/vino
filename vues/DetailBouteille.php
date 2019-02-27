@@ -35,7 +35,7 @@ foreach ($data as $cle => $bouteille) {
                         <li>Expiration : <?php echo $bouteille['expiration'] ?></li>
                         <li>Millesime : <?php echo $bouteille['millesime'] ?></li>
                         <li>  <div class="ConteneurCommentaire" >
-                <div>
+                <div></li>
                     
                     <?php 
         if($bouteille['commentaire'])

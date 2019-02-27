@@ -41,7 +41,7 @@ foreach ($data as $cle => $bouteille) {
                 <?php
                         }else{
                             ?>
-                            <img src="/vino/<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                            <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
                             <?php 
                         }
                     }else{

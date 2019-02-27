@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /**
  * Fichier de lancement du MVC, Il appel le var.init et le gabarit HTML 
  * @author Jonathan Martel

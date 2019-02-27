@@ -1,15 +1,15 @@
 <?php
 if($data){
     ?>
-    <form>
-        <input class="input" name="valeurRechercher" >
+    <form method="POST">
+        <input  class="input" name="valeurRechercher">
         <select name="typeDeRecherchetoutcelliers">
         <option value="nom_bouteille_cellier">nom</option>
         <option value="prix_a_lachat">prix</option>
         <option value="millesime">millesime</option>
         <option value="pays_cellier">pays</option>
         </select>
-        <input class='recherchetoutcelliers bouton' type="button" value="Rechercher des bouteilles"/>
+        <input class="recherchetoutcelliers bouton" type="submit" value="Rechercher des bouteilles"/>
   </form>
   <input class="SupprimerResultat" type="button" value="X">
   <div class="resultatRechercheTousLesCelliers">
@@ -29,12 +29,17 @@ foreach ($data as $cle => $cellier) {
                             <h5><?php  echo $cellier["nom_cellier"];  ?></h5>
                             <ul style="text-decoration: none">
                             <?php
+                            $teste=false;
                             foreach ($nombreDeBouteilles as $cle => $bouteille) {
                                 if($cellier["id_cellier"] == $bouteille["cellierUsager"]){
+                                    $teste=true;
                                 ?>
                                     <li>Nombres de bouteilles: <?php  echo $bouteille["nombre_de_bouteilles"]; ?></li>
                                 <?php
                                 }
+                            }
+                        if($teste==false){
+                            echo "<li>Nombres de bouteilles: 0</li>";
                             }
                                 ?>
                             </ul>

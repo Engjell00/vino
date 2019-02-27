@@ -79,7 +79,9 @@ CREATE TABLE `vino_usager`(
         `nom` Varchar (50) NOT NULL ,
         `prenom` Varchar (50) NOT NULL ,
         `courriel` Varchar (50) NOT NULL ,
-        `description_usager`  Varchar (200)        
+        `description_usager`  Varchar (200),
+        `autorisation`  int (2)
+    
 	,CONSTRAINT vino_usager_PK PRIMARY KEY (`id_usager`)
 )ENGINE=InnoDB;
 
@@ -87,10 +89,10 @@ CREATE TABLE `vino_usager`(
 -- Contenu de la table `vino_usager` TESTÉ
 --
 
-INSERT INTO `vino_usager` VALUES(1, 'engjell', 'engjell', 'test','','','');
-INSERT INTO `vino_usager` VALUES(2, 'reda', 'reda','jeffal','reda','redajeffal@yahoo.ca','hjhjhjh');
-INSERT INTO `vino_usager` VALUES(3, 'louisalexandre', 'louisalexandre', 'test','','','');
-INSERT INTO `vino_usager` VALUES(4, 'alexanne', 'alexanne', 'test','','','');
+INSERT INTO `vino_usager` VALUES(1, 'engjell', 'engjell', 'test','','','','');
+INSERT INTO `vino_usager` VALUES(2, 'reda', 'reda','jeffal','reda','redajeffal@yahoo.ca','hjhjhjh','');
+INSERT INTO `vino_usager` VALUES(3, 'louisalexandre', 'louisalexandre', 'test','','','','');
+INSERT INTO `vino_usager` VALUES(4, 'alexanne', 'alexanne', 'test','','','','');
 
 
 
@@ -136,18 +138,18 @@ CREATE TABLE `contient` (
         `id_cellier`                    Int NOT NULL ,
         `nom_bouteille_cellier`         Varchar (200) NOT NULL ,
         `image_bouteille_cellier`       Varchar (200) NOT NULL ,
-        `code_saq_cellier`              Varchar (200) NOT NULL ,
+        `code_saq_cellier`              Varchar (200) ,
         `pays_cellier`                  Varchar (200) NOT NULL ,
-        `description_bouteille_cellier` Varchar (200) NOT NULL ,
-        `prix_a_lachat`                 Varchar (10) NOT NULL ,
-        `url_saq_cellier`               Varchar (200) NOT NULL ,
-        `url_image_cellier`             Varchar (200) NOT NULL ,
-        `format_bouteille_cellier`      Varchar (20) NOT NULL ,
-        `id_type`                       Int NOT NULL ,
-        `date_achat`                    Date NOT NULL ,
+        `description_bouteille_cellier` Varchar (200),
+        `prix_a_lachat`                 Varchar (10),
+        `url_saq_cellier`               Varchar (200,
+        `url_image_cellier`             Varchar (200),
+        `format_bouteille_cellier`      Varchar (20),
+        `id_type`                       Int(2),
+        `date_achat`                    Date,
         `expiration`                    Date DEFAULT NULL ,
-        `quantite`                      Int NOT NULL ,
-        `notes`                         Varchar (200) NOT NULL ,
+        `quantite`                      Int,
+        `notes`                         Varchar (200),
         `millesime`                     Varchar (20) DEFAULT NULL,
      `commentaire`             Varchar (200)  
 	,CONSTRAINT contient_PK PRIMARY KEY (`id_bouteille_cellier`)
