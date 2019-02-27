@@ -112,7 +112,8 @@ class Usager extends Modele {
 	 */
     public function mesStatistiques()
     {
-        $requete = "select vino_cellier.id_cellier as vino_cellier_ID,vino_usager.id_usager,vino_usager.nom,vino_usager.prenom,courriel,description_usager,count(vino_cellier.id_cellier) as nombre from vino_usager join vino_cellier on vino_usager.id_usager=vino_cellier.id_usager group by vino_cellier.id_usager ";
+		$requete = "select vino_cellier.id_cellier as vino_cellier_ID,vino_usager.id_usager,vino_usager.nom,vino_usager.prenom,courriel,description_usager,count(vino_cellier.id_cellier) as nombre 
+					from vino_usager join vino_cellier on vino_usager.id_usager = vino_cellier.id_usager group by vino_cellier.id_usager ";
          if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)

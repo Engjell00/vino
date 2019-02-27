@@ -63,7 +63,7 @@ class Controler
 					$this->getMonProfil();
 					break;
                 case 'statistiques':
-                	$this->ChercherStatistiques();
+                	$this->chercherStatistiques();
                 	break;
 				case 'ajouterBouteilleCellier':
 					$this->ajouterBouteilleCellier();
