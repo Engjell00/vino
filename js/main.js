@@ -126,7 +126,7 @@ window.addEventListener('load', function() {
                           madiv += "<ul data-id="+element.id_bouteille_cellier+">";
                           madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                           madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div>";
+                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div><br>";
                         })
                         resultatRecherche.innerHTML = madiv;
                         //Pour que les classes soient bien active ,
@@ -146,22 +146,21 @@ window.addEventListener('load', function() {
                         });
                       }
                     }).catch(error => {
-                         var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                    
-                      var resultatRecherche =  document.querySelector(".resultatRecherche");
-                      var lesBouteillesCelliers=document.querySelectorAll(".DisplayCellier");
-                      lesBouteillesCelliers.forEach(function(element){
-                          element.style.display = "none";
-                      })
-                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
-                      resultatRecherche.innerHTML = madiv;
-                      SupprimerResultat.addEventListener("click", function(evt){
-                            lesBouteillesCelliers.forEach(function(element){
-                              element.style.display="block";
-                              resultatRecherche.innerHTML = "";
-                            })
-                          });
-                    });
+                          var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                          var resultatRecherche =  document.querySelector(".resultatRecherche");
+                          var lesBouteillesCelliers=document.querySelectorAll(".DisplayCellier");
+                          lesBouteillesCelliers.forEach(function(element){
+                              element.style.display = "none";
+                          })
+                          madiv="Il ya aucun resultat qui corespond a votre rechercher";
+                          resultatRecherche.innerHTML = madiv;
+                          SupprimerResultat.addEventListener("click", function(evt){
+                                lesBouteillesCelliers.forEach(function(element){
+                                  element.style.display="block";
+                                  resultatRecherche.innerHTML = "";
+                                })
+                              });
+                      });
             }
           });     
     }
@@ -204,7 +203,6 @@ window.addEventListener('load', function() {
             }).catch(error => {
               console.error(error);
             });
-
       });
     }
       //Envoye d'une requête lorsque l'usager veut se connecter
@@ -286,7 +284,7 @@ window.addEventListener('load', function() {
                   }
                   return true;
             }else{
-              messageErreur.innerHTML +="Veuillez rentrer tous les champs nécéssaires";
+              messageErreur.innerHTML ="Veuillez rentrer tous les champs nécéssaires";
             }
           }
           var regexMDP = checkForm(inscription);
@@ -318,7 +316,6 @@ window.addEventListener('load', function() {
               }).catch(error => {
                 console.error(error);
               });
-
           }
         });
     }
@@ -382,7 +379,6 @@ window.addEventListener('load', function() {
               "quantite":parseInt(bouteille.quantite.value),
               "millesime":bouteille.millesime.value,
             };
-
           let requete = new Request(BaseURL+"index.php?requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
           fetch(requete)
             .then(response => {
@@ -662,6 +658,7 @@ window.addEventListener('load', function() {
               "champ" :ChampDeRecherche,
               "valeur":valeurRechercher,
           };  
+        if(valeurRechercher != ""){  
           console.log(param);
             let requete = new Request(BaseURL+"index.php?requete=rechercheBouteilleTousLesCelliers", {method: 'POST',  body: JSON.stringify(param)});
               fetch(requete)
@@ -719,21 +716,22 @@ window.addEventListener('load', function() {
                           });
                         } 
                     }).catch(error => {
-                      var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                      var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
-                      var lesCelliers=document.querySelectorAll(".cellier");
-                      lesCelliers.forEach(function(element){
-                          element.style.display = "none";
-                      })
-                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
-                      resultatRecherche.innerHTML = madiv;
-                      SupprimerResultat.addEventListener("click", function(evt){
+                            var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                            var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
+                            var lesCelliers=document.querySelectorAll(".cellier");
                             lesCelliers.forEach(function(element){
-                              element.style.display="block";
-                              resultatRecherche.innerHTML = "";
+                                element.style.display = "none";
                             })
-                          });
-                    });        
+                            madiv="Il ya aucun resultat qui corespond a votre rechercher";
+                            resultatRecherche.innerHTML = madiv;
+                            SupprimerResultat.addEventListener("click", function(evt){
+                                  lesCelliers.forEach(function(element){
+                                    element.style.display="block";
+                                    resultatRecherche.innerHTML = "";
+                                  })
+                                });
+                            });        
+          }
       })
     }      
 });
