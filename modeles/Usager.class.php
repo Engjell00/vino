@@ -10,7 +10,6 @@
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
  * 
  */
-// TODO : TEST METHODS. SEE IF CELLIER CLASS NEEDED
 class Usager extends Modele {
 	const TABLE = 'vino_usager';
     /**
@@ -18,7 +17,7 @@ class Usager extends Modele {
 	 * 
 	 * @param Int id de l'usager a rechercher
 	 * 
-	 * @return Array
+	 * @return Array LEs bouteilles
 	 */
 	public function getListeBouteillesCellier($idUsager, $idCellier)
 	{
@@ -33,7 +32,13 @@ class Usager extends Modele {
 		}
 		return $rows;
 	}
-     public function getProfile($idUsager)
+	/**
+	 * Cette méthode permet d'afficher les informations de l'usager connecté sur la vue Profil.php
+	 * 
+	 * @param Int id de l'usager
+	 * @return Array Les informations nécessaire pour l'affichage du profil connecté
+	 */
+     public function getProfil($idUsager)
 	{
 		
 		$rows = Array();
@@ -56,12 +61,8 @@ class Usager extends Modele {
 	 * 
 	 * @return Array
 	 */
-        
-     // TODO: INCOMPLETE METHOD
-     
 	public function getListeCellier($idUsager)
 	{
-		
 		$rows = Array();
 		$requete ="SELECT * FROM vino_cellier WHERE id_usager = $idUsager";
 					 
@@ -83,25 +84,36 @@ class Usager extends Modele {
 		}
 		return $rows;
 	}
-    
-    
-    public function Verifierautorisation()
+    /**
+	 * Cette méthode permet de vérifier si l'usager est un admin ou un simple utilisateur du site web
+	 * 
+	 * @param Int $_SESSION["UserID"]
+	 * @return Int Une valeur de 1 sera attribué aux admin et 0 au reste des utilisateurs
+	 */
+    public function verifierAutorisation()
     {
         if(isset($_SESSION["UserID"])){
-        $requete ="SELECT autorisation FROM vino_usager WHERE id_usager=".$_SESSION["UserID"];
-       $res = $this->_db->query($requete);
-            if($res){
-        $resultat=mysqli_fetch_assoc($res);
-          
-        return $resultat['autorisation'];
-                  }
-       
-             }
+			$requete ="SELECT autorisation FROM vino_usager WHERE id_usager=".$_SESSION["UserID"];
+			$res = $this->_db->query($requete);
+			if($res){
+					$resultat=mysqli_fetch_assoc($res);
+					return $resultat['autorisation'];
+			}
+        }
     }
-    
-    public function MesStatestique()
+     /**
+	 * Cette méthode permet d'afficher sur la page admin, les statistique des utilisateurs inscrit.
+	 * 	1- Le nom & prenom
+	 * 	2- Le courriel
+	 *  3- Description
+	 *  4- le Nombre de cellier de chacun 	
+	 * 
+	 * @return Array Les informations contribuants au statistique sur la page admin
+	 */
+    public function mesStatistiques()
     {
-        $requete = "select vino_usager.id_usager,vino_usager.nom,vino_usager.prenom,courriel,description_usager,count(vino_cellier.id_cellier) as nombre from vino_usager join vino_cellier on vino_usager.id_usager=vino_cellier.id_usager group by vino_cellier.id_usager ";
+		$requete = "select vino_cellier.id_cellier as vino_cellier_ID,vino_usager.id_usager,vino_usager.nom,vino_usager.prenom,courriel,description_usager,count(vino_cellier.id_cellier) as nombre 
+					from vino_usager join vino_cellier on vino_usager.id_usager = vino_cellier.id_usager group by vino_cellier.id_usager ";
          if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
@@ -120,9 +132,37 @@ class Usager extends Modele {
 		}
 		return $rows;
         
-    }
-    
-    
+	}
+	 /**
+	 * Cette méthode permet d'afficher le prix moyen des bouteilles appartenant à chacun des utilisateurs
+	 * 
+	 * @return Array Le prix moyen des bouteilles de chacun des usager dans leur celliers
+	 */
+	public function prixEnMoyenneParUsager()
+	{
+		
+		$rows = Array();
+		$requete ="Select id_cellier,ROUND(SUM(prix_a_lachat)/count(quantite), 2) as prixMoyenDesBouteilles 
+					from contient 
+					group by contient.id_cellier";
+					 
+		if(($res = $this->_db->query($requete)) ==	 true)
+		{
+			if($res->num_rows)
+			{
+				while($row = $res->fetch_assoc())
+				{
+					$rows[] = $row;
+				}
+			}
+		}
+		else 
+		{
+			throw new Exception("Erreur de requête sur la base de donnée", 1);
+			 $this->_db->error;
+		}
+		return $rows;
+	}
     
 	/**
 	 * Cette méthode ajoute un usager a la table vino_usager
@@ -133,8 +173,6 @@ class Usager extends Modele {
 	 */
      public function creationUsager($data)
 	{
-		//TODO : Valider les données.
-		//var_dump($data);
         if(isset($data->utilisateur) && isset($data->motDePasse)){   	
             try{
 				//$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  
@@ -152,7 +190,11 @@ class Usager extends Modele {
 		
 	}
 	/**
-	 * Méthode qui permet d'authentifier l'utilisateur
+	 * Cette méthode permet de vérifier la connection d'un usager lors de son arrivé
+	 * 
+	 * @param Object $data le mot de passe et le nom d'utilisateur
+	 * 
+	 * @return Boolean Succès ou échec de l'ajout.
 	 */
 	function Authentification($data)
 	{
@@ -172,16 +214,17 @@ class Usager extends Modele {
 			}
 		}
 	}
-	function modifierUsagerProfile($data){
+	/**
+	 * Cette méthode permet de modifier les informartions de l'usager dans son profil s'il désire
+	 * 
+	 * @param Object $data informartions personnels
+	 * 
+	 * @return Boolean Succès ou échec de l'ajout.
+	 */
+	function modifierUsagerProfil($data){
 		$requete="UPDATE vino_usager set nom = '".$data->nom."' , prenom = '".$data->prenom."' , courriel= '".$data->courriel."' , description_usager = '".$data->description."' where id_usager= '".$data->idUsager."'";
 		$res = $this->_db->query($requete);
         return $res;
 	}
-	
-	
 }
-
-
-
-
 ?>

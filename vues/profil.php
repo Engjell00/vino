@@ -17,15 +17,10 @@ foreach ($data as $cle => $usager) {
                             <?php  echo $usager["description_usager"];  ?></span></h5>
 
                     <div class="mdl-card__actions">
-                        <a href='?requete=pageModifierProfile&idProfile=<?php echo $_SESSION["UserID"]?>' class="bouton mdl-button">Modifier mon profil</a>
+                        <a href='?requete=pageModifierProfil&idProfil=<?php echo $_SESSION["UserID"]?>' class="bouton mdl-button">Modifier mon profil</a>
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
     </section>
 </div>

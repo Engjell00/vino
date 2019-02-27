@@ -48,10 +48,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-blue.min.css" />
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css" />
     
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/style2.css">
+      <link rel="stylesheet" href="./css/styles.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
      
     <style>
@@ -64,31 +65,17 @@
             margin-bottom: 40px;
             z-index: 900;
           }
-              .mdl-grid {
-          max-width: 600px;
-      }
+    
       .mdl-card__media {
           margin: 0;
           background-color: white;
           text-align: center;
       }
-      .mdl-card__media > img {
-          max-width: 100%;
-      }
-      .mdl-card__actions {
-          display: flex;
-          box-sizing:border-box;
-          align-items: center;
-      }
-      .mdl-card__actions > .mdl-button--icon {
-          margin-right: 3px;
-          margin-left: 3px;
-      }
+     
+    
+  
 
-      .mdl-card__supporting-text > ul{
-      margin-left: 20%;
-          list-style-type: none;
-      }
+    
     </style>
 		
 
@@ -106,7 +93,7 @@
              <div class="mdl-layout--large-screen-only mdl-layout__header-row">
             </div>
              <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                <a href="celliers.html">
+                <a href="index.php?requete=cellierParUsager">
   <img src="./img/vinoLogo-blanc.png"
        alt="Logo du site Vino">
 </a>
@@ -119,7 +106,7 @@
               if(isset($_SESSION["UserID"]))
               { 
                    ?>
-                <a href="index.php?requete=profile" class="mdl-layout__tab">Mon profil</a>
+                <a href="index.php?requete=profil" class="mdl-layout__tab">Mon profil</a>
                 <a href="index.php?requete=cellierParUsager" class="mdl-layout__tab">Mes celliers</a>
                  <a href="index.php?requete=Logout" class="mdl-layout__tab">Se déconnecter</a>
                   <?php

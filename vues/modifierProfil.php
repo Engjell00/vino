@@ -30,24 +30,12 @@
                             <label class="mdl-textfield__label" for="description">Description...</label>
                         </div><br>
        <div class="mdl-card__actions">
-                <a type="submit" value="Modifier" name="Submit" class="mdl-button submitModifierProfile">Sauvegarder</a>
+                <a type="submit" value="Modifier" name="Submit" class="mdl-button submitModifierProfil">Sauvegarder</a>
               </div>
        </form>
-    
-    
-        
-            
-           
-           
-          
-        
-    
-    <!--<input type="submit" value="Modifier" name="Submit" class="mdl-button submitModifierProfile"/>-->   
-  
 <?php
 }
                     
-
 ?>
 	
                 </div>

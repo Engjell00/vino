@@ -5,16 +5,40 @@
  * @update 2019-01-21
  * @license Creative Commons BY-NC 3.0 (Licence Creative Commons Attribution - Pas d’utilisation commerciale 3.0 non transposé)
  * @license http://creativecommons.org/licenses/by-nc/3.0/deed.fr
+ ***
+ * Application qui aide aux utilisateurs de de créer leur celliers et ajouter des bouteilles
+ * @desc Les fonctionnalités par Javascript -->
+ *          1- Ajout d'une photo pour une bouteille qui ne provient pas de la SAQ // Ligne: 31 à 62
+ *          2- Rechercher une bouteille dans un cellier présent // Ligne: 66 à 153
+ *          3- Modifier Profil d'un usager connecté // Ligne: 158 à 193
+ *          4- Connection d'un usager déjà inscrit // Ligne: 199 à 230
+ *          5- L'inscription d'un nouveau utilisateur du site web // Ligne: 233 à 308
+ *          6- Supprimer une bouteille dans un cellier présent // Ligne: 313 à 336
+ *          7- Modifier la bouteille dans le cellier d'un utilisateur // Ligne: 341 à 388
+ *          8- Boire la bouteille (Changer la quantité dans le dom) // Ligne:  393 à 413
+ *          9- Ajouter une bouteille (Changer la quantité dans le dom) // Ligne: 417 à 438
+ *         10- Rechercher une bouteille dans l'importation de la SAQ (S'il y a lieu) 
+ *             et ajouter la nouvelle bouteille dans le cellier de l'usager // Ligne: 441 à 562
+ *         11- Ajout d'un cellier par un usager connecté // Ligne: 563 à 583
+ *         12- Supprimer un cellier d'un usager connecté // Ligne: 585 à 605
+ *         13- Ajouter une note de dégustation sur une bouteille existante dans le cellier // Ligne: 606 à 645
+ *         14- Rechercher une bouteille dans tous les celliers existantes du l'usager // Ligne: 647 à 742  
+ *     
+ * @required Controler.class.php --> Pour traiter les requêtes envoyés aux serveur à l'aide de ce script.
  *
+ *
+ * 
  */
  //const BaseURL = "http://127.0.0.1/vino/";
 const BaseURL = document.baseURI;
 console.log(BaseURL);
 window.addEventListener('load', function() {
     var ajouterUnePhotoBouteilleNonListee =  document.querySelector(".ajouterUnePhoto");
+    var messageErreur =  document.querySelector(".messageErreur");
     if(ajouterUnePhotoBouteilleNonListee){
       ajouterUnePhotoBouteilleNonListee.addEventListener("click", function(evt){
         evt.preventDefault();
+        //créer un objet FormData qui va contenir par la suite les données nécessaire à l'ajout d'une photo non listée
         var formulaire = new FormData();
         var fileTelecharger = document.querySelector("[name='photo']").files[0];
         var idBouteilleCellier =  document.querySelector("[name='idBouteilleCellier']").value;
@@ -25,7 +49,7 @@ window.addEventListener('load', function() {
             let requete = new Request(BaseURL+"index.php?requete=ajouterPhotoBouteilleNonListee", {method: 'POST', body: formulaire});
             fetch(requete)
               .then(response => {
-                  if (response.status === 200) {
+                  if(response.status === 200) {
                     return response.json()
                   } else {
                     throw new Error('Erreur');
@@ -33,15 +57,20 @@ window.addEventListener('load', function() {
                 })
                 .then(response => {
                   if(response){
-                    window.location.href = BaseURL+response.url;
-                    console.log(response) 
+                    if(response.url){
+                      window.location.href = BaseURL+response.url;
+                    }
+                    console.log(response);
+                    if(response.message){
+                      messageErreur.innerHTML = response.message;
+                    } 
                   }
                 }).catch(error => {
                   console.error(error);
                 });
         })  
     }
-      /**
+  /**
    * Recherche d'une bouteille dans le cellier
    */
     var rechercherBouteillePar =  document.querySelector(".rechercher");
@@ -83,6 +112,8 @@ window.addEventListener('load', function() {
                           element.style.display="none";
                         })
                         var madiv = "";
+                        //Afficher le résultat de la recherche avec les classes MDL
+                        //MDL a besoin de recharger le dom pour bien afficher les classes 
                         response.forEach(function(element){
                           madiv += '<div class="bouteille mdl-layout__tab-panel is-active" id="overview">';
                           madiv += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
@@ -95,9 +126,11 @@ window.addEventListener('load', function() {
                           madiv += "<ul data-id="+element.id_bouteille_cellier+">";
                           madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                           madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div>";
+                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div><br>";
                         })
                         resultatRecherche.innerHTML = madiv;
+                        //Pour que les classes soient bien active ,
+                        //il faudra les enregistré dans ce module qui va recharger ce dom présent,or l'affichage se fera correctement
                         componentHandler.upgradeElement(resultatRecherche);
                       }
                       if(SupprimerResultat){
@@ -113,31 +146,30 @@ window.addEventListener('load', function() {
                         });
                       }
                     }).catch(error => {
-                         var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                    
-                      var resultatRecherche =  document.querySelector(".resultatRecherche");
-                      var lesBouteillesCelliers=document.querySelectorAll(".DisplayCellier");
-                      lesBouteillesCelliers.forEach(function(element){
-                          element.style.display = "none";
-                      })
-                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
-                      resultatRecherche.innerHTML = madiv;
-                      SupprimerResultat.addEventListener("click", function(evt){
-                            lesBouteillesCelliers.forEach(function(element){
-                              element.style.display="block";
-                              resultatRecherche.innerHTML = "";
-                            })
-                          });
-                    });
+                          var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                          var resultatRecherche =  document.querySelector(".resultatRecherche");
+                          var lesBouteillesCelliers=document.querySelectorAll(".DisplayCellier");
+                          lesBouteillesCelliers.forEach(function(element){
+                              element.style.display = "none";
+                          })
+                          madiv="Il n'y aucun résultat à votre recherche";
+                          resultatRecherche.innerHTML = madiv;
+                          SupprimerResultat.addEventListener("click", function(evt){
+                                lesBouteillesCelliers.forEach(function(element){
+                                  element.style.display="block";
+                                  resultatRecherche.innerHTML = "";
+                                })
+                              });
+                      });
             }
           });     
     }
     /*
-    *Modifier profile par un usager
+    *Modifier profil par un usager
     */
-    var modifierProfileParUnUsager = document.querySelector(".submitModifierProfile");
-    if(modifierProfileParUnUsager){
-      modifierProfileParUnUsager.addEventListener("click", function(evt){
+    var modifierProfilParUnUsager = document.querySelector(".submitModifierProfil");
+    if(modifierProfilParUnUsager){
+      modifierProfilParUnUsager.addEventListener("click", function(evt){
         evt.preventDefault();
         let modifier = {
           idUsager : document.querySelector("[name='idUsager']"),
@@ -171,7 +203,6 @@ window.addEventListener('load', function() {
             }).catch(error => {
               console.error(error);
             });
-
       });
     }
       //Envoye d'une requête lorsque l'usager veut se connecter
@@ -220,6 +251,11 @@ window.addEventListener('load', function() {
             courriel_ins : document.querySelector("[name='courriel']"),
             description_ins : document.querySelector(".description"),
           }
+          /**
+           * @desc  Validation des champs lors d'une inscription par un usager
+           * @param {*} inscription 
+           * @return Boolean
+           */
           function checkForm(form)
           {
             var messageErreur = document.querySelector(".erreur")
@@ -248,7 +284,7 @@ window.addEventListener('load', function() {
                   }
                   return true;
             }else{
-              messageErreur.innerHTML +="Veuillez rentrer tous les champs nécéssaires";
+              messageErreur.innerHTML ="Veuillez rentrer tous les champs nécéssaires";
             }
           }
           var regexMDP = checkForm(inscription);
@@ -280,7 +316,6 @@ window.addEventListener('load', function() {
               }).catch(error => {
                 console.error(error);
               });
-
           }
         });
     }
@@ -344,7 +379,6 @@ window.addEventListener('load', function() {
               "quantite":parseInt(bouteille.quantite.value),
               "millesime":bouteille.millesime.value,
             };
-console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=modifierBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
           fetch(requete)
             .then(response => {
@@ -552,12 +586,12 @@ console.log(param);
                     });
       })
     }  
-    let BtnSuprimerCellier =document.querySelectorAll("[name='suprimerCelier']");
-    BtnSuprimerCellier.forEach(function(element){
+    let BtnSupprimerUnCellier = document.querySelectorAll("[name='supprimerUnCellier']");
+    BtnSupprimerUnCellier.forEach(function(element){
       element.addEventListener("click",function(evt){
-          let id=evt.target.dataset.id;
+          let id = evt.target.dataset.id;
           console.log(id);
-          let requete = new Request(BaseURL+"index.php?requete=suprimerCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
+          let requete = new Request(BaseURL+"index.php?requete=supprimerUnCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
               fetch(requete)
                 .then(response => {
                       if (response.status === 200) {
@@ -566,8 +600,8 @@ console.log(param);
                         throw new Error('Erreur');
                       }
                     })
-                .then(response => { 
-                     window.location.href = BaseURL+response.url;
+                .then(response => {
+                  window.location.href = BaseURL+response.url;  
                   }).catch(error => {
                       console.error(error);
                   });
@@ -597,7 +631,7 @@ console.log(param);
             "commentaire":commentaire,  
           };
         console.log(param);
-        let requete = new Request(BaseURL+"index.php?requete=AjouterUnCommentaire", {method: 'POST',  body: JSON.stringify(param)});
+        let requete = new Request(BaseURL+"index.php?requete=ajouterUnCommentaire", {method: 'POST',  body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
@@ -625,8 +659,9 @@ console.log(param);
               "champ" :ChampDeRecherche,
               "valeur":valeurRechercher,
           };  
+        if(valeurRechercher != ""){  
           console.log(param);
-            let requete = new Request(BaseURL+"index.php?requete=RechercheBouteilleToutCelliers", {method: 'POST',  body: JSON.stringify(param)});
+            let requete = new Request(BaseURL+"index.php?requete=rechercheBouteilleTousLesCelliers", {method: 'POST',  body: JSON.stringify(param)});
               fetch(requete)
                   .then(response => {
                       if (response.status === 200) {
@@ -661,7 +696,7 @@ console.log(param);
                             madiv += "<ul data-id="+element.id_bouteille_cellier+">";
                             madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                             madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div>";
+                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div><br>";
                           })
                           resultatRecherche.innerHTML = madiv;
                           componentHandler.upgradeElement(resultatRecherche);
@@ -682,22 +717,22 @@ console.log(param);
                           });
                         } 
                     }).catch(error => {
-                      var SupprimerResultat =  document.querySelector(".SupprimerResultat");
-                    
-                      var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
-                      var lesCelliers=document.querySelectorAll(".cellier");
-                      lesCelliers.forEach(function(element){
-                          element.style.display = "none";
-                      })
-                      madiv="Il ya aucun resultat qui corespond a votre rechercher";
-                      resultatRecherche.innerHTML = madiv;
-                      SupprimerResultat.addEventListener("click", function(evt){
+                            var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                            var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
+                            var lesCelliers=document.querySelectorAll(".cellier");
                             lesCelliers.forEach(function(element){
-                              element.style.display="block";
-                              resultatRecherche.innerHTML = "";
+                                element.style.display = "none";
                             })
-                          });
-                    });        
+                            madiv="Il n'y aucun résultat à votre recherche";
+                            resultatRecherche.innerHTML = madiv;
+                            SupprimerResultat.addEventListener("click", function(evt){
+                                  lesCelliers.forEach(function(element){
+                                    element.style.display="block";
+                                    resultatRecherche.innerHTML = "";
+                                  })
+                                });
+                            });        
+          }
       })
     }      
 });

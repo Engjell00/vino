@@ -1,24 +1,46 @@
+
+
+
+
 <?php
 if($data){
     ?>
-    <form method="POST">
-        <input  class="input" name="valeurRechercher">
-        <select name="typeDeRecherchetoutcelliers">
-        <option value="nom_bouteille_cellier">nom</option>
-        <option value="prix_a_lachat">prix</option>
-        <option value="millesime">millesime</option>
-        <option value="pays_cellier">pays</option>
-        </select>
-        <input class="recherchetoutcelliers bouton" type="submit" value="Rechercher des bouteilles"/>
-  </form>
-  <input class="SupprimerResultat" type="button" value="X">
-  <div class="resultatRechercheTousLesCelliers">
+<div class="bouteille mdl-layout__tab-panel is-active" id="overview">
+<section class="section--center mdl-grid mdl-grid--no-spacing  mdl-shadow--2dp">
+<div class="demo-card-square mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title mdl-card--expand">
+         <h2 class="mdl-card__title-text">Rechercher dans vos celliers</h2>
+        </div>
+    <div class="mdl-card__supporting-text">
+     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+     <input class="mdl-textfield__input" type="text" id="recherche" name="valeurRechercher">
+                            <label class="mdl-textfield__label" for="recherche">Rechercher...</label>
+    <select class="mdl-textfield__input" id="octane" name="typeDeRecherchetoutcelliers">
+      <option></option>
+      <option value="nom_bouteille_cellier">nom</option>
+      <option value="prix_a_lachat">prix</option>
+       <option value="millesime">millesime</option>
+      <option value="pays_cellier">pays</option>
+  </select>
+       
+  </div>
+        </div>
+<div class="mdl-card__actions mdl-card--border">
+                    
+                    
+                    <a class="recherchetoutcelliers mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type='button' >Rechercher</a>
+                    <a class="SupprimerResultat mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " type='button' >Supprimer les résultats </a>
+                
+    </div>
+</div>
+</section>
+</div>
+<div class="resultatRechercheTousLesCelliers">
   </div>
   <?php
 foreach ($data as $cle => $cellier) {
      ?>
 <div class="cellier mdl-layout__tab-panel is-active" id="overview">
-
     <div class="profil" data-quantite="">
         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                     <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">

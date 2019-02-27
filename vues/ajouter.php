@@ -49,7 +49,6 @@
         </div>
         <a name="ajouterBouteilleCellier" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter la bouteille</a>
 
-
     </section>
 
 </div>

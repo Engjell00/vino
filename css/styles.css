@@ -483,6 +483,71 @@ margin-left: 20%;
     list-style-type: none;
 }
 
+.mdl-layout__tab{
+    color:white;
+}
+.android-be-together-section {
+    position: relative;
+    height: 600px;
+    width: auto;
+    background-color: #f3f3f3;
+
+    background-size: cover;
+}
+
+.logo-font {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    color: white;
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 0.5px black;
+
+}
+
+ #connexion {
+            position: fixed;
+            display: block;
+            right: 0;
+            top: 0;
+            margin-right: 40px;
+            margin-top: 40px;
+            z-index: 900;
+        }
+
+        #inscription {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+
+.vinovino{
+    padding-top: 75px;
+}
+
+.android-slogan {
+    font-size: 30px;
+    padding-top: 25px;
+    font-weight: 500;
+}
+
+.android-sub-slogan {
+    font-size: 20px;
+    padding-top: 24px;
+    font-weight: 400;
+}
+
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 175px;
+}
+.demo-card-square > .mdl-card__title {
+  color:blue;
+  background:
+    url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+}
 
 
 @-webkit-keyframes titleBlur {

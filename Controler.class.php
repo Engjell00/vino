@@ -20,9 +20,12 @@ class Controler
 		{
 			
 			switch ($_GET['requete']) {
+				case 'intro':
+					$this->intro();
+					break;
 				case 'accueil':
 					$this->accueil();
-					break;
+					break;	
 				case 'formulaireInscription':
 					$this->formulaireInscription();
 					break;
@@ -35,9 +38,9 @@ class Controler
 				case 'cellierParUsager':
 					$this->listeDesCelliersParUsager();
 					break;
-				case 'suprimerCellier':
-					$this->suprimerUnCellier();
-				break;
+				case 'supprimerUnCellier':
+					$this->supprimerUnCellier();
+					break;
 				case 'afficheUnCellierDunUsager':
 					$this->afficheUnCellierDunUsager();	
 					break;						
@@ -56,12 +59,12 @@ class Controler
 				case 'ajouterNouvelleBouteilleCellier':
 					$this->ajouterNouvelleBouteilleCellier();
         	       break;
-                case "profile" :
+                case "profil":
 					$this->getMonProfil();
 					break;
                 case 'statistiques':
-                	$this->ChercherStatistiques();
-                break;
+                	$this->chercherStatistiques();
+                	break;
 				case 'ajouterBouteilleCellier':
 					$this->ajouterBouteilleCellier();
 					break;
@@ -74,20 +77,20 @@ class Controler
 				case 'rechercherBouteilleParType':
 					$this->rechercherBouteilleParType();
 					break;
-				case 'RechercheBouteilleToutCelliers':
-					$this->RechercheBouteilleToutCelliers();
+				case 'rechercheBouteilleTousLesCelliers':
+					$this->rechercheBouteilleTousLesCelliers();
 					break;		
 				case 'modifierBouteilleCellier':
 					$this->modifierBouteilleCellier();
 					break;
-				case 'pageModifierProfile':
-					$this->pageModifierProfile();
+				case 'pageModifierProfil':
+					$this->pageModifierProfil();
 					break;
 				case 'modifierProfilUsager':
 					$this->modifierProfilUsager();
 					break;	
-				case 'AjouterUnCommentaire':
-						$this->AjouterUnCommentaire();
+				case 'ajouterUnCommentaire':
+					$this->ajouterUnCommentaire();
 					break;
 				case 'pageAjoutPhotoBouteille':
 					$this->pageAjoutPhotoBouteille();
@@ -111,10 +114,10 @@ class Controler
 						);
 					}
 					session_destroy();
-					$this->accueil();
+					$this->intro();
 					break;	    
 				default:
-					$this->accueil();
+					$this->intro();
 					break;
 			}
 		}
@@ -134,23 +137,6 @@ class Controler
 			}
 		}
 	}
-    
-    
-    private function ChercherStatistiques()
-    {
-     $usg=new Usager();
-     $resultat=$usg->MesStatestique();
-    $data2 =$usg->Verifierautorisation();  
-         include("vues/entete.php");
-		include("vues/statistique.php");
-		include("vues/pied.php");
-    }
-    
-    
-    
-    
-    
-    
 	/**
 	 * Inscription d'un nouveau usager sur le site
 	 */
@@ -168,45 +154,57 @@ class Controler
 	private function creeCellier()
 	{
 			$cle = new Cellier();
-			//var_dump(file_get_contents('php://input'));
 			$body = json_decode(file_get_contents('php://input'));
 			$creationCellier = $cle->creeCellier($_SESSION["UserID"],$body->nom);
 			$creationCellier=str_replace("''","",$creationCellier);
 			echo json_encode(["status" => true, "url"=>"index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$creationCellier]);
 		
 	}
-    
+	/**
+	 * Page dédié d'une bouteille en particulier et afficher les détails 
+	 */
     private function afficherDetailsBouteille()
     {
         $bte = new Bouteille();
-        $id_bouteille_cellier=$_GET['id_bouteille_cellier'];
-        $data=$bte->getBouteilleParId($id_bouteille_cellier);
+        $id_bouteille_cellier = $_GET['id_bouteille_cellier'];
+        $data= $bte->getBouteilleParId($id_bouteille_cellier);
         include("vues/entete.php");
 		include("vues/DetailBouteille.php");
 		include("vues/pied.php");
+	}
+	/**
+	 * Pour la page admin, 
+	 * chercher les statistiques présentes de tous les utilisateurs du site 
+	 */
+	private function chercherStatistiques()
+    {
+			$usg = new Usager();
+			$resultat = $usg->mesStatistiques();
+			$data2 = $usg->verifierAutorisation();  
+			$data3 = $usg->prixEnMoyenneParUsager();
+			include("vues/entete.php");
+			include("vues/statistique.php");
+			include("vues/pied.php");
     }
-    
-    
-    
 	/**
 	 * Ajout d'un commentaire sur une bouteille
 	 */
-    private function AjouterUnCommentaire()
+    private function ajouterUnCommentaire()
     {
         $bte = new Bouteille();
         $body = json_decode(file_get_contents('php://input'));
-        $suprimerComm=$bte->ajouterUnCommentaire($body);
+        $suprimerComm = $bte->ajouterUnCommentaire($body);
          echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$body->id_cellier]);
     }
     /**
 	 * Supprimer des celliers
 	 */
-    private function suprimerUnCellier()
+    private function supprimerUnCellier()
     {
-       $cle = new Cellier();
+       	$cle = new Cellier();
         //var_dump(file_get_contents('php://input'));
         $body = json_decode(file_get_contents('php://input'));
-        $supressionCellier = $cle->suprimerCellier($body->id);
+        $supressionCellier = $cle->supprimerUnCellier($body->id);
         echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager"]);
 	}
 	/**
@@ -225,41 +223,43 @@ class Controler
 		include("vues/uploadPhoto.php");
 		include("vues/pied.php");
 	}
+	/**
+	 * Ajouter une photo d'une bouteille non listée
+	 */
 	private function ajouterPhotoBouteilleNonListee(){
-			  $bte = new Bouteille();
-			  $repertoire = "img/imagesBouteilleUsager/";
-			  $nomFichier = $repertoire . basename($_FILES["fichierPhoto"]["name"]);
-			  $uploadOk = true;
-			  $imageType = strtolower(pathinfo($nomFichier,PATHINFO_EXTENSION));
-			  $check = getimagesize($_FILES["fichierPhoto"]["tmp_name"]);
-			  if($check !== false) {
-				  $uploadOk = true;
-			  } else {
-				  echo "Le fichier n'est pas une image.";
-				  $uploadOk = false;
-			  }
-			  if ($_FILES["fichierPhoto"]["size"] > 5000000) {
-				  echo "Le fichier est trop gros.";
-				  $uploadOk = false;
-			  }
-			  if ($uploadOk == false) {
-				  echo "Upload impossible.";
-			  }
-			  if ($uploadOk == false) {
-				echo "Upload impossible.";
-			  } else {
-					if (move_uploaded_file($_FILES["fichierPhoto"]["tmp_name"], $nomFichier)) {
-						
-					} else {
-						echo "Erreur d'upload.";
-					}
+		if(empty($_FILES['fichierPhoto']['tmp_name']) || !is_uploaded_file($_FILES['fichierPhoto']['tmp_name']))
+		{
+			echo json_encode(["status" => true, "message"=>"Veuillez rentrer une image"]);
+		}else{
+				$bte = new Bouteille();
+				$repertoire = "img/imagesBouteilleUsager/";
+				$nomFichier = $repertoire . basename($_FILES["fichierPhoto"]["name"]);
+				$uploadOk = true;
+				$imageType = strtolower(pathinfo($nomFichier,PATHINFO_EXTENSION));
+				$check = getimagesize($_FILES["fichierPhoto"]["tmp_name"]);
+				if($check !== false) {
+					$uploadOk = true;
+				} else {
+					echo "Le fichier n'est pas une image.";
+					$uploadOk = false;
 				}
-			  $resultat = $bte->ajouterPhotoALaBouteilleNonListee($nomFichier,$_POST["idBouteilleCellier"]);
-			  if($resultat){
-				echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$_POST["idCellier"]]); 
-			  }
-
-
+				if ($_FILES["fichierPhoto"]["size"] > 5000000) {
+					echo "Le fichier est trop gros.";
+					$uploadOk = false;
+				}
+				if ($uploadOk == false) {
+					echo "Upload impossible.";
+				}
+				if ($uploadOk == false) {
+					echo "Upload impossible.";
+				} else {
+						move_uploaded_file($_FILES["fichierPhoto"]["tmp_name"], $nomFichier); 
+					}
+				$resultat = $bte->ajouterPhotoALaBouteilleNonListee($nomFichier,$_POST["idBouteilleCellier"]);
+				if($resultat){
+					echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$_POST["idCellier"]]); 
+				}
+			}
 	}
 	/**
 	 * Suppresion d'une bouteille dans le cellier 
@@ -273,7 +273,7 @@ class Controler
 			}
 			else{
                 $usg = new Usager();
-                $data2 =$usg->Verifierautorisation();
+                $data2 = $usg->verifierAutorisation();
 				include("vues/entete.php");
 				include("vues/cellier.php");
 				include("vues/pied.php");
@@ -292,12 +292,15 @@ class Controler
 			}		
 		}
 	}
-	private function RechercheBouteilleToutCelliers()
+	/**
+	 * Rechercher des bouteilles dans tous les celliers
+	 */
+	private function rechercheBouteilleTousLesCelliers()
 	{
 			$body = json_decode(file_get_contents('php://input'));
 			if(!empty($body)){
 				$bte = new Bouteille();        
-				$RechercheBouteille= $bte->RechercheBouteilleToutCelliers($body);		
+				$RechercheBouteille = $bte->rechercheBouteilleTousLesCelliers($body);		
 				echo $RechercheBouteille; 
 			}
 	}
@@ -306,20 +309,20 @@ class Controler
 	 */
 	private function listeDesCelliersParUsager(){
         if(isset($_SESSION["UserID"])){
-		$bouteille = new Bouteille();
-		$data = $bouteille->getListeDesCelliersParUsager($_SESSION["UserID"]);
-		$nombreDeBouteilles = $bouteille->getNombreDeBouteilleParCellierUsager($_SESSION["UserID"]);
-        $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
-		include("vues/entete.php");
-		include("vues/cellierParUsager.php");
-		include("vues/pied.php");
+			$bouteille = new Bouteille();
+			$data = $bouteille->getListeDesCelliersParUsager($_SESSION["UserID"]);
+			$nombreDeBouteilles = $bouteille->getNombreDeBouteilleParCellierUsager($_SESSION["UserID"]);
+			$usg = new Usager();
+			$data2 =$usg->verifierAutorisation();
+			include("vues/entete.php");
+			include("vues/cellierParUsager.php");
+			include("vues/pied.php");
         }
         else{
-        $erreur=true;
-        include("vues/entete.php");
-		include("vues/accueil.php");
-		include("vues/pied.php");
+			$erreur = true;
+			include("vues/entete.php");
+			include("vues/accueil.php");
+			include("vues/pied.php");
         }
 	}
 	/**
@@ -329,44 +332,44 @@ class Controler
 		$bouteille = new Bouteille();
 		$data = $bouteille->getListeBouteilleCellier($_GET["id_cellier"],$_SESSION["UserID"]);
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		include("vues/entete.php");
 		include("vues/cellier.php");
 		include("vues/pied.php");
 	}
 	/**
-	 * Page modifier profile d'un utilisateur
+	 * Page modifier profil d'un utilisateur
 	 */
-	private function pageModifierProfile(){
-		if($_SESSION["UserID"]==$_GET["idProfile"]){
+	private function pageModifierProfil(){
+		if($_SESSION["UserID"] == $_GET["idProfil"]){
 			$usager = new Usager();
-			$data = $usager->getProfile($_GET["idProfile"]);
+			$data = $usager->getProfil($_GET["idProfil"]);
             $usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
+            $data2 = $usg->verifierAutorisation();
 			include("vues/entete.php");
-			include("vues/modifierProfile.php");
+			include("vues/modifierProfil.php");
 			include("vues/pied.php");
 		}
 	}
 	/*
-	* Envoye des données pour la modification du profile
+	* Envoye des données pour la modification du profil
 	*/ 
 	private function modifierProfilUsager(){
 		$body = json_decode(file_get_contents('php://input'));
 		if(!empty($body)){
 			$usager = new Usager();
-			$resultat = $usager->modifierUsagerProfile($body);
+			$resultat = $usager->modifierUsagerProfil($body);
 			//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
 			if($resultat){
-				echo json_encode(["status" => true, "url"=>"index.php?requete=profile"]);
+				echo json_encode(["status" => true, "url"=>"index.php?requete=profil"]);
 			}
 		}
 		else{
-			$usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
-			include("vues/entete.php");
-			include("vues/modifierProfile.php");
-			include("vues/pied.php");
+				$usg = new Usager();
+				$data2 = $usg->verifierAutorisation();
+				include("vues/entete.php");
+				include("vues/modifierProfil.php");
+				include("vues/pied.php");
 		}
 	}
 	/**
@@ -376,7 +379,7 @@ class Controler
 		$bte = new Bouteille();
 		$data = $bte->getBouteilleParID($_GET["idBouteille"]);
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		include("vues/entete.php");
 		include("vues/modifierBouteille.php");
 		include("vues/pied.php");
@@ -392,11 +395,10 @@ class Controler
 			$resultat = $bte->modifierBouteilleAuCellier($body);
 			//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
 			echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$body->id_cellier]);
-			
 		}
 		else{
 			$usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
+            $data2 = $usg->verifierAutorisation();
 			include("vues/entete.php");
 			include("vues/modifierBouteille.php");
 			include("vues/pied.php");
@@ -408,11 +410,8 @@ class Controler
 	private function ajouterNouvelleBouteilleCellier()
 	{
 		$body = json_decode(file_get_contents('php://input'));
-		//var_dump($body);
 		if(!empty($body)){
 			$bte = new Bouteille();
-			//var_dump($_POST['data']);
-			//var_dump($data);
 			$resultat = $bte->ajouterBouteilleCellier($body);
 			//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
 			if($resultat){
@@ -421,12 +420,19 @@ class Controler
 		}
 		else{
             $usg = new Usager();
-            $data2 =$usg->Verifierautorisation();
+            $data2 = $usg->verifierAutorisation();
 			include("vues/entete.php");
 			include("vues/ajouter.php");
 			include("vues/pied.php");   
 		}
 	}
+	/**
+	 * Page introduction au produit
+	 */
+	private function intro()
+    {
+		include("vues/intro.html");
+    }
 	/**
 	 * Page d'accueil quand un utilisateur n'est pas connecté
 	*/		
@@ -439,23 +445,11 @@ class Controler
 				
 	}
 	/**
-	 * Page d'accueil d'un utilisateur lorsqu'il est connecté
-	 */
-	private function accueilConnecter()
-	{
-        $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
-		include("vues/entete.php");
-		include("vues/accueilConnecter.php");
-		include("vues/pied.php");
-				
-	}
-	/**
 	 * formulaire d'inscription
 	 */
 	private function formulaireInscription (){
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		include("vues/entete.php");
 		include("vues/inscription.php");
 		include("vues/pied.php");
@@ -465,14 +459,12 @@ class Controler
 	 */
 	private function getMonProfil()
 	{   
-        if(isset($_SESSION["UserID"]))
-        {
         $usg = new Usager();
-        $data2 =$usg->Verifierautorisation();
+        $data2 = $usg->verifierAutorisation();
 		$usager = new Usager();
-		$data = $usager->getProfile($_SESSION["UserID"]);
+		$data = $usager->getProfil($_SESSION["UserID"]);
 		include("vues/entete.php");
-		include("vues/profile.php");
+		include("vues/profil.php");
 		include("vues/pied.php");
         }
         else
@@ -493,7 +485,6 @@ class Controler
 	private function autocompleteBouteille()
 	{
 		$bte = new Bouteille();
-		//var_dump(file_get_contents('php://input'));
 		$body = json_decode(file_get_contents('php://input'));
 		$listeBouteille = $bte->autocomplete($body->nom);
 		echo json_encode($listeBouteille);
@@ -502,7 +493,6 @@ class Controler
 	private function boireBouteilleCellier()
 	{
 		$body = json_decode(file_get_contents('php://input'));
-		
 		$bte = new Bouteille();
 		$resultat = $bte->modifierQuantiteBouteilleCellier($body->id, -1);
 		echo json_encode($resultat);
@@ -511,12 +501,10 @@ class Controler
 	private function ajouterBouteilleCellier()
 	{
 		$body = json_decode(file_get_contents('php://input'));
-		
 		$bte = new Bouteille();
 		$resultat = $bte->modifierQuantiteBouteilleCellier($body->id, 1);
 		echo json_encode($resultat);
 	}
-		
 }
 ?>
 

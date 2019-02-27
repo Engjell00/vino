@@ -1,7 +1,7 @@
 <?php
-    if(isset($_SESSION["UserID"]))
-    {
-        if($data){
+if(isset($_SESSION["UserID"]))
+{
+    if($data){
 ?>
 <form method="POST">
   <input class="input" name="valeurRechercher" >
@@ -22,10 +22,10 @@
     $bool=false;
 foreach ($data as $cle => $bouteille) {
     if($bool==false){
-   ?>
-     <a href='index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'  id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter une bouteille</a>
-    <?php
-     $bool=true;
+?>
+            <a href='index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'  id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter une bouteille</a>
+            <?php
+            $bool=true;
     }
     ?>
     <div class="bouteille mdl-layout__tab-panel is-active" id="overview">
@@ -34,7 +34,8 @@ foreach ($data as $cle => $bouteille) {
              <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">
                 <?php
                     if($bouteille['image_bouteille_cellier'] != "" && $bouteille['image_bouteille_cellier'] != "imageNONdeposer" ){
-                           /**Condition qui regarde si le lien de l'image reçu provient de la SAQ ou seulement de l'usager */
+                           /**Condition qui regarde si le lien de l'image reçu provient de la SAQ 
+                            * ou seulement de l'usager d'une bouteille non listée*/
                         if (strpos($bouteille['image_bouteille_cellier'], '//s7d9') === 0) {
                 ?>
                            <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
@@ -73,12 +74,12 @@ foreach ($data as $cle => $bouteille) {
     </div>  
 <?php
 
-        }
-        }
-        else{
-            echo $_GET["id_cellier"]."<br>";
-            echo "<a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
-            echo "<h1>vous n avez aucune bouteille dans votre cellier</h1>";
-        }
+                    }
     }
+    else{
+        echo $_GET["id_cellier"]."<br>";
+        echo "<a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
+        echo "<h1>vous n avez aucune bouteille dans votre cellier</h1>";
+    }
+}
 ?>	
