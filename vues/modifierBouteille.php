@@ -16,7 +16,25 @@ foreach ($data as $cle => $bouteille) {
 
 
                         <div class="img">
-                            <img src="https:<?php echo $bouteille['image_bouteille_cellier'] ?>" width="200px" height="200px">
+                    <?php
+                            if($bouteille['image_bouteille_cellier'] != "" && $bouteille['image_bouteille_cellier'] != "imageNONdeposer" ){
+                                /**Condition qui regarde si le lien de l'image reçu provient de la SAQ 
+                                    * ou seulement de l'usager d'une bouteille non listée*/
+                                if (strpos($bouteille['image_bouteille_cellier'], '//s7d9') === 0) {
+                    ?>
+                                    <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                    <?php
+                                }else{
+                    ?>
+                                    <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="200" width="200">
+                                    <?php 
+                                }
+                            }else{
+                    ?>
+                                <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille_cellier=<?php echo $bouteille['id_bouteille_cellier'];?>&id_Cellier=<?php echo $bouteille['id_cellier'];?>' class="mdl-button">Ajouter une photo</a>      
+                    <?php
+                            }
+                     ?>
                         </div>
 
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

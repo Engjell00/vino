@@ -459,21 +459,21 @@ class Controler
 	 */
 	private function getMonProfil()
 	{   
-        $usg = new Usager();
-        $data2 = $usg->verifierAutorisation();
-		$usager = new Usager();
-		$data = $usager->getProfil($_SESSION["UserID"]);
-		include("vues/entete.php");
-		include("vues/profil.php");
-		include("vues/pied.php");
-        }
-        else
+		if(isset($_SESSION["UserID"]))
         {
-        include("vues/entete.php");
-		include("vues/accueil.php");
-		include("vues/pied.php");    
+			$usg = new Usager();
+			$data2 = $usg->verifierAutorisation();
+			$usager = new Usager();
+			$data = $usager->getProfil($_SESSION["UserID"]);
+			include("vues/entete.php");
+			include("vues/profil.php");
+			include("vues/pied.php");
         }
-				
+        else{
+			include("vues/entete.php");
+			include("vues/accueil.php");
+			include("vues/pied.php");    
+        }			
 	}
 	private function listeBouteille()
 	{
