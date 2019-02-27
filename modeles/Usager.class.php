@@ -173,8 +173,6 @@ class Usager extends Modele {
 	 */
      public function creationUsager($data)
 	{
-		//TODO : Valider les données.
-		//var_dump($data);
         if(isset($data->utilisateur) && isset($data->motDePasse)){   	
             try{
 				//$passwordEncrypte = password_hash($data->motDePasse, PASSWORD_DEFAULT);  

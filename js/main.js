@@ -49,7 +49,7 @@ window.addEventListener('load', function() {
             let requete = new Request(BaseURL+"index.php?requete=ajouterPhotoBouteilleNonListee", {method: 'POST', body: formulaire});
             fetch(requete)
               .then(response => {
-                  if (response.status === 200) {
+                  if(response.status === 200) {
                     return response.json()
                   } else {
                     throw new Error('Erreur');
@@ -70,7 +70,7 @@ window.addEventListener('load', function() {
                 });
         })  
     }
-      /**
+  /**
    * Recherche d'une bouteille dans le cellier
    */
     var rechercherBouteillePar =  document.querySelector(".rechercher");
@@ -586,10 +586,10 @@ window.addEventListener('load', function() {
                     });
       })
     }  
-    let BtnSupprimerUnCellier =document.querySelectorAll("[name='supprimerUnCellier']");
+    let BtnSupprimerUnCellier = document.querySelectorAll("[name='supprimerUnCellier']");
     BtnSupprimerUnCellier.forEach(function(element){
       element.addEventListener("click",function(evt){
-          let id=evt.target.dataset.id;
+          let id = evt.target.dataset.id;
           console.log(id);
           let requete = new Request(BaseURL+"index.php?requete=supprimerUnCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
               fetch(requete)
