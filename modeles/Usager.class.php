@@ -142,9 +142,13 @@ class Usager extends Modele {
 	{
 		
 		$rows = Array();
-		$requete ="Select id_cellier,ROUND(SUM(prix_a_lachat)/count(quantite), 2) as prixMoyenDesBouteilles 
+		/*$requete ="Select id_cellier,ROUND(SUM(prix_a_lachat)/count(quantite), 2) as prixMoyenDesBouteilles 
 					from contient 
-					group by contient.id_cellier";
+					group by contient.id_cellier";*/
+		$requete = "Select contient.id_cellier as contientIDCellier,ROUND(SUM(prix_a_lachat)/count(quantite), 2) as prixMoyenDesBouteilles,SUM(quantite) as quantiteParUsager 
+		from contient
+		join vino_cellier on contient.id_cellier = vino_cellier.id_cellier
+		group by vino_cellier.id_usager";			
 					 
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
