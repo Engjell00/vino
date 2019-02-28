@@ -519,7 +519,13 @@ window.addEventListener('load', function() {
             "millesime":bouteille.millesime.value,
             "id_type":1,
           };
-          let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
+          let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {
+                      method: 'POST', 
+                      body: JSON.stringify(param),
+                      headers: {
+                        'Content-Type': 'application/json'
+                      }
+                    });
             fetch(requete)
                 .then(response => {
                     if (response.status === 200) {
