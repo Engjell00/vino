@@ -2,7 +2,6 @@
 if(isset($_SESSION["UserID"])){
     if($data2==1){
 ?>
- 
      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
          <thead>
              <tr><th class="mdl-data-table__cell--non-numeric">Nom</th><th class="mdl-data-table__cell--non-numeric">prenom</th><th class="mdl-data-table__cell--non-numeric">courriel</th><th class="mdl-data-table__cell--non-numeric">description</th><th class="mdl-data-table__cell--non-numeric">nombre de celliers</th><th class="mdl-data-table__cell--non-numeric">Prix Moyen des Bouteilles</th><th class="mdl-data-table__cell--non-numeric">Nombres de bouteille</th></tr></thead><tbody>
