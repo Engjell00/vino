@@ -178,13 +178,13 @@ class Controler
 	 */
 	private function chercherStatistiques()
     {
-			$usg = new Usager();
-			$resultat = $usg->mesStatistiques();
-			$data2 = $usg->verifierAutorisation();  
-			$data3 = $usg->prixEnMoyenneParUsager();
-			include("vues/entete.php");
-			include("vues/statistique.php");
-			include("vues/pied.php");
+		$usg = new Usager();
+		$resultat = $usg->mesStatistiques();
+		$data2 = $usg->verifierAutorisation();  
+		$data3 = $usg->prixEnMoyenneParUsager();
+		include("vues/entete.php");
+		include("vues/statistique.php");
+		include("vues/pied.php");
     }
 	/**
 	 * Ajout d'un commentaire sur une bouteille
@@ -194,7 +194,7 @@ class Controler
         $bte = new Bouteille();
         $body = json_decode(file_get_contents('php://input'));
         $suprimerComm = $bte->ajouterUnCommentaire($body);
-         echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$body->id_cellier]);
+        echo json_encode(["status" => true, "url"=>"index.php?requete=afficheUnCellierDunUsager&id_cellier=".$body->id_cellier]);
     }
     /**
 	 * Supprimer des celliers
@@ -477,24 +477,21 @@ class Controler
 	{
 		$bte = new Bouteille();
 		$cellier = $bte->getListeBouteilleCellier();
-		echo json_encode($cellier);
-				
+		echo json_encode($cellier);				
 	}
 	private function autocompleteBouteille()
 	{
 		$bte = new Bouteille();
 		$body = json_decode(file_get_contents('php://input'));
 		$listeBouteille = $bte->autocomplete($body->nom);
-		echo json_encode($listeBouteille);
-				
+		echo json_encode($listeBouteille);			
 	}
 	private function boireBouteilleCellier()
 	{
 		$body = json_decode(file_get_contents('php://input'));
 		$bte = new Bouteille();
 		$resultat = $bte->modifierQuantiteBouteilleCellier($body->id, -1);
-		echo json_encode($resultat);
-		
+		echo json_encode($resultat);		
 	}
 	private function ajouterBouteilleCellier()
 	{

@@ -594,8 +594,8 @@ window.addEventListener('load', function() {
         }
     })
   })
-  let ContenuComm=document.querySelectorAll(".textecommentaire");
-  let tennvoyerom =document.querySelectorAll(".envoyerComm"); 
+  let ContenuComm = document.querySelectorAll(".textecommentaire");
+  let tennvoyerom = document.querySelectorAll(".envoyerComm"); 
     tennvoyerom.forEach(function(element){
      element.addEventListener("click",function(){
         let id_cellier=document.querySelector("[name='valeurIdCellier']").dataset.id;  
