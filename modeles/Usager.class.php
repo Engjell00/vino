@@ -17,7 +17,7 @@ class Usager extends Modele {
 	 * 
 	 * @param Int id de l'usager a rechercher
 	 * 
-	 * @return Array LEs bouteilles
+	 * @return Array Les bouteilles
 	 */
 	public function getListeBouteillesCellier($idUsager, $idCellier)
 	{
@@ -203,7 +203,6 @@ class Usager extends Modele {
 		$res = $this->_db->query($requete);
 		while($row = $res->fetch_assoc())
 		{
-			var_dump($row);
 			if($data->motDePasse == $row["mot_de_passe_usager"])
 			{
 				$id = $row["id_usager"];

@@ -31,7 +31,6 @@
  */
  //const BaseURL = "http://127.0.0.1/vino/";
 const BaseURL = document.baseURI;
-console.log(BaseURL);
 window.addEventListener('load', function() {
     var ajouterUnePhotoBouteilleNonListee =  document.querySelector(".ajouterUnePhoto");
     var messageErreur =  document.querySelector(".messageErreur");
@@ -60,7 +59,6 @@ window.addEventListener('load', function() {
                     if(response.url){
                       window.location.href = BaseURL+response.url;
                     }
-                    console.log(response);
                     if(response.message){
                       messageErreur.innerHTML = response.message;
                     } 
@@ -88,7 +86,6 @@ window.addEventListener('load', function() {
               "id_cellier":rechercher.id_cellier.value,
             }
             if(rechercher.valeurRechercher.value !== ""){
-                console.log(param);
                 let requete = new Request(BaseURL+"index.php?requete=rechercherBouteilleParType", {method: 'POST', body: JSON.stringify(param)});
                 fetch(requete)
                   .then(response => {
@@ -99,9 +96,7 @@ window.addEventListener('load', function() {
                       }
                     })
                     .then(response => {
-                      console.log(response)
                       var bouteilleCellier =  document.querySelectorAll(".DisplayCellier");
-                      console.log(bouteilleCellier);
                       var resultatRecherche =  document.querySelector(".resultatRecherche");
                       var SupprimerResultat =  document.querySelector(".SupprimerResultat");
                       if(response){
@@ -185,7 +180,6 @@ window.addEventListener('load', function() {
           "courriel":modifier.courriel.value,
           "description":modifier.description.value,
         }
-        console.log(param);
         let requete = new Request(BaseURL+"index.php?requete=modifierProfilUsager", {method: 'POST', body: JSON.stringify(param)});
         fetch(requete)
           .then(response => {
@@ -198,7 +192,6 @@ window.addEventListener('load', function() {
             .then(response => {
               if(response){
                 window.location.href = BaseURL+response.url;
-                console.log(response) 
               }
             }).catch(error => {
               console.error(error);
@@ -218,7 +211,6 @@ window.addEventListener('load', function() {
             "utilisateur":connexion.utilisateur.value,
             "motDePasse":connexion.motDePasse.value,
           }
-          console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=login", {method: 'POST', body: JSON.stringify(param)});
           fetch(requete)
             .then(response => {
@@ -231,7 +223,6 @@ window.addEventListener('load', function() {
               .then(response => {
                 if(response){
                   window.location.href = BaseURL+'index.php?requete=cellierParUsager';
-                  console.log(response) 
                 }
               }).catch(error => {
                 console.error(error);
@@ -297,7 +288,6 @@ window.addEventListener('load', function() {
               "courriel":inscription.courriel_ins.value,
               "description":inscription.description_ins.value,
             }
-            console.log(param);
             let requete = new Request(BaseURL+"index.php?requete=inscription", {method: 'POST', body: JSON.stringify(param)});
             fetch(requete)
             .then(response => {
@@ -309,7 +299,6 @@ window.addEventListener('load', function() {
                 }
               })
               .then(response => {
-                console.log(response);
                 if(response){
                   window.location.href = BaseURL+response.url; 
                 } 
@@ -389,7 +378,6 @@ window.addEventListener('load', function() {
                 }
               })
               .then(response => {
-                console.log(response);
                    window.location.href = BaseURL+response.url;  
               }).catch(error => {
                 console.error(error);
@@ -402,7 +390,6 @@ window.addEventListener('load', function() {
     document.querySelectorAll(".btnBoire").forEach(function(element){
           element.addEventListener("click", function(evt){
               let id = evt.target.parentElement.dataset.id;
-              console.log(id);
               let requete = new Request(BaseURL+"index.php?requete=boireBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
               fetch(requete)
               .then(response => {
@@ -413,7 +400,6 @@ window.addEventListener('load', function() {
                   }
                 })
                 .then(response => {
-                  console.log(response);
                   modifierQuantiteBouteilles(response);
                 }).catch(error => {
                   console.error(error);
@@ -425,7 +411,6 @@ window.addEventListener('load', function() {
     document.querySelectorAll(".btnAjouter").forEach(function(element){
         element.addEventListener("click", function(evt){
             let id = evt.target.parentElement.dataset.id;
-            console.log(id);
             let requete = new Request(BaseURL+"index.php?requete=ajouterBouteilleCellier", {method: 'POST', body: '{"id": '+id+'}'});
             fetch(requete)
             .then(response => {
@@ -446,7 +431,6 @@ window.addEventListener('load', function() {
     });
     let inputRecherchee = document.querySelector("[name='nom_bouteille']");
     let liste = document.querySelector('.listeAutoComplete');
-    console.log(inputRecherchee);
     if(inputRecherchee){
         document.querySelector(".nom_bouteille").style.display = "none";
         document.querySelector(".nomBouteille").style.display = "none";
@@ -460,7 +444,6 @@ window.addEventListener('load', function() {
     if(inputNomBouteille){
       inputNomBouteille.addEventListener("keyup", function(evt){  
         document.querySelector(".commNonListees").innerHTML="";
-        console.log(inputNomBouteille);
         let nom = inputNomBouteille.value;
         liste.innerHTML = "";
         if(nom){
@@ -474,7 +457,6 @@ window.addEventListener('load', function() {
                   }
                 })
                 .then(response => {
-                  console.log(response);
                   if(response==""){
                       document.querySelector(".commNonListees").innerHTML="Attention cette bouteille sera non listée";
                   }
@@ -513,7 +495,6 @@ window.addEventListener('load', function() {
             bouteille.nom.innerHTML =evt.target.innerHTML;
             liste.innerHTML = "";
             inputNomBouteille.value = "";
-            console.log(bouteille.image);
           }
       });
     }
@@ -538,7 +519,6 @@ window.addEventListener('load', function() {
             "millesime":bouteille.millesime.value,
             "id_type":1,
           };
-          console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {method: 'POST', body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
@@ -556,7 +536,6 @@ window.addEventListener('load', function() {
         });
       } 
     function modifierQuantiteBouteilles(objet){
-        console.log(objet);
         let quantite=document.querySelectorAll(".quantite").forEach(function(element){
             objet.forEach(function(monElement){
                 if(element.dataset.id==monElement.id_bouteille_cellier){
@@ -568,7 +547,6 @@ window.addEventListener('load', function() {
     let AjouterCellier =document.querySelector("[name='ajoutercellier']");
     if(AjouterCellier){
       AjouterCellier.addEventListener("click",function(){
-          console.log(AjouterCellier);
           let nom=document.querySelector("[name='cellier']").value;
           let requete = new Request(BaseURL+"index.php?requete=ConfirmerAjoutCellier", {method: 'POST', body: '{"nom": "'+nom+'"}'});
               fetch(requete)
@@ -590,7 +568,6 @@ window.addEventListener('load', function() {
     BtnSupprimerUnCellier.forEach(function(element){
       element.addEventListener("click",function(evt){
           let id = evt.target.dataset.id;
-          console.log(id);
           let requete = new Request(BaseURL+"index.php?requete=supprimerUnCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
               fetch(requete)
                 .then(response => {
@@ -620,7 +597,6 @@ window.addEventListener('load', function() {
   let ContenuComm=document.querySelectorAll(".textecommentaire");
   let tennvoyerom =document.querySelectorAll(".envoyerComm"); 
     tennvoyerom.forEach(function(element){
-     console.log(element);
      element.addEventListener("click",function(){
         let id_cellier=document.querySelector("[name='valeurIdCellier']").dataset.id;  
         let id_bouteille_cellier = element.dataset.id;
@@ -630,7 +606,6 @@ window.addEventListener('load', function() {
             "id_bouteille_cellier":id_bouteille_cellier,
             "commentaire":commentaire,  
           };
-        console.log(param);
         let requete = new Request(BaseURL+"index.php?requete=ajouterUnCommentaire", {method: 'POST',  body: JSON.stringify(param)});
             fetch(requete)
                 .then(response => {
@@ -653,14 +628,11 @@ window.addEventListener('load', function() {
             evt.preventDefault();
       let ChampDeRecherche=document.querySelector("[name='typeDeRecherchetoutcelliers']").value;
       let valeurRechercher=document.querySelector("[name='valeurRechercher']").value;
-      console.log(ChampDeRecherche);
-      console.log(valeurRechercher);
       var param = {
               "champ" :ChampDeRecherche,
               "valeur":valeurRechercher,
           };  
         if(valeurRechercher != ""){  
-          console.log(param);
             let requete = new Request(BaseURL+"index.php?requete=rechercheBouteilleTousLesCelliers", {method: 'POST',  body: JSON.stringify(param)});
               fetch(requete)
                   .then(response => {
@@ -671,9 +643,7 @@ window.addEventListener('load', function() {
                       }
                     })
                     .then(response => {
-                        console.log(response)
                         var bouteilleCellier =  document.querySelectorAll(".cellier");
-                        console.log(bouteilleCellier);
                         var resultatRecherche =  document.querySelector(".resultatRechercheTousLesCelliers");
                         var SupprimerResultat =  document.querySelector(".SupprimerResultat");
                         if(response){

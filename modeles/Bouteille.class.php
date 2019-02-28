@@ -30,7 +30,6 @@ class Bouteille extends Modele {
 				$rows[] = $row;
 			}
 		}
-		
 		return $rows;
 	}
 	/**
@@ -51,7 +50,6 @@ class Bouteille extends Modele {
 				$rows[] = $row;
 			}
 		}
-		
 		return $rows;
 	}
 	/**
@@ -73,7 +71,6 @@ class Bouteille extends Modele {
 			}
 		}
 		return $rows;
-
 	}
 	/**
 	 * Cette méthode permet de retourner la liste des bouteilles dans un cellier donné
@@ -85,7 +82,6 @@ class Bouteille extends Modele {
 	 * 
 	 * @return array id et nom de la bouteille trouvée dans le catalogue
 	 */
-
 	public function getBouteilleParId($idBouteille)
 	{
 		$rows = Array();
@@ -97,13 +93,11 @@ class Bouteille extends Modele {
 			{
 				$rows[] = $row;
 			}
-			// var_dump($rows);
 			return $rows;			
 		}
 		else 
 		{
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
-			 //$this->_db->error;
 		}
 		return $rows;
 	}
@@ -164,7 +158,6 @@ class Bouteille extends Modele {
 		$rows = Array();
 		$nom = $this->_db->real_escape_string($nom);
 		$nom = preg_replace("/\*/","%" , $nom);
-		 
 		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("'. $nom .'%") LIMIT 0,'. $nb_resultat; 
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
@@ -173,15 +166,13 @@ class Bouteille extends Modele {
 				while($row = $res->fetch_assoc())
 				{
 					$row['nom_bouteille'] = trim(utf8_encode($row['nom_bouteille']));
-					$rows[] = $row;
-					
+					$rows[] = $row;			
 				}
 			}
 		}
 		else 
 		{
-			throw new Exception("Erreur de requête sur la base de données", 1);
-			 
+			throw new Exception("Erreur de requête sur la base de données", 1);	 
 		}
 		return $rows;
 	}
@@ -207,7 +198,6 @@ class Bouteille extends Modele {
 	 * 
 	 * @return Array informations completes sur la bouteille du cellier
 	 */
-	
 	function getBouteilleCellierParID($id_bouteille_cellier, $id_cellier)
 	{
 		$requete = "SELECT * from contient WHERE id_bouteille_cellier = $id_bouteille_cellier AND id_cellier = $id_cellier";
@@ -224,7 +214,6 @@ class Bouteille extends Modele {
 		{
 			throw new Exception("Erreur de requête sur la base de donnée", 1);
 		}
-	
 	}
 	/**
 	 * Celle methode sert  Elle sert à modifier la bouteille après avoir récupérer les données
@@ -237,10 +226,8 @@ class Bouteille extends Modele {
 	public function modifierBouteilleAuCellier($data)
 	{
 		$requete = "UPDATE contient SET nom_bouteille_cellier = '".$data->nom."' ,prix_a_lachat='".$data->prix."',format_bouteille_cellier= '".$data->format."',date_achat= '".$data->date_achat. "',expiration= '".$data->expiration. "',quantite= '".$data->quantite."',pays_cellier='".$data->pays."',millesime='".$data->millesime."' WHERE id_bouteille_cellier = '".$data->id_bouteille_cellier."' AND id_cellier = '".$data->id_cellier."' AND id_bouteille = '".$data->id_bouteille."'";
-		//var_dump($requete);
 		$res = $this->_db->query($requete);
-		return $res;
-		
+		return $res;	
 	}
     /**
 	 * Cette méthode permet de supprimer une bouteille dans un cellier présent
@@ -255,8 +242,7 @@ class Bouteille extends Modele {
 		$requete = "DELETE FROM contient where id_bouteille_cellier = '".$idBouteilleVerifier."' AND id_cellier = '".$idCellierVerifier."'";
 		$res = $this->_db->query($requete);
 		return $res;
-	}
-	
+	}	
 	/**
 	 * Cette méthode ajoute une ou des bouteilles au cellier
 	 * 
@@ -267,8 +253,6 @@ class Bouteille extends Modele {
 	 */
 	public function ajouterBouteilleCellier($data)
 	{
-		//TODO : Valider les données.
-		//var_dump($data);
 		if(!isset($data->id_bouteille)){
 			$data->id_bouteille = 0;
 		}	
@@ -284,7 +268,6 @@ class Bouteille extends Modele {
 		"'".$data->quantite."',".
 		"'".$data->millesime."',".
         "'".$data->id_type."')";
-        //var_dump($requete);
         $res = $this->_db->query($requete);
 		return $res;       
 	}
@@ -360,14 +343,11 @@ class Bouteille extends Modele {
 				while($row = $res->fetch_assoc())
 				{
 					$rows[] = array_map('utf8_encode', $row);
-				}
-				//var_dump($rows);
-							
+				}			
 			}
 			else 
 			{
 				throw new Exception("Erreur de requête sur la base de donnée", 1);
-				//$this->_db->error;
 			}
 			$resultatJSON = json_encode($rows,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 			return  $resultatJSON;

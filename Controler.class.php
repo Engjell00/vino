@@ -202,7 +202,6 @@ class Controler
     private function supprimerUnCellier()
     {
        	$cle = new Cellier();
-        //var_dump(file_get_contents('php://input'));
         $body = json_decode(file_get_contents('php://input'));
         $supressionCellier = $cle->supprimerUnCellier($body->id);
         echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager"]);
@@ -390,7 +389,6 @@ class Controler
 	private function modifierBouteilleCellier(){
 		$body = json_decode(file_get_contents('php://input'));
 		if(!empty($body)){
-		    //var_dump($body);
 			$bte = new Bouteille();
 			$resultat = $bte->modifierBouteilleAuCellier($body);
 			//Envoyé le url en json pour traiter la redirection dans le javascript par la suite.
