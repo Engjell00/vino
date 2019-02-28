@@ -85,7 +85,6 @@ class SAQ extends Modele {
 	private function recupereInfo($noeud) {
 		$info = new stdClass();
 		$info -> img = $noeud -> getElementsByTagName("img") -> item(0) -> getAttribute('src');
-		;
 		$info -> url = $noeud -> getElementsByTagName("a") -> item(0) -> getAttribute('href');
 		$p = $noeud -> getElementsByTagName("p");
 		foreach ($p as $node) {
@@ -138,7 +137,8 @@ class SAQ extends Modele {
 			$type = $type['id_type'];
 			$rows = $this -> _db -> query("select id_bouteille from vino_bouteille where code_saq_bouteille = '" . $bte -> desc -> code_SAQ  . "'");
 			if ($rows -> num_rows < 1) {
-			    $this -> stmt -> bind_param("sssssssssi", $bte -> nom, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format,$type);
+				$nomUTF8 = iconv(mb_detect_encoding($bte -> nom, mb_detect_order(), true), "UTF-8", $bte -> nom);
+			    $this -> stmt -> bind_param("sssssssssi", $nomUTF8, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format,$type);
 				$retour -> succes = $this -> stmt -> execute();
 				
 			} else {

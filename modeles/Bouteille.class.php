@@ -255,11 +255,13 @@ class Bouteille extends Modele {
 	{
 		if(!isset($data->id_bouteille)){
 			$data->id_bouteille = 0;
-		}	
+		}	 
+		$string = str_replace(' ', '-', $data->nom_bouteille_cellier);
+		$stringUTF8= preg_replace('/[^A-Za-z0-9\-U+00E3]/', '', $string);
 		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
 		"'".$data->id_bouteille."',".
         "'".$data->id_cellier."',".
-        "'".$data->nom_bouteille_cellier."',".      
+        "'".$stringUTF8."',".      
         "'".$data->image_bouteille."',".
         "'".$data->pays_bouteille."',".
 		"'".$data->date_achat."',".

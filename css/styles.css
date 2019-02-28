@@ -82,6 +82,14 @@ html, body {
   color: inherit;
   width: calc(100% - 80px);
 }
+@media (max-width: 470px) {
+  .mdl-card .mdl-cell .mdl-cell--9-col-desktop .mdl-cell--6-col-tablet .mdl-cell--6-col-phone{
+    width: 35dp;
+  }                    
+  .section__play-btn .mdl-cell .mdl-cell--3-col-desktop .mdl-cell--2-col-tablet .mdl-cell--2-col-phone .mdl-color--red-900 .mdl-color-text--white{
+    width: 30dp;
+  }                 
+}
 .mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
   margin-top: 0;
   margin-bottom: 20px;
@@ -591,4 +599,3 @@ margin-left: 20%;
     text-shadow: 0px 5px 5px rgba(0, 136, 204, 0);
   }
 }
-

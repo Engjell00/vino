@@ -436,11 +436,9 @@ class Controler
 	*/		
 	private function accueil()
 	{  
-        
 		include("vues/entete.php");
 		include("vues/accueil.php");
-		include("vues/pied.php");
-				
+		include("vues/pied.php");		
 	}
 	/**
 	 * formulaire d'inscription
