@@ -226,6 +226,7 @@ class Bouteille extends Modele {
 	 */
 	public function modifierBouteilleAuCellier($data)
 	{
+		$data->nom = utf8_decode($data->nom);
 		$requete = "UPDATE contient SET nom_bouteille_cellier = '".$data->nom."' ,prix_a_lachat='".$data->prix."',format_bouteille_cellier= '".$data->format."',date_achat= '".$data->date_achat. "',expiration= '".$data->expiration. "',quantite= '".$data->quantite."',pays_cellier='".$data->pays."',millesime='".$data->millesime."' WHERE id_bouteille_cellier = '".$data->id_bouteille_cellier."' AND id_cellier = '".$data->id_cellier."' AND id_bouteille = '".$data->id_bouteille."'";
 		$res = $this->_db->query($requete);
 		return $res;	
