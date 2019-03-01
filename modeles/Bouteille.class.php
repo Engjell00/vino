@@ -92,6 +92,7 @@ class Bouteille extends Modele {
 			while($row = $res->fetch_assoc())
 			{
 				$row["nom_bouteille_cellier"] = trim(utf8_encode($row["nom_bouteille_cellier"]));
+				$row["format_bouteille_cellier"] = trim(utf8_encode($row["format_bouteille_cellier"]));
 				$rows[] = $row;
 			}
 			return $rows;			
@@ -125,6 +126,7 @@ class Bouteille extends Modele {
 				while($row = $res->fetch_assoc())
 				{
 					$row["nom_bouteille_cellier"] = trim(utf8_encode($row["nom_bouteille_cellier"]));
+					$row["format_bouteille_cellier"] = trim(utf8_encode($row["format_bouteille_cellier"]));
 					$rows[] = $row;
 				}
 			}

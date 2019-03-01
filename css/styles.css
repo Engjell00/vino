@@ -19,6 +19,16 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+h4{
+    font-size: 18px;
+    line-height: 24px;
+}
+
+h5{
+    margin: 8px 0 ;
+}
+
 .mdl-demo .mdl-layout__header-row {
   padding-left: 40px;
 }
@@ -54,9 +64,8 @@ html, body {
   height: 4px;
 }
 .mdl-demo main > .mdl-layout__tab-panel {
-  padding: 8px;
-  padding-top: 48px;
-}
+  padding:5px 5px 0 5px;
+  }
 .mdl-demo .mdl-card {
   height: auto;
   display: -webkit-flex;
@@ -65,13 +74,14 @@ html, body {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
+    margin:0 auto;
 }
 .mdl-demo .mdl-card > * {
   height: auto;
 }
 .mdl-demo .mdl-card .mdl-card__supporting-text {
 
-   margin-left:40px;
+   margin-left:8px;
     margin-top: 0;
     margin-bottom: 0;
         margin-right: 0;
@@ -80,28 +90,20 @@ html, body {
           flex-grow: 1;
   padding: 0;
   color: inherit;
-  width: calc(100% - 80px);
-}
-@media (max-width: 470px) {
-  .mdl-card .mdl-cell .mdl-cell--9-col-desktop .mdl-cell--6-col-tablet .mdl-cell--6-col-phone{
-    width: 35dp;
-  }                    
-  .section__play-btn .mdl-cell .mdl-cell--3-col-desktop .mdl-cell--2-col-tablet .mdl-cell--2-col-phone .mdl-color--red-900 .mdl-color-text--white{
-    width: 30dp;
-  }                 
+  width: 100%;
 }
 .mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .mdl-demo .mdl-card__actions {
   margin: 0;
-  padding: 4px 40px;
+  padding:0;
   color: inherit;
 }
 .mdl-demo .mdl-card__actions a {
   color: #b71c1c;
-  margin: 0;
+  margin:0 10px 0 10px;
 }
 .mdl-demo .mdl-card__actions a:hover,
 .mdl-demo .mdl-card__actions a:active {
@@ -141,6 +143,7 @@ html, body {
 }
 .mdl-demo section > .section__play-btn {
   min-height: 200px;
+    
 }
 .mdl-demo section > header > .material-icons {
   font-size: 3rem;
@@ -532,7 +535,7 @@ margin-left: 20%;
         }
 
 .vinovino{
-    padding-top: 75px;
+    padding-top: 10px;
 }
 
 .android-slogan {
@@ -556,7 +559,11 @@ margin-left: 20%;
   background:
     url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
 }
-
+.mdl-card__media img:hover {
+  opacity: 0.6;
+  transition: all 200ms ease-in;
+  transform: scale(1.2);
+}
 
 @-webkit-keyframes titleBlur {
   0% {
@@ -599,3 +606,42 @@ margin-left: 20%;
     text-shadow: 0px 5px 5px rgba(0, 136, 204, 0);
   }
 }
+
+    .modImg{
+        display:none;
+    }  
+
+img{
+    margin:0;
+}
+
+@media only screen and (max-width: 480px) {
+    .mdl-demo section > .section__play-btn {
+  min-height: 200px;
+    display:none;
+        
+}
+    
+    .modImg{
+        display:flex;
+        margin:0;
+    }  
+ 
+}
+
+.mdl-button{
+    padding: 0 px;
+}
+
+.boutonPoubelle{
+    padding-left: 55%;
+}
+
+@media only screen and (min-width: 1400px) {
+    .boutonPoubelle{
+    padding-left: 70%;
+}
+}
+
+
+

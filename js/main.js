@@ -85,6 +85,7 @@ window.addEventListener('load', function() {
               "typeDeRecherche":rechercher.typeDeRecherche.value,
               "id_cellier":rechercher.id_cellier.value,
             }
+            console.log(param);
             if(rechercher.valeurRechercher.value !== ""){
                 let requete = new Request(BaseURL+"index.php?requete=rechercherBouteilleParType", {method: 'POST', body: JSON.stringify(param)});
                 fetch(requete)
@@ -110,18 +111,18 @@ window.addEventListener('load', function() {
                         //Afficher le résultat de la recherche avec les classes MDL
                         //MDL a besoin de recharger le dom pour bien afficher les classes 
                         response.forEach(function(element){
-                          madiv += '<div class="bouteille mdl-layout__tab-panel is-active" id="overview">';
-                          madiv += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
-                          madiv += '<header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">';
-                          madiv += "<img src="+element.image_bouteille_cellier+" height='200' width='200'>";
-                          madiv += "</header>";
-                          madiv += "<div class='mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone'>";
-                          madiv += "<div class='description mdl-card__supporting-text'>";
-                          madiv += "<a href='?requete=afficherDetailsBouteille&id_bouteille_cellier="+element.id_bouteille_cellier+"'> <h5 class='nom'>"+element.nom_bouteille_cellier+"</h5></a>";
-                          madiv += "<ul data-id="+element.id_bouteille_cellier+">";
+                          madiv += '<div class="bouteille mdl-card mdl-cell mdl-cell--5-col-desktop mdl-cell--5-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">';
+                          madiv += '<div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">';
+                          madiv += '<h4 class="mdl-cell mdl-cell--12-col">'+element.nom_bouteille_cellier+'</h4>';
+                          madiv += '<div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">';
+                          madiv += '<div class="mdl-card__media">';
+                          madiv += "<a href='?requete=afficherDetailsBouteille&id_bouteille_cellier="+element.id_bouteille_cellier+"'><img src="+element.image_bouteille_cellier+" height='100' width='100'></a>";
+                          madiv += "</div></div>";
+                          madiv += '<div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--2-col-phone">';
+                          madiv += "<ul  data-id="+element.id_bouteille_cellier+">";
                           madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                           madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div><br>";
+                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></div><br>";
                         })
                         resultatRecherche.innerHTML = madiv;
                         //Pour que les classes soient bien active ,
@@ -661,18 +662,18 @@ window.addEventListener('load', function() {
                           })
                           var madiv = "";
                           response.forEach(function(element){
-                            madiv += '<div class="bouteille mdl-layout__tab-panel is-active" id="overview">';
-                            madiv += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
-                            madiv += '<header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--red-900 mdl-color-text--white">';
-                            madiv += "<img src="+element.image_bouteille_cellier+" height='200' width='200'>";
-                            madiv += "</header>";
-                            madiv += "<div class='mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--6-col-phone'>";
-                            madiv += "<div class='description mdl-card__supporting-text'>";
-                            madiv += "<a href='?requete=afficherDetailsBouteille&id_bouteille_cellier="+element.id_bouteille_cellier+"'> <h5 class='nom'>"+element.nom_bouteille_cellier+"</h5></a>";
-                            madiv += "<ul data-id="+element.id_bouteille_cellier+">";
+                            madiv += '<div class="bouteille mdl-card mdl-cell mdl-cell--5-col-desktop mdl-cell--5-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">';
+                            madiv += '<div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">';
+                            madiv += '<h4 class="mdl-cell mdl-cell--12-col">'+element.nom_bouteille_cellier+'</h4>';
+                            madiv += '<div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">';
+                            madiv += '<div class="mdl-card__media">';
+                            madiv += "<a href='?requete=afficherDetailsBouteille&id_bouteille_cellier="+element.id_bouteille_cellier+"'><img src="+element.image_bouteille_cellier+" height='100' width='100'></a>";
+                            madiv += "</div></div>";
+                            madiv += '<div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--2-col-phone">';
+                            madiv += "<ul  data-id="+element.id_bouteille_cellier+">";
                             madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                             madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></section></div><br>";
+                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></div><br>";
                           })
                           resultatRecherche.innerHTML = madiv;
                           componentHandler.upgradeElement(resultatRecherche);
