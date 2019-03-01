@@ -8,7 +8,7 @@ if(isset($_SESSION["UserID"]))
 foreach ($data as $cle => $bouteille) {
     if($bool==false){
 ?>
-       <a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=<?php echo $bouteille['id_cellier'];?>'  id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter une bouteille</a>
+      
 <?php
         $bool=true;
     }
@@ -18,7 +18,7 @@ foreach ($data as $cle => $bouteille) {
         <div class="mdl-grid">
             <div class="mdl-card mdl-cell mdl-cell--6-col-phone mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-shadow--2dp">
                 <figure class="mdl-card__media">
-                    <img id="imgBouteille" src="https:<?php echo $bouteille['image_bouteille_cellier'] ?>">
+                    <img id="imgBouteille" src="<?php echo $bouteille['image_bouteille_cellier'] ?>">
                 </figure>
                 <div class="mdl-card__title">
                     <h1 class="mdl-card__title-text"><?php echo $bouteille['nom_bouteille_cellier'] ?></h1>
@@ -54,10 +54,15 @@ foreach ($data as $cle => $bouteille) {
                     </ul>
                 </div>
                  <div class="mdl-card__actions mdl-card--border" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>" >
-                    <a class="mdl-button mdl-button--colored" href='?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>' >Modifier</a>
-                    <a class="bouton supprimerBouteille mdl-button" type='button'  data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>"  >Supprimer</a>
-                    <a class="btnAjouter mdl-button mdl-button--colored">Ajouter</a>
-                    <a class="btnBoire mdl-button mdl-button--colored">Boire</a>
+                   
+                    <a class="bouton btnAjouter mdl-js-button mdl-button--fab mdl-button--mini-fab" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>"><i class="material-icons">add</i></a>
+                    <a class="btnBoire mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>"><i class="material-icons">remove</i></a>
+                     
+                     
+                      <a id="btnEdit" class="mdl-button mdl-button--colored" href='index.php?requete=pageModifierBouteilleCellier&idBouteille=<?php echo $bouteille['id_bouteille_cellier'] ?>' ><i class="material-icons">
+edit
+</i></a>
+                    <a class="bouton supprimerBouteille mdl-button" type='button'  data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>"  ><i class="material-icons" data-id-bouteille="<?php echo $bouteille['id_bouteille_cellier'] ?>" data-id-cellier="<?php echo $bouteille['id_cellier'] ?>">delete</i></a>
                 </div>
             </div>
         </div>    
@@ -67,9 +72,10 @@ foreach ($data as $cle => $bouteille) {
     }
     else{
         echo $_GET["id_cellier"]."<br>";
-        echo "<a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
+        echo "<a href='index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
         echo "<h1>vous n avez aucune bouteille dans votre cellier</h1>";
     }
 }
 ?>	
-
+        
+       

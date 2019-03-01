@@ -203,7 +203,7 @@ class Controler
     {
        	$cle = new Cellier();
         $body = json_decode(file_get_contents('php://input'));
-        $supressionCellier = $cle->supprimerUnCellier($body->id);
+		$supressionCellier = $cle->supprimerUnCellier($body->id);
         echo json_encode(["status" => true, "url"=>"index.php?requete=cellierParUsager"]);
 	}
 	/**

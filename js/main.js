@@ -122,7 +122,11 @@ window.addEventListener('load', function() {
                           madiv += "<ul  data-id="+element.id_bouteille_cellier+">";
                           madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                           madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></div><br>";
+                          madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div>";
+                          madiv += "<div class='mdl-card__actions mdl-card--border' data-id="+element.id_bouteille_cellier+">";
+                          madiv += "<a class='btnDetail btnBoire mdl-js-button mdl-button--fab mdl-button--mini-fab'  data-id="+element.id_bouteille_cellier+" type='button' ><i class='material-icons'>remove</i></a>";
+                          madiv += "<a class='btnDetail btnAjouter mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab' type='button' data-id="+element.id_bouteille_cellier+" ><i class='material-icons'>add</i></a>";
+                          madiv += "<a class='boutonPoubelle supprimerBouteille mdl-button' type='button'  data-id-bouteille="+element.id_bouteille_cellier+" data-id-cellier="+element.id_cellier+"><i class='material-icons' data-id-bouteille="+element.id_bouteille_cellier+"  data-id-cellier="+element.id_cellier+">delete</i></a></div></div></div><br>";
                         })
                         resultatRecherche.innerHTML = madiv;
                         //Pour que les classes soient bien active ,
@@ -143,6 +147,7 @@ window.addEventListener('load', function() {
                       }
                     }).catch(error => {
                           var SupprimerResultat =  document.querySelector(".SupprimerResultat");
+                          var messageErreur =  document.querySelector(".SupprimerResultat");
                           var resultatRecherche =  document.querySelector(".resultatRecherche");
                           var lesBouteillesCelliers=document.querySelectorAll(".DisplayCellier");
                           lesBouteillesCelliers.forEach(function(element){
@@ -574,7 +579,8 @@ window.addEventListener('load', function() {
     let BtnSupprimerUnCellier = document.querySelectorAll("[name='supprimerUnCellier']");
     BtnSupprimerUnCellier.forEach(function(element){
       element.addEventListener("click",function(evt){
-          let id = evt.target.dataset.id;
+          let id = evt.target.parentNode.dataset.id;
+          console.log(id);
           let requete = new Request(BaseURL+"index.php?requete=supprimerUnCellier", {method: 'POST', body: '{"id": "'+id+'"}'});
               fetch(requete)
                 .then(response => {
@@ -673,7 +679,11 @@ window.addEventListener('load', function() {
                             madiv += "<ul  data-id="+element.id_bouteille_cellier+">";
                             madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                             madiv += "<li>$"+element.prix_a_lachat+"</li>";
-                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div></div></div><br>";
+                            madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div>";
+                            madiv += "<div class='mdl-card__actions mdl-card--border' data-id="+element.id_bouteille_cellier+">";
+                            madiv += "<a class='btnDetail btnBoire mdl-js-button mdl-button--fab mdl-button--mini-fab'  data-id="+element.id_bouteille_cellier+" type='button' ><i class='material-icons'>remove</i></a>";
+                            madiv += "<a class='btnDetail btnAjouter mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab' type='button' data-id="+element.id_bouteille_cellier+" ><i class='material-icons'>add</i></a>";
+                            madiv += "<a class='boutonPoubelle supprimerBouteille mdl-button' type='button'  data-id-bouteille="+element.id_bouteille_cellier+" data-id-cellier="+element.id_cellier+"><i class='material-icons' data-id-bouteille="+element.id_bouteille_cellier+"  data-id-cellier="+element.id_cellier+">delete</i></a></div></div></div><br>";
                           })
                           resultatRecherche.innerHTML = madiv;
                           componentHandler.upgradeElement(resultatRecherche);

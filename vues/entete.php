@@ -55,32 +55,43 @@
       <link rel="stylesheet" href="./css/styles.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
      
-    <style>
-              #view-source {
+     <style>
+        #view-source {
             position: fixed;
             display: block;
             right: 0;
             bottom: 0;
             margin-right: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 150px;
             z-index: 900;
-          }
-    
-      .mdl-card__media {
-          margin: 0;
-          background-color: white;
-          text-align: center;
-      }
-     
-    
-  
+        }
 
-    
+        @media only screen and (min-width: 900px) {
+            #view-source {
+                position: fixed;
+                display: block;
+                right: 0;
+                bottom: 0;
+                margin-right: 150px;
+                margin-bottom: 150px;
+                z-index: 900;
 
+            }
+         }
+             @media only screen and (min-width:1400px) {
+            #view-source {
+                position: fixed;
+                display: block;
+                right: 0;
+                bottom: 0;
+                margin-right: 250px;
+                margin-bottom: 125px;
+                z-index: 900;
+
+            }
+         }
 
     </style>
-		
-
 		<base href="<?php echo BASEURL; ?>">
 		<!--<script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
 		<script src="./js/main.js"></script>

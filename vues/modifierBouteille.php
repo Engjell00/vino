@@ -69,11 +69,9 @@ foreach ($data as $cle => $bouteille) {
                             <input class="input mdl-textfield__input" type="text" id="millesime" name="millesime" value="<?php echo $bouteille['millesime'] ?>">
                             <label class="mdl-textfield__label" for="millesime">Millesime...</label>
                         </div><br>
-                        <div class="mdl-card__actions">
-                            <a type="submit" value="Modifier" name="Submit" class="mdl-button submitModifierBouteille">Modifier la bouteille</a>
-                        </div>
+                      
                     </form>
-                    <!--<input type="submit" value="Modifier" name="Submit" class="submitModifierBouteille" />-->
+                   
                     <?php
 }
 ?>
@@ -82,4 +80,8 @@ foreach ($data as $cle => $bouteille) {
         </div>
     
     </section>
+    
+    
+    <a type="submit" value="Modifier" name="Submit" id="view-source" class="submitModifierBouteille mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast"><i class="material-icons">save</i></a>
+
 </div>
