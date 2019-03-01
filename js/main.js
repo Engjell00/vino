@@ -124,7 +124,7 @@ window.addEventListener('load', function() {
                           madiv += "<li>$"+element.prix_a_lachat+"</li>";
                           madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div>";
                           madiv += "<div class='mdl-card__actions mdl-card--border' data-id="+element.id_bouteille_cellier+">";
-                          madiv += "<a class='btnDetail btnBoire mdl-js-button mdl-button--fab mdl-button--mini-fab'  data-id="+element.id_bouteille_cellier+" type='button' ><i class='material-icons'>remove</i></a>";
+                          madiv += "<a id='btnBoir' class='btnDetail btnBoire mdl-js-button mdl-button--fab mdl-button--mini-fab'  data-id="+element.id_bouteille_cellier+" type='button' ><i class='material-icons'>remove</i></a>";
                           madiv += "<a class='btnDetail btnAjouter mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab' type='button' data-id="+element.id_bouteille_cellier+" ><i class='material-icons'>add</i></a>";
                           madiv += "<a class='boutonPoubelle supprimerBouteille mdl-button' type='button'  data-id-bouteille="+element.id_bouteille_cellier+" data-id-cellier="+element.id_cellier+"><i class='material-icons' data-id-bouteille="+element.id_bouteille_cellier+"  data-id-cellier="+element.id_cellier+">delete</i></a></div></div></div><br>";
                         })
@@ -680,10 +680,7 @@ window.addEventListener('load', function() {
                             madiv += "<li class='pays format'>"+element.pays_cellier+", "+element.format_bouteille_cellier+" ml</li>";
                             madiv += "<li>$"+element.prix_a_lachat+"</li>";
                             madiv += "<li class='quantite' data-id="+element.id_bouteille_cellier+" >Quantité :"+element.quantite+"</li></ul></div>";
-                            madiv += "<div class='mdl-card__actions mdl-card--border' data-id="+element.id_bouteille_cellier+">";
-                            madiv += "<a class='btnDetail btnBoire mdl-js-button mdl-button--fab mdl-button--mini-fab'  data-id="+element.id_bouteille_cellier+" type='button' ><i class='material-icons'>remove</i></a>";
-                            madiv += "<a class='btnDetail btnAjouter mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab' type='button' data-id="+element.id_bouteille_cellier+" ><i class='material-icons'>add</i></a>";
-                            madiv += "<a class='boutonPoubelle supprimerBouteille mdl-button' type='button'  data-id-bouteille="+element.id_bouteille_cellier+" data-id-cellier="+element.id_cellier+"><i class='material-icons' data-id-bouteille="+element.id_bouteille_cellier+"  data-id-cellier="+element.id_cellier+">delete</i></a></div></div></div><br>";
+                            madiv += "</div></div><br>";
                           })
                           resultatRecherche.innerHTML = madiv;
                           componentHandler.upgradeElement(resultatRecherche);
@@ -721,6 +718,10 @@ window.addEventListener('load', function() {
                             });        
           }
       })
-    }      
+    }  
+    let btnBoir=ducument.querySelector("#btnBoir");
+    btnBoir.addEventListener("click",function(){
+      console.log(btnBoir);
+    })     
 });
 
