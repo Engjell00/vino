@@ -16,8 +16,9 @@
                             <input class="mdl-textfield__input" type="password" id="motDePasse" name="motDePasse">
                             <label class="mdl-textfield__label" for="motDePasse">Mot de Passe...</label>
                         </div>
-                        <input class= "connexion" type="submit" value="Log in">
+                        
                     </form>
+                    
                     <div>
                     <?php
                         if(isset($erreur)){
@@ -27,11 +28,10 @@
                         }
                      ?>
                     </div>
+                    <input  class= "connexion mdl-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" type="submit" value="Log in">
                 </div>
             </div>
-             <div class="mdl-card__actions">
-                <a href="index.php?requete=formulaireInscription" class="mdl-button">S'inscrire</a>
-              </div>
+             
         </div>
     </section>
 </div>
