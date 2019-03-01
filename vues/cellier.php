@@ -52,7 +52,7 @@ foreach ($data as $cle => $bouteille) {
                         }
                     }else{
                 ?>
-                    <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille_cellier=<?php echo $bouteille['id_bouteille_cellier'];?>&id_Cellier=<?php echo $bouteille['id_cellier'];?>' class="mdl-button">Ajouter une photo</a>      
+                    <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille_cellier=<?php echo $bouteille['id_bouteille_cellier'];?>&id_Cellier=<?php echo $bouteille['id_cellier'];?>' class="mdl-button">Ajouter</a>      
                 <?php
                     }
                  ?>
@@ -94,7 +94,7 @@ foreach ($data as $cle => $bouteille) {
         else{
             echo $_GET["id_cellier"]."<br>";
             echo "<a href='?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
-            echo "<h1>vous n avez aucune bouteille dans votre cellier</h1>";
+            echo "<h1>Vous n'avez aucune bouteille dans votre cellier présentement</h1>";
         }
     }
 ?>	
