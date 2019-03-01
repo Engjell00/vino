@@ -161,7 +161,7 @@ class Bouteille extends Modele {
 		$rows = Array();
 		$nom = $this->_db->real_escape_string($nom);
 		$nom = preg_replace("/\*/","%" , $nom);
-		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("'. $nom .'%") LIMIT 0,'. $nb_resultat; 
+		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille,format_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("'. $nom .'%") LIMIT 0,'. $nb_resultat; 
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
@@ -169,6 +169,7 @@ class Bouteille extends Modele {
 				while($row = $res->fetch_assoc())
 				{
 					$row['nom_bouteille'] = trim(utf8_encode($row['nom_bouteille']));
+					$row['format_bouteille'] = trim(utf8_encode($row['format_bouteille']));
 					$rows[] = $row;			
 				}
 			}
