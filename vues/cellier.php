@@ -76,7 +76,7 @@ foreach ($data as $cle => $bouteille) {
                 </div>
                 <div class="section__text">
                   <ul  data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
-                        <li class="pays format"><?php echo $bouteille['pays_cellier'] ?>, <?php echo $bouteille['format_bouteille_cellier'] ?>  </li>
+                        <li class="pays format"><?php echo $bouteille['pays_cellier'] ?>, <?php echo $bouteille['format_bouteille_cellier'] ?> ml </li>
                         <li>$<?php echo $bouteille['prix_a_lachat'] ?></li>
                         <li class="quantite" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>" >Quantité : <?php echo $bouteille['quantite'] ?></li>
                     </ul>
