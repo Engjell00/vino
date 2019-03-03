@@ -75,7 +75,7 @@ INSERT INTO `vino_bouteille` VALUES(10, 'Tenuta Il Falchetto Bricco Paradiso -..
 CREATE TABLE `vino_usager`(
         `id_usager`           Int NOT NULL AUTO_INCREMENT,
         `nom_usager`          Varchar (50) NOT NULL ,
-        `mot_de_passe_usager` Varchar (50) NOT NULL ,
+        `mot_de_passe_usager` Varchar (255) NOT NULL ,
         `nom` Varchar (50) NOT NULL ,
         `prenom` Varchar (50) NOT NULL ,
         `courriel` Varchar (50) NOT NULL ,
