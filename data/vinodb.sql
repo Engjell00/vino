@@ -89,10 +89,10 @@ CREATE TABLE `vino_usager`(
 -- Contenu de la table `vino_usager` TESTÉ
 --
 
-INSERT INTO `vino_usager` VALUES(1, 'engjell', 'engjell', 'bislimi','engjell','engjell@yahoo.ca','ma description','1');
-INSERT INTO `vino_usager` VALUES(2, 'reda', 'reda','jeffal','reda','redajeffal@yahoo.ca','ma description','1');
-INSERT INTO `vino_usager` VALUES(3, 'louisalexandre', 'louisalexandre', 'Simard','Louis-Alexandre','alex@yahoo.ca','ma description','1');
-INSERT INTO `vino_usager` VALUES(4, 'alexanne', 'alexanne', 'test','','','','');
+INSERT INTO `vino_usager` VALUES(1, 'engjell', '$2y$10$sJd63E.S0p8vwUFw8TzXs.uAkefR5BmGuzQ8lbiODvjJlvr0RxQ.C', 'bislimi','engjell','engjell@yahoo.ca','ma description','1');
+INSERT INTO `vino_usager` VALUES(2, 'reda', '$2y$10$/I9tQhJiSCPgm5.enKEmw.dOHOjV3HaF70R7SmX/O.l/sp0GCgC2m','jeffal','reda','redajeffal@yahoo.ca','ma description','1');
+INSERT INTO `vino_usager` VALUES(3, 'louisalexandre', '$2y$10$wBrr00/MmRTYWJO0OGqF2.hCcba4FEADUR5MDfezgNvWU1u2yQ1oe', 'Simard','Louis-Alexandre','alex@yahoo.ca','ma description','1');
+INSERT INTO `vino_usager` VALUES(4, 'alexanne', '$2y$10$62Kftw/PRJEf8JCD0H6jV.BRr/3aj2BgUcvfTny3odyPOnPhodIFG', 'alexanne','alexanne','','','');
 
 
 
