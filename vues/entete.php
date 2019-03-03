@@ -48,87 +48,100 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css" />
-    
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css" />
+
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/style2.css">
-      <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="../css/getMDL-select.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-     
-     <style>
+    <script defer src="../js/getMDL-select.js"></script>
+
+    <style>
         #view-source {
             position: fixed;
             display: block;
             right: 0;
             bottom: 0;
             margin-right: 40px;
-            margin-bottom: 150px;
+            margin-bottom: 100px;
             z-index: 900;
         }
-
-        @media only screen and (min-width: 900px) {
+        
+        @media only screen and (max-width: 480px) {
             #view-source {
-                position: fixed;
-                display: block;
-                right: 0;
-                bottom: 0;
+                
+                margin-right: 40px;
+                margin-bottom: 75px;
+               }
+        }
+        
+         @media only screen and (min-width: 801px) {
+            #view-source {
+                
+                margin-right: 75px;
+                margin-bottom: 75px;
+               }
+        }
+
+        @media only screen and (min-width: 901px) {
+            #view-source {
+              
                 margin-right: 150px;
                 margin-bottom: 150px;
-                z-index: 900;
+               }
+        }
 
-            }
-         }
-             @media only screen and (min-width:1400px) {
+        @media only screen and (min-width:1401px) {
             #view-source {
-                position: fixed;
-                display: block;
-                right: 0;
-                bottom: 0;
+               
                 margin-right: 250px;
                 margin-bottom: 125px;
-                z-index: 900;
+               }
+        }
 
-            }
-         }
+        
+        
+        
 
     </style>
-		<base href="<?php echo BASEURL; ?>">
-		<!--<script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
-		<script src="./js/main.js"></script>
+    <base href="<?php echo BASEURL; ?>">
+    <!--<script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
+    <script src="./js/main.js"></script>
     <script src="./js/script.js"></script>
-	
-		<!-- inclus bootstrap cdn -->
-		<meta charset="UTF-8" />
-	</head>
-	<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
-         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		 <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
-             <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+
+    <!-- inclus bootstrap cdn -->
+    <meta charset="UTF-8" />
+</head>
+
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
             </div>
-             <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
                 <a href="index.php?requete=cellierParUsager">
-  <img src="./img/vinoLogo-blanc.png"
-       alt="Logo du site Vino">
-</a>
-               
+                    <img src="./img/vinoLogo-blanc.png" alt="Logo du site Vino">
+                </a>
+
             </div>
-             <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
             </div>
-			 <div class="container mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-                 <?php
+            <div class="container mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+                <?php
               if(isset($_SESSION["UserID"]))
               { 
                    ?>
-                <a href="index.php?requete=profil" class="mdl-layout__tab">Mon profil</a>
-                <a href="index.php?requete=cellierParUsager" class="mdl-layout__tab">Mes celliers</a>
-                 <a href="index.php?requete=Logout" class="mdl-layout__tab">Se déconnecter</a>
-                  <?php
+                <a href="index.php?requete=profil" class="mdl-layout__tab">Profil</a>
+                <a href="index.php?requete=cellierParUsager" class="mdl-layout__tab">Celliers</a>
+                <a href="index.php?requete=Logout" class="mdl-layout__tab">Déconnection</a>
+                <?php
                   if(isset($data2)){
                  if($data2==1)
                     {
                      ?>
-                        <a href="index.php?requete=statistiques" class="mdl-layout__tab">Admin</a>
-                 <?php
+                <a href="index.php?requete=statistiques" class="mdl-layout__tab">Admin</a>
+                <?php
                     }
                   }
               }
@@ -136,17 +149,16 @@
               { 
                                               
               ?>
-                    <a href="index.php?requete=formulaireInscription" class="mdl-layout__tab">Inscription</a>
-                    <a href="index.php?requete=accueil" class="mdl-layout__tab">Connexion</a>
-                 
-                
-                 <?php
+                <a href="index.php?requete=formulaireInscription" class="mdl-layout__tab">Inscription</a>
+                <a href="index.php?requete=accueil" class="mdl-layout__tab">Connexion</a>
+
+
+                <?php
                 
                   }
                  ?>
-               
-               
+
+
             </div>
-		</header>
-		<main id="table" class="container mdl-layout__content"'>
-			
+        </header>
+        <main id="table" class="container mdl-layout__content"'>

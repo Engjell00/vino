@@ -63,7 +63,7 @@ foreach ($data as $cle => $bouteille) {
                         </div><br>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="input mdl-textfield__input" type="text" id="expiration" name="expiration" value="<?php echo $bouteille['expiration'] ?>">
-                            <label class="mdl-textfield__label" for="expiration">Date d'expiration...</label>
+                            <label class="mdl-textfield__label" for="expiration">Garder jusqu'à...</label>
                         </div><br>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="input mdl-textfield__input" type="text" id="millesime" name="millesime" value="<?php echo $bouteille['millesime'] ?>">

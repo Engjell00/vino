@@ -12,8 +12,12 @@
             <div class="mdl-card__supporting-text">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="recherche" name="valeurRechercher">
+                   
+                   
                     <label class="mdl-textfield__label" for="recherche">Rechercher...</label>
                     <select class="mdl-textfield__input" id="octane" name="typeDeRecherche">
+                        
+                        
                         <option value="nom_bouteille_cellier">nom</option>
                         <option value="prix_a_lachat">prix</option>
                         <option value="millesime">millesime</option>
@@ -27,7 +31,7 @@
                 <a class="SupprimerResultat mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " type='button'>Supprimer les résultats </a>
             </div>
         </div>
-    </section>
+   
 </div>
 <div class="resultatRecherche">
 </div>
@@ -55,11 +59,11 @@ foreach ($data as $cle => $bouteille) {
                            /**Condition qui regarde si le lien de l'image reçu provient de la SAQ ou seulement de l'usager */
                         if (strpos($bouteille['image_bouteille_cellier'], '//s7d9') === 0) {
                 ?>
-                           <a href='index.php?requete=afficherDetailsBouteille&id_bouteille_cellier= <?php echo $bouteille['id_bouteille_cellier'] ?>'><img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="100" width="100"></a>
+                           <img src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="100" width="100">
                 <?php
                         }else{
                             ?>
-                      <a href='index.php?requete=afficherDetailsBouteille&id_bouteille_cellier= <?php echo $bouteille['id_bouteille_cellier'] ?>'><img src="/vino/<?php echo $bouteille['image_bouteille_cellier'] ?>" height="100" width="100"></a>
+                      <img src="/vino/<?php echo $bouteille['image_bouteille_cellier'] ?>" height="100" width="100">
                             <?php 
                         }
                     }else{
@@ -72,7 +76,7 @@ foreach ($data as $cle => $bouteille) {
                 </div>
                 <div class="section__text">
                   <ul  data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>">
-                        <li class="pays format"><?php echo $bouteille['pays_cellier'] ?>, <?php echo $bouteille['format_bouteille_cellier'] ?> ml </li>
+                        <li class="pays format"><?php echo $bouteille['pays_cellier'] ?>, <?php echo $bouteille['format_bouteille_cellier'] ?>  </li>
                         <li>$<?php echo $bouteille['prix_a_lachat'] ?></li>
                         <li class="quantite" data-id="<?php echo $bouteille['id_bouteille_cellier'] ?>" >Quantité : <?php echo $bouteille['quantite'] ?></li>
                     </ul>
@@ -81,7 +85,9 @@ foreach ($data as $cle => $bouteille) {
                 
                       
                      
-                      
+                    <a class="mdl-js-button " href='?requete=afficherDetailsBouteille&id_bouteille_cellier= <?php echo $bouteille['id_bouteille_cellier'] ?>'><i class="material-icons">
+                                        open_in_new
+                                    </i></a>   
                       
                       
                       
@@ -106,7 +112,7 @@ foreach ($data as $cle => $bouteille) {
         else{
             echo $_GET["id_cellier"]."<br>";
             echo "<a href='index.php?requete=ajouterNouvelleBouteilleCellier&id_cellier=".$_GET["id_cellier"]."'>Ajouter une bouteille au cellier</a>";
-            echo "<h1>Vous n'avez aucune bouteille dans votre cellier présentement</h1>";
+            echo "<h3 class='message mdl-cell mdl-cell--12-col'>Vous n'avez aucune bouteille dans votre cellier présentement</h3>";
         }
     }
 ?>	

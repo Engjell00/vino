@@ -25,10 +25,10 @@
                         </div><br>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="input mdl-textfield__input" type="date" name="garde_jusqua" id="garde_jusqua">
-                            <label class="mdl-textfield__label" for="garde_jusqua">Date d'expiration...</label>
+                            <label class="mdl-textfield__label" for="garde_jusqua">Garder jusqu'à...</label>
                         </div><br>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="input mdl-textfield__input" type="number" name="prix" id="prix">
+                        <div class="mdl-textfield mdl-js-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="input mdl-textfield__input" value="" type="text" name="prix" id="prix" >
                             <label class="mdl-textfield__label" for="prix">Prix...</label>
                         </div><br>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -43,9 +43,14 @@
                             <input class="input mdl-textfield__input" type="text" name="Notes" id="Notes">
                             <label class="mdl-textfield__label" for="notes">Notes...</label>
                         </div><br>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="input mdl-textfield__input" type="text" name="format" id="format">
+                            <label class="mdl-textfield__label" for="format">format...</label>
+                        </div><br>
                         <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">
                 </div>
             </div>
+            <div class="divID"></div>
         </div>
         <a name="ajouterBouteilleCellier" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Ajouter la bouteille</a>
 

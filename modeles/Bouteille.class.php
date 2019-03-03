@@ -161,7 +161,7 @@ class Bouteille extends Modele {
 		$rows = Array();
 		$nom = $this->_db->real_escape_string($nom);
 		$nom = preg_replace("/\*/","%" , $nom);
-		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("'. $nom .'%") LIMIT 0,'. $nb_resultat; 
+		$requete ='SELECT id_bouteille, nom_bouteille,image_bouteille,code_saq,url_img_bouteille,id_type_bouteille,format_bouteille,prix_saq_bouteille,pays_bouteille FROM vino_bouteille where LOWER(nom_bouteille) like LOWER("'. $nom .'%") LIMIT 0,'. $nb_resultat; 
 		if(($res = $this->_db->query($requete)) ==	 true)
 		{
 			if($res->num_rows)
@@ -169,6 +169,7 @@ class Bouteille extends Modele {
 				while($row = $res->fetch_assoc())
 				{
 					$row['nom_bouteille'] = trim(utf8_encode($row['nom_bouteille']));
+					$row['format_bouteille'] = trim(utf8_encode($row['format_bouteille']));
 					$rows[] = $row;			
 				}
 			}
@@ -261,11 +262,13 @@ class Bouteille extends Modele {
 			$data->id_bouteille = 0;
 		}	
 		$data->nom_bouteille_cellier=utf8_decode($data->nom_bouteille_cellier);
-		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
+		$data->nom_bouteille_cellier=utf8_decode($data->format);
+		$requete = "INSERT INTO contient(id_bouteille,id_cellier,nom_bouteille_cellier,image_bouteille_cellier,format_bouteille_cellier,pays_cellier,date_achat,notes,prix_a_lachat,quantite,millesime,id_type) VALUES (".
 		"'".$data->id_bouteille."',".
         "'".$data->id_cellier."',".
         "'".$data->nom_bouteille_cellier."',".      
-        "'".$data->image_bouteille."',".
+		"'".$data->image_bouteille."',".
+		"'".$data->format."',".
         "'".$data->pays_bouteille."',".
 		"'".$data->date_achat."',".
 		"'".$data->notes."',".

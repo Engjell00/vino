@@ -526,11 +526,7 @@ body {
     transform: translate(0, 0);
 }
 
-::-webkit-datetime-edit-year-field:not([aria-valuenow]),
-::-webkit-datetime-edit-month-field:not([aria-valuenow]),
-::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
-    color: transparent;
-}
+
 
 .mdl-grid {
     max-width: 600px;
@@ -548,6 +544,7 @@ body {
     display: flex;
     box-sizing: border-box;
     align-items: center;
+    justify-content: space-between;
 }
 
 .mdl-card__actions > .mdl-button--icon {
@@ -622,17 +619,8 @@ body {
     height: 175px;
 }
 
-.demo-card-square > .mdl-card__title {
-    color: blue;
-    background:
-        url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
-}
 
-.mdl-card__media img:hover {
-    opacity: 0.6;
-    transition: all 200ms ease-in;
-    transform: scale(1.2);
-}
+
 
 @-webkit-keyframes titleBlur {
     0% {
@@ -682,13 +670,27 @@ body {
     }
 }
 
-.modImg {
-    display: none;
+
+.btnDetail {
+    margin-left: 80px;
 }
 
-img {
-    margin: 0;
+
+ .mdl-layout__tab-panel:last-child {
+        margin-bottom: 150px;
+    }
+
+.marginCellier {
+    margin-bottom: 150px;
 }
+
+.boutonPoubelle {
+    margin-left: 55%;
+}
+
+
+
+
 
 @media only screen and (max-width: 480px) {
 
@@ -698,10 +700,7 @@ img {
 
     }
 
-    .modImg {
-        display: flex;
-        margin: 0;
-    }
+
 
     #btnEdit {
         margin-left: 125px;
@@ -711,18 +710,45 @@ img {
         overflow: scroll;
     }
 
+    .mdl-layout__tab {
+
+        font-weight: 500;
+        font-size: 12px;
+
+    }
+    
+     .boutonPoubelle {
+        margin-left: 35%;
+    }
+
+   
+
 
 }
 
 @media only screen and (max-width: 800px) {
 
 
-
     #btnEdit {
         margin-left: 80px;
     }
 
+    .mdl-mini-footer {
+        display: none;
+    }
+
+    .mdl-layout__tab-panel:last-child {
+        margin-bottom: 150px;
+    }
+
 }
+
+@media only screen and (min-width: 1401px) {
+    .boutonPoubelle {
+        margin-left: 70%;
+    }
+}
+
 
 @media only screen and (max-width: 1920px) {
     #btnEdit {
@@ -733,9 +759,6 @@ img {
 
 
 
-.boutonPoubelle {
-    margin-left: 55%;
-}
 
 .mdl-button--fab.mdl-button--mini-fab {
 
@@ -749,12 +772,50 @@ mdl-button {
     padding: 0px;
 }
 
-@media only screen and (min-width: 1400px) {
-    .boutonPoubelle {
-        margin-left: 70%;
-    }
-}
 
 #table {
     overflow: auto;
+}
+
+ul > li {
+    list-style-type: none;
+    margin-left: 50px;
+}
+
+.mdl-card__media {
+    background-color: rgba(255, 255, 255, 0);
+
+}
+
+.message{
+    text-align: center;
+    color:wheat;
+}
+
+/*Regle pour qui met les placeholder provenant du HTML en transparence sur les date
+Cel permet d'avoir un label flottant de MDL, lorsque le label est focus il devient flottant
+et le placeholder HTML (ex date) apparait*/
+
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+
+input[type=date]:focus::-webkit-datetime-edit {
+    color: black !important;
+}
+
+
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+    color: transparent;
+}
+
+
+.mdl-textfield:not(.is-dirty) input::-webkit-datetime-edit {
+    color: transparent;
+}
+
+input:focus::-webkit-datetime-edit {
+    color: rgba(255, 255, 255, .46) !important;
 }

@@ -92,7 +92,7 @@ foreach ($data as $cle => $cellier) {
 }
     else{
 
-    echo "<h3>vous n avez pas de cellier</h3>";
+    echo "<h3 class='message mdl-cell mdl-cell--12-col'>Vous n'avez aucun cellier à votre profil</h3>";
     }
 ?>
             <div class="profil" data-quantite="">
@@ -101,3 +101,4 @@ foreach ($data as $cle => $cellier) {
 
                 </div>
             </div>
+<div class="marginCellier"></div>

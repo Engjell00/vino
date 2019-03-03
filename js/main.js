@@ -464,10 +464,12 @@ window.addEventListener('load', function() {
                       document.querySelector(".commNonListees").innerHTML="Attention cette bouteille sera non listée";
                   }
                   else{
+                    let liste2 = document.querySelector('.divID');
                       response.forEach(function(element){
                           document.querySelector(".commNonListees").innerHTML="";
                       
-                        liste.innerHTML += "<li data-id='"+element.id_bouteille +"' classe='mesLi' image='"+element.image_bouteille+"' typeV='"+element.id_type_bouteille+"'>"+element.nom_bouteille+"</li>";
+                        liste.innerHTML += "<li data-id='"+element.id_bouteille +"' classe='mesLi' image='"+element.image_bouteille+"'pays='"+element.pays_bouteille+"' typeV='"+element.id_type_bouteille+"' formatBouteille='"+element.format_bouteille+"' prixALachat='"+element.prix_saq_bouteille+"'>"+element.nom_bouteille+"</li>";
+                        liste2.innerHTML = element.prix_saq_bouteille + element.format_bouteille +element.pays_bouteille;;
                       })
                   }
                 }).catch(error => {
@@ -483,10 +485,12 @@ window.addEventListener('load', function() {
         millesime : document.querySelector("[name='millesime']"),
         quantite : document.querySelector("[name='quantite']"),
         date_achat : document.querySelector("[name='date_achat']"),
-        prix : document.querySelector("[name='prix']"),
+         prix : document.querySelector("[name='prix']"),
         garde_jusqua : document.querySelector("[name='garde_jusqua']"),
         notes : document.querySelector("[name='notes']"),
+        format : document.querySelector("[name='format']"),
       };
+     
     if(liste){
       liste.addEventListener("click", function(evt){
           console.dir(evt.target)
@@ -496,15 +500,29 @@ window.addEventListener('load', function() {
             bouteille.image=evt.target.getAttribute('image');
             bouteille.nom.dataset.id = evt.target.dataset.id;
             bouteille.nom.innerHTML =evt.target.innerHTML;
-            liste.innerHTML = "";
+            unPays=evt.target.getAttribute('pays');
+            UnPrix=evt.target.getAttribute('prixALachat');
+            format=evt.target.getAttribute('formatBouteille');
             inputNomBouteille.value = "";
+            liste.innerHTML = "";
           }
       });
     }
       let btnAjouter = document.querySelector("[name='ajouterBouteilleCellier']");
       if(btnAjouter){
         btnAjouter.addEventListener("click", function(evt){
+        
             evt.preventDefault;
+            if(bouteille.prix.value==""){
+              bouteille.prix.value=UnPrix;
+            }
+            if(bouteille.format.value ==""){
+              bouteille.format.value=format;
+            }
+            if(bouteille.pays.value ==""){
+              bouteille.pays.value=unPays;
+            }
+        
           if(!bouteille.image){
             bouteille.image="imageNONdeposer";
           }  
@@ -517,11 +535,13 @@ window.addEventListener('load', function() {
             "date_achat":bouteille.date_achat.value,
             "garde_jusqua":bouteille.garde_jusqua.value,
             "notes":bouteille.date_achat.value,
-            "prix":parseFloat(bouteille.prix.value),
+            "format":bouteille.format.value,
+            "prix":bouteille.prix.value,
             "quantite":bouteille.quantite.value,
             "millesime":bouteille.millesime.value,
             "id_type":1,
           };
+          console.log(param);
           let requete = new Request(BaseURL+"index.php?requete=ajouterNouvelleBouteilleCellier", {
                       method: 'POST', 
                       body: JSON.stringify(param),
@@ -538,7 +558,7 @@ window.addEventListener('load', function() {
                     }
                   })
                   .then(response => {
-                    window.location.href = BaseURL+response.url; 
+                  window.location.href = BaseURL+response.url; 
                   }).catch(error => {
                     console.error(error);
                   });
