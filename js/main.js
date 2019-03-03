@@ -469,7 +469,7 @@ window.addEventListener('load', function() {
                           document.querySelector(".commNonListees").innerHTML="";
                       
                         liste.innerHTML += "<li data-id='"+element.id_bouteille +"' classe='mesLi' image='"+element.image_bouteille+"'pays='"+element.pays_bouteille+"' typeV='"+element.id_type_bouteille+"' formatBouteille='"+element.format_bouteille+"' prixALachat='"+element.prix_saq_bouteille+"'>"+element.nom_bouteille+"</li>";
-                        liste2.innerHTML = element.prix_saq_bouteille + element.format_bouteille +element.pays_bouteille;;
+                       // liste2.innerHTML = element.prix_saq_bouteille + element.format_bouteille +element.pays_bouteille;;
                       })
                   }
                 }).catch(error => {
