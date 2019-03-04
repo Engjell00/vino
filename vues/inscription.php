@@ -16,7 +16,6 @@
                             <h4 class="mdl-cell mdl-cell--12-col">Inscription</h4>
                            
                             <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-                                <h5>Votre Profil</h5>
                                 <form method="POST">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="sample3" name="nom">
@@ -42,8 +41,8 @@
                                       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input description" type="text" id="sample3">
                                         <label class="mdl-textfield__label" for="sample3">Description...</label>
-                                    </div>
-                                   <input class='inscription' type="submit" value="S'inscrire"/>
+                                    </div><br>
+                                   <input id="btnInscription" class='inscription mdl-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast' type="submit" value="S'inscrire"/><br>
                                 </form>
                                 <span class="erreur"></span>
                             </div>

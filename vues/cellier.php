@@ -4,7 +4,7 @@
         if($data){
 ?>
 
-<div  class="bouteille mdl-layout__tab-panel is-active" id="overview">
+<div  class="SupprimerResultat bouteille mdl-layout__tab-panel is-active" id="overview">
         <div class="mdl-card mdl-cell mdl-cell--5-col-desktop mdl-cell--5-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
             <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <h2 class="mdl-card__title-text">Rechercher dans vos celliers</h2>
@@ -27,8 +27,10 @@
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <input type="hidden" value="<?php echo $_GET["id_cellier"]; ?>" name="valeurIdCellier">
-                <a class="rechercher mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type='button'>Rechercher</a>
-                <a class="SupprimerResultat mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " type='button'>Supprimer les résultats </a>
+                <a class="rechercher mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type='button'><i class="material-icons">
+search
+</i></a>
+                
             </div>
         </div>
    

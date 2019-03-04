@@ -685,7 +685,7 @@ body {
 }
 
 .boutonPoubelle {
-    margin-left: 55%;
+    margin-left: 40%;
 }
 
 
@@ -717,9 +717,7 @@ body {
 
     }
     
-     .boutonPoubelle {
-        margin-left: 35%;
-    }
+    
 
    
 
@@ -747,16 +745,15 @@ body {
     .boutonPoubelle {
         margin-left: 70%;
     }
-}
-
-
-@media only screen and (max-width: 1920px) {
-    #btnEdit {
+     #btnEdit {
         margin-left: 200px;
     }
-
 }
 
+
+#btnInscription{
+    margin-bottom: 5px;
+}
 
 
 
@@ -779,7 +776,7 @@ mdl-button {
 
 ul > li {
     list-style-type: none;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 .mdl-card__media {
@@ -791,6 +788,9 @@ ul > li {
     text-align: center;
     color:wheat;
 }
+
+
+
 
 /*Regle pour qui met les placeholder provenant du HTML en transparence sur les date
 Cel permet d'avoir un label flottant de MDL, lorsque le label est focus il devient flottant
