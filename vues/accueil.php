@@ -28,7 +28,7 @@
                         }
                      ?>
                     </div>
-                    <input  class= "connexion mdl-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" type="submit" value="Log in">
+                    <input  class= "connexion mdl-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" type="submit" value="Se connecter">
                 </div>
             </div>
              
