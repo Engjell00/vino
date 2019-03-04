@@ -18,7 +18,24 @@ foreach ($data as $cle => $bouteille) {
         <div class="mdl-grid">
             <div class="mdl-card mdl-cell mdl-cell--6-col-phone mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-shadow--2dp">
                 <figure class="mdl-card__media">
-                    <img id="imgBouteille" src="<?php echo $bouteille['image_bouteille_cellier'] ?>">
+                <?php
+                    if($bouteille['image_bouteille_cellier'] != "" && $bouteille['image_bouteille_cellier'] != "imageNONdeposer" ){
+                           /**Condition qui regarde si le lien de l'image reçu provient de la SAQ ou seulement de l'usager */
+                        if (strpos($bouteille['image_bouteille_cellier'], '//s7d9') === 0) {
+                ?>
+                           <img id="imgBouteille" src="<?php echo $bouteille['image_bouteille_cellier'] ?>" height="100" width="100">
+                <?php
+                        }else{
+                            ?>
+                      <img id="imgBouteille" src="/vino/<?php echo $bouteille['image_bouteille_cellier'] ?>" height="100" width="100">
+                            <?php 
+                        }
+                    }else{
+                ?>
+                    <a href='index.php?requete=pageAjoutPhotoBouteille&id_bouteille_cellier=<?php echo $bouteille['id_bouteille_cellier'];?>&id_Cellier=<?php echo $bouteille['id_cellier'];?>' class="mdl-button"><i class="material-icons">add_a_photo</i></a>      
+                <?php
+                    }
+                 ?>
                 </figure>
                 <div class="mdl-card__title">
                     <h1 class="mdl-card__title-text"><?php echo $bouteille['nom_bouteille_cellier'] ?></h1>
