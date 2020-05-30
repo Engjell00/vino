@@ -2,8 +2,6 @@
 /**
  * Class Usager
  * Cette classe gère la creation d'usager et la gestion de leurs profils
- * 
- * @author Alexanne Morneault
  * @version 1.0
  * @update 2019-01-31
  * @license Creative Commons BY-NC 3.0 (Licence Creative Commons Attribution - Pas d’utilisation commerciale 3.0 non transposé)
